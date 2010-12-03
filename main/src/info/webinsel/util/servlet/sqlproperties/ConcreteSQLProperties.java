@@ -2,6 +2,11 @@ package info.webinsel.util.servlet.sqlproperties;
 
 
 
+/**
+ * Default implementation of the {@link SQLProperties} interface.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class ConcreteSQLProperties implements SQLProperties {
   private String dbHost;
   private String dbName;

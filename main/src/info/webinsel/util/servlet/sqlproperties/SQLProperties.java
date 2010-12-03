@@ -1,29 +1,45 @@
 package info.webinsel.util.servlet.sqlproperties;
 
+
+
+/**
+ * Classes implementing this interface provide a bean to store information to connect to a SQL database.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public interface SQLProperties {
+	public String getDBDriver();
 
-	public abstract String getDBDriver();
+	
+	public void setDBDriver(String dbDriver);
 
-	public abstract void setDBDriver(String dbDriver);
+	
+	public String getDBHost();
 
-	public abstract String getDBHost();
+	
+	public void setDBHost(String dbHost);
 
-	public abstract void setDBHost(String dbHost);
+	
+	public String getDBName();
 
-	public abstract String getDBName();
+	
+	public void setDBName(String dbName);
 
-	public abstract void setDBName(String dbName);
+	
+	public String getDBPassword();
 
-	public abstract String getDBPassword();
+	
+	public void setDBPassword(String dbPassword);
 
-	public abstract void setDBPassword(String dbPassword);
+	
+	public String getDBUser();
 
-	public abstract String getDBUser();
+	
+	public void setDBUser(String dbUser);
 
-	public abstract void setDBUser(String dbUser);
+	
+	public String getTablePrefix();
 
-	public abstract String getTablePrefix();
-
-	public abstract void setTablePrefix(String tablePrefix);
-
+	
+	public void setTablePrefix(String tablePrefix);
 }
