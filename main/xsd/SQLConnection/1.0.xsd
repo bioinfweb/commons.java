@@ -9,14 +9,14 @@
 <!-- Last modified: 2010-12-14 by Ben Stöver                                 -->
 <!--                                                                         -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-    xmlns:conn="http://bioinfweb.info/xmlns/SQLConnection" 
+    xmlns:db="http://bioinfweb.info/xmlns/SQLConnection" 
     targetNamespace="http://bioinfweb.info/xmlns/SQLConnection" 
     elementFormDefault="qualified" attributeFormDefault="unqualified">
   
-  <xsd:element name="database" type="conn:SQLConnectionType">
-	  <xsd:annotation>
-	    <xsd:documentation xml:lang="EN">This is the root element.</xsd:documentation>
-	  </xsd:annotation>
+  <xsd:element name="database" type="db:SQLConnectionType">
+	<xsd:annotation>
+	  <xsd:documentation xml:lang="EN">This is the root element of a database definition.</xsd:documentation>
+	</xsd:annotation>
   </xsd:element>
   
   <xsd:complexType name="SQLConnectionType">
@@ -29,6 +29,7 @@
       <xsd:element name="user" type="xsd:string" minOccurs="1" maxOccurs="1" />
       <xsd:element name="password" type="xsd:string" minOccurs="1" maxOccurs="1" />
       <xsd:element name="driver" type="xsd:string" minOccurs="0" maxOccurs="1" />
+      <xsd:element name="table-prefix" type="xsd:string" minOccurs="0" maxOccurs="1" />
     </xsd:sequence>
   </xsd:complexType>
 </xsd:schema>
