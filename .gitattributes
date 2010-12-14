@@ -104,3 +104,4 @@ main/src/info/webinsel/wikihelp/server/config/WikiHelpXMLConstants.java -text sv
 main/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneBidule.java -text svneol=unset#text/plain
 main/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneSelector.java -text svneol=unset#text/plain
 main/src/org/jdesktop/swingx/scrollpaneselector/TweakedScrollPaneLayout.java -text svneol=unset#text/plain
+main/xsd/SQLConnection/1.0.xsd -text svneol=unset#text/plain
