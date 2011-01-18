@@ -15,7 +15,9 @@ import info.webinsel.util.StringUtils;
 public class SequenceUtils {
 	public static final char GAP_CHAR = '-';	
 	public static final String DNA_CHARS = "CGAT";  // Order is relevant for randSequence() 	
-	public static final String RNA_CHARS = "CGAAU";  // Order is relevant for randSequence()	
+	public static final String ALL_DNA_CHARS = "CGATYRKMBVDHN"; 	
+	public static final String RNA_CHARS = "CGAU";  // Order is relevant for randSequence()	
+	public static final String ALL_RNA_CHARS = "CGAUYRKMBVDHN"; 	
 	
 	private static final HashMap<Character, Character> complementMap = createComplementMap();
 	
@@ -93,6 +95,26 @@ public class SequenceUtils {
   
   public static String dnaToRNA(String dna) {
   	return dna.toUpperCase().replaceAll("T", "U");
+  }
+  
+  
+  public static boolean isDNAChar(char c) {
+  	return isInTokenSet(Character.toUpperCase(c), ALL_DNA_CHARS);
+  }
+  
+  
+  public static boolean isRNAChar(char c) {
+  	return isInTokenSet(Character.toUpperCase(c), ALL_RNA_CHARS);
+  }
+  
+  
+  public static boolean isInTokenSet(char c, String tokens) {
+  	for (int i = 0; i < tokens.length(); i++) {
+			if (c == tokens.charAt(i)) {
+				return true;
+			}
+		}
+  	return false;
   }
   
   
