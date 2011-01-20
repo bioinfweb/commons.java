@@ -32,7 +32,9 @@ public class UnalignedSequenceView<C extends Compound> extends SequenceProxyView
 	 * @param bioStart - start index, cannot be less than 1
 	 * @param bioEnd - end index, cannot be greater than the sequence length
 	 */
-	public UnalignedSequenceView(Sequence<C> sequence, CompoundSet<C> nonGapCompoundSet, Integer bioStart, Integer bioEnd) {
+	public UnalignedSequenceView(Sequence<C> sequence, CompoundSet<C> nonGapCompoundSet, 
+			Integer bioStart, Integer bioEnd) {
+		
 		super(sequence, bioStart, bioEnd);
 		this.nonGapCompoundSet = nonGapCompoundSet;
 		init();
@@ -75,7 +77,7 @@ public class UnalignedSequenceView<C extends Compound> extends SequenceProxyView
 	 */
 	@Override
 	public C getCompoundAt(int position) {
-		return getViewedSequence().getCompoundAt(alignedPositions[position - 1]);
+		return super.getCompoundAt(alignedPositions[position - 1]);  // The super method takes account of bioStart
 	}
 
 
