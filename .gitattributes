@@ -109,3 +109,10 @@ main/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneBidule.java -text svne
 main/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneSelector.java -text svneol=unset#text/plain
 main/src/org/jdesktop/swingx/scrollpaneselector/TweakedScrollPaneLayout.java -text svneol=unset#text/plain
 main/xsd/SQLConnection/1.0.xsd -text svneol=unset#text/plain
+test/.classpath -text svneol=unset#text/plain
+test/.project -text svneol=unset#text/plain
+test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+test/lib/junit-4.9b1.jar -text
+test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
