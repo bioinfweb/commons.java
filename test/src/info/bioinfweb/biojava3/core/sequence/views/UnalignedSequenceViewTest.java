@@ -1,8 +1,9 @@
-package info.bioinfweb.biojavax.core.sequence.views;
+package info.bioinfweb.biojava3.core.sequence.views;
 
 
 import static org.junit.Assert.assertEquals;
-import info.bioinfweb.biojavax.core.sequence.compound.AmbiguityNoGapDNACompoundSet;
+
+import info.bioinfweb.biojava3.core.sequence.compound.AmbiguityNoGapDNACompoundSet;
 
 import org.biojava3.core.sequence.DNASequence;
 import org.biojava3.core.sequence.compound.NucleotideCompound;
