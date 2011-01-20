@@ -8,6 +8,11 @@ main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/servlet.jar -text
 main/src/info/bioinfweb/biojavax/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/core/sequence/compound/AlignmentAmbiguityRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/core/sequence/compound/AmbiguityNoGapDNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/core/sequence/compound/AmbiguityNoGapRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/core/sequence/compound/NoGapDNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/core/sequence/compound/NoGapRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
