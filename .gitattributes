@@ -118,6 +118,7 @@ test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 test/lib/junit-4.9b1.jar -text
+test/src/info/bioinfweb/biojavax/core/sequence/views/UnalignedSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
