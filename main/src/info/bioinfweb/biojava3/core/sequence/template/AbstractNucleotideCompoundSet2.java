@@ -1,4 +1,4 @@
-package info.bioinfweb.biojavax.core.sequence.template;
+package info.bioinfweb.biojava3.core.sequence.template;
 
 
 import org.biojava3.core.sequence.compound.DNACompoundSet;

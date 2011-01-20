@@ -1,4 +1,4 @@
-package info.bioinfweb.biojavax.core.sequence.compound;
+package info.bioinfweb.biojava3.core.sequence.compound;
 
 
 

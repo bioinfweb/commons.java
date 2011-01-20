@@ -6,18 +6,18 @@ main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/biojava3-core-3.0.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/servlet.jar -text
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AlignmentAmbiguityRNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AmbiguityNoGapDNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AmbiguityNoGapNucleotideCompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/AmbiguityNoGapRNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/NoGapDNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/NoGapNucleotideCompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/NoGapRNACompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/compound/NucleotideCompoundSet.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/biojavax/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AmbiguityNoGapDNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AmbiguityNoGapNucleotideCompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/AmbiguityNoGapRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapDNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapNucleotideCompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapRNACompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitorable.java -text svneol=unset#text/plain

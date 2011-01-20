@@ -1,4 +1,4 @@
-package info.bioinfweb.biojavax.core.sequence.views;
+package info.bioinfweb.biojava3.core.sequence.views;
 
 
 import java.util.Arrays;

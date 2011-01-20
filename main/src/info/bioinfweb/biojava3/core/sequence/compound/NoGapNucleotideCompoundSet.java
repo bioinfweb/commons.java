@@ -1,7 +1,7 @@
-package info.bioinfweb.biojavax.core.sequence.compound;
+package info.bioinfweb.biojava3.core.sequence.compound;
 
 
-import info.bioinfweb.biojavax.core.sequence.template.AbstractNucleotideCompoundSet2;
+import info.bioinfweb.biojava3.core.sequence.template.AbstractNucleotideCompoundSet2;
 
 
 
