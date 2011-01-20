@@ -30,7 +30,7 @@ public class NoGapRNACompoundSet extends AbstractNucleotideCompoundSet2 {
 	/**
 	 * Returns a shared instance of this class.
 	 */
-	public static NoGapRNACompoundSet getAlignmentAmbiguityDNACompoundSet() {
+	public static NoGapRNACompoundSet getNoGapRNACompoundSet() {
 		if (sharedInstance == null) {
 			sharedInstance = new NoGapRNACompoundSet();
 		}

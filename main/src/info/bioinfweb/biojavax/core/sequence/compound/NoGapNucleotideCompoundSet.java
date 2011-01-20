@@ -6,33 +6,33 @@ import info.bioinfweb.biojavax.core.sequence.template.AbstractNucleotideCompound
 
 
 /**
- * Nucleotide compound set that contains all DNA compounds but no gap <i>-</i> character (and without <i>N</i>).
+ * Nucleotide compound set that contains all DNA and RNA compounds but no gap <i>-</i> or ambiguity character.
  * 
  * @author Ben St&ouml;ver
- * @since build 10
  */
-public class NoGapDNACompoundSet extends AbstractNucleotideCompoundSet2 {
-	private static NoGapDNACompoundSet sharedInstance = null;
+public class NoGapNucleotideCompoundSet extends AbstractNucleotideCompoundSet2 {
+	private static NoGapNucleotideCompoundSet sharedInstance = null;
 	
 	
 	/**
 	 * Returns a new instance of this class.
 	 */
-	public NoGapDNACompoundSet() {
+	public NoGapNucleotideCompoundSet() {
 		super();
     addNucleotideCompound("A", "T");
     addNucleotideCompound("T", "A");
     addNucleotideCompound("G", "C");
     addNucleotideCompound("C", "G");
+    addNucleotideCompound("U", "A");
 	}
 
 	
 	/**
 	 * Returns a shared instance of this class.
 	 */
-	public static NoGapDNACompoundSet getNoGapDNACompoundSet() {
+	public static NoGapNucleotideCompoundSet getNoGapNucleotideCompoundSet() {
 		if (sharedInstance == null) {
-			sharedInstance = new NoGapDNACompoundSet();
+			sharedInstance = new NoGapNucleotideCompoundSet();
 		}
 		return sharedInstance;
 	}
