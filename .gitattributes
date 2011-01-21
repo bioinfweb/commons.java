@@ -4,7 +4,11 @@ main/.project -text svneol=unset#text/plain
 main/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/biojava3-core-3.0.jar -text
+main/lib/bytecode-1.8.jar -text
+main/lib/core-1.8.jar -text
+main/lib/jgrapht-jdk1.5.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
+main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain
@@ -18,6 +22,12 @@ main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapRNACompoundSet.java
 main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSet.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSetNexusFileBuilder.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlock.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockBuilder.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockListener.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockParser.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitorable.java -text svneol=unset#text/plain
