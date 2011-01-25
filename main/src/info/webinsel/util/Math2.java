@@ -54,6 +54,118 @@ public class Math2 {
   	}
   	return result;
   }
+  
+  
+  public static int minInt(int... values) {
+  	if (values.length >= 2) {
+  		int result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.min(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static long minLong(long... values) {
+  	if (values.length >= 2) {
+  		long result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.min(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static float minFloat(float... values) {
+  	if (values.length >= 2) {
+  		float result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.min(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static double minDouble(double... values) {
+  	if (values.length >= 2) {
+  		double result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.min(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static int maxInt(int... values) {
+  	if (values.length >= 2) {
+  		int result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.max(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static long maxLong(long... values) {
+  	if (values.length >= 2) {
+  		long result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.max(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static float maxFloat(float... values) {
+  	if (values.length >= 2) {
+  		float result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.max(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
+
+  
+  public static double maxDouble(double... values) {
+  	if (values.length >= 2) {
+  		double result = values[0];
+  		for (int i = 1; i < values.length; i++) {
+				result = Math.max(result, values[i]);
+			}
+  		return result;
+  	}
+  	else {
+  		throw new IllegalArgumentException("This function must have at least two parameters.");
+  	}
+  }
 
   
   public static boolean isBetween(byte value, byte min, byte max) {
