@@ -28,6 +28,22 @@ public class StringUtils {
   }
   
   
+  /**
+   * Returns a string where the first character is in lower case.
+   */
+  public static String firstCharToLowerCase(String s) {
+  	return s.substring(0, 1).toLowerCase() + s.substring(1);
+  }
+  
+  
+  /**
+   * Returns a string where the first character is in upper case.
+   */
+  public static String firstCharToUpperCase(String s) {
+  	return s.substring(0, 1).toUpperCase() + s.substring(1);
+  }
+  
+  
   public static void renameRepeatedEntries(String[] array) {
   	HashMap<String, Integer> counts = new HashMap<String, Integer>();
   	for (int i = 0; i < array.length; i++) {
