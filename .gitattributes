@@ -135,4 +135,5 @@ test/lib/junit-4.9b1.jar -text
 test/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/StringUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
