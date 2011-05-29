@@ -45,7 +45,7 @@ public class SQLXMLReader implements SQLXMLConstants {
 	
 	
 	/**
-	 * Reads information information about a database connection from a XML-document.
+	 * Reads information information about a database connection from a XML-document. The namespace is not checked.
 	 * <pre>
 	 * <Host>host</Host>
 	 * <Name>name</Name> 
@@ -63,27 +63,27 @@ public class SQLXMLReader implements SQLXMLConstants {
     while (event.getEventType() != XMLStreamConstants.END_ELEMENT) {
       if (event.getEventType() == XMLStreamConstants.START_ELEMENT) {
       	StartElement element = event.asStartElement();
-        if (element.getName().equals(TAG_DB_HOST)) {
+        if (element.getName().getLocalPart().equals(TAG_DB_HOST.getLocalPart())) {
         	properties.setDBHost(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
-        else if (element.getName().equals(TAG_DB_NAME)) {
+        else if (element.getName().getLocalPart().equals(TAG_DB_NAME.getLocalPart())) {
         	properties.setDBName(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
-        else if (element.getName().equals(TAG_DB_USER)) {
+        else if (element.getName().getLocalPart().equals(TAG_DB_USER.getLocalPart())) {
         	properties.setDBUser(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
-        else if (element.getName().equals(TAG_DB_PASSWORD)) {
+        else if (element.getName().getLocalPart().equals(TAG_DB_PASSWORD.getLocalPart())) {
         	properties.setDBPassword(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
-        else if (element.getName().equals(TAG_DB_DRIVER)) {
+        else if (element.getName().getLocalPart().equals(TAG_DB_DRIVER.getLocalPart())) {
         	properties.setDBDriver(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
-        else if (element.getName().equals(TAG_TABLE_PREFIX)) {
+        else if (element.getName().getLocalPart().equals(TAG_TABLE_PREFIX.getLocalPart())) {
         	properties.setTablePrefix(reader.nextEvent().asCharacters().getData());
         	reader.nextEvent();  // END_ELEMENT überspringen
         }
