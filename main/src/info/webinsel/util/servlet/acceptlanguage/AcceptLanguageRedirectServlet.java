@@ -3,7 +3,6 @@ package info.webinsel.util.servlet.acceptlanguage;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,26 +19,21 @@ import info.webinsel.util.servlet.GetPostServlet;
  *       
  * @author Ben St&ouml;ver
  */
-public class AcceptLanguageRedirectServlet extends GetPostServlet {
-  private String defaultLanguage = "en";
-  private Map<String, String> urls;
-  
-  
-	public AcceptLanguageRedirectServlet(String defaultLanguage, Map<String, String> urls) {
+public abstract class AcceptLanguageRedirectServlet extends GetPostServlet {
+	public AcceptLanguageRedirectServlet() {
 		super();
-		this.defaultLanguage = defaultLanguage;
-		this.urls = urls;
 	}
 
 
-	public String getDefaultLanguage() {
-		return defaultLanguage;
+	public AcceptLanguageRedirectServlet(String contentType) {
+		super(contentType);
 	}
 
 
-	public Map<String, String> getUrls() {
-		return urls;
-	}
+	protected abstract String getDefaultLanguage() throws ServletException;
+
+
+	protected abstract String getURL(String language)throws ServletException;
 
 
 	/**
@@ -47,15 +41,15 @@ public class AcceptLanguageRedirectServlet extends GetPostServlet {
 	 * @param languages - the list of languages the client accepts (Must be sorted descendant by the quality score.)
 	 * @return
 	 */
-	private String findURL(List<AcceptLanguageEntry> languages) {
+	private String findURL(List<AcceptLanguageEntry> languages) throws ServletException {
     String url = null;
 		for (int i = 0; i < languages.size(); i++) {
-			url = getUrls().get(languages.get(i).getLanguage());
+			url = getURL(languages.get(i).getLanguage());
 			if (url != null) {
 				return url;
 			}
 		}
-		return getUrls().get(getDefaultLanguage());
+		return getURL(getDefaultLanguage());
 	}
 	
 	
