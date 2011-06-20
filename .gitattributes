@@ -7,6 +7,7 @@ main/lib/biojava3-core-3.0.jar -text
 main/lib/bytecode-1.8.jar -text
 main/lib/core-1.8.jar -text
 main/lib/jgrapht-jdk1.5.jar -text
+main/lib/junit-4.9b1.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
@@ -64,12 +65,16 @@ main/src/info/webinsel/util/io/XMLUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/io/streammessage/Message.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/io/streammessage/MessageReader.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/io/streammessage/NewerMessageVersionException.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/junit/TestTools.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/CaptchaDBManagement.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/CookieManager.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/DatabaseException.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/GetPostServlet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/HTTPIncludeServlet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/SQLManipulator.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageEntry.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParser.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/servlet/acceptlanguage/QualityComparator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/sqlproperties/ConcreteSQLProperties.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
