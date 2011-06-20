@@ -74,6 +74,7 @@ main/src/info/webinsel/util/servlet/HTTPIncludeServlet.java -text svneol=unset#t
 main/src/info/webinsel/util/servlet/SQLManipulator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageEntry.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParser.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageRedirectServlet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/QualityComparator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/sqlproperties/ConcreteSQLProperties.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
