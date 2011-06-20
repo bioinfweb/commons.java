@@ -142,3 +142,4 @@ test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plai
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/StringUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
