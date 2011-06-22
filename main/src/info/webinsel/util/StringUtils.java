@@ -114,7 +114,8 @@ public class StringUtils {
   
   
   /**
-   * <p>Concatenates two expressions with an operator of both are not empty.</p>
+   * Concatenates two expressions with an operator of both are not empty.
+   * 
    * @param leftPart - the left expression
    * @param rightPart - the right expression 
    * @param operator - the operator (including whitespaces if necessary)
@@ -126,5 +127,27 @@ public class StringUtils {
   		String operator) {
   	
   	return concatWithOperator(leftPart, rightPart, operator, "", "");
+  }
+  
+  
+  /**
+   * Converts a camel case string to a separated string. (Example: 
+   * <code>convertCamelCase("anExampleKeyword", "-")</code> would return <i>an-example-keyword</i>)
+   * 
+   * @param camelCase - the camel case string
+   * @param separator - the separator to be used to created the separated string
+   * @return
+   */
+  public static String convertCamelCase(String camelCase, String separator) {
+  	StringBuffer result = new StringBuffer((int)(1.2 * camelCase.length()));
+  	for (int i = 0; i < camelCase.length(); i++) {
+			if (Character.isUpperCase(camelCase.charAt(i))) {
+				result.append(separator + Character.toLowerCase(camelCase.charAt(i)));
+			}
+			else {
+				result.append(camelCase.charAt(i));
+			}
+		}
+  	return result.toString();
   }
 }
