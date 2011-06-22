@@ -19,4 +19,10 @@ public class StringUtilsTest {
   public void test_firstCharToUpperCase() {
   	assertEquals("Content", StringUtils.firstCharToUpperCase("content"));
   }
+  
+  
+  @Test
+  public void test_convertCamelCase() {
+  	assertEquals("an-example-keyword", StringUtils.convertCamelCase("anExampleKeyword", "-"));
+  }
 }
