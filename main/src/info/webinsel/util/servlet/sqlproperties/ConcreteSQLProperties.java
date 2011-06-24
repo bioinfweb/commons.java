@@ -8,12 +8,12 @@ package info.webinsel.util.servlet.sqlproperties;
  * @author Ben St&ouml;ver
  */
 public class ConcreteSQLProperties implements SQLProperties {
-  private String dbHost;
-  private String dbName;
-  private String dbUser;
-  private String dbPassword;
-  private String dbDriver;
-  private String tablePrefix;
+  private String dbHost = "";
+  private String dbName = "";
+  private String dbUser = "";
+  private String dbPassword = "";
+  private String dbDriver = "";
+  private String tablePrefix = "";
 
 
 	/* (non-Javadoc)
