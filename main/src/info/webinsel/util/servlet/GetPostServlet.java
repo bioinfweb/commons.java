@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public abstract class GetPostServlet extends HttpServlet {
-	private String contentType = "text/html";
+	public static final String DEFAULT_CONTENT_TYPE = "text/html";
+	
+	
+	private String contentType = DEFAULT_CONTENT_TYPE;
 	
 	
 	public GetPostServlet() {
