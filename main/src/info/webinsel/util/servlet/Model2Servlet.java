@@ -10,12 +10,36 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Provides general functionality for servlets that are part of a model 2 architecture.
+ * Provides general functionality for servlets that are part of a model 2 architecture. The path to the output JSP
+ * can be provided as a contructor parameter or as a request parameter. (A request parameter would be ignored if a 
+ * contructor parameter was privided.)
  * 
- * @author Ben St&ouml;ver
+ * @author Ben St&ouml;ver 
  */
 public abstract class Model2Servlet extends GetPostServlet {
-  /**
+	public static final String PARAM_OUTPUT_JSP = "outputJSP";
+  
+	
+  private String outputJSP = null; 
+	
+	
+  public Model2Servlet() {
+		super();
+	}
+
+
+	public Model2Servlet(String contentType) {
+		super(contentType);
+	}
+
+
+	public Model2Servlet(String contentType, String outputJSP) {
+		super();
+		this.outputJSP = outputJSP;
+	}
+
+
+	/**
    * Implementations of this method are called before this servlet delegates to the output JSP.
    * @param request
    * @param response
@@ -26,10 +50,11 @@ public abstract class Model2Servlet extends GetPostServlet {
 	
 	
   /**
-   * Implementing classes must specify the URL of the output JSP here.
    * @return the URL relative to the servlet context
    */
-  protected abstract String getOutputJSP();
+  protected  String getOutputJSP() {
+  	return outputJSP;
+  }
   
   
 	@Override
@@ -38,7 +63,11 @@ public abstract class Model2Servlet extends GetPostServlet {
 		
 		try {
 			generateBeans(request, response);
-			getServletContext().getRequestDispatcher(getOutputJSP()).include(
+			String outputJSP = getOutputJSP();
+			if (outputJSP == null) {
+				outputJSP = request.getParameter(PARAM_OUTPUT_JSP);
+			}
+			getServletContext().getRequestDispatcher(outputJSP).include(
 					request, response);
 		}
 		catch (Exception e) {
