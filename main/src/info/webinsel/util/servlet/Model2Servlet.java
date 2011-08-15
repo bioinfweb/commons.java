@@ -15,9 +15,6 @@ import javax.servlet.http.HttpServletResponse;
  * @author Ben St&ouml;ver
  */
 public abstract class Model2Servlet extends GetPostServlet {
-	public static final String PARAM_OUTPUT_JSP = "outputJSP";
-  
-	
   /**
    * Implementations of this method are called before this servlet delegates to the output JSP.
    * @param request
@@ -28,13 +25,20 @@ public abstract class Model2Servlet extends GetPostServlet {
 			HttpServletResponse response) throws Exception;
 	
 	
+  /**
+   * Implementing classes must specify the URL of the output JSP here.
+   * @return the URL relative to the servlet context
+   */
+  protected abstract String getOutputJSP();
+  
+  
 	@Override
 	protected void doGetPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
 			generateBeans(request, response);
-			getServletContext().getRequestDispatcher(request.getParameter(PARAM_OUTPUT_JSP)).include(
+			getServletContext().getRequestDispatcher(getOutputJSP()).include(
 					request, response);
 		}
 		catch (Exception e) {
