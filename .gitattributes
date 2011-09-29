@@ -73,6 +73,7 @@ main/src/info/webinsel/util/servlet/GetPostServlet.java -text svneol=unset#text/
 main/src/info/webinsel/util/servlet/HTTPIncludeServlet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/Model2Servlet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/SQLManipulator.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/servlet/ServletUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageEntry.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParser.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageRedirectServlet.java -text svneol=unset#text/plain
@@ -83,6 +84,7 @@ main/src/info/webinsel/util/servlet/sqlproperties/SQLXMLConstants.java -text svn
 main/src/info/webinsel/util/servlet/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/sql/IDGenerator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/sql/SQLConnector.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/sql/SQLUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/AccessibleUndoManager.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/ActionHashMap.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/DecimalInput.java -text svneol=unset#text/plain
