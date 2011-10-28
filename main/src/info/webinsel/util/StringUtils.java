@@ -1,7 +1,10 @@
 package info.webinsel.util;
 
+
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 
@@ -10,6 +13,10 @@ import java.util.List;
  * @author Ben St&ouml;ver
  */
 public class StringUtils {
+	public static final NumberFormat DOUBLE_FORMAT = NumberFormat.getNumberInstance(Locale.getDefault());
+	public static final NumberFormat INTEGER_FORMAT = NumberFormat.getIntegerInstance(Locale.getDefault());  //new DecimalFormat("#########");
+	
+	
   public static String invert(CharSequence s)  {
   	StringBuffer result = new StringBuffer(s.length());
   	for (int i = 0; i < s.length(); i++) {
@@ -25,22 +32,6 @@ public class StringUtils {
 			result.append(element);
 		}
   	return result.toString();
-  }
-  
-  
-  /**
-   * Returns a string where the first character is in lower case.
-   */
-  public static String firstCharToLowerCase(String s) {
-  	return s.substring(0, 1).toLowerCase() + s.substring(1);
-  }
-  
-  
-  /**
-   * Returns a string where the first character is in upper case.
-   */
-  public static String firstCharToUpperCase(String s) {
-  	return s.substring(0, 1).toUpperCase() + s.substring(1);
   }
   
   
@@ -114,8 +105,7 @@ public class StringUtils {
   
   
   /**
-   * Concatenates two expressions with an operator of both are not empty.
-   * 
+   * <p>Concatenates two expressions with an operator of both are not empty.</p>
    * @param leftPart - the left expression
    * @param rightPart - the right expression 
    * @param operator - the operator (including whitespaces if necessary)
@@ -127,27 +117,5 @@ public class StringUtils {
   		String operator) {
   	
   	return concatWithOperator(leftPart, rightPart, operator, "", "");
-  }
-  
-  
-  /**
-   * Converts a camel case string to a separated string. (Example: 
-   * <code>convertCamelCase("anExampleKeyword", "-")</code> would return <i>an-example-keyword</i>)
-   * 
-   * @param camelCase - the camel case string
-   * @param separator - the separator to be used to created the separated string
-   * @return
-   */
-  public static String convertCamelCase(String camelCase, String separator) {
-  	StringBuffer result = new StringBuffer((int)(1.2 * camelCase.length()));
-  	for (int i = 0; i < camelCase.length(); i++) {
-			if (Character.isUpperCase(camelCase.charAt(i))) {
-				result.append(separator + Character.toLowerCase(camelCase.charAt(i)));
-			}
-			else {
-				result.append(camelCase.charAt(i));
-			}
-		}
-  	return result.toString();
   }
 }
