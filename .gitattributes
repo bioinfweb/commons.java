@@ -33,6 +33,7 @@ main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitorable.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/CommandLineReader.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/HTMLTruncater.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/Math2.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ProgramMainClass.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/PropertyChangeMonitor.java -text svneol=unset#text/plain
