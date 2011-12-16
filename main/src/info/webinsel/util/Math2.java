@@ -31,6 +31,15 @@ public class Math2 {
   		return result;
   	}
   }
+  
+  
+  public static int divAbove(int divided, int divisor) {
+	  int result = divided / divisor;
+	  if (divided % divisor > 0) {
+		  result++;
+	  }
+	  return result;
+  }
 	
 	
 	public static boolean isInt(String value) {
