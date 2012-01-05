@@ -9,7 +9,7 @@ import java.util.Locale;
 
 
 /**
- * Provides general methodes to use with character sequences. 
+ * Provides general methods to use with character sequences. 
  * @author Ben St&ouml;ver
  */
 public class StringUtils {

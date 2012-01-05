@@ -4,6 +4,7 @@ package info.webinsel.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.List;
 
 
 
@@ -62,5 +63,21 @@ public class RandomValues {
 			result.append(chars.charAt((int)(Math.random() * chars.length())));
 		}
 		return result.toString();
+	}
+	
+	
+	/**
+	 * Swaps the elements of the list to get a random order.
+	 * @param list - the list to be reordered
+	 * @param count - the number of swaps to perform 
+	 */
+	public static <E>void listSwap(List<E> list, int count) {
+		for (int i = 0; i < count; i++) {
+			int pos1 = randInt(0, list.size());
+			int pos2 = randInt(0, list.size());
+			E element1 = list.get(pos1);
+			list.set(pos1, list.get(pos2));
+			list.set(pos2, element1);
+		}
 	}
 }
