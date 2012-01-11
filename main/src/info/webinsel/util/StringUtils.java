@@ -118,4 +118,50 @@ public class StringUtils {
   	
   	return concatWithOperator(leftPart, rightPart, operator, "", "");
   }
+  
+  
+  public static String firstCharToLowerCase(String text) {
+  	if (text.length() > 1) {
+  		return Character.toLowerCase(text.charAt(0)) + text.substring(1);
+  	}
+  	else {
+  		return text.toLowerCase();
+  	}
+  }
+  
+  
+  public static String firstCharToUpperCase(String text) {
+  	if (text.length() > 1) {
+  		return Character.toUpperCase(text.charAt(0)) + text.substring(1);
+  	}
+  	else {
+  		return text.toUpperCase();
+  	}
+  }
+  
+  
+  /**
+   * Converts a camel case keyword to a string with the specified separator where all characters are in lower case.<br />
+   * Example: <code>anExampleKeyword</code> would be converted to <code>an-example-keyword</code> and <code>A</code> 
+   * to <code>a</code>.
+   * @param text - the string to be converted
+   * @param separator - the separator to be inserted
+   * @return the converted keyword string
+   */
+  public static String convertCamelCase(String text, String separator) {
+  	if (text.length() > 1) {
+  		StringBuffer result = new StringBuffer(text.length() * (separator.length() + 1) / 5);  // Average length of 5 characters per word expected
+  		result.append(Character.toLowerCase(text.charAt(0)));
+  		for (int i = 1; i < text.length(); i++) {
+				if (Character.isUpperCase(text.charAt(i))) {
+					result.append(separator);
+				}
+				result.append(Character.toLowerCase(text.charAt(i)));
+			}
+    	return result.toString();
+  	}
+  	else {
+  		return text.toLowerCase();
+  	}
+  }
 }
