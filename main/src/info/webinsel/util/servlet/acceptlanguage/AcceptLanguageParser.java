@@ -24,7 +24,7 @@ public class AcceptLanguageParser {
 	
 	
   public static List<AcceptLanguageEntry> parseHeader(HttpServletRequest request) {
-  	return parseHeader(request.getHeader(HEADER_NAME));
+ 		return parseHeader(request.getHeader(HEADER_NAME));
   }
 
   
@@ -60,11 +60,13 @@ public class AcceptLanguageParser {
   
   public static List<AcceptLanguageEntry> parseHeader(String header) {
   	List<AcceptLanguageEntry> result = new ArrayList<AcceptLanguageEntry>();
-  	String[] entries = header.split(",");
-  	for (int i = 0; i < entries.length; i++) {
-			result.add(parseSingleHeader(entries[i]));
-		}
-  	Collections.sort(result, QualityComparator.getInstance());
+  	if ((header != null) && !"".equals(header)) {
+	  	String[] entries = header.split(",");
+	  	for (int i = 0; i < entries.length; i++) {
+				result.add(parseSingleHeader(entries[i]));
+			}
+	  	Collections.sort(result, QualityComparator.getInstance());
+  	}
   	return result;
   }
 }
