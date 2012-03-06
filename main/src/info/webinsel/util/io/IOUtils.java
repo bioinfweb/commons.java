@@ -43,7 +43,7 @@ public class IOUtils {
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
 	 * @param in - the stream to read from
-	 * @param out - the strem to write to
+	 * @param out - the stream to write to
 	 * @throws IOException
 	 */
 	public static void copy(InputStream in, OutputStream out) throws IOException {
