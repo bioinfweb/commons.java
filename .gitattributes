@@ -90,6 +90,7 @@ main/src/info/webinsel/util/swing/AccessibleUndoManager.java -text svneol=unset#
 main/src/info/webinsel/util/swing/ActionHashMap.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/DecimalInput.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/DecimalInputDialog.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/swing/ExtendedAbstractAction.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/ExtendedDesktopPane.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/FileChooserDirModel.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
