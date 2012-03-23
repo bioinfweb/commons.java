@@ -86,6 +86,7 @@ main/src/info/webinsel/util/servlet/sqlproperties/SQLXMLReader.java -text svneol
 main/src/info/webinsel/util/sql/IDGenerator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/sql/SQLConnector.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/sql/SQLUtils.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/swing/AbstractDocumentEdit.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/AccessibleUndoManager.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/ActionHashMap.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/DecimalInput.java -text svneol=unset#text/plain
