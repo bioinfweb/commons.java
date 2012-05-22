@@ -141,12 +141,11 @@ public class XMLUtils {
 	 * @throws XMLStreamException
 	 */
 	public static String readCharactersAsString(XMLEventReader reader) throws XMLStreamException {
-		if (reader.peek().getEventType() == XMLStreamConstants.CHARACTERS) {
-			return reader.nextEvent().asCharacters().getData();
+		String result = "";
+		while (reader.peek().getEventType() == XMLStreamConstants.CHARACTERS) {
+			result += reader.nextEvent().asCharacters().getData();
 		}
-		else {
-			return "";
-		}
+		return result;
 	}
 	
 	
