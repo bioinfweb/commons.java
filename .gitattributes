@@ -3,6 +3,7 @@ main/.classpath -text svneol=unset#text/plain
 main/.project -text svneol=unset#text/plain
 main/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/lib/BrowserLauncher2-1_3.jar -text
+main/lib/biojava3-alignment-3.0.4.jar -text
 main/lib/biojava3-core-3.0.jar -text
 main/lib/bytecode-1.8.jar -text
 main/lib/core-1.8.jar -text
@@ -11,6 +12,7 @@ main/lib/junit-4.9b1.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
+main/src/info/bioinfweb/biojava3/alignment/AlignmentIO.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityRNACompoundSet.java -text svneol=unset#text/plain
@@ -29,6 +31,7 @@ main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlock.java -text svneol=
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockBuilder.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockListener.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockParser.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/util/ConsensusSequenceCreator.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitorable.java -text svneol=unset#text/plain
