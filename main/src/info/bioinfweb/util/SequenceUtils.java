@@ -1,7 +1,8 @@
 package info.bioinfweb.util;
 
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import info.webinsel.util.Math2;
 import info.webinsel.util.StringUtils;
@@ -19,11 +20,11 @@ public class SequenceUtils {
 	public static final String RNA_CHARS = "CGAU";  // Order is relevant for randSequence()	
 	public static final String ALL_RNA_CHARS = "CGAUYRKMBVDHN"; 	
 	
-	private static final HashMap<Character, Character> complementMap = createComplementMap();
+	private static final Map<Character, Character> complementMap = createComplementMap();
 	
 	
-	private static HashMap<Character, Character> createComplementMap() {
-		HashMap<Character, Character> result = new HashMap<Character, Character>();
+	private static Map<Character, Character> createComplementMap() {
+		Map<Character, Character> result = new TreeMap<Character, Character>();
 		result.put('A', 'T');
 		result.put('T', 'A');
 		result.put('U', 'A');
