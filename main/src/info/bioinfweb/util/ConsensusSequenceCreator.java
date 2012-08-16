@@ -57,7 +57,7 @@ public class ConsensusSequenceCreator {
 		mapByBase.put("D", createScoreMapEntry(0, 1, 0, 0));
 		mapByBase.put("H", createScoreMapEntry(1, 1, 0, 1));
 		mapByBase.put("V", createScoreMapEntry(1, 0, 1, 1));
-		mapByBase.put("N", createScoreMapEntry(1, 1, 1, 1));
+		mapByBase.put("N", createScoreMapEntry(1, 1, 1, 1));  //TODO Streng genommen, müsste man hier 0.25, 0.25, 0.25, 0.25 angeben, um vergleichbare W'keiten zu haben. Evtl. später ändern
 		
 		mapByScore = new TreeMap<int[], String>();
 		Iterator<String> iterator = mapByBase.keySet().iterator();
