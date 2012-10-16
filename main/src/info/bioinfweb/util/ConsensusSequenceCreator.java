@@ -1,8 +1,8 @@
 package info.bioinfweb.util;
 
 
+import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;
 import info.bioinfweb.biojava3.core.sequence.compound.AmbiguityNoGapNucleotideCompoundSet;
-import info.webinsel.util.Math2;
 
 import java.util.Iterator;
 import java.util.TreeMap;
@@ -17,8 +17,8 @@ public class ConsensusSequenceCreator {
   private static ConsensusSequenceCreator firstInstance = null; 
   	
   
-	private TreeMap<String, int[]> mapByBase;
-	private TreeMap<int[], String> mapByScore;
+	private TreeMap<String, AmbiguityBaseScore> mapByBase;
+	private TreeMap<AmbiguityBaseScore, String> mapByScore;
 	
 	
 	private ConsensusSequenceCreator() {
@@ -35,67 +35,51 @@ public class ConsensusSequenceCreator {
 	}
 
 
-	private int[] createScoreMapEntry(int... addends) {
-		return addends;
-	}
-	
-	
 	private void createMaps() {
-		mapByBase = new TreeMap<String, int[]>();
-		mapByBase.put("A", createScoreMapEntry(1, 0, 0, 0));
-		mapByBase.put("T", createScoreMapEntry(0, 1, 0, 0));
-		mapByBase.put("C", createScoreMapEntry(0, 0, 1, 0));
-		mapByBase.put("G", createScoreMapEntry(0, 0, 0, 1));
-		mapByBase.put("U", createScoreMapEntry(0, 1, 0, 0));
-		mapByBase.put("Y", createScoreMapEntry(0, 1, 1, 0));
-		mapByBase.put("R", createScoreMapEntry(1, 0, 0, 1));
-		mapByBase.put("W", createScoreMapEntry(1, 1, 0, 0));
-		mapByBase.put("S", createScoreMapEntry(0, 0, 1, 1));
-		mapByBase.put("K", createScoreMapEntry(0, 1, 0, 1));
-		mapByBase.put("M", createScoreMapEntry(1, 0, 1, 0));
-		mapByBase.put("B", createScoreMapEntry(0, 1, 1, 1));
-		mapByBase.put("D", createScoreMapEntry(0, 1, 0, 0));
-		mapByBase.put("H", createScoreMapEntry(1, 1, 0, 1));
-		mapByBase.put("V", createScoreMapEntry(1, 0, 1, 1));
-		mapByBase.put("N", createScoreMapEntry(1, 1, 1, 1));  //TODO Streng genommen, müsste man hier 0.25, 0.25, 0.25, 0.25 angeben, um vergleichbare W'keiten zu haben. Evtl. später ändern
+		mapByBase = new TreeMap<String, AmbiguityBaseScore>();
+		mapByBase.put("A", new AmbiguityBaseScore(1, 0, 0, 0));
+		mapByBase.put("T", new AmbiguityBaseScore(0, 1, 0, 0));
+		mapByBase.put("C", new AmbiguityBaseScore(0, 0, 1, 0));
+		mapByBase.put("G", new AmbiguityBaseScore(0, 0, 0, 1));
+		mapByBase.put("Y", new AmbiguityBaseScore(0, 1, 1, 0));  //TODO Wäre hier 0, 0.5, 0.5, 0 besser? (Dann müssten auch auf 1 normierte Schlüssel im Algorithmus erzeugt werden.)
+		mapByBase.put("R", new AmbiguityBaseScore(1, 0, 0, 1));
+		mapByBase.put("W", new AmbiguityBaseScore(1, 1, 0, 0));
+		mapByBase.put("S", new AmbiguityBaseScore(0, 0, 1, 1));
+		mapByBase.put("K", new AmbiguityBaseScore(0, 1, 0, 1));
+		mapByBase.put("M", new AmbiguityBaseScore(1, 0, 1, 0));
+		mapByBase.put("B", new AmbiguityBaseScore(0, 1, 1, 1));
+		mapByBase.put("D", new AmbiguityBaseScore(0, 1, 0, 0));
+		mapByBase.put("H", new AmbiguityBaseScore(1, 1, 0, 1));
+		mapByBase.put("V", new AmbiguityBaseScore(1, 0, 1, 1));
+		mapByBase.put("N", new AmbiguityBaseScore(1, 1, 1, 1));
+		mapByBase.put("-", new AmbiguityBaseScore(0, 0, 0, 0));
 		
-		mapByScore = new TreeMap<int[], String>();
+		mapByScore = new TreeMap<AmbiguityBaseScore, String>();
 		Iterator<String> iterator = mapByBase.keySet().iterator();
 		while (iterator.hasNext()) {
 			String base = iterator.next();
 			mapByScore.put(mapByBase.get(base), base);
 		}
-		mapByScore.put(createScoreMapEntry(0, 0, 0, 0), "-");
+		//mapByScore.put(new AmbiguityBaseScore(0, 0, 0, 0), "-");
 		
-		mapByBase.put("X", createScoreMapEntry(1, 1, 1, 1));  // has to be added after the creation of mapByScore
+		mapByBase.put("U", new AmbiguityBaseScore(0, 1, 0, 0));  // has to be added after the creation of mapByScore
+		mapByBase.put("X", new AmbiguityBaseScore(1, 1, 1, 1));
 	}
 	
 	
-	/**
-	 * Adds the values of <code>b</code> to <code>a</code>.
-	 * @param a
-	 * @param b
-	 */
-	private void addConsensusCounts(int[] a, int[] b) {
-	  if (b != null) {
-			for (int i = 0; i < a.length; i++) {
-				a[i] += b[i];  
-			}
-	  }
-	}
-	
-	
-	private String getMajorityBase(int[] counts) {
-		int max = Math2.maxInt(counts);
-		for (int i = 0; i < counts.length; i++) {
-			if (counts[i] == max) {
-				counts[i] = 1;
-			}
-			else {
-				counts[i] = 0;
+	private String getMajorityBase(AmbiguityBaseScore score) {
+		double max = score.getMaxScore();
+		if (max > 0) {  // Avoid turning "-" to "N"
+			for (int i = 0; i < 4; i++) {
+				if (score.getScoreByIndex(i) == max) {
+					score.setScoreByIndex(i, 1);
+				}
+				else {
+					score.setScoreByIndex(i, 0);
+				}
 			}
 		}
-		return mapByScore.get(counts);
+		return mapByScore.get(score);
 	}
 	
 	
@@ -106,22 +90,22 @@ public class ConsensusSequenceCreator {
    */
   public Sequence<NucleotideCompound> majorityRuleConsensus(Sequence<NucleotideCompound>[] sequences) {
   	return new BasicSequence<NucleotideCompound>(majorityRuleConsensusAsString(sequences), 
-  			new AmbiguityNoGapNucleotideCompoundSet());
+  			AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet());
   }
   
   
   /**
-   * Constructs a majority rule consensus sequence
+   * Constructs a majority rule consensus sequence. The returned sequence always contains T instead of U, even if RNA sequences 
+   * have been specified. 
    * @param sequences - a set of sequences with equal length
    * @return the consensus sequence
    */
   public String majorityRuleConsensusAsString(Sequence<NucleotideCompound>[] sequences) {
   	StringBuffer result = new StringBuffer(sequences[0].getLength()); 
-		for (int position = 0; position < sequences[0].getLength(); position++) {
-    	int[] counts = {0, 0, 0, 0};
+		for (int position = 1; position <= sequences[0].getLength(); position++) {  // "biological index" [...]
+    	AmbiguityBaseScore counts = new AmbiguityBaseScore(0, 0, 0, 0);
 	  	for (int sequenceIndex = 0; sequenceIndex < sequences.length; sequenceIndex++) {
-	  		addConsensusCounts(counts, 
-	  				mapByBase.get(sequences[sequenceIndex].getCompoundAt(position).getUpperedBase()));
+	  		counts.add(mapByBase.get(sequences[sequenceIndex].getCompoundAt(position).getUpperedBase()));
 			}
 	  	result.append(getMajorityBase(counts));
 		}
