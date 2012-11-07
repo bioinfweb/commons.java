@@ -34,6 +34,8 @@ main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockParser.java -text s
 main/src/info/bioinfweb/util/AmbiguityBaseScore.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/ConsensusSequenceCreator.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/util/alignment/pairwise/NeedlemanWunschAligner.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/util/alignment/pairwise/PairwiseAligner.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/ChangeMonitorable.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/CommandLineReader.java -text svneol=unset#text/plain

@@ -2,12 +2,14 @@ package info.bioinfweb.util;
 
 
 import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;
-import info.bioinfweb.biojava3.core.sequence.compound.AmbiguityNoGapNucleotideCompoundSet;
 
 import java.util.Iterator;
 import java.util.TreeMap;
 
+import javax.swing.plaf.basic.BasicArrowButton;
+
 import org.biojava3.core.sequence.BasicSequence;
+import org.biojava3.core.sequence.DNASequence;
 import org.biojava3.core.sequence.compound.NucleotideCompound;
 import org.biojava3.core.sequence.template.Sequence;
 
@@ -48,8 +50,8 @@ public class ConsensusSequenceCreator {
 		mapByBase.put("K", new AmbiguityBaseScore(0, 1, 0, 1));
 		mapByBase.put("M", new AmbiguityBaseScore(1, 0, 1, 0));
 		mapByBase.put("B", new AmbiguityBaseScore(0, 1, 1, 1));
-		mapByBase.put("D", new AmbiguityBaseScore(0, 1, 0, 0));
-		mapByBase.put("H", new AmbiguityBaseScore(1, 1, 0, 1));
+		mapByBase.put("D", new AmbiguityBaseScore(1, 1, 0, 1));
+		mapByBase.put("H", new AmbiguityBaseScore(1, 1, 1, 0));
 		mapByBase.put("V", new AmbiguityBaseScore(1, 0, 1, 1));
 		mapByBase.put("N", new AmbiguityBaseScore(1, 1, 1, 1));
 		mapByBase.put("-", new AmbiguityBaseScore(0, 0, 0, 0));
@@ -79,21 +81,14 @@ public class ConsensusSequenceCreator {
 				}
 			}
 		}
-		return mapByScore.get(score);
+		String result = mapByScore.get(score);
+//		if (result == null) {
+//			System.out.println(score.getAdeninScore() + " " + score.getThyminScore() + " " + score.getCytosinScore() + " " + score.getGuaninScore());
+//		}
+		return result;
 	}
 	
 	
-  /**
-   * Constructs a majority rule consensus sequence
-   * @param sequences - a set of sequences with equal length
-   * @return the consensus sequence
-   */
-  public Sequence<NucleotideCompound> majorityRuleConsensus(Sequence<NucleotideCompound>[] sequences) {
-  	return new BasicSequence<NucleotideCompound>(majorityRuleConsensusAsString(sequences), 
-  			AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet());
-  }
-  
-  
   /**
    * Constructs a majority rule consensus sequence. The returned sequence always contains T instead of U, even if RNA sequences 
    * have been specified. 
@@ -102,13 +97,43 @@ public class ConsensusSequenceCreator {
    */
   public String majorityRuleConsensusAsString(Sequence<NucleotideCompound>[] sequences) {
   	StringBuffer result = new StringBuffer(sequences[0].getLength()); 
+  	//BasicSequence<NucleotideCompound> result = new BasicSequence<NucleotideCompound>(sequence, compoundSet);
+  	
 		for (int position = 1; position <= sequences[0].getLength(); position++) {  // "biological index" [...]
     	AmbiguityBaseScore counts = new AmbiguityBaseScore(0, 0, 0, 0);
 	  	for (int sequenceIndex = 0; sequenceIndex < sequences.length; sequenceIndex++) {
 	  		counts.add(mapByBase.get(sequences[sequenceIndex].getCompoundAt(position).getUpperedBase()));
 			}
-	  	result.append(getMajorityBase(counts));
+	  	String base = getMajorityBase(counts);
+	  	if (!base.equals("A") && !base.equals("T") && !base.equals("C") && !base.equals("G")) {
+	  		System.out.print(base);
+	  	}
+	  	result.append(base);
 		}
+//		System.out.println();
+//		System.out.println(result.length() + ", " + result.toString());
 		return result.toString();
+  }
+
+  
+  /**
+   * Constructs a majority rule consensus sequence
+   * @param sequences - a set of sequences with equal length
+   * @return the consensus sequence
+   */
+  public Sequence<NucleotideCompound> majorityRuleConsensus(Sequence<NucleotideCompound>[] sequences) {
+  	String seq = majorityRuleConsensusAsString(sequences);
+//  	System.out.println("\"" + seq + "\"");
+  	BasicSequence<NucleotideCompound> result = new BasicSequence<NucleotideCompound>(seq, 
+  			AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet());
+//  	DNASequence result = new DNASequence(seq, 
+//  			AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet());
+//  	System.out.println(result.getLength());
+//  	for (int i = 1; i <= result.getLength(); i++) {
+//  		System.out.print("|" + seq.charAt(i - 1) + result.getCompoundAt(i).getBase());
+//		}
+//  	System.out.println();
+//  	System.out.println("Seq: " + result.getSequenceAsString());
+  	return result;
   }
 }
