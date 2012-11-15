@@ -8,6 +8,9 @@ package info.bioinfweb.biojava3.core.sequence.compound;
  * @author Ben St&ouml;ver
  */
 public class AlignmentAmbiguityNucleotideCompoundSet extends AmbiguityNoGapNucleotideCompoundSet {
+	public static final char GAP_CHARACTER = '-'; 
+	public static final char UNKNOWN_CHARACTER = '?'; 
+	
 	private static AlignmentAmbiguityNucleotideCompoundSet sharedInstance = null;
 	
 	
@@ -16,8 +19,8 @@ public class AlignmentAmbiguityNucleotideCompoundSet extends AmbiguityNoGapNucle
 	 */
 	public AlignmentAmbiguityNucleotideCompoundSet() {
 		super();
-		addNucleotideCompound("-", "-");
-		addNucleotideCompound("?", "?");
+		addNucleotideCompound("" + GAP_CHARACTER, "" + GAP_CHARACTER);
+		addNucleotideCompound("" + UNKNOWN_CHARACTER, "" + UNKNOWN_CHARACTER);
 	}
 
 	
