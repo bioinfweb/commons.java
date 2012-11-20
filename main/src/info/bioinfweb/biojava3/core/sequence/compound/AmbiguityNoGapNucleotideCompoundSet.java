@@ -20,7 +20,7 @@ public class AmbiguityNoGapNucleotideCompoundSet extends NoGapNucleotideCompound
 	 */
 	public AmbiguityNoGapNucleotideCompoundSet() {
 		super();
-		addAmbiguityCompounds();
+		addAmbiguityDNACompounds();
 	}
 
 	

@@ -20,7 +20,7 @@ public class AmbiguityNoGapDNACompoundSet extends NoGapDNACompoundSet {
 	 */
 	public AmbiguityNoGapDNACompoundSet() {
 		super();
-		addAmbiguityCompounds();
+		addAmbiguityDNACompounds();
 	}
 
 	

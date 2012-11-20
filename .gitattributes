@@ -12,7 +12,6 @@ main/lib/junit-4.9b1.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
-main/src/info/bioinfweb/biojava3/alignment/AlignmentIO.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityRNACompoundSet.java -text svneol=unset#text/plain
@@ -24,6 +23,8 @@ main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapNucleotideCompoundS
 main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapRNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceAbstractSequenceView.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSetNexusFileBuilder.java -text svneol=unset#text/plain

@@ -31,7 +31,7 @@ public abstract class AbstractNucleotideCompoundSet2 extends AbstractNucleotideC
     }
     else {
       NucleotideCompound[] compounds = new NucleotideCompound[equivalents.length];
-      for(int i=0; i<compounds.length; i++) {
+      for(int i = 0; i < compounds.length; i++) {
         compounds[i] = getCompoundForString(equivalents[i]);
       }
       return new NucleotideCompound(base, this, complement, compounds);
@@ -39,33 +39,43 @@ public abstract class AbstractNucleotideCompoundSet2 extends AbstractNucleotideC
   }
 	
 	
+	protected void addAmbiguityDNACompounds() {
+		addAmbiguityCompounds("T");
+	}
+	
+	
+	protected void addAmbiguityRNACompounds() {
+		addAmbiguityCompounds("U");
+	}
+	
+	
 	/**
 	 * Implementing classes can use this method to add all DNA or RNA ambiguity codes. (The four bases
 	 * must have been added before calling this method.)  
 	 */
-	protected void addAmbiguityCompounds() {
+	private void addAmbiguityCompounds(String symbolTU) {
     addNucleotideCompound("M", "K",
         "A", "C");
     addNucleotideCompound("R", "Y",
         "A", "G");
     addNucleotideCompound("W", "W",
-        "A", "U");
+        "A", symbolTU);
     addNucleotideCompound("S", "S",
         "C", "G");
     addNucleotideCompound("Y", "R",
-        "C", "U");
+        "C", symbolTU);
     addNucleotideCompound("K", "M",
-        "G", "U");
+        "G", symbolTU);
     addNucleotideCompound("V", "B",
         "A", "C", "G");
     addNucleotideCompound("H", "D",
-        "A", "C", "U");
+        "A", "C", symbolTU);
     addNucleotideCompound("D", "H",
-        "A", "G", "U");
+        "A", "G", symbolTU);
     addNucleotideCompound("B", "V",
-        "C", "G", "U");
+        "C", "G", symbolTU);
     addNucleotideCompound("N", "N",
-        "A", "C", "G", "U", "M", "R", "W", "S", "Y", "K", "V", "H", "D", "B");
+        "A", "C", "G", symbolTU);
 
     calculateIndirectAmbiguities();
 	}
