@@ -28,8 +28,9 @@ public class GraphicsUtils {
   
   
   /**
-   * Returns the specified color if differs enough from the given background color.
+   * Returns the specified color if it differs enough from the given background color.
    * Otherwise the inverted color is returned.
+   * 
    * @param color - the designated foreground color
    * @param background - the background color
    * @param minDifference - the minimal difference the two colors must have so that the
@@ -43,5 +44,24 @@ public class GraphicsUtils {
   	else {
   		return color;
   	}
+  }
+  
+  
+  /**
+   * Blends different colors. (Each color adds the same percentage to the resulting color.)
+   *  
+   * @param colors an array of colors (should contain at least two elements) 
+   * @return the blended color or black if an empty array was specified
+   */
+  public static Color blend(Color... colors) {
+  	int r = 0;
+  	int g = 0;
+  	int b = 0;
+  	for (int i = 0; i < colors.length; i++) {
+			r += colors[i].getRed();
+			g += colors[i].getGreen();
+			b += colors[i].getBlue();
+		}
+  	return new Color(r / colors.length, g / colors.length, b / colors.length);
   }
 }
