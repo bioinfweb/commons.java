@@ -78,4 +78,18 @@ public class Math2Test {
 		assertEquals(100, Math2.maxDouble(0, 24, 100, 23, 36, 78), 0.0);
 		assertEquals(100, Math2.maxDouble(100, 23, 36, 78), 0.0);
 	}	
+
+	
+	@Test
+  public void test_roundUpFloat() {
+		assertEquals(3f, Math2.roundUp(2.1f), 0.0);
+		assertEquals(2f, Math2.roundUp(2f), 0.0);
+	}	
+
+	
+	@Test
+  public void test_roundUpDouble() {
+		assertEquals(3.0, Math2.roundUp(2.1), 0.0);
+		assertEquals(2.0, Math2.roundUp(2.0), 0.0);
+	}	
 }
