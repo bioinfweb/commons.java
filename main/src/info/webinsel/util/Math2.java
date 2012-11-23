@@ -298,12 +298,20 @@ public class Math2 {
   
   
   public static long roundUp(double value) {
-  	return (long)value + 1;
+  	long result = (long)value;
+  	if ((double)result < value) {
+  		result++;
+  	}
+  	return result;
   }
   
   
   public static int roundUp(float value) {
-  	return (int)value + 1;
+  	int result = (int)value;
+  	if ((float)result < value) {
+  		result++;
+  	}
+  	return result;
   }
   
   
