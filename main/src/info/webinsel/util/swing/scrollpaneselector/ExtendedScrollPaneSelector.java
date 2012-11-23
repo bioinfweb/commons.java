@@ -40,27 +40,28 @@ import org.jdesktop.swingx.scrollpaneselector.TweakedScrollPaneLayout;
  */
 public class ExtendedScrollPaneSelector extends JComponent {
 	private static final double MAX_SIZE = 200;
+	private static final String COMPONENT_ORIENTATION = "componentOrientation";
 	private static final Icon LAUNCH_SELECTOR_ICON = new Icon() {
-		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Color tmpColor = g.getColor();
-			g.setColor(Color.BLACK);
-			g.drawRect(2, 2, 10, 10);
-			g.drawRect(4, 5, 6, 4);
-			g.setColor(tmpColor);
-		}
-
-		public int getIconWidth() {
-			return 15;
-		}
-
-		public int getIconHeight() {
-			return 15;
-		}
-	};
+				public void paintIcon(Component c, Graphics g, int x, int y) {
+					Color tmpColor = g.getColor();
+					g.setColor(Color.BLACK);
+					g.drawRect(2, 2, 10, 10);
+					g.drawRect(4, 5, 6, 4);
+					g.setColor(tmpColor);
+				}
+		
+				public int getIconWidth() {
+					return 15;
+				}
+		
+				public int getIconHeight() {
+					return 15;
+				}
+			};
+			
 	private static Map<JScrollPane, ExtendedScrollPaneSelector> theInstalledScrollPaneSelectors
 			= new HashMap<JScrollPane, ExtendedScrollPaneSelector>();
-	private static final String COMPONENT_ORIENTATION = "componentOrientation";
-
+	
 	
 	private LayoutManager theFormerLayoutManager;
 	private JScrollPane theScrollPane;
