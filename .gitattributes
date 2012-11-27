@@ -6,6 +6,7 @@ main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/biojava3-alignment-3.0.4.jar -text
 main/lib/biojava3-core-3.0.jar -text
 main/lib/bytecode-1.8.jar -text
+main/lib/commons-collections-3.2.1.jar -text
 main/lib/core-1.8.jar -text
 main/lib/jgrapht-jdk1.5.jar -text
 main/lib/junit-4.9b1.jar -text
@@ -51,6 +52,10 @@ main/src/info/webinsel/util/appversion/AppVersionXMLConstants.java -text svneol=
 main/src/info/webinsel/util/appversion/AppVersionXMLReadWrite.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/ApplicationType.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/ApplicationVersion.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/collections/AbstractSequenceInterval.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/collections/MultiTreeMap.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/collections/SequenceInterval.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/collections/SequenceIntervalList.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/FontCalculator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/GraphicsUtils.java -text svneol=unset#text/plain
