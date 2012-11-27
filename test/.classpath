@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/_Lib/lib/biojava3-core-3.0.jar"/>
 	<classpathentry kind="lib" path="/_Lib/lib/servlet.jar"/>
 	<classpathentry kind="lib" path="/_Lib/bin" sourcepath="/_Lib/src"/>
+	<classpathentry kind="lib" path="/_Lib/lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
