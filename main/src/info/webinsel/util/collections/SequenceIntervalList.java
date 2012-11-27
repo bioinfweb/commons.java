@@ -21,7 +21,7 @@ import java.util.Set;
  *
  * @param <E> the type of elements that describe a sequence interval (the elements of the collection)
  */
-public class SequenceIntervalList<E extends SequenceInterval> implements Collection<E> {
+public class SequenceIntervalList<E> implements Collection<E> {
 	public static final int DEFAULT_INITIAL_SEQUENCE_LENGTH = 5000;
 	public static final int DEFAULT_INTERVAL_LENGTH = 50;
 	
@@ -30,14 +30,15 @@ public class SequenceIntervalList<E extends SequenceInterval> implements Collect
 	private MultiTreeMap<Integer, E> mapByLastPos = new MultiTreeMap<Integer, E>();
   private ArrayList<List<E>> intervalList;
   private int intervalLength;
+  private SequenceIntervalPositionAdapter<? super E> positionAdapter;
 	
 
   /**
    * Equivalent to calling <code>SequenceIntervalList({@link #DEFAULT_INITIAL_SEQUENCE_LENGTH}, 
    * {@link DEFAULT_INTERVAL_LENGTH})</code>.
    */
-  public SequenceIntervalList() {
-		this(DEFAULT_INITIAL_SEQUENCE_LENGTH, DEFAULT_INTERVAL_LENGTH);
+  public SequenceIntervalList(SequenceIntervalPositionAdapter<? super E> positionAdapter) {
+		this(positionAdapter, DEFAULT_INITIAL_SEQUENCE_LENGTH, DEFAULT_INTERVAL_LENGTH);
 	}
 
 
@@ -54,13 +55,19 @@ public class SequenceIntervalList<E extends SequenceInterval> implements Collect
 	 *        If you already know that you are going to call this method with intervals of a certain length, you specify 
 	 *        a value here that is in the dimension of that length.) 
 	 */
-	public SequenceIntervalList(int sequenceLength, int intervalLength) {
+	public SequenceIntervalList(SequenceIntervalPositionAdapter<? super E> positionAdapter, int sequenceLength, int intervalLength) {
 		super();
+		this.positionAdapter = positionAdapter;
 		this.intervalLength = intervalLength;
 		intervalList = new ArrayList<List<E>>(sequenceLength / intervalLength + 1);
 	}
 	
 	
+	public SequenceIntervalPositionAdapter<? super E> getPositionAdapter() {
+		return positionAdapter;
+	}
+
+
 	private int intervalIndex(int seqPos) {
 		return seqPos / intervalLength;  // rounds down
 	}
@@ -95,10 +102,11 @@ public class SequenceIntervalList<E extends SequenceInterval> implements Collect
 
 	@Override
 	public boolean add(E element) {
-		mapByFirstPos.put(element.getFirstPos(), element);
-		mapByLastPos.put(element.getLastPos(), element);
+		mapByFirstPos.put(getPositionAdapter().getFirstPos(element), element);
+		mapByLastPos.put(getPositionAdapter().getLastPos(element), element);
 
-		Iterator<List<E>> iterator = getIntervalListIterator(element.getFirstPos(), element.getLastPos());
+		Iterator<List<E>> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+				getPositionAdapter().getLastPos(element));
 		boolean result = true;
 		while (iterator.hasNext()) {
 			result = result && iterator.next().add(element);
@@ -109,10 +117,11 @@ public class SequenceIntervalList<E extends SequenceInterval> implements Collect
 	
 	public boolean remove(Object o) {
 		E element = (E)o;
-		mapByFirstPos.remove(element.getFirstPos(), element);
-		mapByFirstPos.remove(element.getLastPos(), element);
+		mapByFirstPos.remove(getPositionAdapter().getFirstPos(element), element);
+		mapByFirstPos.remove(getPositionAdapter().getLastPos(element), element);
 
-		Iterator<List<E>> iterator = getIntervalListIterator(element.getFirstPos(), element.getLastPos());
+		Iterator<List<E>> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+				getPositionAdapter().getLastPos(element));
 		boolean result = true;
 		while (iterator.hasNext()) {
 			result = result && iterator.next().remove(element);
