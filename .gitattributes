@@ -52,7 +52,6 @@ main/src/info/webinsel/util/appversion/AppVersionXMLConstants.java -text svneol=
 main/src/info/webinsel/util/appversion/AppVersionXMLReadWrite.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/ApplicationType.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/ApplicationVersion.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/collections/AbstractSequenceInterval.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/MultiTreeMap.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/SequenceInterval.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/SequenceIntervalList.java -text svneol=unset#text/plain

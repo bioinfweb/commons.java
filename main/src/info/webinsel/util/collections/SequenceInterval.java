@@ -8,7 +8,7 @@ package info.webinsel.util.collections;
  * 
  * @author Ben St&ouml;ver
  */
-public interface SequenceInterval extends Comparable<SequenceInterval> {
+public interface SequenceInterval {
   public int getFirstPos();
 
   public int getLastPos();

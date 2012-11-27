@@ -3,11 +3,11 @@ package info.webinsel.util.collections;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 
 
 
@@ -122,8 +122,7 @@ public class SequenceIntervalList<E extends SequenceInterval> implements Collect
 
 	
 	public Set<E> getOverlappingElements(int firstPos, int lastPos) {
-		TreeSet<E> result = new TreeSet<E>();
-		
+		Set<E> result = new HashSet<E>();
 		Iterator<List<E>> iterator = getIntervalListIterator(firstPos, lastPos);
 		while (iterator.hasNext()) {
 			result.addAll(iterator.next());
