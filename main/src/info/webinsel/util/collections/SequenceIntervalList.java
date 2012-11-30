@@ -6,6 +6,8 @@ import info.webinsel.util.Math2;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -95,6 +97,13 @@ public class SequenceIntervalList<E> implements Collection<E> {
   private int size = 0;
   private int intervalLength;
   private SequenceIntervalPositionAdapter<? super E> positionAdapter;
+	private Comparator<E> firstPosComparator = new Comparator<E>() {
+				@Override
+				public int compare(E o1, E o2) {
+					return getPositionAdapter().getFirstPos(o1) - getPositionAdapter().getFirstPos(o2);
+				}
+			};
+	private boolean sortedByFirstPos = true;
 	
 
   /**
@@ -137,6 +146,20 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 
 
+	public Comparator<E> getFirstPosComparator() {
+		return firstPosComparator;
+	}
+
+
+	public boolean isSortedByFirstPos() {
+		return sortedByFirstPos;
+	}
+
+
+	/**
+	 * Reinserts all elements of the list. This method should be called, if it is not sure anymore
+	 * if the elements are contained in the correct lists, because their position might have changed.
+	 */
 	private void resortElements() {
 		ArrayList<E> elements = new ArrayList<E>(size());
 		elements.addAll(this);
@@ -161,9 +184,16 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 	
 	
-	private IntervalInformation getIntervalList(int intervalIndex) {
+	/**
+	 * Returns the interval lists at the specified position. If no lists exists for this position yet, they are created.
+	 * Additionally a lists between the old maximum interval and the specified position are created.
+	 * 
+	 * @param intervalIndex - the index of the interval the returned list covers
+	 * @return the lists covering the specified interval
+	 */
+	private IntervalInformation getIntervalInformation(int intervalIndex) {
 		while (intervalIndex >= intervalList.size()) {
-			intervalList.add(new IntervalInformation(intervalIndex * getIntervalLength()));
+			intervalList.add(new IntervalInformation(intervalList.size() * getIntervalLength()));
 		}
 		return intervalList.get(intervalIndex);
 	}
@@ -173,16 +203,16 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	 * Returns an iterator over all interval lists, that would contains an element reaching from 
 	 * <code>firstSeqPos</code> to <code>lastSeqPos</code>.
 	 * 
-	 * @param firstSeqPos the first position of the requested interval of the sequence (not the interval index)
-	 * @param lastSeqPos the last position of the requested interval of the sequence (not the interval index)
+	 * @param firstSeqPos - the first position of the requested interval of the sequence (not the interval index)
+	 * @param lastSeqPos - the last position of the requested interval of the sequence (not the interval index)
 	 * @return the {@link Iterator} (created from a {@link LinkedList})
 	 */
-	private Iterator<IntervalInformation> getIntervalListIterator(int firstSeqPos, int lastSeqPos) {
+	private Iterator<IntervalInformation> getIntervalInformationIterator(int firstSeqPos, int lastSeqPos) {
 		LinkedList<IntervalInformation> list = new LinkedList<IntervalInformation>();
 		int firstInterval = intervalIndex(firstSeqPos);
 		int lastInterval = intervalIndex(lastSeqPos);
 		for (int i = firstInterval; i <= lastInterval; i++) {
-			list.add(getIntervalList(i));
+			list.add(getIntervalInformation(i));
 		}
 		return list.iterator();
 	}
@@ -190,7 +220,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public boolean add(E element) {
-		Iterator<IntervalInformation> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+		Iterator<IntervalInformation> iterator = getIntervalInformationIterator(getPositionAdapter().getFirstPos(element), 
 				getPositionAdapter().getLastPos(element));
 		boolean result = true;
 		while (iterator.hasNext()) {
@@ -204,7 +234,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	public boolean remove(Object o) {
 		try {
 			E element = (E)o;
-			Iterator<IntervalInformation> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+			Iterator<IntervalInformation> iterator = getIntervalInformationIterator(getPositionAdapter().getFirstPos(element), 
 					getPositionAdapter().getLastPos(element));
 			boolean result = true;
 			while (iterator.hasNext()) {
@@ -236,7 +266,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	
 	public Collection<E> getOverlappingElements(int firstPos, int lastPos) {
 		Collection<E> result = new ArrayList<E>();
-		Iterator<IntervalInformation> iterator = getIntervalListIterator(firstPos, lastPos);
+		Iterator<IntervalInformation> iterator = getIntervalInformationIterator(firstPos, lastPos);
 		if (iterator.hasNext()) {
 			// Add elements starting in the first interval or before:
 			IntervalInformation first = iterator.next();
@@ -272,7 +302,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	@Override
 	public boolean contains(Object o) {
 		try {
-			return getIntervalList(intervalIndex(getPositionAdapter().getFirstPos((E)o))).getStartList().contains(o);
+			return getIntervalInformation(intervalIndex(getPositionAdapter().getFirstPos((E)o))).getStartList().contains(o);
 		}
 		catch (ClassCastException e) {
 			return false;
@@ -298,38 +328,67 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 
 
+	public void sortSublistsByFirstPos() {
+		if (!isSortedByFirstPos()) {
+			Iterator<IntervalInformation> iterator = intervalList.iterator();
+			while (iterator.hasNext()) {
+				IntervalInformation i = iterator.next();
+				Collections.sort(i.getStartList(), getFirstPosComparator());
+				Collections.sort(i.getOverlapList(), getFirstPosComparator());
+			}
+			sortedByFirstPos = true;
+		}
+	}
+	
+	
+	/**
+	 * Returns an iterator over the list. Each element is only returned once, no matter how many intervals it spans.
+	 * The elements are ordered by their first position. (This method sorts the sublists first. If sorting is not 
+	 * necessary you can call the faster method {@link #unsortedIterator()})
+	 * 
+	 * @see #unsortedIterator()
+	 * @see java.util.Collection#iterator()
+	 */
 	@Override
 	public Iterator<E> iterator() {
+		sortSublistsByFirstPos();
+		return unsortedIterator();
+	}
+	
+	
+	/**
+	 * Returns an iterator over the list. Each element is only returned once, no matter how many intervals it spans.
+	 * Elements contained in the same interval are not necessarily ordered.
+	 * 
+	 * @see #iterator()
+	 */
+	public Iterator<E> unsortedIterator() {
 		return new Iterator<E>() {
 					private Iterator<IntervalInformation> intervalIterator = intervalList.iterator();
 					private Iterator<E> listIterator = null;
 					
 					
 					private boolean secureFilledListIterator() {
-						if ((listIterator == null) || !listIterator.hasNext()) {
+						if (((listIterator == null) || !listIterator.hasNext()) && intervalIterator.hasNext()) {
 							do {  // Search next filled list
 								listIterator = intervalIterator.next().getStartList().iterator();
 							} while (!listIterator.hasNext() && intervalIterator.hasNext());
 						}
-						return listIterator.hasNext();  // Returns false of the end of intervalIterator was reached
+						return (listIterator == null) || listIterator.hasNext();  // Returns false of the end of intervalIterator was reached and the last listIterator contains no more elements
 					}
 					
 					
 					@Override
 					public boolean hasNext() {
-						if ((listIterator != null) && listIterator.hasNext()) {
-							return true;
-						}
-						else {
-							return intervalIterator.hasNext();  //TODO So einfach ist das nicht, da alle folgenden Listen leer sein könnten
-						}
+						return secureFilledListIterator();
 					}
 					
 		
 					@Override
 					public E next() {
-						if ((listIterator == null) || !listIterator.hasNext()) {
-							listIterator = intervalIterator.next().getStartList().iterator();
+						secureFilledListIterator();
+						if (listIterator == null) {
+							
 						}
 						return listIterator.next();
 					}
