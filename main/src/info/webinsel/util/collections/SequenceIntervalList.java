@@ -1,13 +1,14 @@
 package info.webinsel.util.collections;
 
 
+import info.webinsel.util.Math2;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 
 
@@ -22,13 +23,76 @@ import java.util.Set;
  * @param <E> the type of elements that describe a sequence interval (the elements of the collection)
  */
 public class SequenceIntervalList<E> implements Collection<E> {
+	public static final int INITIAL_ELEMENT_LIST_CAPACITY = 10;
 	public static final int DEFAULT_INITIAL_SEQUENCE_LENGTH = 5000;
 	public static final int DEFAULT_INTERVAL_LENGTH = 50;
 	
+
+	protected class IntervalInformation {
+		private int intervalStart;
+		private ArrayList<E> startList = new ArrayList<E>(INITIAL_ELEMENT_LIST_CAPACITY);
+		private ArrayList<E> overlapList = new ArrayList<E>(INITIAL_ELEMENT_LIST_CAPACITY);
+		
+		
+		public IntervalInformation(int intervalStart) {
+			super();
+			this.intervalStart = intervalStart;
+		}
+
+
+		public int getIntervalStart() {
+			return intervalStart;
+		}
+
+
+		public ArrayList<E> getStartList() {
+			return startList;
+		}
+		
+		
+		public ArrayList<E> getOverlapList() {
+			return overlapList;
+		}
+		
+		
+		public boolean add(E element) {
+			int firstPos = getPositionAdapter().getFirstPos(element);
+			int intervalEnd = getIntervalStart() + getIntervalLength() - 1; 
+			if (firstPos > intervalEnd) {
+				return false;
+			}
+			else {
+				if (firstPos < getIntervalStart()) {
+					return getOverlapList().add(element);
+				}
+				else {
+					return getStartList().add(element);
+				}
+			}
+		}
+
+
+		public boolean remove(E element) {
+			if (Math2.isBetween(getPositionAdapter().getFirstPos(element), 
+					getIntervalStart(), getIntervalStart() + getIntervalLength() - 1)) {
+				
+				return getStartList().remove(element);
+			}
+			else {
+				return getOverlapList().remove(element);
+			}
+	  }
+
+
+		public void clear() {
+			getStartList().clear();
+			getOverlapList().clear();
+		}
+	}
 	
-	private MultiTreeMap<Integer, E> mapByFirstPos = new MultiTreeMap<Integer, E>();
-	private MultiTreeMap<Integer, E> mapByLastPos = new MultiTreeMap<Integer, E>();
-  private ArrayList<List<E>> intervalList;
+	
+  private ArrayList<IntervalInformation> intervalList;
+  private int size = 0;
   private int intervalLength;
   private SequenceIntervalPositionAdapter<? super E> positionAdapter;
 	
@@ -59,23 +123,47 @@ public class SequenceIntervalList<E> implements Collection<E> {
 		super();
 		this.positionAdapter = positionAdapter;
 		this.intervalLength = intervalLength;
-		intervalList = new ArrayList<List<E>>(sequenceLength / intervalLength + 1);
+		intervalList = new ArrayList<IntervalInformation>(sequenceLength / intervalLength + 1);
 	}
 	
 	
+	public int getIntervalLength() {
+		return intervalLength;
+	}
+
+
 	public SequenceIntervalPositionAdapter<? super E> getPositionAdapter() {
 		return positionAdapter;
 	}
 
 
-	private int intervalIndex(int seqPos) {
-		return seqPos / intervalLength;  // rounds down
+	private void resortElements() {
+		ArrayList<E> elements = new ArrayList<E>(size());
+		elements.addAll(this);
+		clear();
+		addAll(elements);
 	}
 	
 	
-	private List<E> getIntervalList(int intervalIndex) {
+	/**
+	 * Calling this methods leads to resorting of all elements in the list.
+	 * 
+	 * @param positionAdapter - the new position adapter
+	 */
+	public void setPositionAdapter(SequenceIntervalPositionAdapter<? super E> positionAdapter) {  //TODO Write a test for this method
+		this.positionAdapter = positionAdapter;
+		resortElements();
+	}
+
+
+	private int intervalIndex(int seqPos) {
+		return seqPos / getIntervalLength();  // rounds down
+	}
+	
+	
+	private IntervalInformation getIntervalList(int intervalIndex) {
 		while (intervalIndex >= intervalList.size()) {
-			intervalList.add(new LinkedList<E>());
+			intervalList.add(new IntervalInformation(intervalIndex * getIntervalLength()));
 		}
 		return intervalList.get(intervalIndex);
 	}
@@ -89,8 +177,8 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	 * @param lastSeqPos the last position of the requested interval of the sequence (not the interval index)
 	 * @return the {@link Iterator} (created from a {@link LinkedList})
 	 */
-	private Iterator<List<E>> getIntervalListIterator(int firstSeqPos, int lastSeqPos) {
-		LinkedList<List<E>> list = new LinkedList<List<E>>();
+	private Iterator<IntervalInformation> getIntervalListIterator(int firstSeqPos, int lastSeqPos) {
+		LinkedList<IntervalInformation> list = new LinkedList<IntervalInformation>();
 		int firstInterval = intervalIndex(firstSeqPos);
 		int lastInterval = intervalIndex(lastSeqPos);
 		for (int i = firstInterval; i <= lastInterval; i++) {
@@ -102,39 +190,63 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public boolean add(E element) {
-		mapByFirstPos.put(getPositionAdapter().getFirstPos(element), element);
-		mapByLastPos.put(getPositionAdapter().getLastPos(element), element);
-
-		Iterator<List<E>> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+		Iterator<IntervalInformation> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
 				getPositionAdapter().getLastPos(element));
 		boolean result = true;
 		while (iterator.hasNext()) {
 			result = result && iterator.next().add(element);
 		}
+		size++;  //TODO Müsste eigentlich result prüfen. (Macht aber nur Sinn, wenn einzelne Rückgabewerte der Schlefe betrachtet werden.)
 		return result;
 	}
 	
 	
 	public boolean remove(Object o) {
-		E element = (E)o;
-		mapByFirstPos.remove(getPositionAdapter().getFirstPos(element), element);
-		mapByFirstPos.remove(getPositionAdapter().getLastPos(element), element);
-
-		Iterator<List<E>> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
-				getPositionAdapter().getLastPos(element));
-		boolean result = true;
-		while (iterator.hasNext()) {
-			result = result && iterator.next().remove(element);
+		try {
+			E element = (E)o;
+			Iterator<IntervalInformation> iterator = getIntervalListIterator(getPositionAdapter().getFirstPos(element), 
+					getPositionAdapter().getLastPos(element));
+			boolean result = true;
+			while (iterator.hasNext()) {
+				result = result && iterator.next().remove(element);
+			}
+			if (result) {  // Make sure the specified element was present in the list before 
+				size--;
+			}
+			return result;
 		}
-		return result;
+		catch (ClassCastException e) {
+			return false;
+		}
 	}
 
 	
-	public Set<E> getOverlappingElements(int firstPos, int lastPos) {
-		Set<E> result = new HashSet<E>();
-		Iterator<List<E>> iterator = getIntervalListIterator(firstPos, lastPos);
+	private void addOverlappingElementsFromList(Collection<E> result, List<E> list, int firstPos, int lastPos) {
+		Iterator<E> iterator = list.iterator();
 		while (iterator.hasNext()) {
-			result.addAll(iterator.next());
+			E element = iterator.next();
+			if (Math2.overlaps(firstPos, lastPos, 
+					getPositionAdapter().getFirstPos(element), getPositionAdapter().getLastPos(element))) {
+				
+				result.add(element);
+			}
+		}
+	}
+	
+	
+	public Collection<E> getOverlappingElements(int firstPos, int lastPos) {
+		Collection<E> result = new ArrayList<E>();
+		Iterator<IntervalInformation> iterator = getIntervalListIterator(firstPos, lastPos);
+		if (iterator.hasNext()) {
+			// Add elements starting in the first interval or before:
+			IntervalInformation first = iterator.next();
+			addOverlappingElementsFromList(result, first.getOverlapList(), firstPos, lastPos);
+			addOverlappingElementsFromList(result, first.getStartList(), firstPos, lastPos);
+
+			// Add elements starting after the first interval:
+			while (iterator.hasNext()) {
+				addOverlappingElementsFromList(result, iterator.next().getStartList(), firstPos, lastPos);  //TODO This method must be called only for the last iteration. The others could also use result.addAll().
+			}
 		}
 		return result;
 	}
@@ -152,15 +264,19 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public void clear() {
-		mapByFirstPos.clear();
-		mapByLastPos.clear();
 		intervalList.clear();
+		size = 0;
 	}
 
 
 	@Override
 	public boolean contains(Object o) {
-		return mapByFirstPos.containsValue((E)o);
+		try {
+			return getIntervalList(intervalIndex(getPositionAdapter().getFirstPos((E)o))).getStartList().contains(o);
+		}
+		catch (ClassCastException e) {
+			return false;
+		}
 	}
 
 
@@ -178,13 +294,52 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public boolean isEmpty() {
-		return mapByFirstPos.isEmpty();
+		return (size == 0);
 	}
 
 
 	@Override
 	public Iterator<E> iterator() {
-		return mapByFirstPos.valueIterator();
+		return new Iterator<E>() {
+					private Iterator<IntervalInformation> intervalIterator = intervalList.iterator();
+					private Iterator<E> listIterator = null;
+					
+					
+					private boolean secureFilledListIterator() {
+						if ((listIterator == null) || !listIterator.hasNext()) {
+							do {  // Search next filled list
+								listIterator = intervalIterator.next().getStartList().iterator();
+							} while (!listIterator.hasNext() && intervalIterator.hasNext());
+						}
+						return listIterator.hasNext();  // Returns false of the end of intervalIterator was reached
+					}
+					
+					
+					@Override
+					public boolean hasNext() {
+						if ((listIterator != null) && listIterator.hasNext()) {
+							return true;
+						}
+						else {
+							return intervalIterator.hasNext();  //TODO So einfach ist das nicht, da alle folgenden Listen leer sein könnten
+						}
+					}
+					
+		
+					@Override
+					public E next() {
+						if ((listIterator == null) || !listIterator.hasNext()) {
+							listIterator = intervalIterator.next().getStartList().iterator();
+						}
+						return listIterator.next();
+					}
+					
+		
+					@Override
+					public void remove() {
+						throw new UnsupportedOperationException();  //TODO Could be implemented some time
+					}
+				};
 	}
 
 
@@ -200,7 +355,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public boolean retainAll(Collection<?> collection) {
-		Iterator<E> iterator = mapByFirstPos.valueIterator();
+		Iterator<E> iterator = iterator();
 		boolean result = true;
 		while (iterator.hasNext()) {
 			E element = iterator.next();
@@ -214,18 +369,27 @@ public class SequenceIntervalList<E> implements Collection<E> {
 
 	@Override
 	public int size() {
-		return mapByFirstPos.totalSize();
+		return size;
 	}
 
 
 	@Override
 	public Object[] toArray() {
-		return mapByFirstPos.toArray();
+		return toArray(new Object[size()]);
 	}
 
 
 	@Override
 	public <T> T[] toArray(T[] array) {
-		return mapByFirstPos.toArray(array);
+		if (array.length < size()) {
+			array = (T[])Array.newInstance(array.getClass(), size());
+		}
+		Iterator<E> iterator = iterator();
+		int index = 0;
+		while (iterator.hasNext()) {
+			array[index] = (T)iterator.next();
+			index++;
+		}
+		return array;
 	}
 }

@@ -266,7 +266,7 @@ public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lö
 			@Override
 			public V next() {
 				if ((collectionIterator == null) || !collectionIterator.hasNext()) {
-					collectionIterator = get(keyIterator.next()).iterator();
+					collectionIterator = get(keyIterator.next()).iterator();  //TODO Könnte zu einem key eine leere Liste zurückgegeben werden? Dann würde der Aufruf von next() zu einem Fehler führen.
 				}
 				return collectionIterator.next();
 			}
