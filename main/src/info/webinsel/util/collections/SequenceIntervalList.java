@@ -6,11 +6,11 @@ import info.webinsel.util.Math2;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+
+import com.google.common.collect.TreeMultiset;
 
 
 
@@ -25,20 +25,21 @@ import java.util.List;
  * @param <E> the type of elements that describe a sequence interval (the elements of the collection)
  */
 public class SequenceIntervalList<E> implements Collection<E> {
-	public static final int INITIAL_ELEMENT_LIST_CAPACITY = 10;
 	public static final int DEFAULT_INITIAL_SEQUENCE_LENGTH = 5000;
 	public static final int DEFAULT_INTERVAL_LENGTH = 50;
 	
 
 	protected class IntervalInformation {
 		private int intervalStart;
-		private ArrayList<E> startList = new ArrayList<E>(INITIAL_ELEMENT_LIST_CAPACITY);
-		private ArrayList<E> overlapList = new ArrayList<E>(INITIAL_ELEMENT_LIST_CAPACITY);
+		private TreeMultiset<E> startList;
+		private TreeMultiset<E> overlapList;
 		
 		
-		public IntervalInformation(int intervalStart) {
+		public IntervalInformation(int intervalStart, Comparator<E> comparator) {
 			super();
 			this.intervalStart = intervalStart;
+			startList = TreeMultiset.create(comparator);
+			overlapList = TreeMultiset.create(comparator);
 		}
 
 
@@ -47,12 +48,12 @@ public class SequenceIntervalList<E> implements Collection<E> {
 		}
 
 
-		public ArrayList<E> getStartList() {
+		public TreeMultiset<E> getStartList() {
 			return startList;
 		}
 		
 		
-		public ArrayList<E> getOverlapList() {
+		public TreeMultiset<E> getOverlapList() {
 			return overlapList;
 		}
 		
@@ -97,13 +98,6 @@ public class SequenceIntervalList<E> implements Collection<E> {
   private int size = 0;
   private int intervalLength;
   private SequenceIntervalPositionAdapter<? super E> positionAdapter;
-	private Comparator<E> firstPosComparator = new Comparator<E>() {
-				@Override
-				public int compare(E o1, E o2) {
-					return getPositionAdapter().getFirstPos(o1) - getPositionAdapter().getFirstPos(o2);
-				}
-			};
-	private boolean sortedByFirstPos = true;
 	
 
   /**
@@ -146,16 +140,6 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 
 
-	public Comparator<E> getFirstPosComparator() {
-		return firstPosComparator;
-	}
-
-
-	public boolean isSortedByFirstPos() {
-		return sortedByFirstPos;
-	}
-
-
 	/**
 	 * Reinserts all elements of the list. This method should be called, if it is not sure anymore
 	 * if the elements are contained in the correct lists, because their position might have changed.
@@ -193,7 +177,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	 */
 	private IntervalInformation getIntervalInformation(int intervalIndex) {
 		while (intervalIndex >= intervalList.size()) {
-			intervalList.add(new IntervalInformation(intervalList.size() * getIntervalLength()));
+			intervalList.add(new IntervalInformation(intervalList.size() * getIntervalLength(), (Comparator<E>)getPositionAdapter()));
 		}
 		return intervalList.get(intervalIndex);
 	}
@@ -251,7 +235,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 
 	
-	private void addOverlappingElementsFromList(Collection<E> result, List<E> list, int firstPos, int lastPos) {
+	private void addOverlappingElementsFromList(Collection<E> result, Collection<E> list, int firstPos, int lastPos) {
 		Iterator<E> iterator = list.iterator();
 		while (iterator.hasNext()) {
 			E element = iterator.next();
@@ -328,41 +312,14 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 
 
-	public void sortSublistsByFirstPos() {
-		if (!isSortedByFirstPos()) {
-			Iterator<IntervalInformation> iterator = intervalList.iterator();
-			while (iterator.hasNext()) {
-				IntervalInformation i = iterator.next();
-				Collections.sort(i.getStartList(), getFirstPosComparator());
-				Collections.sort(i.getOverlapList(), getFirstPosComparator());
-			}
-			sortedByFirstPos = true;
-		}
-	}
-	
-	
 	/**
 	 * Returns an iterator over the list. Each element is only returned once, no matter how many intervals it spans.
-	 * The elements are ordered by their first position. (This method sorts the sublists first. If sorting is not 
-	 * necessary you can call the faster method {@link #unsortedIterator()})
+	 * The elements are ordered by their first position.
 	 * 
-	 * @see #unsortedIterator()
 	 * @see java.util.Collection#iterator()
 	 */
 	@Override
 	public Iterator<E> iterator() {
-		sortSublistsByFirstPos();
-		return unsortedIterator();
-	}
-	
-	
-	/**
-	 * Returns an iterator over the list. Each element is only returned once, no matter how many intervals it spans.
-	 * Elements contained in the same interval are not necessarily ordered.
-	 * 
-	 * @see #iterator()
-	 */
-	public Iterator<E> unsortedIterator() {
 		return new Iterator<E>() {
 					private Iterator<IntervalInformation> intervalIterator = intervalList.iterator();
 					private Iterator<E> listIterator = null;
@@ -441,7 +398,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	@Override
 	public <T> T[] toArray(T[] array) {
 		if (array.length < size()) {
-			array = (T[])Array.newInstance(array.getClass(), size());
+			array = (T[])Array.newInstance(array.getClass().getComponentType(), size());
 		}
 		Iterator<E> iterator = iterator();
 		int index = 0;

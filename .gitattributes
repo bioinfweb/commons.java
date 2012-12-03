@@ -8,6 +8,7 @@ main/lib/biojava3-core-3.0.jar -text
 main/lib/bytecode-1.8.jar -text
 main/lib/commons-collections-3.2.1.jar -text
 main/lib/core-1.8.jar -text
+main/lib/guava-13.0.1.jar -text
 main/lib/jgrapht-jdk1.5.jar -text
 main/lib/junit-4.9b1.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
