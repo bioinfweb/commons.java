@@ -153,6 +153,9 @@ test/src/info/bioinfweb/util/alignment/pairwise/NeedlemanWunschAlignerTest.java 
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/RandomValuesTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/StringUtilsTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/collections/IntervalElement.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/collections/MultiTreeMapTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/collections/SequenceIntervalListTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/collections/guavatest/TreeMultisetTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
