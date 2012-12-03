@@ -99,6 +99,7 @@ public class SequenceIntervalListTest {
   	assertEquals("c", list.getOverlappingElements(12, 20).iterator().next().text);
   	assertEquals("b", list.getOverlappingElements(6, 9).iterator().next().text);
   	assertEquals("b", list.getOverlappingElements(6, 10).iterator().next().text);
+  	assertEquals("c", list.getOverlappingElements(12, 12).iterator().next().text);
   }
 	
 	
