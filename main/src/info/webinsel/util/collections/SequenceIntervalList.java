@@ -233,6 +233,30 @@ public class SequenceIntervalList<E> implements Collection<E> {
 			return false;
 		}
 	}
+	
+	
+	/**
+	 * Moves an element of the list to a different position. To change positions of elements only this method
+	 * should be used. If the according properties of the element are set directly, the ordering of this list
+	 * will not be correct anymore.
+	 * 
+	 * @param element - the element to be moved (with unchanged position values)
+	 * @param newFirstPos - the new start position
+	 * @param newLastPos - the new end position
+	 * @return <code>true</code> if the element was moved, <code>false</code> if the element is not contained 
+	 *         in the list
+	 */
+	public boolean move(E element, int newFirstPos, int newLastPos) {
+		if (remove(element)) { 
+			getPositionAdapter().setFirstPos(element, newFirstPos);
+			getPositionAdapter().setLastPos(element, newLastPos);
+			add(element);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	
 	private void addOverlappingElementsFromList(Collection<E> result, Collection<E> list, int firstPos, int lastPos) {
