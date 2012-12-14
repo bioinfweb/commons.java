@@ -27,6 +27,18 @@ public class SequenceIntervalListTest {
 
 
 		@Override
+		public void setFirstPos(IntervalElement element, int newFirstPos) {
+			element.firstPos = newFirstPos;
+		}
+
+
+		@Override
+		public void setLastPos(IntervalElement element, int newLastPos) {
+			element.lastPos = newLastPos;
+		}
+
+
+		@Override
 		public int compare(IntervalElement o1, IntervalElement o2) {
 			return o1.compareTo(o2);
 		}
