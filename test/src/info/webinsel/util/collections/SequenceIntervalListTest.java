@@ -151,6 +151,7 @@ public class SequenceIntervalListTest {
   	IntervalElement return1 = iterator.next();
   	IntervalElement return2 = iterator.next();
   	assertTrue((return1.equals(e3) && return2.equals(e4)) || (return1.equals(e4) && return2.equals(e3)));
+  	assertFalse(iterator.hasNext());
   }
 
   
@@ -173,6 +174,14 @@ public class SequenceIntervalListTest {
   	IntervalElement return1 = iterator.next();
   	IntervalElement return2 = iterator.next();
   	assertTrue((return1.equals(e3) && return2.equals(e4)) || (return1.equals(e4) && return2.equals(e3)));
+  	assertFalse(iterator.hasNext());
+  }
+  
+  
+  @Test
+  public void test_iterator_empty() {
+  	SequenceIntervalList<IntervalElement> list = new SequenceIntervalList<IntervalElement>(new Adapter(), 100, 10);
+  	assertFalse(list.iterator().hasNext());
   }
   
   
