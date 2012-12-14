@@ -351,11 +351,9 @@ public class SequenceIntervalList<E> implements Collection<E> {
 					
 					private boolean secureFilledListIterator() {
 						if (((listIterator == null) || !listIterator.hasNext()) && intervalIterator.hasNext()) {
-							if (intervalIterator.hasNext()) {  // This test is necessary if the intervalIterator is empty from beginning on. 
-								do {  // Search next filled list
-									listIterator = intervalIterator.next().getStartList().iterator();
-								} while (!listIterator.hasNext() && intervalIterator.hasNext());
-							}
+							do {  // Search next filled list
+								listIterator = intervalIterator.next().getStartList().iterator();
+							} while (!listIterator.hasNext() && intervalIterator.hasNext());
 						}
 						return (listIterator != null) && listIterator.hasNext();  // Returns false of the end of intervalIterator was reached and the last listIterator contains no more elements
 					}
