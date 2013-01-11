@@ -1,9 +1,13 @@
 package info.webinsel.util.swing;
 
 
+import info.webinsel.wikihelp.client.WikiHelp;
+
 import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.swing.JEditorPane;
 import javax.swing.JOptionPane;
@@ -22,7 +26,11 @@ import javax.swing.text.html.HTMLDocument;
  * @author Ben St&ouml;ver
  */
 public class JHTMLLabel extends JEditorPane {
+	public static final String WIKI_HELP_PROTOCOL = "wikihelp://";
+	
 	private final JHTMLLabel THIS = this;
+	
+	private WikiHelp wikiHelp = null;
 	
 	
 	public final HyperlinkListener HYPERLINK_LISTENER = 		
@@ -30,7 +38,23 @@ public class JHTMLLabel extends JEditorPane {
 							public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent e) {
 								if (e.getEventType().equals(EventType.ACTIVATED)) {
 									try {
-										Desktop.getDesktop().browse(e.getURL().toURI());
+										if (e.getDescription().startsWith(WIKI_HELP_PROTOCOL)) {
+											String text = e.getDescription().substring(WIKI_HELP_PROTOCOL.length());
+											int topic = -1;
+											try {
+												topic = Integer.parseInt(text);
+											}
+											catch (NumberFormatException ex) {}
+											if (topic > -1) {
+												getWikiHelp().displayTopic(topic);
+											}
+											else {
+												getWikiHelp().displayTopic(text);
+											}
+										}
+										else {
+											Desktop.getDesktop().browse(e.getURL().toURI());
+										}
 									}
 									catch (Exception ex) {
 										JOptionPane.showMessageDialog(SwingUtilities.windowForComponent(THIS), 
@@ -58,6 +82,12 @@ public class JHTMLLabel extends JEditorPane {
   }
 	
 	
+	public JHTMLLabel(WikiHelp wikiHelp) {
+	  this();
+	  this.wikiHelp = wikiHelp;
+  }
+
+
 	@Override
   public void setText(String t) {
 	  super.setText(t);
@@ -67,5 +97,15 @@ public class JHTMLLabel extends JEditorPane {
 
 	public void setHTMLContent(String content) {
 		setText("<html><body>" + content + "</body></html>");
+	}
+
+
+	public WikiHelp getWikiHelp() {
+		return wikiHelp;
+	}
+
+
+	public void setWikiHelp(WikiHelp wikiHelp) {
+		this.wikiHelp = wikiHelp;
 	}
 }
