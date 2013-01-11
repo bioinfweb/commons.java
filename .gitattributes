@@ -108,6 +108,7 @@ main/src/info/webinsel/util/swing/DecimalInputDialog.java -text svneol=unset#tex
 main/src/info/webinsel/util/swing/ExtendedAbstractAction.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/ExtendedDesktopPane.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/FileChooserDirModel.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/swing/JHTMLLabel.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
