@@ -145,4 +145,22 @@ public class ParameterMap extends TreeMap<String, Object> {
 			return defaultValue;
 		}
 	}
+	
+	
+	/**
+	 * Returns the stored object for the key or <code>defaultValue</code> if no object is found.
+	 * 
+	 * @param key - the key under which the result is stored
+	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @return the stored object or <code>defaultValue</code>
+	 */
+	public Object getObject(String key, Object defaultValue) {
+		Object result = get(key);
+		if (result != null) {
+			return result;
+		}
+		else {
+			return defaultValue;
+		}
+	}
 } 
