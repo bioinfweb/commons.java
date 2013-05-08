@@ -18,10 +18,13 @@ import java.util.zip.ZipFile;
  * @author Ben St&ouml;ver
  */
 public class IOUtils {
+	public static final String FILE_SEPERATOR = System.getProperty("file.seperator");
+	
+	
 	/**
 	 * Returns either the path to the class file of the specified class without the package path or 
 	 * the path top the archive file that contains it (e.g. JAR, ZIP, EXE).
-	 * @param c - the class that is cotained in the returned JAR-file
+	 * @param c - the class that is contained in the returned JAR-file
 	 * @return the path to the class folder or archive
 	 */
 	public static String getClassLocation(Class c) {
