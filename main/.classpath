@@ -5,14 +5,14 @@
 	<classpathentry kind="lib" path="lib/BrowserLauncher2-1_3.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.13-bin.jar"/>
 	<classpathentry kind="lib" path="lib/servlet.jar"/>
-	<classpathentry kind="lib" path="lib/biojava3-core-3.0.jar"/>
 	<classpathentry kind="lib" path="lib/bytecode-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/jgrapht-jdk1.5.jar"/>
 	<classpathentry kind="lib" path="lib/phylo-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/core-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/junit-4.9b1.jar"/>
-	<classpathentry kind="lib" path="lib/biojava3-alignment-3.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
 	<classpathentry kind="lib" path="lib/guava-13.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/biojava3-alignment-3.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/biojava3-core-3.0.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
