@@ -25,6 +25,7 @@ main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapNucleotideCompoundS
 main/src/info/bioinfweb/biojava3/core/sequence/compound/NoGapRNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/io/FastaReaderTools.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/io/MapFastaWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceAbstractSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceView.java -text svneol=unset#text/plain
