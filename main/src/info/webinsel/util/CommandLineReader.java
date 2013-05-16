@@ -17,7 +17,7 @@ public class CommandLineReader {
 	 * @param value - the value to search for (exact match, case sensitive)
 	 * @param start - the start index
 	 * @param end - the end index (the last checked index is <code>end - 1</code>)
-	 * @return the index of the first occurence of the value or -1 if it was not found
+	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value, int start, int end) {
 		for (int i = start; i < end; i++) {
@@ -34,7 +34,7 @@ public class CommandLineReader {
 	 * All elements from <code>start</code> on are searched. 
 	 * @param value - the value to search for (exact match, case sensitive)
 	 * @param start - the start index
-	 * @return the index of the first occurence of the value or -1 if it was not found
+	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value, int start) {
 		return contained(value, start, args.length);
@@ -45,7 +45,7 @@ public class CommandLineReader {
 	 * Checks if the given value is contained in the arguments and returns the index.
 	 * All elements are searched. 
 	 * @param value - the value to search for (exact match, case sensitive)
-	 * @return the index of the first occurence of the value or -1 if it was not found
+	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value) {
 		return contained(value, 0, args.length);
