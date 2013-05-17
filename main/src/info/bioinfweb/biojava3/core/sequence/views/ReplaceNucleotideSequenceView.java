@@ -1,6 +1,7 @@
 package info.bioinfweb.biojava3.core.sequence.views;
 
 
+import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;
 import info.bioinfweb.biojava3.core.sequence.compound.AmbiguityNoGapNucleotideCompoundSet;
 
 import java.util.HashMap;
@@ -36,6 +37,18 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	
 	/** Replaces all other ambiguity codes with <i>N</i> and <i>T</i> with <i>U</i>. */
 	public static final Map<NucleotideCompound, NucleotideCompound> AMBIGUITY_DNA_TO_N_RNA_MAP = createAmbiguityDNAToNRNAMap();
+	
+	/** Replaces <i>?</i> with <i>N</i> and <i>U</i> with <i>T</i>. */
+	public static final Map<NucleotideCompound, NucleotideCompound> UNKNOWN_RNA_TO_N_DNA_MAP = createUnknownRNAToNDNAMap();
+	
+	/** Replaces <i>?</i> with <i>N</i> and <i>T</i> with <i>U</i>. */
+	public static final Map<NucleotideCompound, NucleotideCompound> UNKNOWN_DNA_TO_N_RNA_MAP = createUnknownDNAToNRNAMap();
+	
+	/** Replaces all other ambiguity codes and <i>?</i> with <i>N</i> and <i>U</i> with <i>T</i>. */
+	public static final Map<NucleotideCompound, NucleotideCompound> AMBIGUITY_UNKNOWN_RNA_TO_N_DNA_MAP = createAmbiguityUnknownRNAToNDNAMap();
+	
+	/** Replaces all other ambiguity codes and <i>?</i> with <i>N</i> and <i>T</i> with <i>U</i>. */
+	public static final Map<NucleotideCompound, NucleotideCompound> AMBIGUITY_UNKNOWN_DNA_TO_N_RNA_MAP = createAmbiguityUnknownDNAToNRNAMap();
 	
 	
 	private static Map<NucleotideCompound, NucleotideCompound> createRNAToDNAMap() {
@@ -86,6 +99,38 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	}
 
 			
+	private static Map<NucleotideCompound, NucleotideCompound> createUnknownRNAToNDNAMap() {
+		Map<NucleotideCompound, NucleotideCompound> result = createRNAToDNAMap();
+		AlignmentAmbiguityNucleotideCompoundSet cs = AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet(); 
+		result.put(cs.getCompoundForString("?"), cs.getCompoundForString("N"));
+		return result;
+	}
+
+	
+	private static Map<NucleotideCompound, NucleotideCompound> createUnknownDNAToNRNAMap() {
+		Map<NucleotideCompound, NucleotideCompound> result = createDNAToRNAMap();
+		AlignmentAmbiguityNucleotideCompoundSet cs = AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet(); 
+		result.put(cs.getCompoundForString("?"), cs.getCompoundForString("N"));
+		return result;
+	}
+
+	
+	private static Map<NucleotideCompound, NucleotideCompound> createAmbiguityUnknownRNAToNDNAMap() {
+		Map<NucleotideCompound, NucleotideCompound> result = createAmbiguityRNAToNDNAMap();
+		AlignmentAmbiguityNucleotideCompoundSet cs = AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet(); 
+		result.put(cs.getCompoundForString("?"), cs.getCompoundForString("N"));
+		return result;
+	}
+
+	
+	private static Map<NucleotideCompound, NucleotideCompound> createAmbiguityUnknownDNAToNRNAMap() {
+		Map<NucleotideCompound, NucleotideCompound> result = createAmbiguityDNAToNRNAMap();
+		AlignmentAmbiguityNucleotideCompoundSet cs = AlignmentAmbiguityNucleotideCompoundSet.getAlignmentAmbiguityNucleotideCompoundSet(); 
+		result.put(cs.getCompoundForString("?"), cs.getCompoundForString("N"));
+		return result;
+	}
+
+	
 	private Map<NucleotideCompound, NucleotideCompound> replacementMap;
 	
 	
