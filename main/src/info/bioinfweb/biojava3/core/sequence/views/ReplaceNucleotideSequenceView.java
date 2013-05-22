@@ -70,6 +70,8 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	private static Map<NucleotideCompound, NucleotideCompound> createAmbiguityToNMap() {
 		Map<NucleotideCompound, NucleotideCompound> result = new HashMap<NucleotideCompound, NucleotideCompound>();
 		AmbiguityNoGapNucleotideCompoundSet cs = AmbiguityNoGapNucleotideCompoundSet.getAmbiguityNoGapNucleotideCompoundSet(); 
+		result.put(cs.getCompoundForString("Y"), cs.getCompoundForString("N"));
+		result.put(cs.getCompoundForString("R"), cs.getCompoundForString("N"));
 		result.put(cs.getCompoundForString("M"), cs.getCompoundForString("N"));
 		result.put(cs.getCompoundForString("W"), cs.getCompoundForString("N"));
 		result.put(cs.getCompoundForString("S"), cs.getCompoundForString("N"));
