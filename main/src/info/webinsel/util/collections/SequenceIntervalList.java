@@ -16,7 +16,7 @@ import com.google.common.collect.TreeMultiset;
 
 /**
  * Instances of this class are able to manage a set of sequence intervals (Instances of classes implementing 
- * {@linkplain SequenceInterval}). The key feature if the efficient calculation of a subset of the stored 
+ * {@linkplain SequenceInterval}). The key feature is the efficient calculation of a subset of the stored 
  * interval elements that overlap with a defined interval (see {@link #getOverlappingElements(int, int)}. 
  * The actual efficiency depends on the specified interval length (see {@link #SequenceIntervalList(int, int)}).  
  * 
@@ -101,8 +101,8 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	
 
   /**
-   * Equivalent to calling <code>SequenceIntervalList({@link #DEFAULT_INITIAL_SEQUENCE_LENGTH}, 
-   * {@link DEFAULT_INTERVAL_LENGTH})</code>.
+   * Equivalent to calling <code>SequenceIntervalList(positionAdapter, 
+   * {@link #DEFAULT_INITIAL_SEQUENCE_LENGTH}, {@link DEFAULT_INTERVAL_LENGTH})</code>.
    */
   public SequenceIntervalList(SequenceIntervalPositionAdapter<? super E> positionAdapter) {
 		this(positionAdapter, DEFAULT_INITIAL_SEQUENCE_LENGTH, DEFAULT_INTERVAL_LENGTH);
