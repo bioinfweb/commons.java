@@ -1,5 +1,6 @@
 package info.bioinfweb.biojava3.core.sequence.template;
 
+
 import info.webinsel.util.collections.SequenceIntervalList;
 
 import java.util.Map;

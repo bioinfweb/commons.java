@@ -177,7 +177,8 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	 */
 	private IntervalInformation getIntervalInformation(int intervalIndex) {
 		while (intervalIndex >= intervalList.size()) {
-			intervalList.add(new IntervalInformation(intervalList.size() * getIntervalLength(), (Comparator<E>)getPositionAdapter()));
+			intervalList.add(new IntervalInformation(intervalList.size() * getIntervalLength(), 
+					(Comparator<E>)getPositionAdapter()));
 		}
 		return intervalList.get(intervalIndex);
 	}
