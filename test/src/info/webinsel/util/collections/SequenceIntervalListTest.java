@@ -262,4 +262,25 @@ public class SequenceIntervalListTest {
   	list.add(e1);
   	assertTrue(list.contains(e2));  // e1.equals(e2) == true
   }
+  
+  
+  @Test
+  public void test_containsPosition() {
+  	SequenceIntervalList<IntervalElement> list = new SequenceIntervalList<IntervalElement>(new Adapter(), 100, 10);
+  	list.add(new IntervalElement(1, 5, "a"));
+  	list.add(new IntervalElement(1, 11, "b"));
+  	list.add(new IntervalElement(13, 16, "c"));
+  	
+  	assertTrue(list.containsPosition(1));
+  	assertTrue(list.containsPosition(3));
+  	assertTrue(list.containsPosition(5));
+  	assertTrue(list.containsPosition(8));
+  	assertTrue(list.containsPosition(11));
+  	assertFalse(list.containsPosition(12));
+  	assertTrue(list.containsPosition(13));
+  	assertTrue(list.containsPosition(15));
+  	assertTrue(list.containsPosition(16));
+  	assertFalse(list.containsPosition(17));
+  	assertFalse(list.containsPosition(256));
+  }
 }
