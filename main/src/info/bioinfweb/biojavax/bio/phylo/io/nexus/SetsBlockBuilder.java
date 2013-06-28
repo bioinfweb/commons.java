@@ -9,7 +9,7 @@ import org.biojavax.bio.phylo.io.nexus.NexusComment;
 
 
 /**
- * Builds a <code>SETS</code> Nexus block from listening to events.
+ * Builds a <code>SETS</code> Nexus block by listening to events.
  * 
  * @author Ben St&ouml;ver
  */
@@ -31,7 +31,7 @@ public class SetsBlockBuilder extends NexusBlockBuilder.Abstract
 	
 	/**
 	 * The implementation of this method is currently empty since HIR Finder does not process
-	 * any information from Nexus comments.
+	 * any information included in Nexus comments.
 	 * @see org.biojavax.bio.phylo.io.nexus.NexusBlockBuilder$Abstract#addComment(org.biojavax.bio.phylo.io.nexus.NexusComment)
 	 */
 	@Override

@@ -211,7 +211,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 		while (iterator.hasNext()) {
 			result = result && iterator.next().add(element);
 		}
-		size++;  //TODO Müsste eigentlich result prüfen. (Macht aber nur Sinn, wenn einzelne Rückgabewerte der Schlefe betrachtet werden.)
+		size++;  //TODO Müsste eigentlich result prüfen. (Macht aber nur Sinn, wenn einzelne Rückgabewerte der Schleife betrachtet werden.)
 		return result;
 	}
 	
@@ -288,6 +288,29 @@ public class SequenceIntervalList<E> implements Collection<E> {
 			}
 		}
 		return result;
+	}
+	
+	
+	private boolean collectionContainsPosition(Collection<E> collection, int pos) {
+		Iterator<E> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			E element = iterator.next();
+			if (Math2.isBetween(pos, getPositionAdapter().getFirstPos(element), getPositionAdapter().getLastPos(element))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public boolean containsPosition(int pos) {
+		IntervalInformation info = getIntervalInformation(intervalIndex(pos));
+		if (collectionContainsPosition(info.getOverlapList(), pos)) {
+			return true;
+		}
+		else {
+			return collectionContainsPosition(info.getStartList(), pos);
+		}
 	}
 
 
