@@ -1,7 +1,7 @@
-package info.bioinfweb.biojava3.core.sequence.io.alignment;
+package info.bioinfweb.biojava3.alignment.io;
 
 
-import info.bioinfweb.biojava3.core.sequence.template.Alignment;
+import info.bioinfweb.biojava3.alignment.Alignment;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

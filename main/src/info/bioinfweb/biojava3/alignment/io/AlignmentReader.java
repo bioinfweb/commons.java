@@ -1,10 +1,10 @@
-package info.bioinfweb.biojava3.core.sequence.io.alignment;
+package info.bioinfweb.biojava3.alignment.io;
 
 
 import java.io.File;
 import java.io.InputStream;
 
-import info.bioinfweb.biojava3.core.sequence.template.Alignment;
+import info.bioinfweb.biojava3.alignment.Alignment;
 
 
 
