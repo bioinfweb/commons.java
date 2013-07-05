@@ -1,6 +1,6 @@
 package info.bioinfweb.biojava3.alignment.io;
 
-import info.bioinfweb.biojava3.alignment.Alignment;
+import info.bioinfweb.biojava3.alignment.template.Alignment;
 
 import java.io.BufferedInputStream;
 import java.io.File;

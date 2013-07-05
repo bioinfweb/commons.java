@@ -1,6 +1,7 @@
 package info.bioinfweb.biojava3.alignment;
 
 
+import info.bioinfweb.biojava3.alignment.template.Alignment;
 import info.webinsel.util.collections.SequenceIntervalList;
 import info.webinsel.util.collections.SimpleSequenceInterval;
 
@@ -17,7 +18,7 @@ import org.biojava3.core.sequence.template.Sequence;
 
 
 /**
- * Default implementation of {@link Profile}.
+ * Default implementation of {@link Alignment}.
  * 
  * @author Ben St&ouml;ver
  */

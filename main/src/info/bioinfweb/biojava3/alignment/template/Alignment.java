@@ -1,4 +1,4 @@
-package info.bioinfweb.biojava3.alignment;
+package info.bioinfweb.biojava3.alignment.template;
 
 
 import java.util.Collection;

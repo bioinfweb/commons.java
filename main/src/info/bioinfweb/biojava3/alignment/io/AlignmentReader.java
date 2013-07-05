@@ -4,7 +4,7 @@ package info.bioinfweb.biojava3.alignment.io;
 import java.io.File;
 import java.io.InputStream;
 
-import info.bioinfweb.biojava3.alignment.Alignment;
+import info.bioinfweb.biojava3.alignment.template.Alignment;
 
 
 
