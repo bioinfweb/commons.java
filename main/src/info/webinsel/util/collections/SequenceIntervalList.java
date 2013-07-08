@@ -276,7 +276,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	
 	
 	public SortedSet<E> getOverlappingElements(int firstPos, int lastPos) {
-		SortedSet<E> result = new TreeSet<E>();
+		SortedSet<E> result = new TreeSet<E>((Comparator<E>)getPositionAdapter());
 		Iterator<IntervalInformation> iterator = getIntervalInformationIterator(firstPos, lastPos);
 		if (iterator.hasNext()) {
 			// Add elements starting in the first interval or before:

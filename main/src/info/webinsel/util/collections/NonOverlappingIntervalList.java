@@ -3,6 +3,7 @@ package info.webinsel.util.collections;
 
 import info.webinsel.util.Math2;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.SortedSet;
@@ -17,87 +18,72 @@ import java.util.TreeSet;
  * @see SequenceIntervalList
  * @author Ben St&ouml;ver
  */
-public class NonOverlappingIntervalList /*implements Collection<SimpleSequenceInterval>*/ {
-	private TreeSet<SimpleSequenceInterval> intervals = new TreeSet<SimpleSequenceInterval>();
-	
-	
-  public void addInterval(int firstPos, int lastPos) {
+public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> {
+  public NonOverlappingIntervalList() {
+		super(new SimpleSequenceIntervalFirstPosComparator());
+	}
+
+
+  @Override
+	public boolean add(SimpleSequenceInterval e) {
+  	return add(e.getFirstPos(), e.getLastPos());
+	}
+
+
+	public boolean add(int firstPos, int lastPos) {
   	SortedSet<SimpleSequenceInterval> overlap = getOverlappingElements(firstPos - 1, lastPos + 1);
   	if (!overlap.isEmpty()) {
     	removeAll(overlap);
   		firstPos = Math.min(firstPos, overlap.first().getFirstPos());
   		lastPos = Math.max(lastPos, overlap.last().getLastPos());
   	}
-  	intervals.add(new SimpleSequenceInterval(firstPos, lastPos));
+  	return super.add(new SimpleSequenceInterval(firstPos, lastPos));
   }
   
   
-  public void movePositions(int start, int offset) {
-  	
+	public void movePositions(int start, int offset) {
+		SortedSet<SimpleSequenceInterval> elements = tailSet(new SimpleSequenceInterval(start, start));
+		Collection<SimpleSequenceInterval> copy = new ArrayList<SimpleSequenceInterval>(elements.size());  // Copy necessary because the set is just a view.
+		copy.addAll(elements);
+		removeAll(copy);
+		Iterator<SimpleSequenceInterval> iterator = copy.iterator();
+  	while (iterator.hasNext()) {
+  		SimpleSequenceInterval current = iterator.next();
+  		add(current.getFirstPos() + offset, current.getLastPos() + offset);  // If offset is negative, add() will automatically join preceding elements.
+  	}
   }
   
   
-	public boolean isEmpty() {
-		return intervals.isEmpty();
-	}
-
-
-	public Iterator<SimpleSequenceInterval> iterator() {
-		return intervals.iterator();
-	}
-
-
-	public int size() {
-		return intervals.size();
-	}
-
-
-	public void clear() {
-		intervals.clear();
-	}
-
-
-	public SimpleSequenceInterval first() {
-		return intervals.first();
-	}
-
-
-	public SimpleSequenceInterval last() {
-		return intervals.last();
-	}
-
-
-	public boolean remove(Object o) {
-		return intervals.remove(o);
-	}
-
-
-	public boolean removeAll(Collection<?> c) {
-		return intervals.removeAll(c);
-	}
-
-
+  /**
+   * Returns <code>true</code> if the specified position is marked by this list.
+   */
 	public boolean contains(int pos) {
-  	return false;
+  	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(pos, pos));
+  	return (interval != null) && Math2.isBetween(pos, interval.getFirstPos(), interval.getLastPos());
   }
   
   
-  public boolean contains(int firstPos, int lastPos) {
-  	return false;
+  /**
+   * Returns <code>true</code> if all positions in the specified interval are marked by this list.
+   */
+  public boolean containsAll(int firstPos, int lastPos) {
+  	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(firstPos, lastPos));  // Only a single element can contain the whole interval.
+  	return (interval != null) && (interval.getFirstPos() <= firstPos) && (interval.getLastPos() >= lastPos);
   }
 
   
   public SortedSet<SimpleSequenceInterval> getOverlappingElements(int firstPos, int lastPos) {
-		SortedSet<SimpleSequenceInterval> result = new TreeSet<SimpleSequenceInterval>();
+		SortedSet<SimpleSequenceInterval> result = 
+				new TreeSet<SimpleSequenceInterval>(new SimpleSequenceIntervalFirstPosComparator());
 
 		SimpleSequenceInterval newElement = new SimpleSequenceInterval(firstPos, lastPos);
-  	SimpleSequenceInterval first = intervals.floor(newElement);
+  	SimpleSequenceInterval first = floor(newElement);
   	SortedSet<SimpleSequenceInterval> overlapSet;
   	if (first != null) {
-  		overlapSet = intervals.tailSet(first);
+  		overlapSet = tailSet(first);
   	}
   	else {
-  		overlapSet = intervals;
+  		overlapSet = this;
   	}
   	Iterator<SimpleSequenceInterval> iterator = overlapSet.iterator();
   	if (iterator.hasNext()) {
