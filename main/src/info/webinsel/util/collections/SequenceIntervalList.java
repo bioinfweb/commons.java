@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import com.google.common.collect.TreeMultiset;
 
@@ -273,8 +275,8 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	}
 	
 	
-	public Collection<E> getOverlappingElements(int firstPos, int lastPos) {
-		Collection<E> result = new ArrayList<E>();
+	public SortedSet<E> getOverlappingElements(int firstPos, int lastPos) {
+		SortedSet<E> result = new TreeSet<E>();
 		Iterator<IntervalInformation> iterator = getIntervalInformationIterator(firstPos, lastPos);
 		if (iterator.hasNext()) {
 			// Add elements starting in the first interval or before:
