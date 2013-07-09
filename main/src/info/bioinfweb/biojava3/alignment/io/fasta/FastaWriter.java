@@ -13,6 +13,12 @@ import info.bioinfweb.biojava3.alignment.template.Alignment;
 
 
 
+/**
+ * Writes an alignment to a FASTA file. (Note that no character set information will be writte because the 
+ * FASTA format does not support this.)
+ * 
+ * @author BenStoever
+ */
 public class FastaWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C>{
 	public static final int LINE_LENGTH = 80;
 	
