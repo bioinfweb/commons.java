@@ -72,8 +72,13 @@ public class SetsBlockParser extends NexusBlockParser.Abstract {
 				  case SETS_LIST_STARTED:
 				  	String[] indices = token.split(START_END_SEPARATER);
 				  	try {
+				  		int firstPos = Integer.parseInt(indices[0]);
+				  		int lastPos = firstPos;
+				  		if (indices.length > 1) {
+				  			lastPos = Integer.parseInt(indices[1]);
+				  		}
 				  		getBlockListener().addCharSetInterval(currentSetName, 
-				  				Integer.parseInt(indices[0]), Integer.parseInt(indices[1]));
+				  				firstPos, lastPos);
 				  	}
 				  	catch (NumberFormatException e) {
 				  		System.err.println("WARNING: Interval '" + token + "' could not be parsed. Skipped.");
