@@ -21,9 +21,13 @@ import org.biojava3.core.sequence.template.Sequence;
  * @author Ben St&ouml;ver
  */
 public interface Alignment<S extends Sequence<C>, C extends Compound> {
-	public void addSequence(String name, S sequence);
+	public void add(String name, S sequence);
 
-	public void addSequence(int index, String name, S sequence);
+	public void add(int index, String name, S sequence);
+	
+	public void replace(String name, S sequence);
+
+	public void replace(int index, S sequence);
 
 	public void clear();
 
@@ -35,7 +39,9 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 
 	public S getSequence(String name);
 
-	public int indexOfName(String name);
+	public int indexByName(String name);
+	
+	public String nameByIndex(int index);
 
 	public boolean isEmpty();
 

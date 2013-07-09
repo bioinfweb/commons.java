@@ -2,6 +2,7 @@ package info.bioinfweb.biojava3.alignment;
 
 
 import info.bioinfweb.biojava3.alignment.template.Alignment;
+import info.webinsel.util.collections.NonOverlappingIntervalList;
 import info.webinsel.util.collections.SequenceIntervalList;
 import info.webinsel.util.collections.SimpleSequenceInterval;
 
@@ -11,7 +12,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.biojava3.alignment.template.Profile;
 import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.Sequence;
 
@@ -23,8 +23,7 @@ import org.biojava3.core.sequence.template.Sequence;
  * @author Ben St&ouml;ver
  */
 public class SimpleAlignment <S extends Sequence<C>, C extends Compound> implements Alignment<S, C> {
-  private Map<String, SequenceIntervalList<SimpleSequenceInterval>> charSets = 
-  		new TreeMap<String, SequenceIntervalList<SimpleSequenceInterval>>();
+  private Map<String, NonOverlappingIntervalList> charSets = new TreeMap<String, NonOverlappingIntervalList>();
   
   /** Additional list used to store the order of the sequences in the alignment. */
   private ArrayList<String> names = new ArrayList<String>();
@@ -32,20 +31,25 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
   private Map<String, S> sequences = new TreeMap<String, S>();
   
   
-  /* (non-Javadoc)
-	 * @see info.bioinfweb.biojava3.alignment.Alignment#addSequence(java.lang.String, S)
+  public Map<String, NonOverlappingIntervalList> getCharSets() {
+		return charSets;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see info.bioinfweb.biojava3.alignment.Alignment#add(java.lang.String, S)
 	 */
   @Override
-	public void addSequence(String name, S sequence) {
-  	addSequence(size(), name, sequence);
+	public void add(String name, S sequence) {
+  	add(size(), name, sequence);
   }
 
 
   /* (non-Javadoc)
-	 * @see info.bioinfweb.biojava3.alignment.Alignment#addSequence(int, java.lang.String, S)
+	 * @see info.bioinfweb.biojava3.alignment.Alignment#add(int, java.lang.String, S)
 	 */
   @Override
-	public void addSequence(int index, String name, S sequence) {
+	public void add(int index, String name, S sequence) {
   	if (getSequence(name) == null) {
   		names.add(index, name);
     	sequences.put(name, sequence);
@@ -55,6 +59,24 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
   				"\" is already contained in this alignment.");
   	}
   }
+
+
+	@Override
+	public void replace(String name, S sequence) {
+		if (getSequence(name) != null) {
+    	sequences.put(name, sequence);
+		}
+		else {
+  		throw new IllegalArgumentException("A sequence with the name \"" + name + 
+  				"\" is not contained in this alignment.");
+		}
+	}
+
+
+	@Override
+	public void replace(int index, S sequence) {
+		replace(nameByIndex(index), sequence);
+	}
 
 
 	/* (non-Javadoc)
@@ -108,8 +130,14 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	 * @see info.bioinfweb.biojava3.alignment.Alignment#indexOfName(java.lang.String)
 	 */
 	@Override
-	public int indexOfName(String name) {
+	public int indexByName(String name) {
 		return names.indexOf(name);
+	}
+
+
+	@Override
+	public String nameByIndex(int index) {
+		return names.get(index);
 	}
 
 
