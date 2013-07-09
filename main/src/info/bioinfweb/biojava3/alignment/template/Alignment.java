@@ -15,8 +15,8 @@ import org.biojava3.core.sequence.template.Sequence;
  * can be annotated by character sets as defined in the Nexus format.
  * 
  * Although this interface is based on BioJava 3, it differs from {@link Profile} since alignment gaps
- * are treated the same way as nucleotides here. In the future there might be an alternative version 
- * extending {@link Profile}.
+ * are treated the same way as nucleotides here. (Note that a compound set allowing gaps must be use for
+ * this to work.) In the future there might be an alternative version extending {@link Profile}.
  * 
  * @author Ben St&ouml;ver
  */
