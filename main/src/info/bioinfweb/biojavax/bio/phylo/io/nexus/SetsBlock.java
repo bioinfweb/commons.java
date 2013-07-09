@@ -4,7 +4,7 @@ package info.bioinfweb.biojavax.bio.phylo.io.nexus;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 import org.biojavax.bio.phylo.io.nexus.NexusBlock;
 
@@ -20,7 +20,7 @@ public class SetsBlock extends NexusBlock.Abstract {
 	public static final String SETS_BLOCK = "SETS";
 
 	
-	private HashMap<String, CharSet> charSets = new HashMap<String, CharSet>(); 
+	private TreeMap<String, CharSet> charSets = new TreeMap<String, CharSet>(); 
 	
 	
 	public SetsBlock() {
@@ -54,7 +54,7 @@ public class SetsBlock extends NexusBlock.Abstract {
 					"\" is not present in this object.");
 		}
 		else {
-			charSet.addInterval(start, end);
+			charSet.add(start, end);
 		}
 	}
 	

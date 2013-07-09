@@ -2,9 +2,7 @@ package info.bioinfweb.biojava3.alignment;
 
 
 import info.bioinfweb.biojava3.alignment.template.Alignment;
-import info.webinsel.util.collections.NonOverlappingIntervalList;
-import info.webinsel.util.collections.SequenceIntervalList;
-import info.webinsel.util.collections.SimpleSequenceInterval;
+import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -23,7 +21,7 @@ import org.biojava3.core.sequence.template.Sequence;
  * @author Ben St&ouml;ver
  */
 public class SimpleAlignment <S extends Sequence<C>, C extends Compound> implements Alignment<S, C> {
-  private Map<String, NonOverlappingIntervalList> charSets = new TreeMap<String, NonOverlappingIntervalList>();
+  private Map<String, CharSet> charSets = new TreeMap<String, CharSet>();
   
   /** Additional list used to store the order of the sequences in the alignment. */
   private ArrayList<String> names = new ArrayList<String>();
@@ -31,9 +29,23 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
   private Map<String, S> sequences = new TreeMap<String, S>();
   
   
-  public Map<String, NonOverlappingIntervalList> getCharSets() {
+  public Map<String, CharSet> getCharSets() {
 		return charSets;
 	}
+  
+  
+  public void addCharSet(CharSet charSet) {
+  	getCharSets().put(charSet.getName(), charSet);
+  }
+  
+  
+  public void addAllCharSets(Collection<CharSet> collection) {
+		Iterator<CharSet> iterator = collection.iterator();
+		while (iterator.hasNext()) {
+			CharSet current = iterator.next();
+			getCharSets().put(current.getName(), current);
+		}
+  }
 
 
 	/* (non-Javadoc)

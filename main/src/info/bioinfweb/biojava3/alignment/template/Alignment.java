@@ -1,8 +1,11 @@
 package info.bioinfweb.biojava3.alignment.template;
 
 
+import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
+
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.biojava3.alignment.template.Profile;
 import org.biojava3.core.sequence.template.Compound;
@@ -21,7 +24,13 @@ import org.biojava3.core.sequence.template.Sequence;
  * @author Ben St&ouml;ver
  */
 public interface Alignment<S extends Sequence<C>, C extends Compound> {
-	public void add(String name, S sequence);
+  public Map<String, CharSet> getCharSets();
+  
+  public void addCharSet(CharSet charSet);
+  
+  public void addAllCharSets(Collection<CharSet> collection);
+
+  public void add(String name, S sequence);
 
 	public void add(int index, String name, S sequence);
 	
