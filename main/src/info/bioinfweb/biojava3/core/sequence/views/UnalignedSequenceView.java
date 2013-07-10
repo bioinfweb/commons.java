@@ -18,13 +18,10 @@ import org.biojava3.core.sequence.template.SequenceView;
  * 
  * @author Ben St&ouml;ver
  */
-public class UnalignedSequenceView<C extends Compound> extends SequenceProxyView<C> implements SequenceView<C> {
-	private int[] alignedPositions;
+public class UnalignedSequenceView<C extends Compound> extends RemoveSequenceView<C> implements SequenceView<C> {
 	private CompoundSet<C> nonGapCompoundSet;
 	
 
-	//TODO Overwrite more necessary methods
-	
 	/**
 	 * Creates a new instance of this class.
 	 * @param sequence - the underlying aligned sequence
@@ -37,7 +34,6 @@ public class UnalignedSequenceView<C extends Compound> extends SequenceProxyView
 		
 		super(sequence, bioStart, bioEnd);
 		this.nonGapCompoundSet = nonGapCompoundSet;
-		init();
 	}
 
 	
@@ -49,44 +45,12 @@ public class UnalignedSequenceView<C extends Compound> extends SequenceProxyView
 	public UnalignedSequenceView(Sequence<C> sequence, CompoundSet<C> nonGapCompoundSet) {
 		super(sequence);
 		this.nonGapCompoundSet = nonGapCompoundSet;
-		init();
 	}
 	
 	
-	private void init() {
-		createPosTraslation();
-	}
-
-	
-	private void createPosTraslation() {
-		alignedPositions = new int[getViewedSequence().getLength()];
-		
-		int unalignedPos = 0;
-		for (int alignedPos = 1; alignedPos <= getViewedSequence().getLength(); alignedPos++) {
-			if (nonGapCompoundSet.hasCompound(getViewedSequence().getCompoundAt(alignedPos))) {
-				alignedPositions[unalignedPos] = alignedPos;
-				unalignedPos++;
-			}
-		}
-		alignedPositions = Arrays.copyOf(alignedPositions, unalignedPos);  // Shorten array to the necessary length
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.biojava3.core.sequence.template.SequenceProxyView#getCompoundAt(int)
-	 */
 	@Override
-	public C getCompoundAt(int position) {
-		return super.getCompoundAt(alignedPositions[position - 1]);  // The super method takes account of bioStart
-	}
-
-
-	/* (non-Javadoc)
-	 * @see org.biojava3.core.sequence.template.SequenceProxyView#getLength()
-	 */
-	@Override
-	public int getLength() {
-		return alignedPositions.length;
+	protected boolean keepPosition(int viewedPos) {
+		return nonGapCompoundSet.hasCompound(getViewedSequence().getCompoundAt(viewedPos));
 	}
 
 
