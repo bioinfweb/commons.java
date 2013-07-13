@@ -16,6 +16,12 @@ import info.webinsel.util.collections.SimpleSequenceInterval;
 
 
 
+/**
+ * Writes an {@link Alignment} to a stream in Nexus format. The result contains a TAXA, a CHARACTERS and 
+ * a SETS block (if the specified alignment contains any character set).
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class NexusWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
 	public static final String COMMAND_TERMINATOR = ";";
 	public static final String COMMENT_START = "[";
@@ -60,22 +66,24 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 			decreaseIndention();
 			writeBlockEnd(writer, "CHARACTERS");
 			
-			writeBlockStart(writer, "SETS");
-			Iterator<CharSet> charSetIterator = alignment.getCharSets().values().iterator();
-			while (charSetIterator.hasNext()) {
-				CharSet charSet = charSetIterator.next();
-				writeLineStart(writer, "CHARSET " + charSet.getName() + " =");
-				Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
-				while (intervalIterator.hasNext()) {
-					SimpleSequenceInterval interval = intervalIterator.next();
-					writer.write(" " + interval.getFirstPos());
-					if (interval.getFirstPos() != interval.getLastPos()) {
-						writer.write("-" + interval.getLastPos());
+			if (!alignment.getCharSets().isEmpty()) {
+				writeBlockStart(writer, "SETS");
+				Iterator<CharSet> charSetIterator = alignment.getCharSets().values().iterator();
+				while (charSetIterator.hasNext()) {
+					CharSet charSet = charSetIterator.next();
+					writeLineStart(writer, "CHARSET " + charSet.getName() + " =");
+					Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
+					while (intervalIterator.hasNext()) {
+						SimpleSequenceInterval interval = intervalIterator.next();
+						writer.write(" " + interval.getFirstPos());
+						if (interval.getFirstPos() != interval.getLastPos()) {
+							writer.write("-" + interval.getLastPos());
+						}
 					}
+					writer.write(COMMAND_TERMINATOR);
 				}
-				writer.write(COMMAND_TERMINATOR);
+				writeBlockEnd(writer, "SETS");
 			}
-			writeBlockEnd(writer, "SETS");
 		}
 	}
 	
