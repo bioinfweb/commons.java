@@ -84,7 +84,7 @@ public class SetsBlock extends NexusBlock.Abstract {
 		Iterator<String> nameIterator = charSets.keySet().iterator();
 		while (nameIterator.hasNext()) {
 			String name = nameIterator.next();
-			writer.write(SetsBlockParser.CHAR_SET_COMMAND.toUpperCase() + " " + name);
+			writer.write(SetsBlockParser.CHAR_SET_COMMAND.toUpperCase() + " " + name + " =");
 			CharSet charSet = charSets.get(name);
 			Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
 			while (intervalIterator.hasNext()) {

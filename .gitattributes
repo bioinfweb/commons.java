@@ -21,6 +21,7 @@ main/src/info/bioinfweb/biojava3/alignment/io/AlignmentReader.java -text svneol=
 main/src/info/bioinfweb/biojava3/alignment/io/AlignmentWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReader.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/template/Alignment.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityDNACompoundSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/compound/AlignmentAmbiguityNucleotideCompoundSet.java -text svneol=unset#text/plain

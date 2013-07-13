@@ -61,4 +61,6 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 	public boolean remove(String name);
 
 	public int size();
+	
+	public int maxSequenceLength();
 }

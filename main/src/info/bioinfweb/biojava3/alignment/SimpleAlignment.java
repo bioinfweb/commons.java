@@ -201,4 +201,16 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	public int size() {
 		return sequences.size();
 	}
+
+
+	@Override
+	public int maxSequenceLength() {
+		int result = 0;
+		Iterator<String> iterator = nameIterator();
+		while (iterator.hasNext()) {
+			String name = iterator.next();
+			result = Math.max(result, getSequence(name).getLength());
+		}
+		return result;
+	}
 }
