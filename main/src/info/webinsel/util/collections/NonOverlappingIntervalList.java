@@ -30,6 +30,11 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
 	}
 
 
+	public boolean add(int pos) {
+		return add(pos, pos);
+	}
+	
+	
 	public boolean add(int firstPos, int lastPos) {
   	SortedSet<SimpleSequenceInterval> overlap = getOverlappingElements(firstPos - 1, lastPos + 1);
   	if (!overlap.isEmpty()) {

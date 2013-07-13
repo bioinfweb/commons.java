@@ -6,6 +6,7 @@ import info.bioinfweb.biojava3.alignment.template.Alignment;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.biojava3.core.sequence.io.template.SequenceCreatorInterface;
 import org.biojava3.core.sequence.template.Compound;
@@ -32,6 +33,14 @@ public abstract class AbstractAlignmentReader<S extends Sequence<C>, C extends C
 
 	@Override
 	public Alignment<S, C> read(File file) throws Exception {
-		return read(new BufferedInputStream(new FileInputStream(file)));
+		InputStream stream = new BufferedInputStream(new FileInputStream(file));
+		Alignment<S, C> result = null; 
+		try {
+			result = read(stream);
+		}
+		finally {
+			stream.close();
+		}
+		return result;
 	}
 }
