@@ -1,12 +1,16 @@
 package info.bioinfweb.biojavax.bio.phylo.io.nexus;
 
 
+import info.webinsel.util.collections.SimpleSequenceInterval;
+
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 import org.biojavax.bio.phylo.io.nexus.NexusBlock;
+import org.biojavax.bio.phylo.io.nexus.NexusFileFormat;
 
 
 
@@ -75,5 +79,22 @@ public class SetsBlock extends NexusBlock.Abstract {
 	 * @see org.biojavax.bio.phylo.io.nexus.NexusBlock$Abstract#writeBlockContents(java.io.Writer)
 	 */
 	@Override
-	protected void writeBlockContents(Writer writer) throws IOException {}
+	protected void writeBlockContents(Writer writer) throws IOException {
+		//TODO Müssen BEGIN und END hier geschrieben werden?
+		Iterator<String> nameIterator = charSets.keySet().iterator();
+		while (nameIterator.hasNext()) {
+			String name = nameIterator.next();
+			writer.write(SetsBlockParser.CHAR_SET_COMMAND.toUpperCase() + " " + name);
+			CharSet charSet = charSets.get(name);
+			Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
+			while (intervalIterator.hasNext()) {
+				SimpleSequenceInterval interval = intervalIterator.next();
+				writer.write(" " + interval.getFirstPos());
+				if (interval.getFirstPos() != interval.getLastPos()) {
+					writer.write(SetsBlockParser.START_END_SEPARATER + interval.getLastPos());
+				}
+			}
+		}
+		writer.write(";" + NexusFileFormat.NEW_LINE);
+	}
 }
