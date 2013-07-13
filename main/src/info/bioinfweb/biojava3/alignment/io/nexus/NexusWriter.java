@@ -37,52 +37,58 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 
 		if (!alignment.isEmpty()) {
 			PrintWriter writer = new PrintWriter(stream);
-			writeFileStart(writer);
-			
-			writeBlockStart(writer, "TAXA");
-			writeLine(writer, "DIMENSIONS NTAX=" + alignment.size() + COMMAND_TERMINATOR);
-			writeLine(writer, "TAXLABELS ");
-			increaseIndention();
-			Iterator<String> nameIterator = alignment.nameIterator();
-			while (nameIterator.hasNext()) {
-				writeLine(writer, nameIterator.next());
-			}
-			writeLine(writer, COMMAND_TERMINATOR);
-			decreaseIndention();
-			writeBlockEnd(writer, "TAXA");
-			
-			writeBlockStart(writer, "CHARACTERS");
-			writeLine(writer, "DIMENSIONS NCHAR=" + alignment.maxSequenceLength() + COMMAND_TERMINATOR);
-			//TODO Insert format command depending on character set
-			//TODO Use interleaved format in the future
-			writeLine(writer, "MATRIX");
-			increaseIndention();
-			nameIterator = alignment.nameIterator();
-			while (nameIterator.hasNext()) {
-				String name = nameIterator.next();
-				writeLine(writer, name + " " + alignment.getSequence(name).getSequenceAsString());
-			}
-			writeLine(writer, COMMAND_TERMINATOR);
-			decreaseIndention();
-			writeBlockEnd(writer, "CHARACTERS");
-			
-			if (!alignment.getCharSets().isEmpty()) {
-				writeBlockStart(writer, "SETS");
-				Iterator<CharSet> charSetIterator = alignment.getCharSets().values().iterator();
-				while (charSetIterator.hasNext()) {
-					CharSet charSet = charSetIterator.next();
-					writeLineStart(writer, "CHARSET " + charSet.getName() + " =");
-					Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
-					while (intervalIterator.hasNext()) {
-						SimpleSequenceInterval interval = intervalIterator.next();
-						writer.write(" " + interval.getFirstPos());
-						if (interval.getFirstPos() != interval.getLastPos()) {
-							writer.write("-" + interval.getLastPos());
-						}
-					}
-					writer.write(COMMAND_TERMINATOR);
+			try {
+				writeFileStart(writer);
+				
+				writeBlockStart(writer, "TAXA");
+				writeLine(writer, "DIMENSIONS NTAX=" + alignment.size() + COMMAND_TERMINATOR);
+				writeLine(writer, "TAXLABELS ");
+				increaseIndention();
+				Iterator<String> nameIterator = alignment.nameIterator();
+				while (nameIterator.hasNext()) {
+					writeLine(writer, nameIterator.next());
 				}
-				writeBlockEnd(writer, "SETS");
+				writeLine(writer, COMMAND_TERMINATOR);
+				decreaseIndention();
+				writeBlockEnd(writer, "TAXA");
+				
+				writeBlockStart(writer, "CHARACTERS");
+				writeLine(writer, "DIMENSIONS NCHAR=" + alignment.maxSequenceLength() + COMMAND_TERMINATOR);
+				//TODO Insert format command depending on character set
+				//TODO Use interleaved format in the future
+				writeLine(writer, "MATRIX");
+				increaseIndention();
+				nameIterator = alignment.nameIterator();
+				while (nameIterator.hasNext()) {
+					String name = nameIterator.next();
+					writeLine(writer, name + " " + alignment.getSequence(name).getSequenceAsString());
+				}
+				writeLine(writer, COMMAND_TERMINATOR);
+				decreaseIndention();
+				writeBlockEnd(writer, "CHARACTERS");
+				
+				if (!alignment.getCharSets().isEmpty()) {
+					writeBlockStart(writer, "SETS");
+					Iterator<CharSet> charSetIterator = alignment.getCharSets().values().iterator();
+					while (charSetIterator.hasNext()) {
+						CharSet charSet = charSetIterator.next();
+						writeLineStart(writer, "CHARSET " + charSet.getName() + " =");
+						Iterator<SimpleSequenceInterval> intervalIterator = charSet.iterator();
+						while (intervalIterator.hasNext()) {
+							SimpleSequenceInterval interval = intervalIterator.next();
+							writer.write(" " + interval.getFirstPos());
+							if (interval.getFirstPos() != interval.getLastPos()) {
+								writer.write("-" + interval.getLastPos());
+							}
+						}
+						writer.write(COMMAND_TERMINATOR);
+						writer.println();
+					}
+					writeBlockEnd(writer, "SETS");
+				}
+			}
+			finally {
+				writer.close();  // Closing only the underlying stream does not make sure that all commands are written by this writer.
 			}
 		}
 	}
