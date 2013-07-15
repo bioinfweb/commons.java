@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 
 import java.io.File;
-import java.io.IOException;
 
 import info.bioinfweb.biojava3.alignment.SimpleAlignment;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
@@ -42,7 +41,8 @@ public class NexusReaderWriterTest {
   	  	assertEquals(originalAlignment.size(), readAlignment.size());
   	  	for (int i = 0; i < originalAlignment.size(); i++) {
   	  		assertEquals(originalAlignment.nameByIndex(i), readAlignment.nameByIndex(i));
-    	  	assertEquals(originalAlignment.getSequence(i), readAlignment.getSequence(i));
+    	  	assertEquals(originalAlignment.getSequence(i).getSequenceAsString(), 
+    	  			readAlignment.getSequence(i).getSequenceAsString());
 				}
   	  	
   	  	assertEquals(originalAlignment.getCharSets().get("S"), readAlignment.getCharSets().get("S"));
