@@ -9,7 +9,7 @@ import java.util.List;
 import org.biojava3.core.sequence.io.template.SequenceCreatorInterface;
 import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.Sequence;
-import org.biojavax.bio.phylo.io.nexus.DataBlock;
+import org.biojavax.bio.phylo.io.nexus.CharactersBlock;
 import org.biojavax.bio.phylo.io.nexus.NexusBlock;
 import org.biojavax.bio.phylo.io.nexus.NexusFileFormat;
 
@@ -38,11 +38,11 @@ public class NexusReader<S extends Sequence<C>, C extends Compound> extends Abst
 		Iterator<NexusBlock> blockIterator = builder.getNexusFile().blockIterator();
 		while (blockIterator.hasNext()) {
 			NexusBlock block = blockIterator.next();
-			if (block instanceof DataBlock) {
-				Iterator<String> labelIterator = ((DataBlock)block).getMatrixLabels().iterator();
+			if (block instanceof CharactersBlock) {  // also true for instances of DataBlock
+				Iterator<String> labelIterator = ((CharactersBlock)block).getMatrixLabels().iterator();
 				while (labelIterator.hasNext()) {
           String name = labelIterator.next();
-  				List<String> data = ((DataBlock)block).getMatrixData(name);
+  				List<String> data = ((CharactersBlock)block).getMatrixData(name);
   				StringBuffer sequenceStr = new StringBuffer(data.size());
   				for (int i = 0; i < data.size(); i++) {
   					sequenceStr.append(data.get(i));
@@ -61,7 +61,7 @@ public class NexusReader<S extends Sequence<C>, C extends Compound> extends Abst
 			return result;
 		}
 		else {
-			throw new IOException("The specified nexus file contains no DATA block.");
+			throw new IOException("The specified nexus file contains no CHARACTERS or DATA block.");
 		}
 	}
 }
