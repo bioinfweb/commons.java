@@ -58,7 +58,7 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 				writeBlockEnd(writer, "TAXA");
 				
 				writeBlockStart(writer, "CHARACTERS");
-				writeLine(writer, "DIMENSIONS NCHAR=" + alignment.maxSequenceLength() + COMMAND_TERMINATOR);
+				writeLine(writer, "DIMENSIONS NCHAR=" + alignment.maxSequenceLength() + COMMAND_TERMINATOR);  //TODO Check is Nexus format allows sequences with different lengths. Otherwise shorter sequences have to be filled up with "?" or "-".
 				//TODO Insert format command depending on character set
 				//TODO Use interleaved format in the future
 				writeLine(writer, "MATRIX");
