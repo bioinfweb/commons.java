@@ -139,7 +139,7 @@ public class IOUtils {
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
 	 * @param path - the path to the resource
-	 * @param out - the strem to write to
+	 * @param out - the stream to write to
 	 * @throws IOException
 	 */
 	public static void copyFromResource(String path, OutputStream out) throws IOException {
@@ -150,7 +150,7 @@ public class IOUtils {
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
 	 * @param path - the path to the resource
-	 * @param out - the strem to write to
+	 * @param out - the stream to write to
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
 	 * @throws IOException
 	 */

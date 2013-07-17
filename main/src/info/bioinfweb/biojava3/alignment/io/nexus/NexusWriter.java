@@ -31,6 +31,11 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 	private String indention = "";
 	
 	
+	private String maskSpaces(String name) {
+		return name.replaceAll(" ", "_");
+	}
+	
+	
 	@Override
 	public void write(Alignment<S, C> alignment, OutputStream stream)
 			throws Exception {
@@ -46,7 +51,7 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 				increaseIndention();
 				Iterator<String> nameIterator = alignment.nameIterator();
 				while (nameIterator.hasNext()) {
-					writeLine(writer, nameIterator.next());
+					writeLine(writer, maskSpaces(nameIterator.next()));
 				}
 				writeLine(writer, COMMAND_TERMINATOR);
 				decreaseIndention();
@@ -61,7 +66,7 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 				nameIterator = alignment.nameIterator();
 				while (nameIterator.hasNext()) {
 					String name = nameIterator.next();
-					writeLine(writer, name + " " + alignment.getSequence(name).getSequenceAsString());
+					writeLine(writer, maskSpaces(name) + " " + alignment.getSequence(name).getSequenceAsString());
 				}
 				writeLine(writer, COMMAND_TERMINATOR);
 				decreaseIndention();
