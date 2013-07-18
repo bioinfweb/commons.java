@@ -19,7 +19,7 @@ import info.bioinfweb.biojava3.alignment.template.Alignment;
  * 
  * @author BenStoever
  */
-public class FastaWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C>{
+public class FastaWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
 	public static final int LINE_LENGTH = 80;
 	
 	
