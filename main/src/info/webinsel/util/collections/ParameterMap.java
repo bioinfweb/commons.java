@@ -1,6 +1,7 @@
 package info.webinsel.util.collections;
 
 
+import java.io.File;
 import java.util.TreeMap;
 
 
@@ -31,6 +32,18 @@ public class ParameterMap extends TreeMap<String, Object> {
 		}
 	}
 
+	
+	/**
+	 * Checks if an object is stored under the specified key. If so the result of {@link Object#toString()} is
+	 * returned, otherwise <code>null</code> is returned.
+	 * 
+	 * @param key - the key under which the result is stored
+	 * @return the string representation of the stored object or <code>null</code>
+	 */
+	public String getString(String key) {
+		return getString(key, null);
+	}
+	
 	
 	/**
 	 * Checks if a {@link Float} object is stored under the specified key. (Objects of the types {@link Integer} or
@@ -144,6 +157,39 @@ public class ParameterMap extends TreeMap<String, Object> {
 		else {
 			return defaultValue;
 		}
+	}
+
+	
+	/**
+	 * Checks if a {@link File} object is stored under the specified key. If the stored object has another type 
+	 * or no object is found, <code>defaultValue</code> is returned. (This method does not convert String objects
+	 * into File objects, even if the string represents a valid file path.)
+	 * 
+	 * @param key - the key under which the result is stored
+	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @return an appropriate object or <code>defaultValue</code>
+	 */
+	public File getFile(String key, File defaultValue) {
+		Object result = get(key);
+		if (result instanceof File) {
+			return (File)result;
+		}
+		else {
+			return defaultValue;
+		}
+	}
+	
+	
+	/**
+	 * Checks if a {@link File} object is stored under the specified key. If the stored object has another type 
+	 * or no object is found, <code>null</code> is returned. (This method does not convert String objects
+	 * into File objects, even if the string represents a valid file path.)
+	 * 
+	 * @param key - the key under which the result is stored
+	 * @return an appropriate object or <code>null</code>
+	 */
+	public File getFile(String key) {
+		return getFile(key, null);
 	}
 	
 	
