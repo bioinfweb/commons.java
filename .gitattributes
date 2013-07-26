@@ -106,6 +106,7 @@ main/src/info/webinsel/util/log/ApplicationLogger.java -text svneol=unset#text/p
 main/src/info/webinsel/util/log/ApplicationLoggerMessage.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/ApplicationLoggerMessageType.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/ApplicationLoggerParameterMap.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/log/MultipleApplicationLoggersAdapter.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/VoidApplicationLogger.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/package.html -text svneol=unset#text/plain
 main/src/info/webinsel/util/progress/AbstractProgressMonitor.java -text svneol=unset#text/plain
