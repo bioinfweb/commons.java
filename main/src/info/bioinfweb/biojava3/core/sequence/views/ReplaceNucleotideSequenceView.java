@@ -144,6 +144,14 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	}
 
 	
+	public ReplaceNucleotideSequenceView(Sequence<NucleotideCompound> sequence, 
+			Map<NucleotideCompound, NucleotideCompound> replacementMap,	Integer bioStart, Integer bioEnd) {
+
+		super(sequence, bioStart, bioEnd);
+		this.replacementMap = replacementMap;
+	}
+
+
 	@Override
 	public NucleotideCompound getCompoundAt(int position) {
 		NucleotideCompound compound = super.getCompoundAt(position);

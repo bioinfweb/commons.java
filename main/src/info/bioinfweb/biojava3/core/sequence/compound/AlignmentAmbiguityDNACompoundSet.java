@@ -20,7 +20,7 @@ public class AlignmentAmbiguityDNACompoundSet extends AmbiguityDNACompoundSet {
 	 */
 	public AlignmentAmbiguityDNACompoundSet() {
 		super();
-		addNucleotideCompound("?", "?");
+		addNucleotideCompound("?", "?");  //TODO Warum wird "-" hier nicht hinzugefügt? 
 	}
 
 	
