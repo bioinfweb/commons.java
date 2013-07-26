@@ -61,4 +61,19 @@ public interface ApplicationLogger {
    * @param helpCode - the help code associated with this warning
    */
   public void addWarning(String message, int helpCode);
+  
+  
+  /**
+   * Outputs an error message to the user.
+   * @param message
+   */
+  public void addError(String message);
+  
+  
+  /**
+   * Outputs an error message to the user.
+   * @param message
+   * @param helpCode - the help code associated with this warning
+   */
+  public void addError(String message, int helpCode);
 }

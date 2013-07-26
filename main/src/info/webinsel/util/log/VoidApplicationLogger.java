@@ -46,4 +46,12 @@ public class VoidApplicationLogger implements ApplicationLogger {
 	
 	@Override
   public void addWarning(String message, int helpCode) {}
+
+
+	@Override
+	public void addError(String message) {}
+
+
+	@Override
+	public void addError(String message, int helpCode) {}
 }

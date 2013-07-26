@@ -48,4 +48,16 @@ public abstract class AbstractApplicationLogger implements ApplicationLogger {
 	public void addWarning(String message) {
 		addMessage(new ApplicationLoggerMessage(ApplicationLoggerMessageType.WARNING, message));
 	}
+
+
+	@Override
+	public void addError(String message, int helpCode) {
+		addMessage(new ApplicationLoggerMessage(ApplicationLoggerMessageType.ERROR, message, helpCode));
+	}
+
+
+	@Override
+	public void addError(String message) {
+		addMessage(new ApplicationLoggerMessage(ApplicationLoggerMessageType.ERROR, message));
+	}
 }
