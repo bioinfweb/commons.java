@@ -5,6 +5,7 @@ import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleoti
 import info.bioinfweb.biojava3.core.sequence.compound.AmbiguityNoGapNucleotideCompoundSet;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.biojava3.core.sequence.compound.NucleotideCompound;
@@ -162,5 +163,17 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 		else {
 			return replacement;
 		}
-	}		
+	}	
+	
+	
+	public int countReplacedCompounds() {
+		int result = 0;
+		Iterator<NucleotideCompound> iterator = getViewedSequence().iterator();
+		while (iterator.hasNext()) {
+			if (replacementMap.get(iterator.next()) != null) {
+				result++;
+			}
+		}
+		return result;
+	}
 }
