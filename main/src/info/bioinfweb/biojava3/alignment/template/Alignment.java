@@ -63,4 +63,6 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 	public int size();
 	
 	public int maxSequenceLength();
+
+	public void moveAllCharSetPositions(int start, int offset);
 }

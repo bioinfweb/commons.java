@@ -213,4 +213,18 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * Moves all contained character sets by the specified offset.
+	 * 
+	 * @see CharSet#movePositions(int, int)
+	 */
+	@Override
+	public void moveAllCharSetPositions(int start, int offset) {
+		Iterator<CharSet> iterator = getCharSets().values().iterator();
+		while (iterator.hasNext()) {
+			iterator.next().movePositions(start, offset);
+		}
+	}
 }
