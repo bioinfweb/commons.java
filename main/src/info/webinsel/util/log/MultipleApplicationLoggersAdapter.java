@@ -84,4 +84,22 @@ public class MultipleApplicationLoggersAdapter implements ApplicationLogger {
 			iterator.next().addError(message, helpCode);
 		}
 	}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace) {
+		Iterator<ApplicationLogger> iterator = loggers.iterator();
+		while (iterator.hasNext()) {
+			iterator.next().addError(throwable, includeStackTrace);
+		}
+	}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace, int helpCode) {
+		Iterator<ApplicationLogger> iterator = loggers.iterator();
+		while (iterator.hasNext()) {
+			iterator.next().addError(throwable, includeStackTrace, helpCode);
+		}
+	}
 }

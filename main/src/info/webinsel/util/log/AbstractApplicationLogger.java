@@ -1,5 +1,8 @@
 package info.webinsel.util.log;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 
 
 /**
@@ -41,5 +44,30 @@ public abstract class AbstractApplicationLogger implements ApplicationLogger {
 	@Override
 	public void addError(String message) {
 		addMessage(new ApplicationLoggerMessage(ApplicationLoggerMessageType.ERROR, message));
+	}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace) {
+		addError(throwable, includeStackTrace, ApplicationLoggerMessage.NO_HELP_CODE);
+	}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace, int helpCode) {
+		if (includeStackTrace) {
+			StringWriter stringWriter = new StringWriter();
+	    PrintWriter printWriter = new PrintWriter(stringWriter);
+	    try {
+	    	throwable.printStackTrace(printWriter);
+	    }
+	    finally {
+	      printWriter.close();
+	    }
+	    addError(stringWriter.toString(), helpCode);
+		}
+		else {
+			addError(throwable.getLocalizedMessage(), helpCode);
+		}
 	}
 }

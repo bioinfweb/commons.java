@@ -13,17 +13,18 @@ import java.util.Date;
  * @author Ben St&ouml;ver
  */
 public class ApplicationLoggerMessage {
+	public static final int NO_HELP_CODE = -1; 
 	public static final DateFormat TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 	
 	
 	private ApplicationLoggerMessageType type = null;
 	private Date time = new Date(System.currentTimeMillis());
   private String message = "";
-  private int helpCode = -1;
+  private int helpCode = NO_HELP_CODE;
   
   
 	public ApplicationLoggerMessage(ApplicationLoggerMessageType type, String message) {
-		this(type, message, -1);
+		this(type, message, NO_HELP_CODE);
 	}
   
   
@@ -82,6 +83,11 @@ public class ApplicationLoggerMessage {
 
 	public void setHelpCode(int helpCode) {
 		this.helpCode = helpCode;
+	}
+	
+	
+	public boolean hasHelpCode() {
+		return getHelpCode() != NO_HELP_CODE;
 	}
 
 

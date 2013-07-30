@@ -36,4 +36,12 @@ public class VoidApplicationLogger implements ApplicationLogger {
 
 	@Override
 	public void addError(String message, int helpCode) {}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace) {}
+
+
+	@Override
+	public void addError(Throwable throwable, boolean includeStackTrace, int helpCode) {}
 }
