@@ -16,7 +16,7 @@ import javax.swing.undo.UndoableEdit;
  * 
  * @author Ben St&ouml;ver
  */
-public abstract class AbstractUndoActionManagement extends ActionHashMap {
+public abstract class AbstractUndoActionManagement extends ActionMap {
 	protected abstract AccessibleUndoManager getUndoManager();
 	
 	protected abstract JMenu getUndoMenu();

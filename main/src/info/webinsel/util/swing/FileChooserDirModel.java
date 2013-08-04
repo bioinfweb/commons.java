@@ -12,6 +12,7 @@ import javax.swing.JFileChooser;
 /**
  * This class allows several instances of <code>JFileChooser</code> to use the same directory. 
  * If one registered component changes its current directory, all the others are updated.
+ * 
  * @author Ben St&ouml;ver
  */
 public class FileChooserDirModel {
@@ -66,6 +67,7 @@ public class FileChooserDirModel {
 	 * If <code>setSaveCanceled(true)</code> is called the current directory is also updated if the 
 	 * user cancels the file chooser dialog.<br>
 	 * Default value is <code>true</code>.
+	 * 
 	 * @param saveCanceled
 	 */
 	public void setSaveCanceled(boolean saveCanceled) {

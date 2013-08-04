@@ -1,22 +1,24 @@
 package info.webinsel.util.swing;
 
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.Action;
 
 
 
 /**
- * This class allows to store varius <code>Action</code> objects in a <code>HashMap</code>
- * and acces them with a unique <code>String</code>.
+ * This class allows to store various {@link Action} objects in a {@link Map}
+ * and access them with a unique {@link String}.
+ * 
  * @author Ben St&ouml;ver
  */
-public abstract class ActionHashMap {
-	private HashMap<String, Action> map = new HashMap<String, Action>();
+public abstract class ActionMap {
+	private Map<String, Action> map = new TreeMap<String, Action>();
 	
 	
-	protected HashMap<String, Action> getMap() {
+	protected Map<String, Action> getMap() {
 		return map;
 	}
 	
