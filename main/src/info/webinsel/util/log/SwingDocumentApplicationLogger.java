@@ -31,7 +31,7 @@ public class SwingDocumentApplicationLogger extends AbstractApplicationLogger {
 	@Override
 	public void addMessage(ApplicationLoggerMessage message) {
 		try {
-			getDocument().insertString(getDocument().getLength(), message.toString(), null);
+			getDocument().insertString(getDocument().getLength(), message.toString() + System.lineSeparator(), null);
 		}
 		catch (BadLocationException e) {
 			e.printStackTrace();

@@ -27,6 +27,6 @@ public class JTextAreaApplicationLogger extends AbstractApplicationLogger {
 
 	@Override
 	public void addMessage(ApplicationLoggerMessage message) {
-		getTextArea().append(message.toString());
+		getTextArea().append(message.toString() + System.lineSeparator());
 	}
 }
