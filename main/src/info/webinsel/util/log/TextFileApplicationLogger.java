@@ -32,7 +32,7 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 	 */
 	public TextFileApplicationLogger(File file, boolean append) throws IOException {
 		super();
-		writer = new PrintWriter(new BufferedWriter(new FileWriter("outfilename", append)));
+		writer = new PrintWriter(new BufferedWriter(new FileWriter(file, append)));
 	}
 
 	
