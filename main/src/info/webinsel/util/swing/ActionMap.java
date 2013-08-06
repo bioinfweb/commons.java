@@ -14,7 +14,7 @@ import javax.swing.Action;
  * 
  * @author Ben St&ouml;ver
  */
-public abstract class ActionMap {
+public class ActionMap {
 	private Map<String, Action> map = new TreeMap<String, Action>();
 	
 	
@@ -51,7 +51,4 @@ public abstract class ActionMap {
 	public int size() {
 		return map.size();
 	}
-
-
-	public abstract void refreshActionStatus();
 }
