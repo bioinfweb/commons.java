@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Iterator;
@@ -117,7 +118,13 @@ public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends Abs
    * @throws FileNotFoundException - if the file exists but is a directory rather than a regular file, does not exist but cannot be created, or cannot be opened for any other reason
    * @throws SecurityException - if a security manager exists and its checkWrite method denies write access to the file.
    */
-  public void writeNameMap(File file) throws FileNotFoundException {
-  	writeNameMap(new BufferedOutputStream(new FileOutputStream(file)));
+  public void writeNameMap(File file) throws FileNotFoundException, IOException {
+  	BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(file)); 
+  	try {
+  		writeNameMap(stream);
+  	}
+  	finally {
+  		stream.close();
+  	}
   }
 }
