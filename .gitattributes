@@ -7,6 +7,7 @@ main/lib/biojava3-alignment-3.0.5.jar -text
 main/lib/biojava3-core-3.0.5.jar -text
 main/lib/bytecode-1.8.jar -text
 main/lib/commons-collections-3.2.1.jar -text
+main/lib/commons-lang3-3.1.jar -text
 main/lib/core-1.8.jar -text
 main/lib/guava-13.0.1.jar -text
 main/lib/jgrapht-jdk1.5.jar -text
@@ -63,6 +64,7 @@ main/src/info/webinsel/util/ProgramMainClass.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/PropertyChangeMonitor.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/RandomValues.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/StringUtils.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/SystemUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/applet/DoubleBufferedApplet.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/AppVersionXMLConstants.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/appversion/AppVersionXMLReadWrite.java -text svneol=unset#text/plain
@@ -106,7 +108,9 @@ main/src/info/webinsel/util/log/ApplicationLogger.java -text svneol=unset#text/p
 main/src/info/webinsel/util/log/ApplicationLoggerMessage.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/ApplicationLoggerMessageType.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/ApplicationLoggerParameterMap.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/log/JTextAreaApplicationLogger.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/MultipleApplicationLoggersAdapter.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/log/SwingDocumentApplicationLogger.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/TextFileApplicationLogger.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/VoidApplicationLogger.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/log/package.html -text svneol=unset#text/plain

@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="lib/guava-13.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/biojava3-alignment-3.0.5.jar"/>
 	<classpathentry kind="lib" path="lib/biojava3-core-3.0.5.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
