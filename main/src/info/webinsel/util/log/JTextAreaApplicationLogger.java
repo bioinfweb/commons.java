@@ -28,5 +28,6 @@ public class JTextAreaApplicationLogger extends AbstractApplicationLogger {
 	@Override
 	public void addMessage(ApplicationLoggerMessage message) {
 		getTextArea().append(message.toString() + System.lineSeparator());
+		getTextArea().setCaretPosition(getTextArea().getDocument().getLength());
 	}
 }
