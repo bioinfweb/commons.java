@@ -93,10 +93,10 @@ public class ApplicationLoggerMessage {
 
 	@Override
 	public String toString() {
-		String result = TIME_FORMAT.format(getTime()) + " " + getMessage();
+		String result = getMessage();
 		if (!getType().equals(ApplicationLoggerMessageType.MESSAGE)) {
 			result = getType().toString() + ": " + result;
 		}
-		return result;
+		return TIME_FORMAT.format(getTime()) + " " + result;
 	}
 }
