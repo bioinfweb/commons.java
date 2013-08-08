@@ -9,6 +9,11 @@ import javax.xml.stream.events.StartElement;
 
 
 
+/**
+ * Reads or write an XML tag describing an {@link ApplicationVersion} object.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class AppVersionXMLReadWrite extends AppVersionXMLConstants {
 	public static void write(XMLStreamWriter writer, ApplicationVersion version) throws XMLStreamException {
 		writer.writeStartElement(TAG_APP_VERSION.toString());
