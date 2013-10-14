@@ -26,11 +26,49 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 	public static final String COMMAND_TERMINATOR = ";";
 	public static final String COMMENT_START = "[";
 	public static final String COMMENT_END = "]";
+
+	public static final String DATATYPE_STANDARD = "STANDARD";
+	public static final String DATATYPE_DNA = "DNA";
+	public static final String DATATYPE_RNA = "RNA";
+	public static final String DATATYPE_NUCLEOTIDE = "NUCLEOTIDE";
+	public static final String DATATYPE_PROTEIN = "PROTEIN";
+	public static final String DATATYPE_CONTINUOUS = "CONTINUOUS";
 	
 	
+	private String matrixDataType = DATATYPE_STANDARD;
+	private char gapCharacter = '-';
+	private char missingCharacter = '?';
 	private String indention = "";
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 *  
+	 * @param matrixDataType - the data type specified in the Nexus {@code FORMAT} command (Nexus allows 
+	 * {@code STANDARD}, {@code DNA}, {@codeRDNA}, {@code NUCLEOTIDE}, {@code PROTEIN} or {@code CONTINUOUS}.)
+	 * @param gapCharacter - the character coding a gap in the alignment
+	 * @param missingCharacter - the character coding missing data in the alignment
+	 */
+	public NexusWriter(String matrixDataType, char gapCharacter, char missingCharacter) {
+		super();
+		this.matrixDataType = matrixDataType;
+		this.gapCharacter = gapCharacter;
+		this.missingCharacter = missingCharacter;
+	}
+
+
+	/**
+	 * Creates a new instance of this class with "{@code -}" as gap data and "{@code ?} as missing data character.
+	 *  
+	 * @param matrixDataType - the data type specified in the Nexus {@code FORMAT} command (Nexus allows 
+	 * {@code STANDARD}, {@code DNA}, {@codeRDNA}, {@code NUCLEOTIDE}, {@code PROTEIN} or {@code CONTINUOUS}.)
+	 */
+	public NexusWriter(String matrixDataType) {
+		super();
+		this.matrixDataType = matrixDataType;
+	}
+
+
 	private String maskSpaces(String name) {
 		return name.replaceAll(" ", "_");
 	}
@@ -59,7 +97,8 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 				
 				writeBlockStart(writer, "CHARACTERS");
 				writeLine(writer, "DIMENSIONS NCHAR=" + alignment.maxSequenceLength() + COMMAND_TERMINATOR);  //TODO Check is Nexus format allows sequences with different lengths. Otherwise shorter sequences have to be filled up with "?" or "-".
-				//TODO Insert format command depending on character set
+				writeLine(writer, "FORMAT DATATYPE=" + matrixDataType + " GAP=" + gapCharacter + 
+						" MISSING=" + missingCharacter + COMMAND_TERMINATOR);  //TODO Add more parameters as defined in the Nexus standard.
 				//TODO Use interleaved format in the future
 				writeLine(writer, "MATRIX");
 				increaseIndention();
