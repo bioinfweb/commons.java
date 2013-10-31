@@ -150,7 +150,7 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a boolean value.
+	 * Reads the characters from the next event of the stream a parses them as a {@code boolean} value.
 	 * @param reader - the stream to read the next element from
 	 * @return
 	 * @throws XMLStreamException
@@ -161,7 +161,7 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as an integer value.
+	 * Reads the characters from the next event of the stream a parses them as an {@code int} value.
 	 * @param reader - the stream to read the next element from
 	 * @return
 	 * @throws XMLStreamException
@@ -172,7 +172,18 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a float value.
+	 * Reads the characters from the next event of the stream a parses them as an {@code long} value.
+	 * @param reader - the stream to read the next element from
+	 * @return
+	 * @throws XMLStreamException
+	 */
+	public static long readCharactersAsLong(XMLEventReader reader) throws XMLStreamException {
+		return Long.parseLong(readCharactersAsString(reader));
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the stream a parses them as a {@code float} value.
 	 * @param reader - the stream to read the next element from
 	 * @return
 	 * @throws XMLStreamException
@@ -183,7 +194,7 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a double value.
+	 * Reads the characters from the next event of the stream a parses them as a {@code double} value.
 	 * @param reader - the stream to read the next element from
 	 * @return
 	 * @throws XMLStreamException
