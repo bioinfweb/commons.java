@@ -29,33 +29,66 @@ import org.biojavax.bio.phylo.io.phylip.PHYLIPFileFormat;
  * @author Ben St&ouml;ver
  */
 public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
-  public static int MAX_NAME_LENGTH = 10;
+  public static int DEFAULT_MAX_NAME_LENGTH = 10;
+  public static char WHITESPACE_REPLACEMENT = '_'; 
   
   
-  private Map<String, String> nameMap = new TreeMap<String, String>();
+  private int maxNameLength = DEFAULT_MAX_NAME_LENGTH;
+  private boolean replaceWhiteSpace = false;
+	private Map<String, String> nameMap = new TreeMap<String, String>();
   
   
-  private String formatSequenceName(String name) {
-  	String result;
-    if (name.length() > MAX_NAME_LENGTH) {
-      result = name.substring(0, MAX_NAME_LENGTH);
+  public PhylipWriter() {
+		super();
+	}
+
+
+  public PhylipWriter(boolean replaceWhiteSpace) {
+		super();
+		this.replaceWhiteSpace = replaceWhiteSpace;
+	}
+
+
+	public PhylipWriter(boolean replaceWhiteSpace, int maxNameLength) {
+		super();
+		this.maxNameLength = maxNameLength;
+		this.replaceWhiteSpace = replaceWhiteSpace;
+	}
+
+
+  public int getMaxNameLength() {
+		return maxNameLength;
+	}
+
+
+	public boolean getReplaceWhiteSpace() {
+		return replaceWhiteSpace;
+	}
+
+
+	private String formatSequenceName(String name) {
+  	String result = name;
+  	if (getReplaceWhiteSpace()) {
+  		result = name.replaceAll("\\s", "" + WHITESPACE_REPLACEMENT);
+  	}  	
+  	
+    if (result.length() > maxNameLength) {
+      result = result.substring(0, maxNameLength);
     } 
-    else if (name.length() < MAX_NAME_LENGTH) {
-      StringBuffer buffer = new StringBuffer(MAX_NAME_LENGTH);
-      buffer.append(name);
-      while (buffer.length() < MAX_NAME_LENGTH) {
+    else if (result.length() < maxNameLength) {
+      StringBuffer buffer = new StringBuffer(maxNameLength);
+      buffer.append(result);
+      while (buffer.length() < maxNameLength) {
         buffer.append(" ");
       }
       result = buffer.toString();
-    }
-    else {
-      result = name;
     }
     
     int index = 1;
     while (nameMap.containsKey(result)) {
     	String indexStr = "" + index;
-    	result = result.substring(0, MAX_NAME_LENGTH - indexStr.length()) + indexStr;
+    	result = result.substring(0, maxNameLength - indexStr.length()) + indexStr;
+    	index++;
     }
     nameMap.put(result, name);
     
