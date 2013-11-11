@@ -32,7 +32,7 @@ public class NexusReaderWriterTest {
   	try {
   		File file = File.createTempFile("NexusReaderWriterTest", ".nex");
   		//System.out.println(file);
-  		new NexusWriter<DNASequence, NucleotideCompound>().write(originalAlignment, file);
+  		new NexusWriter<DNASequence, NucleotideCompound>("DNA").write(originalAlignment, file);
   		try {
   	  	Alignment<DNASequence, NucleotideCompound> readAlignment = 
   	  			new NexusReader<DNASequence, NucleotideCompound>(new DNASequenceCreator(

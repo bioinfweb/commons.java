@@ -22,22 +22,68 @@ public class PhylipWriterTest {
 		result.add("SequenceWithManyAs", new DNASequence("AAAAA"));
 		result.add("SequenceWithManyTs", new DNASequence("TTTTT"));
 		result.add("SequenceWithManyCs", new DNASequence("CCCCC"));
+		result.add("Seq with spaces", new DNASequence("CGTTA"));
 		return result;
 	}
 	
 	
   @Test
-  public void test_write() {
+  public void test_write_space() {
   	final String LINE_SEP = System.getProperty("line.separator");
   	ByteArrayOutputStream stream = new ByteArrayOutputStream();
-  	PhylipWriter<DNASequence, NucleotideCompound> writer = new PhylipWriter<DNASequence, NucleotideCompound>();
+  	PhylipWriter<DNASequence, NucleotideCompound> writer = new PhylipWriter<DNASequence, NucleotideCompound>(false);
   	try {
   		writer.write(createAlignment(), stream);
-  		assertEquals(" 3 5" + LINE_SEP + 
+  		assertEquals(" 5 5" + LINE_SEP + 
   				"ASequence  ATCGT" + LINE_SEP + 
   				"SequenceWi AAAAA" + LINE_SEP + 
   				"SequenceW1 TTTTT" + LINE_SEP +
-  				"SequenceW2 CCCCC" + LINE_SEP,
+  				"SequenceW2 CCCCC" + LINE_SEP +
+  				"Seq with s CGTTA" + LINE_SEP,
+  				stream.toString());
+  	}
+  	catch (Exception e) {
+  		e.printStackTrace();
+  		fail(e.getMessage());
+  	}
+  }
+  
+  
+  @Test
+  public void test_write_noSpace() {
+  	final String LINE_SEP = System.getProperty("line.separator");
+  	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+  	PhylipWriter<DNASequence, NucleotideCompound> writer = new PhylipWriter<DNASequence, NucleotideCompound>(true);
+  	try {
+  		writer.write(createAlignment(), stream);
+  		assertEquals(" 5 5" + LINE_SEP + 
+  				"ASequence  ATCGT" + LINE_SEP + 
+  				"SequenceWi AAAAA" + LINE_SEP + 
+  				"SequenceW1 TTTTT" + LINE_SEP +
+  				"SequenceW2 CCCCC" + LINE_SEP +
+  				"Seq_with_s CGTTA" + LINE_SEP,
+  				stream.toString());
+  	}
+  	catch (Exception e) {
+  		e.printStackTrace();
+  		fail(e.getMessage());
+  	}
+  }
+  
+  
+  @Test
+  public void test_write_noSpaceShorter() {
+  	final String LINE_SEP = System.getProperty("line.separator");
+  	ByteArrayOutputStream stream = new ByteArrayOutputStream();
+  	PhylipWriter<DNASequence, NucleotideCompound> writer = new PhylipWriter<DNASequence, NucleotideCompound>(true, 8);
+  	try {
+  		writer.write(createAlignment(), stream);
+  		assertEquals(" 5 5" + LINE_SEP + 
+  				"ASequenc ATCGT" + LINE_SEP + 
+  				"Sequence AAAAA" + LINE_SEP + 
+  				"Sequenc1 TTTTT" + LINE_SEP +
+  				"Sequenc2 CCCCC" + LINE_SEP +
+  				"Seq_with CGTTA" + LINE_SEP,
   				stream.toString());
   	}
   	catch (Exception e) {
