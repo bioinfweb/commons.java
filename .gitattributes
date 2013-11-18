@@ -39,11 +39,13 @@ main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.ja
 main/src/info/bioinfweb/biojava3/core/sequence/io/FastaReaderTools.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/io/MapFastaWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/CountableSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/RemoveSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/RemovedCharSetSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceAbstractSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceView.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/UpperCaseSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSet.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/CharSetNexusFileBuilder.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlock.java -text svneol=unset#text/plain

@@ -22,7 +22,7 @@ import org.biojava3.core.sequence.template.SequenceView;
  * @author Ben St&ouml;ver
  */
 public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideCompound> 
-    implements SequenceView<NucleotideCompound> {
+    implements SequenceView<NucleotideCompound>, CountableSequenceView {
 	
 	/** Replaces <i>U</i> with <i>T</i>. */
 	public static final Map<NucleotideCompound, NucleotideCompound> RNA_TO_DNA_MAP = createRNAToDNAMap();
@@ -166,7 +166,8 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	}	
 	
 	
-	public int countReplacedCompounds() {
+	@Override
+	public int countChangedCompounds() {
 		int result = 0;
 		Iterator<NucleotideCompound> iterator = getViewedSequence().iterator();
 		int pos = 1;  // BioJava sequences start with 1. 
