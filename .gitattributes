@@ -193,6 +193,7 @@ test/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReaderWriterTest.java -
 test/src/info/bioinfweb/biojava3/alignment/io/phylip/PhylipWriterTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceViewTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/biojava3/core/sequence/views/UpperCaseSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/AmbiguityBaseScoreTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/ConsensusSequenceCreatorTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plain
