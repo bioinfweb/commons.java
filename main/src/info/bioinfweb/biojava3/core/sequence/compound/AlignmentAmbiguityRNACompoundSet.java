@@ -20,7 +20,10 @@ public class AlignmentAmbiguityRNACompoundSet extends AmbiguityDNACompoundSet {
 	 */
 	public AlignmentAmbiguityRNACompoundSet() {
 		super();
-		addNucleotideCompound("?", "?");
+		addNucleotideCompound("" + AlignmentAmbiguityNucleotideCompoundSet.GAP_CHARACTER, 
+				"" + AlignmentAmbiguityNucleotideCompoundSet.GAP_CHARACTER);
+		addNucleotideCompound("" + AlignmentAmbiguityNucleotideCompoundSet.UNKNOWN_CHARACTER, 
+				"" + AlignmentAmbiguityNucleotideCompoundSet.UNKNOWN_CHARACTER);
 	}
 
 	

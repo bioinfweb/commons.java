@@ -169,10 +169,13 @@ public class ReplaceNucleotideSequenceView extends SequenceProxyView<NucleotideC
 	public int countReplacedCompounds() {
 		int result = 0;
 		Iterator<NucleotideCompound> iterator = getViewedSequence().iterator();
-		while (iterator.hasNext()) {
-			if (replacementMap.get(iterator.next()) != null) {
+		int pos = 1;  // BioJava sequences start with 1. 
+		while (iterator.hasNext() && (pos <= getBioEnd())) {
+			NucleotideCompound compound = iterator.next();
+			if ((pos >= getBioStart()) && (replacementMap.get(compound) != null)) {
 				result++;
 			}
+			pos++;
 		}
 		return result;
 	}
