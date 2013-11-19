@@ -86,7 +86,7 @@ public class MEGAWriter <S extends Sequence<C>, C extends Compound> extends Name
 				String modifiedName = name.replaceAll("\\s", WHITESPACE_REPLACEMENT);
 				getNameMap().put(modifiedName, name);  // Does not work if e.g. "A sequence" and "A_sequence" are contained in the same alignment.
 	      out.write('#');
-	      out.write(modifiedName.getBytes());  //TODO Generate translation table
+	      out.write(modifiedName.getBytes());
 	      out.write(LINE_SEPARATOR);
 	
 	      int compoundCount = 0;
