@@ -20,8 +20,10 @@ main/src/info/bioinfweb/biojava3/alignment/io/AbstractAlignmentReader.java -text
 main/src/info/bioinfweb/biojava3/alignment/io/AbstractAlignmentWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/AlignmentReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/AlignmentWriter.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/alignment/io/NameMapWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaWriter.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/alignment/io/mega/MEGAWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/phylip/PhylipWriter.java -text svneol=unset#text/plain
