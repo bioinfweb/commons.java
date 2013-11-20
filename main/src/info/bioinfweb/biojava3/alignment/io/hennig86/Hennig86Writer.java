@@ -66,7 +66,7 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 	public void write(Alignment<S, C> alignment, File file, String title)	throws Exception {
 		OutputStream stream = new BufferedOutputStream(new FileOutputStream(file));
 		try {
-			write(alignment, stream, null);
+			write(alignment, stream, title);
 		}
 		finally {
 			stream.close();
