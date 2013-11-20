@@ -108,19 +108,4 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 			out.close();
 		}
 	}
-	
-	
-	public static void main(String[] args) {
-		try {
-			final String folder = "C:\\Users\\BenStoever\\Documents\\Studium\\Projekte\\Promotion\\Alignment Evaluation\\Eigene Programme\\Alignment Evaluation\\Testdaten\\TestRepository\\ViscumITS";
-	  	Alignment<Sequence<NucleotideCompound>, NucleotideCompound> alignment = 
-	  			new NexusReader<Sequence<NucleotideCompound>, NucleotideCompound>(new DNASequenceCreator(
-	  					new AlignmentAmbiguityNucleotideCompoundSet())).read(new File(folder + "\\Original.nex"));
-	  	new Hennig86Writer<Sequence<NucleotideCompound>, NucleotideCompound>(DATATYPE_DNA).write(
-	  			alignment, new File(folder + "\\Hennig86.txt"), "A title with spaces");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 }
