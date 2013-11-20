@@ -23,6 +23,7 @@ main/src/info/bioinfweb/biojava3/alignment/io/AlignmentWriter.java -text svneol=
 main/src/info/bioinfweb/biojava3/alignment/io/NameMapWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaWriter.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/alignment/io/hennig86/Hennig86Writer.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/mega/MEGAWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusWriter.java -text svneol=unset#text/plain

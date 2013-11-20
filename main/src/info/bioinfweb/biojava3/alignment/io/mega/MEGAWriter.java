@@ -8,12 +8,8 @@ import java.io.OutputStream;
 import java.util.Iterator;
 
 import info.bioinfweb.biojava3.alignment.io.NameMapWriter;
-import info.bioinfweb.biojava3.alignment.io.nexus.NexusReader;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
-import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;
 
-import org.biojava3.core.sequence.compound.NucleotideCompound;
-import org.biojava3.core.sequence.io.DNASequenceCreator;
 import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.Sequence;
 
@@ -24,10 +20,9 @@ import org.biojava3.core.sequence.template.Sequence;
  * 
  * @author Ben St&ouml;ver
  */
-public class MEGAWriter <S extends Sequence<C>, C extends Compound> extends NameMapWriter<S, C> {
+public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends NameMapWriter<S, C> {
 	public static final String DATATYPE_DNA = "DNA";
 	public static final String DATATYPE_PROTEIN = "Protein";
-	public static final String WHITESPACE_REPLACEMENT = "_";
 	public static final String DEFAULT_TITLE = "Alignment generated with bioinfweb AlignmentIO";
 
 	public static final int LINE_LENGTH = 80;
@@ -83,8 +78,7 @@ public class MEGAWriter <S extends Sequence<C>, C extends Compound> extends Name
 			Iterator<String> iterator = alignment.nameIterator();
 			while (iterator.hasNext()) {
 				String name = iterator.next();
-				String modifiedName = name.replaceAll("\\s", WHITESPACE_REPLACEMENT);
-				getNameMap().put(modifiedName, name);  // Does not work if e.g. "A sequence" and "A_sequence" are contained in the same alignment.
+				String modifiedName = replaceWhiteSpaces(name);
 	      out.write('#');
 	      out.write(modifiedName.getBytes());
 	      out.write(LINE_SEPARATOR);

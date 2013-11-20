@@ -29,6 +29,9 @@ import org.biojava3.core.sequence.template.Sequence;
  * @param <C> - the compound type to be written
  */
 public abstract class NameMapWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
+	public static final String WHITESPACE_REPLACEMENT = "_";
+
+	
 	private Map<String, String> nameMap = new TreeMap<String, String>();
 
 	
@@ -76,5 +79,20 @@ public abstract class NameMapWriter<S extends Sequence<C>, C extends Compound> e
   	finally {
   		stream.close();
   	}
+  }
+  
+  
+  /**
+   * Replaces all whitespaces in the specified name by {@link NameMapWriter#WHITESPACE_REPLACEMENT} and adds
+   * the old and new name to the name map. (Note that this method does not work if e.g. the taxon names 
+   * {@code A sequence} and {@code A_sequence} are contained in the same alignment.)
+   * 
+   * @param name - the taxon name containing spaces
+   * @return a new taxon name without spaces
+   */
+  protected String replaceWhiteSpaces(String name) {
+		String modifiedName = name.replaceAll("\\s", WHITESPACE_REPLACEMENT);
+		getNameMap().put(modifiedName, name);  // Does not work if e.g. "A sequence" and "A_sequence" are contained in the same alignment.
+    return modifiedName;
   }
 }
