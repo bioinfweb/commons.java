@@ -124,9 +124,10 @@ public abstract class NameMapWriter<S extends Sequence<C>, C extends Compound> e
   
   
   /**
-   * Replaces all whitespaces in the specified name by {@link NameMapWriter#WHITESPACE_REPLACEMENT} and truncates 
-   * them to the length of {@link #getMaxNameLength()}. The old and new name are than added to the name map. 
-   * If identical names occur during this process they will be changed accordingly.
+   * Replaces all whitespaces in the specified name by {@link NameMapWriter#WHITESPACE_REPLACEMENT} if 
+   * {@link #getReplaceWhiteSpace()} returns {@code true} and truncates them to the length of 
+   * {@link #getMaxNameLength()}. The old and new name are than added to the name map. If identical 
+   * names occur during this process they will be changed accordingly.
    * 
    * @param name - the taxon name containing spaces
    * @param fillUp - If {@code true} is specified here, all names will be filled up with spaces until a length
@@ -153,14 +154,21 @@ public abstract class NameMapWriter<S extends Sequence<C>, C extends Compound> e
 	    }
   	}
     
-    int index = 1;
-    while (getNameMap().containsKey(result)) {
-    	String indexStr = "" + index;
-    	result = result.substring(0, getMaxNameLength() - indexStr.length()) + indexStr;
-    	index++;
-    }
-    getNameMap().put(result, name);
+  	if (!name.equals(result)) {
+	    int index = 1;
+	    while (getNameMap().containsKey(result)) {
+	    	String indexStr = "" + index;
+	    	result = result.substring(0, getMaxNameLength() - indexStr.length()) + indexStr;
+	    	index++;
+	    }
+	    getNameMap().put(result, name);
+  	}
     
     return result;
   }
+	
+	
+	public boolean anyNamesChanged() {
+		return !getNameMap().isEmpty();
+	}
 }

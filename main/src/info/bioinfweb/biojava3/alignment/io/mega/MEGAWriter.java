@@ -34,14 +34,14 @@ public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends NameM
 	
 	
 	public MEGAWriter(String datatype, char gapCharacter) {
-		super();
+		super(true);
 		this.datatype = datatype;
 		this.gapCharacter = gapCharacter;
 	}
 
 
 	public MEGAWriter(String datatype) {
-		super();
+		super(true);
 		this.datatype = datatype;
 	}
 
