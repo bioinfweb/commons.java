@@ -78,7 +78,7 @@ public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends NameM
 			Iterator<String> iterator = alignment.nameIterator();
 			while (iterator.hasNext()) {
 				String name = iterator.next();
-				String modifiedName = replaceWhiteSpaces(name);
+				String modifiedName = formatSequenceName(name, false);
 	      out.write('#');
 	      out.write(modifiedName.getBytes());
 	      out.write(LINE_SEPARATOR);

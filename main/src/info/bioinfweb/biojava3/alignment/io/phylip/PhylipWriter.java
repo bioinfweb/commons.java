@@ -26,68 +26,21 @@ public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends Nam
   public static char WHITESPACE_REPLACEMENT = '_'; 
   
   
-  private int maxNameLength = DEFAULT_MAX_NAME_LENGTH;
-  private boolean replaceWhiteSpace = false;
-  
-  
   public PhylipWriter() {
-		super();
+		super(true, DEFAULT_MAX_NAME_LENGTH);
 	}
 
 
   public PhylipWriter(boolean replaceWhiteSpace) {
-		super();
-		this.replaceWhiteSpace = replaceWhiteSpace;
+		super(replaceWhiteSpace, DEFAULT_MAX_NAME_LENGTH);
 	}
 
 
 	public PhylipWriter(boolean replaceWhiteSpace, int maxNameLength) {
-		super();
-		this.maxNameLength = maxNameLength;
-		this.replaceWhiteSpace = replaceWhiteSpace;
+		super(replaceWhiteSpace, maxNameLength);
 	}
 
 
-  public int getMaxNameLength() {
-		return maxNameLength;
-	}
-
-
-	public boolean getReplaceWhiteSpace() {
-		return replaceWhiteSpace;
-	}
-
-
-	private String formatSequenceName(String name) {
-  	String result = name;
-  	if (getReplaceWhiteSpace()) {
-  		result = name.replaceAll("\\s", "" + WHITESPACE_REPLACEMENT);
-  	}  	
-  	
-    if (result.length() > maxNameLength) {
-      result = result.substring(0, maxNameLength);
-    } 
-    else if (result.length() < maxNameLength) {
-      StringBuffer buffer = new StringBuffer(maxNameLength);
-      buffer.append(result);
-      while (buffer.length() < maxNameLength) {
-        buffer.append(" ");
-      }
-      result = buffer.toString();
-    }
-    
-    int index = 1;
-    while (getNameMap().containsKey(result)) {
-    	String indexStr = "" + index;
-    	result = result.substring(0, maxNameLength - indexStr.length()) + indexStr;
-    	index++;
-    }
-    getNameMap().put(result, name);
-    
-    return result;
-  }
-
-  
   /**
    * Writes the specified alignment in sequential Phylip format.
    * 
@@ -101,7 +54,7 @@ public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends Nam
     Iterator<String> iterator = alignment.nameIterator();
     while (iterator.hasNext()) {
     	String name = iterator.next();
-    	writer.println(formatSequenceName(name) + " " + alignment.getSequence(name).getSequenceAsString());
+    	writer.println(formatSequenceName(name, true) + " " + alignment.getSequence(name).getSequenceAsString());
     }
     writer.flush();		
 	}

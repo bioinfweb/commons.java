@@ -8,21 +8,16 @@ import java.io.OutputStream;
 import java.util.Iterator;
 
 import info.bioinfweb.biojava3.alignment.io.NameMapWriter;
-import info.bioinfweb.biojava3.alignment.io.nexus.NexusReader;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
-import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;
 import info.webinsel.util.SystemUtils;
 
-import org.biojava3.core.sequence.compound.NucleotideCompound;
-import org.biojava3.core.sequence.io.DNASequenceCreator;
 import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.Sequence;
 
 
 
 /**
- * Writes an alignment to a Hennig86 file. (Note that no character set information will be written, because this
- * file type does not support this.)
+ * Writes an alignment to a Hennig86 file. (Note that no character set information will be written.)
  * 
  * Optionally a {@code nstates} command for <i>TNT</i> can be written depending on the constructor that is used.
  * 
@@ -38,6 +33,7 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 
 	
 	private String noOfStates = null;
+	private int maxTaxonNameLength = -1;
 	
 	
 	public Hennig86Writer() {
@@ -48,6 +44,26 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 	public Hennig86Writer(String noOfStates) {
 		super();
 		this.noOfStates = noOfStates;
+	}
+
+
+	public String getNoOfStates() {
+		return noOfStates;
+	}
+
+
+	public void setNoOfStates(String noOfStates) {
+		this.noOfStates = noOfStates;
+	}
+
+
+	public int getMaxTaxonNameLength() {
+		return maxTaxonNameLength;
+	}
+
+
+	public void setMaxTaxonNameLength(int maxTaxonNameLength) {
+		this.maxTaxonNameLength = maxTaxonNameLength;
 	}
 
 
@@ -97,7 +113,7 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 			Iterator<String> iterator = alignment.nameIterator();
 			while (iterator.hasNext()) {
 				String name = iterator.next();
-				String modifiedName = replaceWhiteSpaces(name);
+				String modifiedName = formatSequenceName(name, false);
 	      out.write((modifiedName + " ").getBytes());
         out.write(alignment.getSequence(name).getSequenceAsString().getBytes());
         out.write(LINE_SEPARATOR);
