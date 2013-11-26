@@ -22,7 +22,7 @@ public class FastaReaderTest {
   public void test_read_valid() {
   	try {
   		Alignment<DNASequence, NucleotideCompound> aligment = new FastaReader<DNASequence, NucleotideCompound>(
-  				new DNASequenceCreator(new AlignmentAmbiguityNucleotideCompoundSet())).read(new File("data\\valid.fasta"));
+  				new DNASequenceCreator(new AlignmentAmbiguityNucleotideCompoundSet())).read(new File("data\\alignmentIO\\valid.fasta"));
   		assertEquals(3, aligment.size());
   		Iterator<String> iterator = aligment.nameIterator();
   		
@@ -48,6 +48,6 @@ public class FastaReaderTest {
   @Test(expected=IOException.class)
   public void test_read_invalid() throws Exception {
 		new FastaReader<DNASequence, NucleotideCompound>(
-				new DNASequenceCreator(new AlignmentAmbiguityNucleotideCompoundSet())).read(new File("data\\invalid.fasta"));
+				new DNASequenceCreator(new AlignmentAmbiguityNucleotideCompoundSet())).read(new File("data\\alignmentIO\\invalid.fasta"));
   }
 }
