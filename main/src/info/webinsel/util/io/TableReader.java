@@ -28,7 +28,7 @@ public class TableReader {
 	 * @throws IOException
 	 */
 	public static String[][] readTable(InputStream stream, char separator) throws IOException {
-		String[] lines = TextReader.readText(stream).split("\n");
+		String[] lines = TextReader.readText(stream).split("\r\n|\n|\r");  // Currently unnecessary because TextReader converts all types of line breaks to '\n'
 		
 		// Calculate column count:
     int maxColCount = 0; 
