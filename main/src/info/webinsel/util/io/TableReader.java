@@ -9,19 +9,26 @@ import java.net.URL;
 
 
 
+/**
+ * Implements reading a table from a text file two a two dimensional array with {@link String} objects.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class TableReader {
 	public static String[][] readTable(URL url, char separator) throws IOException {
-		return readTable(url.openStream(), separator);
+		return readTable(url.openStream(), separator);  // Buffering is done by the underlying TextReader later.
 	}
 	
 
 	public static String[][] readTable(File file, char separator) throws IOException {
-		return readTable(new FileInputStream(file), separator);
+		return readTable(new FileInputStream(file), separator);  // Buffering is done by the underlying TextReader later.
 	}
 	
 
 	/**
-	 * Reads text data into a string array.
+	 * Reads text data into a two dimensional array with {@link String} objects. If an empty file is read 
+	 * the returned array has one element containing an empty {@link String}.
+	 * 
 	 * @param stream - the stream to read the text data from
 	 * @param separator - the column separator
 	 * @return String[colCount][rowCount]
@@ -43,21 +50,18 @@ public class TableReader {
 		}
 		
 		// Fill array:
-		if (maxColCount > 1) {
-			String[][] result = new String[maxColCount][lines.length];
-			for (int lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-				String[] cols = lines[lineIndex].split("" + separator);
-				for (int colIndex = 0; colIndex < maxColCount; colIndex++) {
-					if (colIndex >= cols.length) {
-						result[colIndex][lineIndex] = ""; 
-					}
-					else {
-						result[colIndex][lineIndex] = cols[colIndex];
-					}
+		String[][] result = new String[maxColCount][lines.length];
+		for (int lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+			String[] cols = lines[lineIndex].split("" + separator);
+			for (int colIndex = 0; colIndex < maxColCount; colIndex++) {
+				if (colIndex >= cols.length) {
+					result[colIndex][lineIndex] = ""; 
+				}
+				else {
+					result[colIndex][lineIndex] = cols[colIndex];
 				}
 			}
-			return result;
 		}
-		return null;
+		return result;
 	}
 }
