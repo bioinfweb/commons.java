@@ -38,6 +38,7 @@ public class TableReaderTest {
   		
   		final int columnCount = 2;
   		final int rowCount = 4;
+  		assertNotNull(table);
   		assertEquals(columnCount, table.length);
   		assertEquals(rowCount, table[0].length);
   		for (int column = 0; column < columnCount; column++) {
@@ -72,7 +73,7 @@ public class TableReaderTest {
 	
 	
   @Test
-  public void test_readTable_linuxterminalBreak() {
+  public void test_readTable_linuxTerminalBreak() {
   	testTable("TableLinux_terminalBreak.txt");
   }
 	
@@ -87,4 +88,46 @@ public class TableReaderTest {
   public void test_readTable_macterminalBreak() {
   	testTable("TableMac_terminalBreak.txt");
   }
+  
+  
+  @Test
+  public void test_readTable_oneColumn() {
+		try {
+		  String[][] table = TableReader.readTable(new File("data" + SystemUtils.FILE_SEPARATOR + "io" + 
+  	      SystemUtils.FILE_SEPARATOR + "tableReader" + SystemUtils.FILE_SEPARATOR + "Table_oneColumn.txt"), '\t');
+  		
+  		final int columnCount = 1;
+  		final int rowCount = 4;
+  		assertNotNull(table);
+  		assertEquals(columnCount, table.length);
+  		assertEquals(rowCount, table[0].length);
+      for (int row = 0; row < rowCount; row++) {
+        assertEquals("V0" + row, table[0][row]);
+      }
+  	}
+  	catch (Exception e) {
+  		e.printStackTrace();
+  		fail(e.getMessage());
+  	}
+	}
+
+
+  @Test
+  public void test_readTable_empty() {
+		try {
+		  String[][] table = TableReader.readTable(new File("data" + SystemUtils.FILE_SEPARATOR + "io" + 
+  	      SystemUtils.FILE_SEPARATOR + "tableReader" + SystemUtils.FILE_SEPARATOR + "Table_empty.txt"), '\t');
+  		
+  		final int columnCount = 1;
+  		final int rowCount = 1;
+  		assertNotNull(table);
+  		assertEquals(columnCount, table.length);
+  		assertEquals(rowCount, table[0].length);
+      assertEquals("", table[0][0]);
+  	}
+  	catch (Exception e) {
+  		e.printStackTrace();
+  		fail(e.getMessage());
+  	}
+	}
 }

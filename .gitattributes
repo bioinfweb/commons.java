@@ -196,6 +196,8 @@ test/data/io/tableReader/TableMac_noTerminalBreak.txt -text svneol=unset#text/pl
 test/data/io/tableReader/TableMac_terminalBreak.txt -text svneol=unset#text/plain
 test/data/io/tableReader/TableWindows_noTerminalBreak.txt -text svneol=unset#text/plain
 test/data/io/tableReader/TableWindows_terminalBreak.txt -text svneol=unset#text/plain
+test/data/io/tableReader/Table_empty.txt -text svneol=unset#text/plain
+test/data/io/tableReader/Table_oneColumn.txt -text svneol=unset#text/plain
 test/lib/junit-4.9b1.jar -text
 test/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReaderWriterTest.java -text svneol=unset#text/plain
