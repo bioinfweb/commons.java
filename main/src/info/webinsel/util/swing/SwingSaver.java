@@ -49,7 +49,7 @@ public abstract class SwingSaver extends AbstractSaver implements ChangeMonitora
 				return save();
 			}
 			
-			return (choice != JOptionPane.CANCEL_OPTION) || (choice != JOptionPane.CLOSED_OPTION); 
+			return (choice != JOptionPane.CANCEL_OPTION) && (choice != JOptionPane.CLOSED_OPTION); 
 		}
 		else {
 			return true;
