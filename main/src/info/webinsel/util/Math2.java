@@ -433,7 +433,7 @@ public class Math2 {
   /**
    * Parses a double value which can have either "," or "." as its decimal separator. The
    * string must not contain thousand separators. (Distinguishing between "1,236" as 1236 in English and 
-   * "1,236" as 1.236 is not possible.)
+   * "1,236" as 1.236 in German is not possible.)
    * 
    * @param string - the string to parse
    * @return the parsed double value
