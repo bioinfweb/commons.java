@@ -91,5 +91,12 @@ public class Math2Test {
   public void test_roundUpDouble() {
 		assertEquals(3.0, Math2.roundUp(2.1), 0.0);
 		assertEquals(2.0, Math2.roundUp(2.0), 0.0);
-	}	
+	}
+	
+	
+	@Test
+	public void test_parseDouble() {
+		assertEquals(1000.2, Math2.parseDouble("1000.2"), 0.0000001);
+		assertEquals(1000.2, Math2.parseDouble("1000,2"), 0.0000001);
+	}
 }
