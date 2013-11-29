@@ -431,10 +431,13 @@ public class Math2 {
 
   
   /**
-   * Parses a double value wich can have either "," or "." as its decimal seperator. The
-   * string must not contain thousend separators.
-   * @param string the string to parse
+   * Parses a double value which can have either "," or "." as its decimal separator. The
+   * string must not contain thousand separators. (Distinguishing between "1,236" as 1236 in English and 
+   * "1,236" as 1.236 is not possible.)
+   * 
+   * @param string - the string to parse
    * @return the parsed double value
+   * @throws NumberFormatException - if the specified string does not represent a valid decimal value 
    */
   public static double parseDouble(String string) {
   	return Double.parseDouble(string.replace(',', '.'));
