@@ -51,7 +51,7 @@ public class FileChooserDirModel {
 
 	public void setCurrentDirectory(File currentDirectory) {
 		this.currentDirectory = currentDirectory;
-		
+
 		for (int i = 0; i < fileChoosers.size(); i++) {
 			fileChoosers.get(i).setCurrentDirectory(currentDirectory);
 		}
@@ -75,6 +75,11 @@ public class FileChooserDirModel {
 	}
 
 
+	public boolean contains(JFileChooser fileChooser) {
+		return fileChoosers.contains(fileChooser); 
+	}
+	
+	
 	public void addFileChooser(JFileChooser fileChooser) {
 		fileChooser.setCurrentDirectory(getCurrentDirectory());
   	fileChooser.addActionListener(listener);
