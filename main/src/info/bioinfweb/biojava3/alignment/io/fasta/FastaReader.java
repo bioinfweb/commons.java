@@ -31,7 +31,7 @@ public class FastaReader<S extends Sequence<C>, C extends Compound> extends Abst
 			if (line.startsWith(">")) {
 				String name = line.substring(1);
 				StringBuffer sequence = new StringBuffer();
-				line = reader.readLine();
+				line = reader.readLine();  // TODO Zukünftig effizienteren SequenceReader verwenden, der Zeilen direkt in ein byte array schreibt. (Standardimplementierung verwendet ein array von Compound, was 64 bit statt 8 pro Symbol belegt. Außerdem liegen momentan komplette Seqenzen noch einmal zusätzlich als StringBuilder und einmal als String im Speicher. (mit 16 Bit pro Symbol))  
 				while ((line != null) && !line.startsWith(">")) {
 					sequence.append(line);
 					line = reader.readLine();					

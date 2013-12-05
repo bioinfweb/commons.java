@@ -27,6 +27,7 @@ public class NexusReader<S extends Sequence<C>, C extends Compound> extends Abst
 	}
 
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public Alignment<S, C> read(InputStream stream) throws Exception {
 		CharSetNexusFileBuilder builder = new CharSetNexusFileBuilder();
