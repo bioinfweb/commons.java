@@ -1,12 +1,9 @@
 package info.bioinfweb.biojava3.core.sequence.views;
 
 
-import java.util.Arrays;
-
 import org.biojava3.core.sequence.template.Compound;
 import org.biojava3.core.sequence.template.CompoundSet;
 import org.biojava3.core.sequence.template.Sequence;
-import org.biojava3.core.sequence.template.SequenceProxyView;
 import org.biojava3.core.sequence.template.SequenceView;
 
 
