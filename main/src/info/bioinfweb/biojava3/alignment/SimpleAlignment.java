@@ -3,6 +3,7 @@ package info.bioinfweb.biojava3.alignment;
 
 import info.bioinfweb.biojava3.alignment.template.Alignment;
 import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
+import info.webinsel.util.text.UniqueNameMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -226,5 +227,43 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 		while (iterator.hasNext()) {
 			iterator.next().movePositions(start, offset);
 		}
+	}
+	
+	
+	@Override
+	public void renameSequence(String currentName, String newName) {
+		if (containsName(newName)) {
+			throw new IllegalArgumentException("The sequence cannot be renamed, because another sequence with the name \"" +
+					newName + "\" is already present.");
+		}
+		else {
+			names.set(indexByName(currentName), newName);
+			sequences.put(newName, sequences.get(currentName));
+			sequences.remove(currentName);
+		}
+	}
+
+
+	/**
+	 * Changes the sequence names in this alignment according to the parameters of the specified name map
+	 * and stores in the old and new names in map. (Previous contents of the map are deleted.)
+	 */
+	@Override
+	public void renameSequences(UniqueNameMap nameMap) {
+		nameMap.clear();
+	  Map<String, S> newSequences = new TreeMap<String, S>();		// A new sequence map has to be created, some original names could be equal to the processed names of others.
+		Iterator<String> iterator = nameIterator();
+		while (iterator.hasNext()) {
+			String originalName = iterator.next();
+			String processedName = nameMap.addName(originalName);
+			if (!originalName.equals(processedName)) {  // unchanged names have not been added to the list
+				names.set(indexByName(originalName), processedName);
+				newSequences.put(processedName, getSequence(originalName));
+			}
+			else {
+				newSequences.put(originalName, getSequence(originalName));
+			}
+		}
+		sequences = newSequences;
 	}
 }

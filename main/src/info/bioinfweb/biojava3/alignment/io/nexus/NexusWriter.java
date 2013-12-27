@@ -13,6 +13,7 @@ import info.bioinfweb.biojava3.alignment.io.AbstractAlignmentWriter;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
 import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
 import info.webinsel.util.collections.SimpleSequenceInterval;
+import info.webinsel.util.text.UniqueNameMap;
 
 
 
@@ -41,6 +42,36 @@ public class NexusWriter<S extends Sequence<C>, C extends Compound> extends Abst
 	private String indention = "";
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 *  
+	 * @param matrixDataType - the data type specified in the Nexus {@code FORMAT} command (Nexus allows 
+	 * {@code STANDARD}, {@code DNA}, {@codeRDNA}, {@code NUCLEOTIDE}, {@code PROTEIN} or {@code CONTINUOUS}.)
+	 * @param gapCharacter - the character coding a gap in the alignment
+	 * @param missingCharacter - the character coding missing data in the alignment
+	 * @param nameMap - used to translate sequence names, if necessary
+	 */
+	public NexusWriter(String matrixDataType, char gapCharacter, char missingCharacter, UniqueNameMap nameMap) {
+		super(nameMap);
+		this.matrixDataType = matrixDataType;
+		this.gapCharacter = gapCharacter;
+		this.missingCharacter = missingCharacter;
+	}
+
+
+	/**
+	 * Creates a new instance of this class with "{@code -}" as gap data and "{@code ?} as missing data character.
+	 *  
+	 * @param matrixDataType - the data type specified in the Nexus {@code FORMAT} command (Nexus allows 
+	 * {@code STANDARD}, {@code DNA}, {@codeRDNA}, {@code NUCLEOTIDE}, {@code PROTEIN} or {@code CONTINUOUS}.)
+	 * @param nameMap - used to translate sequence names, if necessary
+	 */
+	public NexusWriter(String matrixDataType, UniqueNameMap nameMap) {
+		super(nameMap);
+		this.matrixDataType = matrixDataType;
+	}
+
+
 	/**
 	 * Creates a new instance of this class.
 	 *  

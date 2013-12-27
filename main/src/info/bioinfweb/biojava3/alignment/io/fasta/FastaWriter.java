@@ -10,6 +10,7 @@ import org.biojava3.core.sequence.template.Sequence;
 
 import info.bioinfweb.biojava3.alignment.io.AbstractAlignmentWriter;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
+import info.webinsel.util.text.UniqueNameMap;
 
 
 
@@ -23,6 +24,16 @@ public class FastaWriter<S extends Sequence<C>, C extends Compound> extends Abst
 	public static final int LINE_LENGTH = 80;
 	
 	
+	public FastaWriter() {
+		super();
+	}
+
+
+	public FastaWriter(UniqueNameMap nameMap) {
+		super(nameMap);
+	}
+
+
 	@Override
 	public void write(Alignment<S, C> alignment, OutputStream stream)
 			throws Exception {

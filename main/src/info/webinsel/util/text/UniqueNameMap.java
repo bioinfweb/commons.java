@@ -91,6 +91,11 @@ public class UniqueNameMap {
 	}
 	
 	
+	public String getProcessedName(String originalName) {
+		return nameMap.get(originalName);
+	}
+
+
 	public void clear() {
 		nameMap.clear();
 	}

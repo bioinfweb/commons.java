@@ -2,6 +2,7 @@ package info.bioinfweb.biojava3.alignment.template;
 
 
 import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
+import info.webinsel.util.text.UniqueNameMap;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -65,4 +66,8 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 	public int maxSequenceLength();
 
 	public void moveAllCharSetPositions(int start, int offset);
+
+	public void renameSequence(String currentName, String newName);
+
+	public void renameSequences(UniqueNameMap nameMap);
 }
