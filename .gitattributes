@@ -200,6 +200,7 @@ test/data/io/tableReader/TableWindows_terminalBreak.txt -text svneol=unset#text/
 test/data/io/tableReader/Table_empty.txt -text svneol=unset#text/plain
 test/data/io/tableReader/Table_oneColumn.txt -text svneol=unset#text/plain
 test/lib/junit-4.9b1.jar -text
+test/src/info/bioinfweb/biojava3/alignment/SimpleAlignmentTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReaderWriterTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/phylip/PhylipWriterTest.java -text svneol=unset#text/plain
@@ -212,7 +213,6 @@ test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plai
 test/src/info/bioinfweb/util/alignment/pairwise/NeedlemanWunschAlignerTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/RandomValuesTest.java -text svneol=unset#text/plain
-test/src/info/webinsel/util/StringUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/collections/IntervalElement.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/collections/MultiTreeMapTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/collections/NonOverlappingIntervalListTest.java -text svneol=unset#text/plain
@@ -221,3 +221,4 @@ test/src/info/webinsel/util/collections/guavatest/TreeMultisetTest.java -text sv
 test/src/info/webinsel/util/io/TableReaderTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/io/XMLUtilsTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
+test/src/info/webinsel/util/text/StringUtilsTest.java -text svneol=unset#text/plain
