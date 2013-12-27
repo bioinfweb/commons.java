@@ -1,4 +1,4 @@
-package info.webinsel.util;
+package info.webinsel.util.text;
 
 
 import java.text.NumberFormat;

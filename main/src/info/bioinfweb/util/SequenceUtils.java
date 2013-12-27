@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import info.webinsel.util.Math2;
-import info.webinsel.util.StringUtils;
+import info.webinsel.util.text.StringUtils;
 
 
 

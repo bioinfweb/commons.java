@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-import info.bioinfweb.biojava3.alignment.io.NameMapWriter;
+import info.bioinfweb.biojava3.alignment.io.AbstractAlignmentWriter;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
 import info.webinsel.util.SystemUtils;
 
@@ -23,13 +23,13 @@ import org.biojava3.core.sequence.template.Sequence;
  * 
  * @author Ben St&ouml;ver
  */
-public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends NameMapWriter<S, C> {
+public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
 	public static final String COMMAND_TERMINATOR = ";";
 	public static final String NO_OF_STATES_COMMAND = "nstates";
 	public static final String MATRIX_COMMAND = "xread";
 	public static final String DATATYPE_DNA = "dna";
 	public static final String DATATYPE_PROTEIN = "prot";
-	public static final String WHITESPACE_REPLACEMENT = "_";
+	public static final char WHITESPACE_REPLACEMENT = '_';
 
 	
 	private String noOfStates = null;
@@ -37,12 +37,13 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 	
 	
 	public Hennig86Writer() {
-		super();
+		this(null);
 	}
 
 
 	public Hennig86Writer(String noOfStates) {
 		super();
+		getNameMap().getParameters().getReplacements().put("\\s", Character.toString(WHITESPACE_REPLACEMENT));
 		this.noOfStates = noOfStates;
 	}
 
@@ -113,7 +114,7 @@ public class Hennig86Writer<S extends Sequence<C>, C extends Compound> extends N
 			Iterator<String> iterator = alignment.nameIterator();
 			while (iterator.hasNext()) {
 				String name = iterator.next();
-				String modifiedName = formatSequenceName(name, false);
+				String modifiedName = getNameMap().addName(name);
 	      out.write((modifiedName + " ").getBytes());
         out.write(alignment.getSequence(name).getSequenceAsString().getBytes());
         out.write(LINE_SEPARATOR);

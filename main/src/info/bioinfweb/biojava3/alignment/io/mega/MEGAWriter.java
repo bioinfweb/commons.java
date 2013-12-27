@@ -7,7 +7,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
 
-import info.bioinfweb.biojava3.alignment.io.NameMapWriter;
+import info.bioinfweb.biojava3.alignment.io.AbstractAlignmentWriter;
 import info.bioinfweb.biojava3.alignment.template.Alignment;
 
 import org.biojava3.core.sequence.template.Compound;
@@ -20,29 +20,29 @@ import org.biojava3.core.sequence.template.Sequence;
  * 
  * @author Ben St&ouml;ver
  */
-public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends NameMapWriter<S, C> {
+public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
 	public static final String DATATYPE_DNA = "DNA";
 	public static final String DATATYPE_PROTEIN = "Protein";
 	public static final String DEFAULT_TITLE = "Alignment generated with bioinfweb AlignmentIO";
-
+	public static final char DEFAULT_GAP_CHAR = '-';
 	public static final int LINE_LENGTH = 80;
 	public static final byte[] LINE_SEPARATOR = "\r\n".getBytes();  // Always use windows separator because there are only windows versions of MEGA.
 	
 	
 	private String datatype;
-	private char gapCharacter = '-';
+	private char gapCharacter;
 	
 	
 	public MEGAWriter(String datatype, char gapCharacter) {
-		super(true);
+		super();
+		getNameMap().getParameters().getReplacements().put("\\s", Character.toString(WHITESPACE_REPLACEMENT));
 		this.datatype = datatype;
 		this.gapCharacter = gapCharacter;
 	}
 
 
 	public MEGAWriter(String datatype) {
-		super(true);
-		this.datatype = datatype;
+		this(datatype, DEFAULT_GAP_CHAR);
 	}
 
 
@@ -78,7 +78,7 @@ public class MEGAWriter<S extends Sequence<C>, C extends Compound> extends NameM
 			Iterator<String> iterator = alignment.nameIterator();
 			while (iterator.hasNext()) {
 				String name = iterator.next();
-				String modifiedName = formatSequenceName(name, false);
+				String modifiedName = getNameMap().addName(name);
 	      out.write('#');
 	      out.write(modifiedName.getBytes());
 	      out.write(LINE_SEPARATOR);
