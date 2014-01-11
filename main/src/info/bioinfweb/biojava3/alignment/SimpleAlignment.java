@@ -266,4 +266,15 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 		}
 		sequences = newSequences;
 	}
+
+
+	/* (non-Javadoc)
+	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#subAlignment(int, int)
+	 */
+	@Override
+	public Alignment<S, C> subAlignment(int startIndex, int endIndex) {
+		SimpleAlignment<S, C> result = new SimpleAlignment<S, C>();
+		throw new InternalError("Not yet implemented.");
+		//return result;
+	}
 }

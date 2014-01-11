@@ -60,7 +60,7 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   
   
   /**
-   * Returns <code>true</code> if the specified position is marked by this list.
+   * Returns {@code true} if the specified position is marked by this list.
    */
 	public boolean contains(int pos) {
   	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(pos, pos));
@@ -69,7 +69,7 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   
   
   /**
-   * Returns <code>true</code> if all positions in the specified interval are marked by this list.
+   * Returns {@code true} if all positions in the specified interval are marked by this list.
    */
   public boolean containsAll(int firstPos, int lastPos) {
   	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(firstPos, lastPos));  // Only a single element can contain the whole interval.

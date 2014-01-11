@@ -70,4 +70,15 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 	public void renameSequence(String currentName, String newName);
 
 	public void renameSequences(UniqueNameMap nameMap);
+	
+	/**
+	 * Returns a new alignment that contains a subset of the columns of this alignment (including the character sets that
+	 * contain columns in the specified area. The subalignment begins at the specified {@code beginIndex} and extends to 
+	 * the column at index {@code endIndex - 1}. Thus the length of the substring is {@code endIndex - beginIndex}. 
+	 * 
+	 * @param startIndex - the beginning index, inclusive
+	 * @param endIndex - the ending index, exclusive
+	 * @return the specified alignment
+	 */
+	public Alignment<S, C> subAlignment(int startIndex, int endIndex);
 }
