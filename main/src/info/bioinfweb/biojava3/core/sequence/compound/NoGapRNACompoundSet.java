@@ -1,12 +1,15 @@
 package info.bioinfweb.biojava3.core.sequence.compound;
 
 
+import org.biojava3.core.sequence.compound.RNACompoundSet;
+
 import info.bioinfweb.biojava3.core.sequence.template.AbstractNucleotideCompoundSet2;
 
 
 
 /**
  * Nucleotide compound set that contains all RNA compounds but no gap <i>-</i> character (and without <i>N</i>).
+ * ({@link RNACompoundSet} contains both these symbols.)
  * 
  * @author Ben St&ouml;ver
  * @since build 10

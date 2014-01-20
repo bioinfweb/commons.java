@@ -1,9 +1,6 @@
 package info.bioinfweb.biojava3.core.sequence.compound;
 
 
-import org.biojava3.core.sequence.compound.AmbiguityDNACompoundSet;
-
-
 
 /**
  * Extension of {@link AlignmentAmbiguityRNACompoundSet} that also includes the <code>?</code> character.
@@ -11,7 +8,7 @@ import org.biojava3.core.sequence.compound.AmbiguityDNACompoundSet;
  * @author Ben St&ouml;ver
  * @since build 8
  */
-public class AlignmentAmbiguityRNACompoundSet extends AmbiguityDNACompoundSet {
+public class AlignmentAmbiguityRNACompoundSet extends AmbiguityNoGapRNACompoundSet {
 	private static AlignmentAmbiguityRNACompoundSet sharedInstance = null;
 	
 	

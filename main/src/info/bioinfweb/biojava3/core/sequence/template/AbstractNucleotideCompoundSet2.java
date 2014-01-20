@@ -79,4 +79,32 @@ public abstract class AbstractNucleotideCompoundSet2 extends AbstractNucleotideC
 
     calculateIndirectAmbiguities();
 	}
+	
+	
+	protected void addAmbiguityDNARNACompounds() {
+    addNucleotideCompound("M", "K",
+        "A", "C");
+    addNucleotideCompound("R", "Y",
+        "A", "G");
+    addNucleotideCompound("W", "W",
+        "A", "T", "U");
+    addNucleotideCompound("S", "S",
+        "C", "G");
+    addNucleotideCompound("Y", "R",
+        "C", "T", "U");
+    addNucleotideCompound("K", "M",
+        "G", "T", "U");
+    addNucleotideCompound("V", "B",
+        "A", "C", "G");
+    addNucleotideCompound("H", "D",
+        "A", "C", "T", "U");
+    addNucleotideCompound("D", "H",
+        "A", "G", "T", "U");
+    addNucleotideCompound("B", "V",
+        "C", "G", "T", "U");
+    addNucleotideCompound("N", "N",
+        "A", "C", "G", "T", "U");
+
+    calculateIndirectAmbiguities();
+	}
 }

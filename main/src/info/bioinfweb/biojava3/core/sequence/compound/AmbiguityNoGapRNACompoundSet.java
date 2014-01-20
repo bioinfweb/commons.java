@@ -1,13 +1,13 @@
 package info.bioinfweb.biojava3.core.sequence.compound;
 
 
-import org.biojava3.core.sequence.compound.AmbiguityDNACompoundSet;
+import org.biojava3.core.sequence.compound.AmbiguityRNACompoundSet;
 
 
 
 /**
  * Nucleotide compound set that contains all RNA compounds and ambiguity codes but no gap <i>-</i> character.
- * 
+ * ({@link AmbiguityRNACompoundSet} contains the gap character.)
  * @author Ben St&ouml;ver
  * @since build 10
  */
