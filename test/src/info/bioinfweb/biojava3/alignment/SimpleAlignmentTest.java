@@ -2,9 +2,10 @@ package info.bioinfweb.biojava3.alignment;
 
 
 import static org.junit.Assert.*;
+
+import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
 import info.webinsel.util.text.UniqueNameMapParameters;
 import info.webinsel.util.text.UniqueNameMap;
-
 
 import org.biojava3.core.sequence.DNASequence;
 import org.biojava3.core.sequence.compound.NucleotideCompound;
@@ -15,7 +16,7 @@ import org.junit.Test;
 public class SimpleAlignmentTest {
   @Test(expected=IllegalArgumentException.class)
   public void test_renameSequence1() {
-  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment();
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment<DNASequence, NucleotideCompound>();
   	alignment.add("A", new DNASequence("ATCG"));
   	alignment.add("B", new DNASequence("ATCC"));
   	alignment.add("C", new DNASequence("ATCT"));
@@ -24,9 +25,9 @@ public class SimpleAlignmentTest {
   }
   
   
-  @Test()
+  @Test
   public void test_renameSequence2() {
-  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment();
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment<DNASequence, NucleotideCompound>();
   	alignment.add("A", new DNASequence("ATCG"));
   	alignment.add("B", new DNASequence("ATCC"));
   	alignment.add("C", new DNASequence("ATCT"));
@@ -38,9 +39,9 @@ public class SimpleAlignmentTest {
   }
   
   
-  @Test()
+  @Test
   public void test_renameSequences() {
-  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment();
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment<DNASequence, NucleotideCompound>();
   	alignment.add("Name 1", new DNASequence("ATCG"));
   	alignment.add("Name 2", new DNASequence("ATCC"));
   	alignment.add("Name 3 Text", new DNASequence("ATCT"));
@@ -54,5 +55,75 @@ public class SimpleAlignmentTest {
   	assertEquals("Name_1", alignment.nameByIndex(0));
   	assertEquals("Name_2", alignment.nameByIndex(1));
   	assertEquals("Name_3", alignment.nameByIndex(2));
+  }
+
+  
+  @Test(expected=UnsupportedOperationException.class)
+  public void asMap() {
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment.add("Name 1", new DNASequence("ATCG"));
+  	alignment.add("Name 2", new DNASequence("ATCC"));
+  	alignment.add("Name 3 Text", new DNASequence("ATCT"));
+
+  	alignment.asMap().remove("Name 1");
+  }
+
+  
+  @Test
+  public void test_equals() {
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment1 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment1.add("Name 1", new DNASequence("ATCG"));
+  	alignment1.add("Name 2", new DNASequence("ATCC"));
+  	alignment1.add("Name 3 Text", new DNASequence("ATCT"));
+
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment2 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment2.add("Name 1", new DNASequence("ATCG"));
+  	alignment2.add("Name 2", new DNASequence("ATCC"));
+  	alignment2.add("Name 3 Text", new DNASequence("ATCT"));
+  	
+  	assertTrue("Equal alignments not considered equal.", alignment1.equals(alignment2));
+  	assertTrue("equals() method is not symmetric.", alignment2.equals(alignment1));
+  	
+  	alignment2 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment2.add("Name 1", new DNASequence("ATCG"));
+  	alignment2.add("Name 2", new DNASequence("ATCN"));
+  	alignment2.add("Name 3 Text", new DNASequence("ATCT"));
+  	
+  	assertFalse(alignment1.equals(alignment2));
+  	assertFalse(alignment2.equals(alignment1));
+
+  	alignment2 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment2.add("Name 1", new DNASequence("ATCG"));
+  	alignment2.add("Name 4", new DNASequence("ATCC"));
+  	alignment2.add("Name 3 Text", new DNASequence("ATCT"));
+  	
+  	assertFalse(alignment1.equals(alignment2));
+  	assertFalse(alignment2.equals(alignment1));
+  }
+
+  
+  @Test
+  public void test_equals_charSet() {
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment1 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment1.add("Name 1", new DNASequence("ATCG"));
+  	alignment1.add("Name 2", new DNASequence("ATCC"));
+  	alignment1.add("Name 3 Text", new DNASequence("ATCT"));
+  	alignment1.addCharSet(new CharSet("A"));
+  	alignment1.getCharSets().get("A").add(1, 2);
+
+  	SimpleAlignment<DNASequence, NucleotideCompound> alignment2 = new SimpleAlignment<DNASequence, NucleotideCompound>();
+  	alignment2.add("Name 1", new DNASequence("ATCG"));
+  	alignment2.add("Name 2", new DNASequence("ATCC"));
+  	alignment2.add("Name 3 Text", new DNASequence("ATCT"));
+  	alignment2.addCharSet(new CharSet("A"));
+  	alignment2.getCharSets().get("A").add(1, 2);
+  	
+  	assertTrue("Equal alignments not considered equal.", alignment1.equals(alignment2));
+  	assertTrue("equals() method is not symmetric.", alignment2.equals(alignment1));
+  	
+  	alignment2.getCharSets().get("A").clear();
+  	
+  	assertFalse(alignment1.equals(alignment2));
+  	assertFalse(alignment2.equals(alignment1));
   }
 }
