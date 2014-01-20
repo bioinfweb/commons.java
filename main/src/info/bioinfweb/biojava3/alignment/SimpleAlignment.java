@@ -2,11 +2,13 @@ package info.bioinfweb.biojava3.alignment;
 
 
 import info.bioinfweb.biojava3.alignment.template.Alignment;
+import info.bioinfweb.biojava3.core.sequence.SequenceCompareUtils;
 import info.bioinfweb.biojavax.bio.phylo.io.nexus.CharSet;
 import info.webinsel.util.text.UniqueNameMap;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -268,13 +270,63 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	}
 
 
+	@Override
+	public Map<String, S> asMap() {
+		return Collections.unmodifiableMap(sequences);
+	}
+
+
 	/* (non-Javadoc)
 	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#subAlignment(int, int)
 	 */
 	@Override
 	public Alignment<S, C> subAlignment(int startIndex, int endIndex) {
 		SimpleAlignment<S, C> result = new SimpleAlignment<S, C>();
+		//result.getCharSets().get("A").
+		
 		throw new InternalError("Not yet implemented.");
 		//return result;
+	}
+
+	
+	/** 
+	 * Checks if this alignment contains the same sequences (name and sequence) as the specified one. (Ambiguity codes 
+	 * are not checked for equivalence. Character sets are not taken into account.)
+	 * 
+	 * @param other
+	 * @return
+	 */
+	public boolean sequncesEqual(Alignment<?, ?> other) {
+	 	// Simple comparison of the maps is not enough, since BioJava sequence objects do not implement the equals method 
+		// depending in the sequence. Otherwise result = sequences.equals(((Alignment)other).asMap()) would be enough.
+		
+		boolean result = size() == other.size();
+		Iterator<String> iterator = nameIterator();
+		while (result && iterator.hasNext()) {
+			String name =  iterator.next();
+			result =  result && other.containsName(name) && 
+					SequenceCompareUtils.sequencesEqual(getSequence(name), other.getSequence(name));
+		}
+		return result;
+	}
+	
+
+	/** 
+	 * Checks if this alignment contains the same sequences (name and sequence) and the same character sets
+	 * (names and positions) as the specified one. (Ambiguity codes are not checked for equivalence.)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object other) {
+		boolean result = other instanceof Alignment<?, ?>;
+		if (result) {
+			Alignment<?, ?> otherAlignment = (Alignment<?, ?>)other;
+			result = sequncesEqual(otherAlignment);
+			if (result) {
+				result = getCharSets().equals(otherAlignment.getCharSets());
+			}
+		}
+		return result;
 	}
 }

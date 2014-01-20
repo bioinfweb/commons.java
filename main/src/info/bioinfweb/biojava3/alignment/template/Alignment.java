@@ -71,6 +71,10 @@ public interface Alignment<S extends Sequence<C>, C extends Compound> {
 
 	public void renameSequences(UniqueNameMap nameMap);
 	
+	public Map<String, S> asMap();
+	
+	public boolean sequncesEqual(Alignment<?, ?> other);
+	
 	/**
 	 * Returns a new alignment that contains a subset of the columns of this alignment (including the character sets that
 	 * contain columns in the specified area. The subalignment begins at the specified {@code beginIndex} and extends to 
