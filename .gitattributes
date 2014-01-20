@@ -205,6 +205,7 @@ test/src/info/bioinfweb/biojava3/alignment/SimpleAlignmentTest.java -text svneol
 test/src/info/bioinfweb/biojava3/alignment/io/fasta/FastaReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/nexus/NexusReaderWriterTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/alignment/io/phylip/PhylipWriterTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/biojava3/core/sequence/SequenceCompareUtilsTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/UpperCaseSequenceViewTest.java -text svneol=unset#text/plain
