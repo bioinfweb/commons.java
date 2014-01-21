@@ -44,6 +44,39 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   	}
   	return super.add(new SimpleSequenceInterval(firstPos, lastPos));
   }
+	
+	
+	/**
+	 * Adds all or a part of the intervals contained in another list to this list. 
+	 * 
+	 * @param other - the other list instance
+	 * @param firstIndex - the first position from where to start the import (must be {@code >= 0})
+	 * @param lastIndex - the index after the last position to be imported (must be > {@code firstIndex}).
+	 * @param moveToFront - Specify {@code true} here, if you want to move the imported intervals to the
+	 *        front of the target list. (An interval starting at {@code firstIndex} would than start at 0
+	 *        in the target list.)
+	 */
+	public void addAll(NonOverlappingIntervalList other, int firstIndex, int lastIndex, boolean moveToFront) {
+		SortedSet<SimpleSequenceInterval> set = other.getOverlappingElements(firstIndex, lastIndex);  //TODO Change meaning of lastIndex in getOverlappingElements()
+		int offset = moveToFront ? -firstIndex : 0;
+		Iterator<SimpleSequenceInterval> iterator = set.iterator();
+		while (iterator.hasNext()) {
+			SimpleSequenceInterval interval = iterator.next();
+			add(Math.max(firstIndex, interval.getFirstPos()) + offset, 
+					Math.min(lastIndex - 1, interval.getLastPos()) + offset);  // If getOverlappingElements() works correctly, it is not necessary to check the upper bound for the firstIndex or the lower bound for the last pos.
+		}
+	}
+	
+	
+	/**
+	 * Adds all of the intervals contained in another list to this list. Calling this method is equivalent to
+	 * calling {@code addAll(other, 0, other.last().getLastPos() + 1, false)}. 
+	 * 
+	 * @param other - the other list instance
+	 */
+	public void addAll(NonOverlappingIntervalList other) {
+		addAll(other, 0, other.last().getLastPos() + 1, false);
+	}
   
   
 	public void movePositions(int start, int offset) {
