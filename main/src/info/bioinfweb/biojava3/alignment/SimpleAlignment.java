@@ -270,23 +270,48 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	}
 
 
+	/**
+	 * Returns this alignment as a map with sequence names as keys and sequences as values. Note that
+	 * the returned map is read only. (It might throw an exception if modifying methods are called.)
+	 * 
+	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#asMap()
+	 */
 	@Override
 	public Map<String, S> asMap() {
 		return Collections.unmodifiableMap(sequences);
 	}
 
-
-	/* (non-Javadoc)
-	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#subAlignment(int, int)
-	 */
-	@Override
-	public Alignment<S, C> subAlignment(int startIndex, int endIndex) {
-		SimpleAlignment<S, C> result = new SimpleAlignment<S, C>();
-		//result.getCharSets().get("A").
-		
-		throw new InternalError("Not yet implemented.");
-		//return result;
-	}
+	
+//TODO Method finished but untested. Commented out because sequences in the returned instance are only View. 
+// => Find BioJava method to clone sequences independently of their implementing class. (Only possible, if all implementing classes implement a clone method?)
+// => AlignmentView API wäre Alternative, die evtl. zunächst verfolgt werden sollte. (Operationen wie in Preprocessor von AlignmentEvaluation.)
+//	/* (non-Javadoc)
+//	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#subAlignment(int, int)
+//	 */
+//	@Override
+//	public Alignment<S, C> subAlignment(int startColumn, int endColumn) {
+//		SimpleAlignment<S, C> result = new SimpleAlignment<S, C>();
+//
+//		// Add character sets:
+//		Iterator<String> iterator = getCharSets().keySet().iterator();
+//		while (iterator.hasNext()) {
+//			String name = iterator.next();
+//			CharSet copy = new CharSet(name);
+//			copy.addAll(getCharSets().get(name), startColumn, endColumn, true);
+//			if (!copy.isEmpty()) {
+//				result.addCharSet(copy);
+//			}
+//		}
+//
+//		// Add sequences
+//		iterator = nameIterator();
+//		while (iterator.hasNext()) {
+//			String name =  iterator.next();
+//			getSequence(name).getSubSequence(startColumn, endColumn - 1);
+//		}
+//		
+//		return result;
+//	}
 
 	
 	/** 
