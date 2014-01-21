@@ -125,6 +125,71 @@ public class NonOverlappingIntervalListTest {
   	assertEquals(32, element.getLastPos());
   }
   
+    
+  @Test
+  public void test_addAll_otherInstance() {
+  	NonOverlappingIntervalList other = getList();
+  	NonOverlappingIntervalList list = new NonOverlappingIntervalList();
+  	list.addAll(other);
+
+  	Iterator<SimpleSequenceInterval> iterator = list.iterator();
+  	SimpleSequenceInterval element = iterator.next();
+  	assertEquals(5, element.getFirstPos());
+  	assertEquals(8, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(10, element.getFirstPos());
+  	assertEquals(12, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(14, element.getFirstPos());
+  	assertEquals(15, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(18, element.getFirstPos());
+  	assertEquals(20, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(25, element.getFirstPos());
+  	assertEquals(30, element.getLastPos());
+  }
+  
+  
+  @Test
+  public void test_addAll_otherInstanceSublist() {
+  	NonOverlappingIntervalList other = getList();
+  	NonOverlappingIntervalList list = new NonOverlappingIntervalList();
+  	list.addAll(other, 11, 20, false);
+
+  	Iterator<SimpleSequenceInterval> iterator = list.iterator();
+  	SimpleSequenceInterval element = iterator.next();
+  	assertEquals(11, element.getFirstPos());
+  	assertEquals(12, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(14, element.getFirstPos());
+  	assertEquals(15, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(18, element.getFirstPos());
+  	assertEquals(19, element.getLastPos());
+  	assertFalse(iterator.hasNext());
+  }
+  
+  
+  @Test
+  public void test_addAll_otherInstanceSublistMoved() {
+  	NonOverlappingIntervalList other = getList();
+  	NonOverlappingIntervalList list = new NonOverlappingIntervalList();
+  	list.addAll(other, 11, 20, true);
+
+  	Iterator<SimpleSequenceInterval> iterator = list.iterator();
+  	SimpleSequenceInterval element = iterator.next();
+  	assertEquals(0, element.getFirstPos());
+  	assertEquals(1, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(3, element.getFirstPos());
+  	assertEquals(4, element.getLastPos());
+  	element = iterator.next();
+  	assertEquals(7, element.getFirstPos());
+  	assertEquals(8, element.getLastPos());
+  	assertFalse(iterator.hasNext());
+  }
+  
   
   @Test
   public void test_contains() {
