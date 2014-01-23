@@ -42,6 +42,7 @@ main/src/info/bioinfweb/biojava3/core/sequence/compound/NucleotideCompoundSet.ja
 main/src/info/bioinfweb/biojava3/core/sequence/io/FastaReaderTools.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/io/MapFastaWriter.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/template/AbstractNucleotideCompoundSet2.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/biojava3/core/sequence/views/ConcatenatedSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/CountableSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/RemoveSequenceView.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/core/sequence/views/RemovedCharSetSequenceView.java -text svneol=unset#text/plain
