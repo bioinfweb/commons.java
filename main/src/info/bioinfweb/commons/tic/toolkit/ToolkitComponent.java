@@ -1,6 +1,6 @@
 /*
- * LibrAlign - A GUI library for displaying and editing multiple sequence alignments and attached data
- * Copyright (C) 2014  Ben Stöver
+ * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
+ * Copyright (C) 2010-2014  Ben Stöver
  * <http://bioinfweb.info/LibrAlign>
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -16,40 +16,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package info.webinsel.util.graphics;
+package info.bioinfweb.commons.tic.toolkit;
 
 
-import java.awt.geom.Dimension2D;
+import info.bioinfweb.commons.tic.TICComponent;
 
 
 
-public class DoubleDimension extends Dimension2D {
-	private double width;
-	private double height;
-	
-
-	public DoubleDimension(double width, double height) {
-		super();
-		this.width = width;
-		this.height = height;
-	}
-
-	
-	@Override
-	public double getHeight() {
-		return height;
-	}
-	
-
-	@Override
-	public double getWidth() {
-		return width;
-	}
-
-	
-	@Override
-	public void setSize(double width, double height) {
-		this.width = width;
-		this.height = height;
-	}
+/**
+ * Should be implemented by all GUI classes that display the contents of a {@link PaintableArea}.
+ * 
+ * @author Ben St&ouml;ver
+ * @since 1.0.0
+ */
+public interface ToolkitComponent {
+  /**
+   * Returns the {@link TICComponent} that is displayed by this GUI element.
+   */
+  public TICComponent getIndependentComponent();
+  
+  public void repaint();
 }

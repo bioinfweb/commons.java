@@ -2,7 +2,9 @@
 main/.classpath -text svneol=unset#text/plain
 main/.project -text svneol=unset#text/plain
 main/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/lib/BrowserLauncher2-1_3.jar -text
+main/lib/JFreeChartSWTExperimental.jar -text
 main/lib/biojava3-alignment-3.0.5.jar -text
 main/lib/biojava3-core-3.0.5.jar -text
 main/lib/bytecode-1.8.jar -text
@@ -15,6 +17,7 @@ main/lib/junit-4.9b1.jar -text
 main/lib/mysql-connector-java-5.1.13-bin.jar -text
 main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
+main/lib/swt.jar -text
 main/src/info/bioinfweb/biojava3/alignment/SimpleAlignment.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/AbstractAlignmentReader.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojava3/alignment/io/AbstractAlignmentWriter.java -text svneol=unset#text/plain
@@ -56,6 +59,22 @@ main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlock.java -text svneol=
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockBuilder.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockListener.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockParser.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/graphics/DoubleDimension.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/graphics/FontCalculator.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/graphics/GraphicsUtils.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/graphics/ImageRescaler.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/SWTGraphics2D.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/TICComponent.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/TICPaintEvent.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/TargetToolkit.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/exception/UnsupportedToolkitException.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/package-info.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/AbstractSWTWidget.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/AbstractSwingComponent.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/DefaultSWTWidget.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/DefaultSwingComponent.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/ToolkitComponent.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/AmbiguityBaseScore.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/ConsensusSequenceCreator.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/SequenceUtils.java -text svneol=unset#text/plain
@@ -85,11 +104,6 @@ main/src/info/webinsel/util/collections/SimpleSequenceInterval.java -text svneol
 main/src/info/webinsel/util/collections/SimpleSequenceIntervalFirstPosComparator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/SimpleSequenceIntervalLastPosComparator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/SimpleSequenceIntervalPositionAdapter.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/graphics/DoubleDimension.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/graphics/FontCalculator.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/graphics/GraphicsUtils.java -text svneol=unset#text/plain
-main/src/info/webinsel/util/graphics/ImageRescaler.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/vlcframegrabber/FrameReaderRenderCallback.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/vlcframegrabber/VLCFrameReader.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/io/AbstractSaver.java -text svneol=unset#text/plain
