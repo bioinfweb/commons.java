@@ -59,6 +59,7 @@ main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlock.java -text svneol=
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockBuilder.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockListener.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/biojavax/bio/phylo/io/nexus/SetsBlockParser.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/collections/ListChangeType.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/graphics/DoubleDimension.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/graphics/FontCalculator.java -text svneol=unset#text/plain
