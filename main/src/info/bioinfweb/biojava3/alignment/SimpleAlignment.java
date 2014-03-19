@@ -170,7 +170,27 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	 */
 	@Override
 	public Iterator<String> nameIterator() {
-		return names.iterator();
+		final Iterator<String> iterator = names.iterator();
+		return new Iterator<String>() {
+			private String currentName;
+			
+			@Override
+			public boolean hasNext() {
+				return iterator.hasNext();
+			}
+
+			@Override
+			public String next() {
+				currentName = iterator.next();
+				return currentName;
+			}
+
+			@Override
+			public void remove() {
+				iterator.remove();
+				sequences.remove(currentName);
+			}
+		};
 	}
 	
 	
