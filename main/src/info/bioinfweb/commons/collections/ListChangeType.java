@@ -26,7 +26,15 @@ package info.bioinfweb.commons.collections;
  * @author Ben St&ouml;ver
  */
 public enum ListChangeType {
+	/** Indicates that an element has been inserted into the list. */
 	INSERTION,
+	
+	/** Indicates that an element has been removed from the list. */
 	DELETION,
+
+	/** 
+	 * Indicates that an element in the list has been replaced by another one 
+	 * (or edited, depending on the implementation). 
+	 */
 	REPLACEMENT;
 }
