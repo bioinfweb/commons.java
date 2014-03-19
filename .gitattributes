@@ -86,6 +86,7 @@ main/src/info/webinsel/util/collections/SimpleSequenceIntervalFirstPosComparator
 main/src/info/webinsel/util/collections/SimpleSequenceIntervalLastPosComparator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/collections/SimpleSequenceIntervalPositionAdapter.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
+main/src/info/webinsel/util/graphics/DoubleDimension.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/FontCalculator.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/GraphicsUtils.java -text svneol=unset#text/plain
 main/src/info/webinsel/util/graphics/ImageRescaler.java -text svneol=unset#text/plain

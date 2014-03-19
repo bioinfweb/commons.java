@@ -90,7 +90,8 @@ public class ConsensusSequenceCreator {
 	
   /**
    * Constructs a majority rule consensus sequence. The returned sequence always contains T instead of U, even if RNA sequences 
-   * have been specified. 
+   * have been specified.
+   * 
    * @param sequences - a set of sequences with equal length
    * @return the consensus sequence
    */
@@ -109,7 +110,8 @@ public class ConsensusSequenceCreator {
 
 
   /**
-   * Constructs a majority rule consensus sequence
+   * Constructs a majority rule consensus sequence.
+   * 
    * @param sequences - a set of sequences with equal length
    * @return the consensus sequence
    */
