@@ -70,8 +70,13 @@ public abstract class TICComponent {
 
 	
 	/**
-	 * Painting operations of the implementing class should be performed here. The coordinates in the 
-	 * provided context are relative to this are. (0, 0) represents the top left corner of this area.
+	 * Painting operations of the implementing class should be performed here, if a toolkit independent
+	 * painting method is provided. The coordinates in the provided context are relative to this are. 
+	 * (0, 0) represents the top left corner of this area.
+	 * <p>
+	 * If implementing classes provide custom toolkit specific components by overwriting 
+	 * {@link #doCreateSwingComponent()} and {@link #doCreateSWTWidget(Composite, int)} the 
+	 * implementation of this method can be empty.
 	 * 
 	 * @param graphics - the graphics context used to perform the paint operations in Swing and SWT
 	 */
@@ -124,15 +129,29 @@ public abstract class TICComponent {
 	
 	
 	/**
+	 * Method that creates a new instance of the associated Swing component. It is called by
+	 * {@link #createSwingComponent()} internally.
+	 * <p>
+	 * Overwrite this method if you want to provide custom toolkit specific implementations.
+	 * <p>
+	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
+	 * 
+	 * @return a new instance implementing {@link ToolkitComponent}
+	 */
+	protected JComponent doCreateSwingComponent() {
+		return new DefaultSwingComponent(this);
+	}
+	
+	
+	/**
 	 * Creates the Swing component that will be associated with this instance. The returned instance
 	 * will be returned by {@link #getToolkitComponent()} from now on.
 	 * <p>
 	 * Note that this method can only be called once and only if {@link #createSWTWidget(Composite, int)}
 	 * has not been called before.
 	 * <p>
-	 * Overwrite this method if you want to provide custom toolkit specific implementations.
-	 * <p>
-	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
+	 * If you want to provide a custom Swing component overwrite {@link #doCreateSwingComponent()} 
+	 * instead of this method.
 	 * 
 	 * @return the associated Swing component that has been created
 	 * @throws IllegalStateException if this method or {@link #createSWTWidget(Composite, int)} has already
@@ -140,12 +159,27 @@ public abstract class TICComponent {
 	 */
 	public JComponent createSwingComponent() {
 		if (toolkitComponent != null) {
-			toolkitComponent = new DefaultSwingComponent(this);
-			return (AbstractSwingComponent)toolkitComponent;
+			toolkitComponent = (ToolkitComponent)doCreateSwingComponent();
+			return (JComponent)toolkitComponent;
 		}
 		else {
 			throw new IllegalStateException("A component has already been created for this instance.");
 		}
+	}
+	
+	
+	/**
+	 * Method that creates a new instance of the associated SWT component. It is called by
+	 * {@link #createSWTWidget} internally.
+	 * <p>
+	 * Overwrite this method if you want to provide custom toolkit specific implementations.
+	 * <p>
+	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
+	 * 
+	 * @return a new instance implementing {@link ToolkitComponent}
+	 */
+	protected Composite doCreateSWTWidget(Composite parent, int style) {
+		return new DefaultSWTWidget(parent, style, this);
 	}
 	
 	
@@ -156,9 +190,8 @@ public abstract class TICComponent {
 	 * Note that this method can only be called once and only if {@link #createSwingComponent())}
 	 * has not been called before.
 	 * <p>
-	 * Overwrite this method if you want to provide custom toolkit specific implementations. 
-	 * <p>
-	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
+	 * If you want to provide a custom SWT composite overwrite {@link #doCreateSWTWidget(Composite, int)} 
+	 * instead of this method.
 	 * 
 	 * @return the associated SWT component that has been created
 	 * @throws IllegalStateException if this method or {@link #createSwingComponent()} has already
@@ -166,8 +199,8 @@ public abstract class TICComponent {
 	 */
 	public Composite createSWTWidget(Composite parent, int style) {
 		if (toolkitComponent != null) {
-			toolkitComponent = new DefaultSWTWidget(parent, style, this);
-			return (AbstractSWTWidget)toolkitComponent;
+			toolkitComponent = (ToolkitComponent)doCreateSWTWidget(parent, style);
+			return (Composite)toolkitComponent;
 		}
 		else {
 			throw new IllegalStateException("A component has already been created for this instance.");
