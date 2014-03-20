@@ -27,6 +27,8 @@ import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
 
 import java.awt.geom.Dimension2D;
 
+import javax.swing.JComponent;
+
 import org.eclipse.swt.widgets.Composite;
 
 
@@ -123,18 +125,20 @@ public abstract class TICComponent {
 	
 	/**
 	 * Creates the Swing component that will be associated with this instance. The returned instance
-	 * if the same as the one returned by {@link #getToolkitComponent()} from now on.
+	 * will be returned by {@link #getToolkitComponent()} from now on.
 	 * <p>
 	 * Note that this method can only be called once and only if {@link #createSWTWidget(Composite, int)}
 	 * has not been called before.
 	 * <p>
-	 * Overwrite this method if you want to provide custom toolkit specific implementations. 
+	 * Overwrite this method if you want to provide custom toolkit specific implementations.
+	 * <p>
+	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
 	 * 
 	 * @return the associated Swing component that has been created
 	 * @throws IllegalStateException if this method or {@link #createSWTWidget(Composite, int)} has already
 	 *         been called before 
 	 */
-	public AbstractSwingComponent createSwingComponent() {
+	public JComponent createSwingComponent() {
 		if (toolkitComponent != null) {
 			toolkitComponent = new DefaultSwingComponent(this);
 			return (AbstractSwingComponent)toolkitComponent;
@@ -147,18 +151,20 @@ public abstract class TICComponent {
 	
 	/**
 	 * Creates the SWT component that will be associated with this instance. The returned instance
-	 * if the same as the one returned by {@link #getToolkitComponent()} from now on.
+	 * will be returned by {@link #getToolkitComponent()} from now on.
 	 * <p>
 	 * Note that this method can only be called once and only if {@link #createSwingComponent())}
 	 * has not been called before.
 	 * <p>
 	 * Overwrite this method if you want to provide custom toolkit specific implementations. 
+	 * <p>
+	 * <b>IMPORTANT:</b> The returned instances must implement the interface {@link ToolkitComponent}. 
 	 * 
-	 * @return the associated Swing component that has been created
+	 * @return the associated SWT component that has been created
 	 * @throws IllegalStateException if this method or {@link #createSwingComponent()} has already
 	 *         been called before 
 	 */
-	public AbstractSWTWidget createSWTWidget(Composite parent, int style) {
+	public Composite createSWTWidget(Composite parent, int style) {
 		if (toolkitComponent != null) {
 			toolkitComponent = new DefaultSWTWidget(parent, style, this);
 			return (AbstractSWTWidget)toolkitComponent;
