@@ -144,27 +144,27 @@ public abstract class TICComponent {
 	
 	
 	/**
-	 * Creates the Swing component that will be associated with this instance. The returned instance
-	 * will be returned by {@link #getToolkitComponent()} from now on.
+	 * Creates the Swing component that will be associated with this instance if it was not created before. 
+	 * The returned instance will be returned by {@link #getToolkitComponent()} from now on. Subsequent
+	 * calls of this method will return the same instance again. 
 	 * <p>
-	 * Note that this method can only be called once and only if {@link #createSWTWidget(Composite, int)}
-	 * has not been called before.
+	 * Note that this method can only be if {@link #createSWTWidget(Composite, int)} has not been called 
+	 * before.
 	 * <p>
 	 * If you want to provide a custom Swing component overwrite {@link #doCreateSwingComponent()} 
 	 * instead of this method.
 	 * 
 	 * @return the associated Swing component that has been created
-	 * @throws IllegalStateException if this method or {@link #createSWTWidget(Composite, int)} has already
-	 *         been called before 
+	 * @throws IllegalStateException if {@link #createSWTWidget(Composite, int)} has been called before 
 	 */
 	public JComponent createSwingComponent() {
-		if (toolkitComponent != null) {
+		if (toolkitComponent == null) {
 			toolkitComponent = (ToolkitComponent)doCreateSwingComponent();
-			return (JComponent)toolkitComponent;
 		}
-		else {
-			throw new IllegalStateException("A component has already been created for this instance.");
+		else if (!getCurrentToolkit().equals(TargetToolkit.SWING)) {
+			throw new IllegalStateException("A non Swing component has already been created.");
 		}
+		return (JComponent)toolkitComponent;
 	}
 	
 	
@@ -184,26 +184,27 @@ public abstract class TICComponent {
 	
 	
 	/**
-	 * Creates the SWT component that will be associated with this instance. The returned instance
-	 * will be returned by {@link #getToolkitComponent()} from now on.
+	 * Creates the SWT component that will be associated with this instance if it was not created before. 
+	 * The returned instance will be returned by {@link #getToolkitComponent()} from now on. Subsequent
+	 * calls of this method will return the same instance again. The specified parameters will not be
+	 * considered in that case. 
 	 * <p>
-	 * Note that this method can only be called once and only if {@link #createSwingComponent())}
-	 * has not been called before.
+	 * Note that this method can only be if {@link #createSWTWidget(Composite, int)} has not been called 
+	 * before.
 	 * <p>
-	 * If you want to provide a custom SWT composite overwrite {@link #doCreateSWTWidget(Composite, int)} 
+	 * If you want to provide a custom Swing component overwrite {@link #doCreateSwingComponent()} 
 	 * instead of this method.
 	 * 
-	 * @return the associated SWT component that has been created
-	 * @throws IllegalStateException if this method or {@link #createSwingComponent()} has already
-	 *         been called before 
+	 * @return the associated Swing component that has been created
+	 * @throws IllegalStateException if {@link #createSWTWidget(Composite, int)} has been called before 
 	 */
 	public Composite createSWTWidget(Composite parent, int style) {
-		if (toolkitComponent != null) {
+		if (toolkitComponent == null) {
 			toolkitComponent = (ToolkitComponent)doCreateSWTWidget(parent, style);
-			return (Composite)toolkitComponent;
 		}
-		else {
-			throw new IllegalStateException("A component has already been created for this instance.");
+		else if (!getCurrentToolkit().equals(TargetToolkit.SWT)) {
+			throw new IllegalStateException("A non Swing component has already been created.");
 		}
+		return (Composite)toolkitComponent;
 	}
 }
