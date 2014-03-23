@@ -227,9 +227,9 @@ test/src/info/bioinfweb/biojava3/core/sequence/views/ConcatenatedSequenceViewTes
 test/src/info/bioinfweb/biojava3/core/sequence/views/ReplaceNucleotideSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/UnalignedSequenceViewTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/biojava3/core/sequence/views/UpperCaseSequenceViewTest.java -text svneol=unset#text/plain
-test/src/info/bioinfweb/util/AmbiguityBaseScoreTest.java -text svneol=unset#text/plain
-test/src/info/bioinfweb/util/ConsensusSequenceCreatorTest.java -text svneol=unset#text/plain
-test/src/info/bioinfweb/util/SequenceUtilsTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/bio/AmbiguityBaseScoreTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/bio/ConsensusSequenceCreatorTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/bio/SequenceUtilsTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/util/alignment/pairwise/NeedlemanWunschAlignerTest.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/Math2Test.java -text svneol=unset#text/plain
 test/src/info/webinsel/util/RandomValuesTest.java -text svneol=unset#text/plain
