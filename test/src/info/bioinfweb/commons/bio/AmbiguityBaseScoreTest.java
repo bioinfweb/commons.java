@@ -20,10 +20,16 @@ public class AmbiguityBaseScoreTest {
 	
 	@Test
 	public void test_rescale() {
-		AmbiguityBaseScore score = new AmbiguityBaseScore(1, 0, 1, 0).rescale(1);
-		assertEquals(score.getAdeninScore(), .5, 0.0);
-		assertEquals(score.getThyminScore(), 0.0, 0.0);
-		assertEquals(score.getCytosinScore(), .5, 0.0);
-		assertEquals(score.getGuaninScore(), 0.0, 0.0);
+		AmbiguityBaseScore score = new AmbiguityBaseScore(1, 0, 1, 0, 1);
+		assertEquals(score.getAdenineScore(), .5, 0.0);
+		assertEquals(score.getThymineScore(), 0.0, 0.0);
+		assertEquals(score.getCytosineScore(), .5, 0.0);
+		assertEquals(score.getGuanineScore(), 0.0, 0.0);
+
+		score = new AmbiguityBaseScore(0, 0, 0, 0, 1);
+		assertEquals(score.getAdenineScore(), 0.0, 0.0);
+		assertEquals(score.getThymineScore(), 0.0, 0.0);
+		assertEquals(score.getCytosineScore(), 0.0, 0.0);
+		assertEquals(score.getGuanineScore(), 0.0, 0.0);
 	}
 }
