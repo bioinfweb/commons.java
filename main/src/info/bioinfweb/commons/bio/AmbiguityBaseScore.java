@@ -94,6 +94,33 @@ public class AmbiguityBaseScore implements Comparable<AmbiguityBaseScore>, Clone
   }
   
   
+  /**
+   * Returns the sum of all scores.
+   */
+  public double getSum() {
+  	double result = scores[0];
+  	for (int i = 1; i < scores.length; i++) {
+			result += scores[i];
+		}
+  	return result;
+  }
+  
+  
+  /**
+   * Scales all scores with the same linear factor so that the sum of all scores is equal to {@code sum}. 
+   * 
+   * @param sum - the sum all scored together shall have
+   * @return a reference to this instance (Useful to construct a scaled instance of this class in one command.)
+   */
+  public AmbiguityBaseScore rescale(double sum) {
+  	double factor = sum / getSum();
+  	for (int i = 0; i < scores.length; i++) {
+			scores[i] = factor * scores[i];
+		}
+  	return this;
+  }
+  
+  
   @Override
 	protected Object clone() throws CloneNotSupportedException {
 		return new AmbiguityBaseScore(getAdeninScore(), getThyminScore(), getCytosinScore(), getGuaninScore());
