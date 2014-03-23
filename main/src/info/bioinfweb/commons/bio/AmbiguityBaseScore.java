@@ -146,6 +146,34 @@ public class AmbiguityBaseScore implements Comparable<AmbiguityBaseScore>, Clone
   }
   
   
+  public char getConsensusBase() {
+  	double max = getMaxScore();
+  	if (max == 0) {
+  		return '-';
+  	}
+  	else {
+    	int index = 0;
+    	for (int i = 0; i < scores.length; i++) {
+    		if (scores[i] == max) {
+    			index = i;;
+    		}
+  		}
+    	
+    	switch (index) {
+    		case 0:
+    			return 'A';
+    		case 1:
+    			return 'T';
+    		case 2:
+    			return 'C';
+    		default:
+    			return 'G';
+    	}
+  	}
+   	//TODO Implement using ConsensusSequenceCreator in future versions and support ambiguity codes as well.
+  }
+  
+  
   @Override
 	protected Object clone() throws CloneNotSupportedException {
 		return new AmbiguityBaseScore(getAdenineScore(), getThymineScore(), getCytosineScore(), getGuanineScore());
