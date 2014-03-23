@@ -21,7 +21,7 @@ package info.bioinfweb.commons.tic;
 
 import info.bioinfweb.commons.tic.toolkit.AbstractSWTWidget;
 import info.bioinfweb.commons.tic.toolkit.AbstractSwingComponent;
-import info.bioinfweb.commons.tic.toolkit.DefaultSWTWidget;
+import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
 import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
 
@@ -179,7 +179,7 @@ public abstract class TICComponent {
 	 * @return a new instance implementing {@link ToolkitComponent}
 	 */
 	protected Composite doCreateSWTWidget(Composite parent, int style) {
-		return new DefaultSWTWidget(parent, style, this);
+		return new DefaultSWTComposite(parent, style, this);
 	}
 	
 	

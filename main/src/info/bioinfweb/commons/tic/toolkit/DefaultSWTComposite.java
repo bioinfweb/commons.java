@@ -37,8 +37,8 @@ import org.eclipse.swt.widgets.Composite;
  * 
  * @author Ben St&ouml;ver
  */
-public class DefaultSWTWidget extends AbstractSWTWidget {
-	public DefaultSWTWidget(Composite parent, int style, TICComponent ticComponent) {
+public class DefaultSWTComposite extends AbstractSWTWidget {
+	public DefaultSWTComposite(Composite parent, int style, TICComponent ticComponent) {
 		super(parent, style, ticComponent);
 	}
 	

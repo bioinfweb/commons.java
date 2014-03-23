@@ -73,7 +73,7 @@ main/src/info/bioinfweb/commons/tic/exception/UnsupportedToolkitException.java -
 main/src/info/bioinfweb/commons/tic/package-info.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/tic/toolkit/AbstractSWTWidget.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/tic/toolkit/AbstractSwingComponent.java -text svneol=unset#text/plain
-main/src/info/bioinfweb/commons/tic/toolkit/DefaultSWTWidget.java -text svneol=unset#text/plain
+main/src/info/bioinfweb/commons/tic/toolkit/DefaultSWTComposite.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/tic/toolkit/DefaultSwingComponent.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/commons/tic/toolkit/ToolkitComponent.java -text svneol=unset#text/plain
 main/src/info/bioinfweb/util/AmbiguityBaseScore.java -text svneol=unset#text/plain
