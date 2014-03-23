@@ -3,10 +3,10 @@ package info.bioinfweb.commons.bio;
 
 
 public class AmbiguityBaseScore implements Comparable<AmbiguityBaseScore>, Cloneable {
-	public static final int ADENIN_INDEX = 0;
-	public static final int THYMIN_INDEX = 1;
-	public static final int CYTOSIN_INDEX = 2;
-	public static final int GUANIN_INDEX = 3;
+	public static final int ADENINE_INDEX = 0;
+	public static final int THYMINE_INDEX = 1;
+	public static final int CYTOSINE_INDEX = 2;
+	public static final int GUANINE_INDEX = 3;
 	
 	
   private double[] scores = null;
@@ -22,49 +22,72 @@ public class AmbiguityBaseScore implements Comparable<AmbiguityBaseScore>, Clone
 	}
 
 
- 	public AmbiguityBaseScore(double adenin, double thymin, double cytosin, double guanin) {
+ 	/**
+ 	 * Creates a new instance of this class.
+ 	 * 
+ 	 * @param adenine - the score for adenine
+ 	 * @param thymine - the score for thymin
+ 	 * @param cytosine - the score for cytosin
+ 	 * @param guanine - the score for guanine 
+ 	 */
+ 	public AmbiguityBaseScore(double adenine, double thymine, double cytosine, double guanine) {
 		super();
-		this.scores = new double[]{adenin, thymin, cytosin, guanin};
+		this.scores = new double[]{adenine, thymine, cytosine, guanine};
 	}
 
  	
- 	public double getAdeninScore() {
- 		return scores[ADENIN_INDEX];
+ 	/**
+ 	 * Creates a new instance of this class and directly scales is to the specified sum.
+ 	 * 
+ 	 * @param adenine - the score for adenine
+ 	 * @param thymine - the score for thymin
+ 	 * @param cytosine - the score for cytosin
+ 	 * @param guanine - the score for guanine 
+ 	 * @param sum - the sum all scroes together shall have
+ 	 */
+ 	public AmbiguityBaseScore(double adenine, double thymine, double cytosine, double guanine, double sum) {
+		this(adenine, thymine, cytosine, guanine);
+		rescale(sum);
+	}
+
+ 	
+ 	public double getAdenineScore() {
+ 		return scores[ADENINE_INDEX];
  	}
  	
 
- 	public double getThyminScore() {
- 		return scores[THYMIN_INDEX];
+ 	public double getThymineScore() {
+ 		return scores[THYMINE_INDEX];
  	}
  	
 
- 	public double getCytosinScore() {
- 		return scores[CYTOSIN_INDEX];
+ 	public double getCytosineScore() {
+ 		return scores[CYTOSINE_INDEX];
  	}
  	
 
- 	public double getGuaninScore() {
- 		return scores[GUANIN_INDEX];
+ 	public double getGuanineScore() {
+ 		return scores[GUANINE_INDEX];
  	}
 
  	
  	public void setAdeninScore(double score) {
- 		scores[ADENIN_INDEX] = score;
+ 		scores[ADENINE_INDEX] = score;
  	}
  	
 
  	public void setThyminScore(double score) {
- 		scores[THYMIN_INDEX] = score;
+ 		scores[THYMINE_INDEX] = score;
  	}
  	
 
  	public void setCytosinScore(double score) {
- 		scores[CYTOSIN_INDEX] = score;
+ 		scores[CYTOSINE_INDEX] = score;
  	}
  	
 
  	public void setGuaninScore(double score) {
- 		scores[GUANIN_INDEX] = score;
+ 		scores[GUANINE_INDEX] = score;
  	}
  	
  	
@@ -107,23 +130,25 @@ public class AmbiguityBaseScore implements Comparable<AmbiguityBaseScore>, Clone
   
   
   /**
-   * Scales all scores with the same linear factor so that the sum of all scores is equal to {@code sum}. 
+   * Scales all scores with the same linear factor so that the sum of all scores is equal to {@code sum}.
+   * If the current sum of all scores is zero calling this method will have no effect. 
    * 
    * @param sum - the sum all scored together shall have
-   * @return a reference to this instance (Useful to construct a scaled instance of this class in one command.)
    */
-  public AmbiguityBaseScore rescale(double sum) {
-  	double factor = sum / getSum();
-  	for (int i = 0; i < scores.length; i++) {
-			scores[i] = factor * scores[i];
-		}
-  	return this;
+  public void rescale(double sum) {
+  	double previousSum = getSum();
+  	if (previousSum > 0) {
+	  	double factor = sum / previousSum;
+	  	for (int i = 0; i < scores.length; i++) {
+				scores[i] = factor * scores[i];
+			}
+  	}
   }
   
   
   @Override
 	protected Object clone() throws CloneNotSupportedException {
-		return new AmbiguityBaseScore(getAdeninScore(), getThyminScore(), getCytosinScore(), getGuaninScore());
+		return new AmbiguityBaseScore(getAdenineScore(), getThymineScore(), getCytosineScore(), getGuanineScore());
 	}
 
 
