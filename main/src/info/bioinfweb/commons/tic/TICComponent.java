@@ -25,7 +25,7 @@ import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
 import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
 
-import java.awt.geom.Dimension2D;
+import java.awt.Dimension;
 
 import javax.swing.JComponent;
 
@@ -92,7 +92,7 @@ public abstract class TICComponent {
 	 * 
 	 * @return the dimension in pixels
 	 */
-	public abstract Dimension2D getSize();
+	public abstract Dimension getSize();
 	
 	
 	/**
@@ -104,6 +104,15 @@ public abstract class TICComponent {
 		if (hasToolkitComponent()) {
 			getToolkitComponent().repaint();
 		}
+	}
+	
+	
+	/**
+	 * Adopts the current component size to the underlying GUI toolkit, if a toolkit specific component
+	 * has already been created..
+	 */
+	protected void assignSize() {
+		
 	}
 	
 	
@@ -204,6 +213,10 @@ public abstract class TICComponent {
 		}
 		else if (!getCurrentToolkit().equals(TargetToolkit.SWT)) {
 			throw new IllegalStateException("A non Swing component has already been created.");
+		}
+		else if (((Composite)toolkitComponent).isDisposed()) {  // && getCurrentToolkit().equals(TargetToolkit.SWT)
+			toolkitComponent = (ToolkitComponent)doCreateSWTWidget(parent, style);  // Create new component if previous one was disposed.
+			//TODO Does this make sense this way? Anything else to be done about disposing of SWT elements?
 		}
 		return (Composite)toolkitComponent;
 	}
