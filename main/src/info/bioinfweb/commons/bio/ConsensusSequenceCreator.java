@@ -1,4 +1,4 @@
-package info.bioinfweb.util;
+package info.bioinfweb.commons.bio;
 
 
 import info.bioinfweb.biojava3.core.sequence.compound.AlignmentAmbiguityNucleotideCompoundSet;

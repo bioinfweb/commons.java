@@ -1,4 +1,4 @@
-package info.bioinfweb.util;
+package info.bioinfweb.commons.bio;
 
 
 
