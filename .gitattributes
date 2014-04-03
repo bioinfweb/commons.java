@@ -123,10 +123,6 @@ main/experimental/info/bioinfweb/commons/servlet/webapp/DBObject.java -text svne
 main/experimental/info/bioinfweb/commons/servlet/webapp/MySQLManipulator.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/webapp/session/Session.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/webapp/session/Sessions.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/sql/sqlproperties/ConcreteSQLProperties.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/sql/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/sql/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/sql/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/swing/ToolBarPopup.java -text svneol=unset#text/plain
 main/experimental/info/webinsel/util/tokenizer/StrToken.java -text svneol=unset#text/plain
 main/experimental/info/webinsel/util/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
@@ -156,6 +152,10 @@ main/servlet/info/bioinfweb/commons/servlet/acceptlanguage/QualityComparator.jav
 main/sql/info/bioinfweb/commons/sql/IDGenerator.java -text svneol=unset#text/plain
 main/sql/info/bioinfweb/commons/sql/SQLConnector.java -text svneol=unset#text/plain
 main/sql/info/bioinfweb/commons/sql/SQLUtils.java -text svneol=unset#text/plain
+main/sql/info/bioinfweb/commons/sql/sqlproperties/ConcreteSQLProperties.java -text svneol=unset#text/plain
+main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
+main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
+main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/DefaultErrorHandler.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/OkCancelApplyWikiHelpDialog.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/SwingErrorHandler.java -text svneol=unset#text/plain
