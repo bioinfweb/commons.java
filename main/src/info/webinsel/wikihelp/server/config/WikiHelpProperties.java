@@ -1,7 +1,7 @@
 package info.webinsel.wikihelp.server.config;
 
 
-import info.webinsel.util.servlet.sqlproperties.ConcreteSQLProperties;
+import info.bioinfweb.commons.sql.sqlproperties.ConcreteSQLProperties;
 
 
 

@@ -1,7 +1,7 @@
 package info.webinsel.wikihelp.client;
 
 
-import info.webinsel.util.swing.OkCancelApplyHelpDialog;
+import info.bioinfweb.commons.swing.OkCancelApplyHelpDialog;
 
 import java.awt.Dialog;
 import java.awt.Frame;

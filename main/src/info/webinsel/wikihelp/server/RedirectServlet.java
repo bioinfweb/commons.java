@@ -10,7 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import info.webinsel.util.servlet.GetPostServlet;
+import info.bioinfweb.commons.servlet.GetPostServlet;
 import info.webinsel.wikihelp.server.config.PropertiesManager;
 import info.webinsel.wikihelp.server.config.WikiHelpProperties;
 

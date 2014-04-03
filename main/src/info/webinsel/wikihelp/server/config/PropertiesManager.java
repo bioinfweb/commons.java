@@ -1,7 +1,7 @@
 package info.webinsel.wikihelp.server.config;
 
 
-import info.webinsel.util.servlet.SQLConnector;
+import info.bioinfweb.commons.sql.SQLConnector;
 
 import java.sql.Connection;
 import java.sql.SQLException;

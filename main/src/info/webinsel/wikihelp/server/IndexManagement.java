@@ -1,7 +1,8 @@
 package info.webinsel.wikihelp.server;
 
 
-import info.webinsel.util.servlet.SQLManipulator;
+import info.bioinfweb.commons.servlet.SQLManipulator;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

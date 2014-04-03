@@ -1,8 +1,8 @@
 package info.webinsel.wikihelp.server.config;
 
 
-import info.webinsel.util.io.XMLUtils;
-import info.webinsel.util.servlet.sqlproperties.SQLXMLReader;
+import info.bioinfweb.commons.io.XMLUtils;
+import info.bioinfweb.commons.sql.sqlproperties.SQLXMLReader;
 
 import java.io.File;
 import java.io.FileInputStream;
