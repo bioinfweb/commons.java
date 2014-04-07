@@ -31,6 +31,9 @@ public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lö
 	private MultiValueMap multiValueMap;
 	
 	
+	/**
+	 * Creates a new instance of this class using the default key comparator.
+	 */
 	public MultiTreeMap() {
 		super();
 		treeMap = new TreeMap<K, ArrayList<V>>();
@@ -38,6 +41,11 @@ public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lö
 	}
 
 
+	/**
+	 * Creates a new instance of this class using the specified comparator.
+	 * 
+	 * @param comparator - the comparator used to sort the keys in the tree map
+	 */
 	public MultiTreeMap(Comparator<? super K> comparator) {
 		super();
 		treeMap = new TreeMap<K, ArrayList<V>>(comparator);

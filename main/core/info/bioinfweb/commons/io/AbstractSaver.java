@@ -1,9 +1,8 @@
 package info.bioinfweb.commons.io;
 
 
-import info.bioinfweb.commons.ChangeMonitor;
-import info.bioinfweb.commons.ChangeMonitorable;
-import info.webinsel.util.*;
+import info.bioinfweb.commons.changemonitor.ChangeMonitor;
+import info.bioinfweb.commons.changemonitor.ChangeMonitorable;
 
 import java.io.*;
 import java.util.Vector;

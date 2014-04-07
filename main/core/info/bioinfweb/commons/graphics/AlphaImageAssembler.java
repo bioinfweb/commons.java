@@ -45,6 +45,11 @@ public class AlphaImageAssembler {
 	}
 		
 	
+	/**
+	 * @param black
+	 * @param white
+	 * @return
+	 */
 	public static BufferedImage assemble(BufferedImage black, BufferedImage white) {
 		if ((black.getWidth() != white.getWidth()) || (black.getHeight() != white.getHeight())) {
 			return null;

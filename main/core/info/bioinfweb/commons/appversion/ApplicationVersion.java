@@ -1,25 +1,41 @@
 package info.bioinfweb.commons.appversion;
 
 
+import info.bioinfweb.commons.io.FormatVersion;
+
+
 
 /**
  * Stores the version of an application.
  * 
  * @author Ben St&ouml;ver
+ * @see FormatVersion
  */
 public class ApplicationVersion implements Comparable<ApplicationVersion>, Cloneable {
 	private int majorRelease = 0;
   private int minorRelease = 0;
   private int patchLevel = 0;
   private long buildNumber = 0;
-  private ApplicationType type = ApplicationType.FINAL;
+  private ApplicationType type = ApplicationType.STABLE;
 	
   
+  /**
+   * Creates a new instance of this class with the default values {@code 0.0.0.0} (stable).
+   */
   public ApplicationVersion() {
 		super();
 	}
 
 
+	/**
+	 * Creates a new instance of this class using the specified values.
+	 * 
+	 * @param majorRelease - the major release number
+	 * @param minorRelease - the minor release number
+	 * @param patchLevel - the patch level number
+	 * @param buildNumber - the build number
+	 * @param type - the type of application
+	 */
 	public ApplicationVersion(int majorRelease, int minorRelease, int patchLevel, 
 			long buildNumber, ApplicationType type) {
 		
@@ -91,6 +107,11 @@ public class ApplicationVersion implements Comparable<ApplicationVersion>, Clone
 	}
 	
 	
+  /**
+   * Checks if two versions are equal. Major, minor, patch level and build number have to be equal. The
+   * application type is not checked by this method, since there should never be two versions of the same
+   * application having the same set of version numbers.
+   */
   @Override
 	public boolean equals(Object other) {
   	if (other instanceof ApplicationVersion) {
@@ -106,20 +127,42 @@ public class ApplicationVersion implements Comparable<ApplicationVersion>, Clone
 	}
 
 
+	/**
+	 * Compares two application versions. If the major version is equal, the minor version is compared, than
+	 * the patch level and than the build number. The application type is not considered by this method.
+	 */
+  @Override
 	public int compareTo(ApplicationVersion other) {
-		// Differenz aus beiden kann wegen Konvertierung von long zu int nicht zurückgegeben werden.
-		if (getBuildNumber() == other.getBuildNumber()) {
-			return 0;
-		}
-		else if (getBuildNumber() > other.getBuildNumber()) {
-			return 1;
+		if (getMajorRelease() == other.getMajorRelease()) {
+			if (getMinorRelease() == other.getMinorRelease()) {
+				if (getPatchLevel() == other.getPatchLevel()) {
+					if (getBuildNumber() == other.getBuildNumber()) {
+						return 0;
+					}
+					else if (getBuildNumber() > other.getBuildNumber()) { // The difference cannot be returned directly because it might be outside the integer range.
+						return 1;
+					}
+					else {
+						return -1;
+					}
+				}
+				else {
+					return getPatchLevel() - other.getPatchLevel();
+				}
+			}
+			else {
+				return getMinorRelease() - other.getMinorRelease();
+			}
 		}
 		else {
-			return -1;
+			return getMajorRelease() - other.getMajorRelease();
 		}
 	}
 
 
+	/**
+	 * Returns a new instance if this class having the same version numbers and application type as this instance.
+	 */
 	@Override
 	public ApplicationVersion clone() {
 		return new ApplicationVersion(getMajorRelease(), getMinorRelease(), getPatchLevel(), getBuildNumber(), 

@@ -2,10 +2,20 @@ package info.bioinfweb.commons;
 
 
 
+/**
+ * Tool class that allows to analyze command line arguments that have been passed to an application.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class CommandLineReader {
   private String[] args = null;
 
   
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param args - the passed command line arguments
+	 */
 	public CommandLineReader(String[] args) {
 		super();
 		this.args = args;
@@ -13,7 +23,8 @@ public class CommandLineReader {
   
   
 	/**
-	 * Checks if the given value is contained in the arguments and returns the index. 
+	 * Checks if the given value is contained in the arguments and returns the index.
+	 *  
 	 * @param value - the value to search for (exact match, case sensitive)
 	 * @param start - the start index
 	 * @param end - the end index (the last checked index is <code>end - 1</code>)
@@ -31,7 +42,8 @@ public class CommandLineReader {
 	
 	/**
 	 * Checks if the given value is contained in the arguments and returns the index.
-	 * All elements from <code>start</code> on are searched. 
+	 * All elements from {@code start} on are searched. 
+	 * 
 	 * @param value - the value to search for (exact match, case sensitive)
 	 * @param start - the start index
 	 * @return the index of the first occurrence of the value or -1 if it was not found

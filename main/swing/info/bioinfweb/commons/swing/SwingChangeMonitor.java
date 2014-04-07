@@ -9,7 +9,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import info.bioinfweb.commons.ChangeMonitor;
+import info.bioinfweb.commons.changemonitor.ChangeMonitor;
 
 
 

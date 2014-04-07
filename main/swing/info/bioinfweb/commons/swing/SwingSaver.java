@@ -1,7 +1,7 @@
 package info.bioinfweb.commons.swing;
 
 
-import info.bioinfweb.commons.ChangeMonitorable;
+import info.bioinfweb.commons.changemonitor.ChangeMonitorable;
 import info.bioinfweb.commons.io.AbstractSaver;
 import info.bioinfweb.commons.io.Savable;
 import info.webinsel.util.*;
