@@ -12,6 +12,11 @@ import java.util.ArrayList;
 
 
 
+/**
+ * Offers methods that read the whole content of a text file and return it as a string.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class TextReader {
 	public static String readText(URL url) throws IOException {
 		return readText(url.openStream());
