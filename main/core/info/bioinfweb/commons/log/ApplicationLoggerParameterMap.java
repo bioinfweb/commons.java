@@ -7,7 +7,7 @@ import info.bioinfweb.commons.collections.ParameterMap;
 
 public class ApplicationLoggerParameterMap extends ParameterMap {
 	public static final String KEY_APPLICATION_LOGGER = 
-			"info.webinsel.util.log.ApplicationLogger_ApplicationLoggerParameterMap";
+			"info.bioinfweb.commons.log.ApplicationLogger_ApplicationLoggerParameterMap";
 	
 	
 	/**

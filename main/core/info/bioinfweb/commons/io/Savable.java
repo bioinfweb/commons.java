@@ -2,7 +2,7 @@ package info.bioinfweb.commons.io;
 
 
 import info.bioinfweb.commons.changemonitor.ChangeMonitorable;
-import info.webinsel.util.*;
+import info.bioinfweb.commons.*;
 
 import java.io.*;
 

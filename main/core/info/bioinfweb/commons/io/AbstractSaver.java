@@ -67,13 +67,13 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#askToSave()
+	 * @see info.bioinfweb.commons.io.Savable#askToSave()
 	 */
 	public abstract boolean askToSave();
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#getDefaultPath()
+	 * @see info.bioinfweb.commons.io.Savable#getDefaultPath()
 	 */
 	public String getDefaultName() {
 		return defaultName;
@@ -81,7 +81,7 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
 	
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#getPath()
+	 * @see info.bioinfweb.commons.io.Savable#getPath()
 	 */
 	public File getFile() {
 		return file;
@@ -89,7 +89,7 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#hasPath()
+	 * @see info.bioinfweb.commons.io.Savable#hasPath()
 	 */
 	public boolean hasFile() {
 		return (file != null);
@@ -107,7 +107,7 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
   
   
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#save()
+	 * @see info.bioinfweb.commons.io.Savable#save()
 	 */
 	public boolean save() {
 		if (hasFile()) {
@@ -122,13 +122,13 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
 	
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#saveAs()
+	 * @see info.bioinfweb.commons.io.Savable#saveAs()
 	 */
 	public abstract boolean saveAs();
 	
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#setDefaultPath(java.lang.String)
+	 * @see info.bioinfweb.commons.io.Savable#setDefaultPath(java.lang.String)
 	 */
 	public void setDefaultName(String path) {
 		defaultName = path;
@@ -136,7 +136,7 @@ public abstract class AbstractSaver extends ChangeMonitor implements ChangeMonit
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.io.Savable#setPath(java.lang.String)
+	 * @see info.bioinfweb.commons.io.Savable#setPath(java.lang.String)
 	 */
 	public void setFile(File file) {
 		this.file = file;

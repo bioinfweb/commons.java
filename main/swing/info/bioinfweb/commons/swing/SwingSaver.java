@@ -4,7 +4,7 @@ package info.bioinfweb.commons.swing;
 import info.bioinfweb.commons.changemonitor.ChangeMonitorable;
 import info.bioinfweb.commons.io.AbstractSaver;
 import info.bioinfweb.commons.io.Savable;
-import info.webinsel.util.*;
+import info.bioinfweb.commons.*;
 import java.awt.*;
 import java.io.File;
 import javax.swing.*;

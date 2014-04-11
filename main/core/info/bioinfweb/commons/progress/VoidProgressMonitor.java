@@ -12,7 +12,7 @@ public class VoidProgressMonitor extends AbstractProgressMonitor implements Prog
 	
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.progress.ProgressMonitor#getProgressValue()
+	 * @see info.bioinfweb.commons.progress.ProgressMonitor#getProgressValue()
 	 */
 	@Override
 	public double getProgressValue() {
@@ -21,7 +21,7 @@ public class VoidProgressMonitor extends AbstractProgressMonitor implements Prog
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.progress.ProgressMonitor#setProgressValue(double)
+	 * @see info.bioinfweb.commons.progress.ProgressMonitor#setProgressValue(double)
 	 */
 	@Override
 	public void setProgressValue(double value) {

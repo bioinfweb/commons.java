@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import info.bioinfweb.commons.RandomValues;
-import info.webinsel.util.*;
 
 
 

@@ -17,7 +17,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getDBDriver()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getDBDriver()
 	 */
 	public String getDBDriver() {
 		return dbDriver;
@@ -25,7 +25,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 	
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setDBDriver(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setDBDriver(java.lang.String)
 	 */
 	public void setDBDriver(String dbDriver) {
 		this.dbDriver = dbDriver;
@@ -33,7 +33,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getDBHost()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getDBHost()
 	 */
 	public String getDBHost() {
 		return dbHost;
@@ -41,7 +41,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setDBHost(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setDBHost(java.lang.String)
 	 */
 	public void setDBHost(String dbHost) {
 		this.dbHost = dbHost;
@@ -49,7 +49,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getDBName()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getDBName()
 	 */
 	public String getDBName() {
 		return dbName;
@@ -57,7 +57,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setDBName(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setDBName(java.lang.String)
 	 */
 	public void setDBName(String dbName) {
 		this.dbName = dbName;
@@ -65,7 +65,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getDBPassword()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getDBPassword()
 	 */
 	public String getDBPassword() {
 		return dbPassword;
@@ -73,7 +73,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setDBPassword(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setDBPassword(java.lang.String)
 	 */
 	public void setDBPassword(String dbPassword) {
 		this.dbPassword = dbPassword;
@@ -81,7 +81,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getDBUser()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getDBUser()
 	 */
 	public String getDBUser() {
 		return dbUser;
@@ -89,7 +89,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setDBUser(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setDBUser(java.lang.String)
 	 */
 	public void setDBUser(String dbUser) {
 		this.dbUser = dbUser;
@@ -97,7 +97,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 	
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#getTablePrefix()
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#getTablePrefix()
 	 */
 	public String getTablePrefix() {
 		return tablePrefix;
@@ -105,7 +105,7 @@ public class ConcreteSQLProperties implements SQLProperties {
 
 
 	/* (non-Javadoc)
-	 * @see info.webinsel.util.servlet.sqlproperties.SQLProperties#setTablePrefix(java.lang.String)
+	 * @see info.bioinfweb.commons.servlet.sqlproperties.SQLProperties#setTablePrefix(java.lang.String)
 	 */
 	public void setTablePrefix(String tablePrefix) {
 		this.tablePrefix = tablePrefix;
