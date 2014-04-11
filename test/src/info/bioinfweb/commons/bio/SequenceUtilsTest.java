@@ -2,9 +2,8 @@ package info.bioinfweb.commons.bio;
 
 
 import static org.junit.Assert.*;
+import info.bioinfweb.commons.Math2;
 
-
-import info.webinsel.util.Math2;
 
 import org.junit.Test;
 
