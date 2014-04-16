@@ -1,4 +1,4 @@
-package info.webinsel.util.tokenizer;
+package info.bioinfweb.commons.tokenizer;
 
 
 import java.util.Vector;

@@ -1,9 +1,9 @@
 package info.bioinfweb.commons;
 
 
-import java.util.prefs.Preferences;
-
 import info.bioinfweb.commons.appversion.ApplicationVersion;
+
+import java.util.prefs.Preferences;
 
 
 

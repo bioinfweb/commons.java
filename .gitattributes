@@ -124,8 +124,8 @@ main/experimental/info/bioinfweb/commons/servlet/webapp/MySQLManipulator.java -t
 main/experimental/info/bioinfweb/commons/servlet/webapp/session/Session.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/webapp/session/Sessions.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/swing/ToolBarPopup.java -text svneol=unset#text/plain
-main/experimental/info/webinsel/util/tokenizer/StrToken.java -text svneol=unset#text/plain
-main/experimental/info/webinsel/util/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/tokenizer/StrToken.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
 main/junit/info/bioinfweb/commons/junit/TestTools.java -text svneol=unset#text/plain
 main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/JFreeChartSWTExperimental.jar -text
