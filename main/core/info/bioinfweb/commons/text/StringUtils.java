@@ -70,7 +70,7 @@ public class StringUtils {
   
   
   /**
-   * <p>Concatenates two expressions with an operator of both are not empty.</p>
+   * <p>Concatenates two expressions with an operator if both are not empty.</p>
    * <p><b>Example:</b></p>
    * <ul>
    *   <li>
@@ -85,7 +85,7 @@ public class StringUtils {
    *  
    * @param leftPart - the left expression
    * @param rightPart - the right expression 
-   * @param operator - the operator (including whitespaces if necessary)
+   * @param operator - the operator (including white spaces if necessary)
    * @param leftBracket - the left bracket to be used (e.g. "{")
    * @param rightBracket - the right bracket to be used (e.g. "}")
    * @return the concatenated expression
@@ -105,10 +105,11 @@ public class StringUtils {
   
   
   /**
-   * <p>Concatenates two expressions with an operator of both are not empty.</p>
+   * Concatenates two expressions with an operator if both are not empty.
+   * 
    * @param leftPart - the left expression
    * @param rightPart - the right expression 
-   * @param operator - the operator (including whitespaces if necessary)
+   * @param operator - the operator (including white spaces if necessary)
    * @return the concatenated expression
    * 
    * @see StringUtils#concatWithOperator(String, String, String, String, String)
