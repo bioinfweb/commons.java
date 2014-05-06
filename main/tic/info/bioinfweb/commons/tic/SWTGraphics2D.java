@@ -67,7 +67,7 @@ import org.jfree.experimental.swt.SWTUtils;
 
 
 /**
- * Adapter class that allows to draw on a grphics context of SWT ({@link GC}) using a
+ * Adapter class that allows to draw on a graphics context of SWT ({@link GC}) using a
  * {@link Graphics2D} object.
  * <p>
  * Its based on the implementation of org.jfree.experimental.swt.SWTGraphics2D from JFreeChart,
@@ -1243,15 +1243,14 @@ public class SWTGraphics2D extends Graphics2D {
      * @return The SWT font instance.
      */
     private org.eclipse.swt.graphics.Font getSwtFontFromPool(Font font) {
-        org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)
-        this.fontsPool.get(font);
-        if (swtFont == null) {
-            swtFont = new org.eclipse.swt.graphics.Font(this.gc.getDevice(),
-                    SWTUtils.toSwtFontData(this.gc.getDevice(), font, true));
-            addToResourcePool(swtFont);
-            this.fontsPool.put(font, swtFont);
-        }
-        return swtFont;
+      org.eclipse.swt.graphics.Font swtFont = (org.eclipse.swt.graphics.Font)this.fontsPool.get(font);
+      if (swtFont == null) {
+          swtFont = new org.eclipse.swt.graphics.Font(this.gc.getDevice(),
+              SWTUtils.toSwtFontData(this.gc.getDevice(), font, true));
+          addToResourcePool(swtFont);
+          this.fontsPool.put(font, swtFont);
+      }
+      return swtFont;
     }
 
     /**
