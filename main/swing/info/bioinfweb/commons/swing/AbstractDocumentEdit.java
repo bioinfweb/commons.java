@@ -70,9 +70,17 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 	}
 
 
+	/**
+	 * Inheriting classes should e.g. inform document listener here.
+	 */
 	public abstract void registerDocumentChange();
 	
 	
+	/**
+	 * Default implementation that just calls {@link #registerDocumentChange()} if this edit is not a subedit.
+	 * Inheriting classes would have to overwrite this method to perform there document changes but should
+	 * call the inherited methods at the end of the implementation.
+	 */
 	public void redo() throws CannotRedoException {
 		if (!getIsSubedit()) {
 			registerDocumentChange();
@@ -80,6 +88,11 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 	}
 
 
+	/**
+	 * Default implementation that just calls {@link #registerDocumentChange()} if this edit is not a subedit.
+	 * Inheriting classes would have to overwrite this method to undo there document changes but should
+	 * call the inherited methods at the end of the implementation.
+	 */
 	public void undo() throws CannotUndoException {
 		if (!getIsSubedit()) {
 			registerDocumentChange();
