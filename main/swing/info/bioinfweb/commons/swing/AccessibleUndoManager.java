@@ -8,6 +8,11 @@ import javax.swing.undo.UndoableEdit;
 
 
 
+/**
+ * An extension of {@link UndoManager} that allows to access all edit objects contained in the underlying list.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class AccessibleUndoManager extends UndoManager {
 	/**
 	 * Returns the position of the edit to undone next.
