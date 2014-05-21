@@ -127,7 +127,6 @@ main/experimental/info/bioinfweb/commons/servlet/webapp/session/Sessions.java -t
 main/experimental/info/bioinfweb/commons/swing/ToolBarPopup.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrToken.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
-main/junit/info/bioinfweb/commons/junit/TestTools.java -text svneol=unset#text/plain
 main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/JFreeChartSWTExperimental.jar -text
 main/lib/biojava3-alignment-3.0.5.jar -text
@@ -193,6 +192,7 @@ main/swing/info/bioinfweb/commons/swing/SwingSaverMessages.java -text svneol=uns
 main/swing/info/bioinfweb/commons/swing/TableColumnModelAdapter.java -text svneol=unset#text/plain
 main/swing/info/bioinfweb/commons/swing/scrollpaneselector/ExtendedScrollPaneSelector.java -text svneol=unset#text/plain
 main/swing/info/bioinfweb/commons/swing/scrollpaneselector/ScrollPaneSelectable.java -text svneol=unset#text/plain
+main/testing/info/bioinfweb/commons/testing/TestTools.java -text svneol=unset#text/plain
 main/tic/info/bioinfweb/commons/tic/SWTGraphics2D.java -text svneol=unset#text/plain
 main/tic/info/bioinfweb/commons/tic/TICComponent.java -text svneol=unset#text/plain
 main/tic/info/bioinfweb/commons/tic/TICPaintEvent.java -text svneol=unset#text/plain
