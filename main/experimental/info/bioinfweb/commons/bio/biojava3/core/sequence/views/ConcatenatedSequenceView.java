@@ -26,6 +26,7 @@ import org.biojava3.core.sequence.template.SequenceView;
  * @param <C>
  */
 public class ConcatenatedSequenceView<C extends Compound> implements SequenceView<C> {
+	//TODO Where is the difference to the according sequence view existing in BioJava?
 	public class ViewedSequence {
 		private Sequence<C> sequence;
 		private int bioStart = -1;

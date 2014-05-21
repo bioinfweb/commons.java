@@ -30,7 +30,7 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 	}
 
 
-	public boolean addEdit(UndoableEdit arg0) {
+	public boolean addEdit(UndoableEdit edit) {
 		return false;
 	}
 
@@ -71,9 +71,9 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 
 
 	/**
-	 * Inheriting classes should e.g. inform document listener here.
+	 * Inheriting classes should e.g. inform document listeners here.
 	 */
-	public abstract void registerDocumentChange();
+	protected abstract void registerDocumentChange();
 	
 	
 	/**
