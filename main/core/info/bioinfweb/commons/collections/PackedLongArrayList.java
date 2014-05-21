@@ -108,27 +108,42 @@ public class PackedLongArrayList {
 
 	
 	protected void removeRange(long index, long length) {
-		long bitShiftInLeftBlock = length * bitsPerValue % BLOCK_SIZE;
-		long bitShiftInRightBlock = BLOCK_SIZE - bitShiftInLeftBlock;
-		long firstInitialBitLength = index * bitsPerValue % BLOCK_SIZE;
-		long firstInitialBitShift =  BLOCK_SIZE - firstInitialBitLength;
-		long secondIntialBitShift = BLOCK_SIZE - (index + length) * bitsPerValue % BLOCK_SIZE;
+		long bitLength1 = index * bitsPerValue % BLOCK_SIZE;
+		long bitLength2 = BLOCK_SIZE - bitLength1;
+		long bitLength3 = (index + length) * bitsPerValue % BLOCK_SIZE;
+		long bitLength4 = BLOCK_SIZE - bitLength3;
+		long bitLength5 = length * bitsPerValue % BLOCK_SIZE;
+		long bitLength6 = BLOCK_SIZE - bitLength5;
+		long bitLength7 = bitLength3 - bitLength1;
+		long bitLength8 = BLOCK_SIZE - bitLength7;
+		
 		int blockShift = (int)(length * bitsPerValue / BLOCK_SIZE);  // If integer conversion would not be possible, the specified length would be longer than the list.
 
 		int minBlockIndex = calculateArrayLength(index) - 1;
 		int maxBlockIndex = calculateArrayLength(index + length) - 1;
 		//System.out.println("block indices: " + minBlockIndex + " " + maxBlockIndex + " " + blockShift);
    
-		array[minBlockIndex] = (array[minBlockIndex] >>> firstInitialBitShift << firstInitialBitShift) |
-				(array[minBlockIndex + blockShift] << secondIntialBitShift >>> firstInitialBitLength);
-		if (minBlockIndex + blockShift + 1 < array.length) {
-			array[minBlockIndex] |= (array[minBlockIndex + blockShift + 1] >>> bitShiftInRightBlock);
-
-			for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
-				array[blockIndex] = array[blockIndex + blockShift] << bitShiftInLeftBlock |
-						array[blockIndex + blockShift + 1] >>> bitShiftInRightBlock;
+		array[minBlockIndex] = array[minBlockIndex] >>> bitLength2 << bitLength2;
+		if (bitLength1 > bitLength5) {  // First block has to be calculated from three other blocks
+			System.out.println("Fall 1: " + bitLength1 + " " + bitLength5);
+			array[minBlockIndex] |= array[minBlockIndex + blockShift] << bitLength4 >>> bitLength1;
+			if (minBlockIndex + blockShift + 1 < array.length) {
+				array[minBlockIndex] |= (array[minBlockIndex + blockShift + 1] >>> bitLength6);
+	
+				for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
+					array[blockIndex] = array[blockIndex + blockShift] << bitLength5 |
+							array[blockIndex + blockShift + 1] >>> bitLength6;
+				}
+				array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitLength5;
 			}
-			array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitShiftInLeftBlock;
+		}
+		else {
+			System.out.println("Fall 2");
+			array[minBlockIndex] |= array[minBlockIndex + blockShift] >>> bitLength7 << bitLength6 >>> bitLength4;
+			for (int blockIndex = minBlockIndex + 1; blockIndex <= maxBlockIndex; blockIndex++) {
+				array[blockIndex] = array[blockIndex + blockShift - 1] << bitLength8 |
+						array[blockIndex + blockShift] >>> bitLength7;
+			}
 		}
 		
 		size -= length;
