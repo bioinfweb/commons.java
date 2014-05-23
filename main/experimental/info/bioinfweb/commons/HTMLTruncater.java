@@ -1,4 +1,4 @@
-package info.bioinfweb.commons.core;
+package info.bioinfweb.commons;
 
 
 import java.util.ArrayList;
