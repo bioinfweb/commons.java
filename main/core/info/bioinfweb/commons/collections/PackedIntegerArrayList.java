@@ -19,13 +19,11 @@
 package info.bioinfweb.commons.collections;
 
 
-import info.bioinfweb.commons.testing.TestTools;
-
 import java.util.Arrays;
 
 
 
-public class PackedLongArrayList {
+public class PackedIntegerArrayList {
 	public static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
 	public static final int BLOCK_SIZE = 64; // 32 = int, 64 = long
 	public static final int BLOCK_BITS = 6; // The #bits representing BLOCK_SIZE
@@ -54,7 +52,7 @@ public class PackedLongArrayList {
    * @param bitsPerValue - the number of bit each value will consume in memory
    * @param initialCapacity - the number of values the underlying array can take up initially
    */
-  public PackedLongArrayList(int bitsPerValue, long initialCapacity) {
+  public PackedIntegerArrayList(int bitsPerValue, long initialCapacity) {
     this.size = 0;
     if ((bitsPerValue <= 0) || (bitsPerValue > 64)) {
     	throw new IllegalArgumentException("At least 1 and at most 64 bits per value are allowed to be used.");

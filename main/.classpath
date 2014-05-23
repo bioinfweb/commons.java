@@ -4,7 +4,7 @@
 	<classpathentry kind="src" path="experimental"/>
 	<classpathentry kind="src" path="core"/>
 	<classpathentry kind="src" path="applet"/>
-	<classpathentry kind="src" path="junit"/>
+	<classpathentry kind="src" path="testing"/>
 	<classpathentry kind="src" path="servlet"/>
 	<classpathentry kind="src" path="sql"/>
 	<classpathentry kind="src" path="swing"/>

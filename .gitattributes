@@ -19,7 +19,7 @@ main/core/info/bioinfweb/commons/changemonitor/PropertyChangeMonitor.java -text 
 main/core/info/bioinfweb/commons/collections/ListChangeType.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/MultiTreeMap.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/NonOverlappingIntervalList.java -text svneol=unset#text/plain
-main/core/info/bioinfweb/commons/collections/PackedLongArrayList.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/collections/PackedIntegerArrayList.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/PackedObjectArrayList.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/ParameterMap.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/SequenceIntervalList.java -text svneol=unset#text/plain
