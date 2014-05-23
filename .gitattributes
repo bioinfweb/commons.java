@@ -116,6 +116,12 @@ main/experimental/info/bioinfweb/commons/core/graphics/vlcframegrabber/VLCFrameR
 main/experimental/info/bioinfweb/commons/core/io/streammessage/Message.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/core/io/streammessage/MessageReader.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/core/io/streammessage/NewerMessageVersionException.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/graphics/ImageRescaler.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/graphics/vlcframegrabber/FrameReaderRenderCallback.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/graphics/vlcframegrabber/VLCFrameReader.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/io/streammessage/Message.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/io/streammessage/MessageReader.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/io/streammessage/NewerMessageVersionException.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/CaptchaDBManagement.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/CookieManager.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/DatabaseException.java -text svneol=unset#text/plain
