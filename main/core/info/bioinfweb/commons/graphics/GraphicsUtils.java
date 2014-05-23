@@ -1,7 +1,7 @@
 /*
  * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
  * Copyright (C) 2010-2014  Ben Stöver
- \* <http://commons.bioinfweb.info/Java>
+ * <http://commons.bioinfweb.info/Java>
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
