@@ -28,8 +28,8 @@ import static org.junit.Assert.* ;
 
 
 
-public class PackedLongArrayListTest {
-	private void printList(PackedLongArrayList list, int elementPerLine) {
+public class PackedIntegerArrayListTest {
+	private void printList(PackedIntegerArrayList list, int elementPerLine) {
 		for (long i = 0; i < list.size(); i++) {
 			if (i % elementPerLine == 0) {
 				System.out.print(i + ": ");
@@ -45,7 +45,7 @@ public class PackedLongArrayListTest {
   public void testInsertRange(final long intialListSize, final long insertIndex, final long insertionLength, 
   		final int elementLength) {
   	
-		PackedLongArrayList list = new PackedLongArrayList(elementLength, intialListSize);
+  	PackedIntegerArrayList list = new PackedIntegerArrayList(elementLength, intialListSize);
 		for (long i = 0; i < intialListSize; i++) {
 			list.add(i);
 		}
@@ -86,7 +86,7 @@ public class PackedLongArrayListTest {
   private void testRemoveRange(final long intialListSize, final long removeIndex, final long removeLength, 
   		final int elementLength) {
   	
-		PackedLongArrayList list = new PackedLongArrayList(elementLength, intialListSize);
+  	PackedIntegerArrayList list = new PackedIntegerArrayList(elementLength, intialListSize);
 		for (long i = 0; i < intialListSize; i++) {
 			list.add(i);
 		}
@@ -130,7 +130,7 @@ public class PackedLongArrayListTest {
   	System.out.println(TestTools.toBinaryRepresentation(2001l >>> 63));
   	System.out.println(TestTools.toBinaryRepresentation(2001l >>> 64));  // Does nothing
   	
-		PackedLongArrayList list = new PackedLongArrayList(6, 100);
+  	PackedIntegerArrayList list = new PackedIntegerArrayList(6, 100);
 		list.set(56, 8);
 		list.set(60, 63);
 		list.set(61, 64);
