@@ -4,11 +4,10 @@ package info.bioinfweb.commons.servlet.acceptlanguage;
 import static org.junit.Assert.* ;
 
 
-import info.bioinfweb.commons.junit.TestTools;
+import info.bioinfweb.commons.testing.TestTools;
 
 import java.lang.reflect.Method;
 import java.util.Iterator;
-import java.util.List;
 
 import org.junit.* ;
 
