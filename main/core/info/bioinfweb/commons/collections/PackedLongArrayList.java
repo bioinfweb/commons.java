@@ -19,8 +19,6 @@
 package info.bioinfweb.commons.collections;
 
 
-import info.bioinfweb.commons.testing.TestTools;
-
 import java.util.Arrays;
 
 
@@ -103,8 +101,6 @@ public class PackedLongArrayList {
 			int minBlockIndex = (int)(index * bitsPerValue / BLOCK_SIZE) + blockShift;
 	    int maxBlockIndex = Math.min(array.length - 1, (int)((size + length) * bitsPerValue / BLOCK_SIZE));
 			
-	    //System.out.println(index + " " + length);
-	    //System.out.println(minBlockIndex + " " + maxBlockIndex + " " + blockShift + " " + array.length);
 	    long initialBitShift = BLOCK_SIZE - indexInBits % BLOCK_SIZE;
 			long initialBits = array[minBlockIndex] >>> initialBitShift << initialBitShift;
 
@@ -121,10 +117,7 @@ public class PackedLongArrayList {
       }
 			array[minBlockIndex] = array[minBlockIndex - blockShift] >>> bitShiftInRightBlock;
 			if ((blockShift == 0) && (initialBitShift < BLOCK_SIZE)) {  // array[minBlockIndex] also contains initial bits
-				//System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]) + " " + initialBitShift);
 				array[minBlockIndex] = array[minBlockIndex] & (-1l >>> (BLOCK_SIZE - initialBitShift)) | initialBits;
-				//System.out.println(TestTools.toBinaryRepresentation(-1l >>> (BLOCK_SIZE - initialBitShift)));
-				//System.out.println(TestTools.toBinaryRepresentation(initialBits));
 			}
 			size += length;
 		}
@@ -144,20 +137,16 @@ public class PackedLongArrayList {
 			int firstBlockIndex = calculateArrayLength(index) - 1;
 			int lastBlockIndex = calculateArrayLength(size - length) - 1;
 			int blockShift = (int)lengthInBits / BLOCK_SIZE;
-			//System.out.println("Block indices: " + firstBlockIndex + " " + lastBlockIndex + " " + blockShift + " " + array.length);
 			
 			long initialBitShift = BLOCK_SIZE - index * bitsPerValue % BLOCK_SIZE;
 			boolean remainingFirstBlock = firstBlockIndex >= 0;
 			long initialBits = 0;
 			if (remainingFirstBlock) {
-				//System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
 				initialBits = array[firstBlockIndex] >>> initialBitShift << initialBitShift;  // If blockMinusInitialBitLength is 64 no shift is performed.
-				//System.out.println(TestTools.toBinaryRepresentation(initialBits));
 			}
 
 			long bitShiftInLeftBlock = lengthInBits % BLOCK_SIZE;
 			long bitShiftInRightBlock = BLOCK_SIZE - bitShiftInLeftBlock;
-      //System.out.println("bit shifts: " + blockMinusInitialBitLength + " " + bitShiftInLeftBlock + " " + bitShiftInRightBlock + " " + remainingFirstBlock);
 
     	int start = Math.max(0, firstBlockIndex);
       if (bitShiftInLeftBlock == 0) {
@@ -175,15 +164,11 @@ public class PackedLongArrayList {
       }
 			
       if (remainingFirstBlock) {
-//      	System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
       	long mask = 0;
       	if (initialBitShift < BLOCK_SIZE) {
       		mask = -1l >>> (BLOCK_SIZE - initialBitShift);
       	}
       	array[firstBlockIndex] = array[firstBlockIndex] & mask | initialBits;  //TODO Warum muss initialBits nicht 0 sein bei initialBitShift = 64?
-//      	System.out.println(TestTools.toBinaryRepresentation(mask));
-//      	System.out.println(TestTools.toBinaryRepresentation(initialBits));
-//      	System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
       }
 			
 			size -= length;
