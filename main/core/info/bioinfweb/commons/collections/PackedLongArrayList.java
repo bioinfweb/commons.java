@@ -92,18 +92,42 @@ public class PackedLongArrayList {
   
   
 	protected void insertRange(long index, long length) {
-		ensureCapacity(size + length);  // Throws an IllegalArgumentException if the array will become longer than 2 GB
-		
-		long bitShiftInRightBlock = length * bitsPerValue % BLOCK_SIZE;
-		long bitShiftInLeftBlock = BLOCK_SIZE - bitShiftInRightBlock;
-		int blockShift = (int)(length * bitsPerValue / BLOCK_SIZE) + 1;  // If integer conversion would not be possible, ensureCapacity() would already have thrown an exception.
-		int minBlockIndex = calculateArrayLength(index) + blockShift - 1;
+		if (length > 0) {
+			ensureCapacity(size + length);  // Throws an IllegalArgumentException if the array will become longer than 2 GB
+			
+			long lengthInBits = length * bitsPerValue;
+			long indexInBits = index * bitsPerValue;
+			long bitShiftInRightBlock = lengthInBits % BLOCK_SIZE;
+			long bitShiftInLeftBlock = BLOCK_SIZE - bitShiftInRightBlock;
+			int blockShift = (int)(lengthInBits / BLOCK_SIZE);  // If integer conversion would not be possible, ensureCapacity() would already have thrown an exception.
+			int minBlockIndex = (int)(index * bitsPerValue / BLOCK_SIZE) + blockShift;
+	    int maxBlockIndex = Math.min(array.length - 1, (int)((size + length) * bitsPerValue / BLOCK_SIZE));
+			
+	    //System.out.println(index + " " + length);
+	    //System.out.println(minBlockIndex + " " + maxBlockIndex + " " + blockShift + " " + array.length);
+	    long initialBitShift = BLOCK_SIZE - indexInBits % BLOCK_SIZE;
+			long initialBits = array[minBlockIndex] >>> initialBitShift << initialBitShift;
 
-		for (int blockIndex = calculateArrayLength(size + length); blockIndex >= minBlockIndex; blockIndex--) {
-			array[blockIndex] = (array[blockIndex - blockShift] << bitShiftInLeftBlock) | 
-					(array[blockIndex - blockShift + 1] >>> bitShiftInRightBlock);
+      if (bitShiftInRightBlock == 0) {
+      	for (int blockIndex = maxBlockIndex; blockIndex > minBlockIndex; blockIndex--) {  // System.arraycopy() does not work here.
+					array[blockIndex] = array[blockIndex - blockShift];
+				}
+      }
+      else { 
+				for (int blockIndex = maxBlockIndex; blockIndex > minBlockIndex; blockIndex--) {
+					array[blockIndex] = (array[blockIndex - blockShift] >>> bitShiftInRightBlock) |
+							(array[blockIndex - blockShift - 1] << bitShiftInLeftBlock);
+				}
+      }
+			array[minBlockIndex] = array[minBlockIndex - blockShift] >>> bitShiftInRightBlock;
+			if ((blockShift == 0) && (initialBitShift < BLOCK_SIZE)) {  // array[minBlockIndex] also contains initial bits
+				//System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]) + " " + initialBitShift);
+				array[minBlockIndex] = array[minBlockIndex] & (-1l >>> (BLOCK_SIZE - initialBitShift)) | initialBits;
+				//System.out.println(TestTools.toBinaryRepresentation(-1l >>> (BLOCK_SIZE - initialBitShift)));
+				//System.out.println(TestTools.toBinaryRepresentation(initialBits));
+			}
+			size += length;
 		}
-		size += length;
 	}
 
 	
@@ -122,12 +146,12 @@ public class PackedLongArrayList {
 			int blockShift = (int)lengthInBits / BLOCK_SIZE;
 			//System.out.println("Block indices: " + firstBlockIndex + " " + lastBlockIndex + " " + blockShift + " " + array.length);
 			
-			long blockMinusInitialBitLength = BLOCK_SIZE - index * bitsPerValue % BLOCK_SIZE;
+			long initialBitShift = BLOCK_SIZE - index * bitsPerValue % BLOCK_SIZE;
 			boolean remainingFirstBlock = firstBlockIndex >= 0;
 			long initialBits = 0;
 			if (remainingFirstBlock) {
 				//System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
-				initialBits = array[firstBlockIndex] >>> blockMinusInitialBitLength << blockMinusInitialBitLength;  // If blockMinusInitialBitLength is 64 no shift is performed.
+				initialBits = array[firstBlockIndex] >>> initialBitShift << initialBitShift;  // If blockMinusInitialBitLength is 64 no shift is performed.
 				//System.out.println(TestTools.toBinaryRepresentation(initialBits));
 			}
 
@@ -153,10 +177,10 @@ public class PackedLongArrayList {
       if (remainingFirstBlock) {
 //      	System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
       	long mask = 0;
-      	if (blockMinusInitialBitLength < BLOCK_SIZE) {
-      		mask = -1l >>> (BLOCK_SIZE - blockMinusInitialBitLength);
+      	if (initialBitShift < BLOCK_SIZE) {
+      		mask = -1l >>> (BLOCK_SIZE - initialBitShift);
       	}
-      	array[firstBlockIndex] = array[firstBlockIndex] & mask | initialBits;
+      	array[firstBlockIndex] = array[firstBlockIndex] & mask | initialBits;  //TODO Warum muss initialBits nicht 0 sein bei initialBitShift = 64?
 //      	System.out.println(TestTools.toBinaryRepresentation(mask));
 //      	System.out.println(TestTools.toBinaryRepresentation(initialBits));
 //      	System.out.println(TestTools.toBinaryRepresentation(array[firstBlockIndex]));
