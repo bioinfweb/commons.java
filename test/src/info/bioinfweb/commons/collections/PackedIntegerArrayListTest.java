@@ -29,7 +29,7 @@ import static org.junit.Assert.* ;
 
 
 public class PackedIntegerArrayListTest {
-	private void printList(PackedIntegerArrayList list, int elementPerLine) {
+	public static void printList(PackedIntegerArrayList list, int elementPerLine) {
 		for (long i = 0; i < list.size(); i++) {
 			if (i % elementPerLine == 0) {
 				System.out.print(i + ": ");
