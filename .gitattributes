@@ -227,6 +227,7 @@ test/data/io/tableReader/TableWindows_terminalBreak.txt -text svneol=unset#text/
 test/data/io/tableReader/Table_empty.txt -text svneol=unset#text/plain
 test/data/io/tableReader/Table_oneColumn.txt -text svneol=unset#text/plain
 test/lib/junit-4.9b1.jar -text
+test/lib/lucene-core-4.8.0.jar -text
 test/src/info/bioinfweb/commons/Math2Test.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/RandomValuesTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/bio/AmbiguityBaseScoreTest.java -text svneol=unset#text/plain
@@ -251,4 +252,5 @@ test/src/info/bioinfweb/commons/collections/guavatest/TreeMultisetTest.java -tex
 test/src/info/bioinfweb/commons/io/TableReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/XMLUtilsTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/test/LuceneTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/text/StringUtilsTest.java -text svneol=unset#text/plain
