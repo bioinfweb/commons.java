@@ -19,6 +19,8 @@
 package info.bioinfweb.commons.collections;
 
 
+import info.bioinfweb.commons.testing.TestTools;
+
 import java.util.Arrays;
 
 
@@ -163,12 +165,8 @@ public class PackedLongArrayList {
 				}
       }
 			
-      if (remainingFirstBlock) {
-      	long mask = 0;
-      	if (initialBitShift < BLOCK_SIZE) {
-      		mask = -1l >>> (BLOCK_SIZE - initialBitShift);
-      	}
-      	array[firstBlockIndex] = array[firstBlockIndex] & mask | initialBits;  //TODO Warum muss initialBits nicht 0 sein bei initialBitShift = 64?
+      if (remainingFirstBlock && (initialBitShift < BLOCK_SIZE)) {
+      	array[firstBlockIndex] = array[firstBlockIndex] & (-1l >>> (BLOCK_SIZE - initialBitShift)) | initialBits;
       }
 			
 			size -= length;
