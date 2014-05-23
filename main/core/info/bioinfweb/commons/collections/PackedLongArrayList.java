@@ -56,7 +56,7 @@ public class PackedLongArrayList {
    */
   public PackedLongArrayList(int bitsPerValue, long initialCapacity) {
     this.size = 0;
-    if ((bitsPerValue <= 0) || (bitsPerValue >= 64)) {
+    if ((bitsPerValue <= 0) || (bitsPerValue > 64)) {
     	throw new IllegalArgumentException("At least 1 and at most 64 bits per value are allowed to be used.");
     }
     else {
@@ -90,6 +90,26 @@ public class PackedLongArrayList {
     }
   }
   
+  
+  private long shiftBitsLeft(long value, long shift) {
+  	if (shift >= 64) {
+  		return 0;
+  	}
+  	else {
+  		return value << shift;
+  	}
+  }
+  
+
+  private long shiftBitsRight(long value, long shift) {
+  	if (shift >= 64) {
+  		return 0;
+  	}
+  	else {
+  		return value >>> shift;
+  	}
+  }
+  
 
 	protected void insertRange(long index, long length) {
 		ensureCapacity(size + length);  // Thrown an IllegalArgumentException if the array will become longer than 2 GB
@@ -115,42 +135,59 @@ public class PackedLongArrayList {
 			long bitLength2b = BLOCK_SIZE - bitLengthHelper1 % BLOCK_SIZE;
 			
 			int blockShift = (int)(length * bitsPerValue / BLOCK_SIZE);  // If integer conversion would not be possible, the specified length would be longer than the list.
+//			if (length * bitsPerValue % BLOCK_SIZE == 0) {
+//				blockShift--;
+//			}
 	
 			int minBlockIndex = calculateArrayLength(index) - 1;
 			int maxBlockIndex = calculateArrayLength(size - length) - 1;
-			System.out.println("block indices: " + minBlockIndex + " " + maxBlockIndex + " " + blockShift);
+			//System.out.println("block indices: " + minBlockIndex + " " + maxBlockIndex + " " + blockShift);
 			
 			long remainingBitsInFirstBlock = 0;
-			if ((minBlockIndex >= 0) && (bitLength2a < 64)) {  // If bitLength2a is 64 no bit shall remain, but Java uses bitLength2a mod 64 for shift operations.
+			if ((bitLength1 > 0) && (bitLength2a < 64)) {  // If bitLength2a is 64 no bit shall remain, but Java uses bitLength2a mod 64 for shift operations.
 				remainingBitsInFirstBlock = array[minBlockIndex] >>> bitLength2a << bitLength2a;  // array[minBlockIndex] cannot be used to store this values because this value will still be needed if blockShift is 0. 
 			}
 			if (bitLength2b >= bitLength2a) {  // Fall 1
 				long bitLength3a = BLOCK_SIZE - (bitLengthHelper1 + bitLength2a) % BLOCK_SIZE;
+				//long bitLength3a = (bitLengthHelper1 + bitLength2a) % BLOCK_SIZE;
+				//if (bitLength3a > 0) {
+				//	bitLength3a = BLOCK_SIZE - bitLength3a;
+				//}
+//				else {
+//					System.out.println("bitLength3a = 0" + bitLength3a);
+//				}
 				long bitLength4a = BLOCK_SIZE - bitLength3a;
 				
 				System.out.println("Fall 1: " + minBlockIndex + " " + maxBlockIndex + " " + blockShift);
-				//System.out.println(bitLength1 + " " + bitLength2a + " " + bitLength2b + " " + bitLength3a + " " + bitLength4a);			
-	  	  //System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]));
-	  		//System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift + 1] << (bitLength1 - bitLength3a) >>> bitLength1));
-				if (minBlockIndex >= 0) {
+				System.out.println(bitLength1 + " " + bitLength2a + " " + bitLength2b + " " + bitLength3a + " " + bitLength4a);			
+    	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]));
+    	  System.out.println(TestTools.toBinaryRepresentation(remainingBitsInFirstBlock));
+	  		System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift + 1] << (bitLength1 - bitLength3a) >>> bitLength1));
+				if (bitLength1 > 0) {
 					array[minBlockIndex] = remainingBitsInFirstBlock | 
 							array[minBlockIndex + blockShift + 1] << (bitLength1 - bitLength3a) >>> bitLength1;
 				}
 	  		//System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]));
-				if (bitLength2b == bitLength2a) {  // Fall 3
-					for (int blockIndex = minBlockIndex + 1; blockIndex <= maxBlockIndex; blockIndex++) {
-						array[blockIndex] = array[blockIndex + blockShift];
-					}
+				if ((bitLength3a == 64) || (bitLength4a == 64)) {
+					System.out.println("Complete bit shift: " + bitLength3a + " " + bitLength4a + " " + minBlockIndex + " " + maxBlockIndex + " " + index + " " + length + " " + bitsPerValue);
 				}
-				else {  // Fall 1
-					for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
-						array[blockIndex] = array[blockIndex + blockShift] << bitLength4a |
-								array[blockIndex + blockShift + 1] >>> bitLength3a;
-					}
-					array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitLength4a;
-					if (array.length > maxBlockIndex + blockShift + 1) {
-						array[maxBlockIndex] |= array[maxBlockIndex + blockShift + 1] >>> bitLength3a;
-					}
+				if (maxBlockIndex > minBlockIndex) {
+//					if (bitLength2b == bitLength2a) {  // Fall 3
+//						System.out.println("Fall 3");
+//						for (int blockIndex = minBlockIndex + 1; blockIndex <= maxBlockIndex; blockIndex++) {
+//							array[blockIndex] = array[blockIndex + blockShift];
+//						}
+//					}
+//					else {  // Fall 1
+						for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
+							array[blockIndex] = array[blockIndex + blockShift] << bitLength4a |
+									shiftBitsRight(array[blockIndex + blockShift + 1], bitLength3a);
+						}
+						array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitLength4a;
+						if (array.length > maxBlockIndex + blockShift + 1) {
+							array[maxBlockIndex] |= shiftBitsRight(array[maxBlockIndex + blockShift + 1], bitLength3a);
+						}
+//					}
 				}
 			}
 			else {  // Fall 2
@@ -158,24 +195,29 @@ public class PackedLongArrayList {
 				long bitLength4b = BLOCK_SIZE - bitLength3b;
 				
 				System.out.println("Fall 2");
-				System.out.println(bitLength1 + " " + bitLength2a + " " + bitLength2b + " " + bitLength3b + " " + bitLength4b);			
-	  	  System.out.println(TestTools.toBinaryRepresentation(remainingBitsInFirstBlock));
-	  	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift] << (BLOCK_SIZE - bitLength2b) >>> bitLength1));
-	  	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift + 1] >>> bitLength4b));
+//	  	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex]));
+//				System.out.println(bitLength1 + " " + bitLength2a + " " + bitLength2b + " " + bitLength3b + " " + bitLength4b);			
+//	  	  System.out.println(TestTools.toBinaryRepresentation(remainingBitsInFirstBlock));
+//	  	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift] << (BLOCK_SIZE - bitLength2b) >>> bitLength1));
+//	  	  System.out.println(TestTools.toBinaryRepresentation(array[minBlockIndex + blockShift + 1] >>> bitLength4b));
 	
-				if (minBlockIndex >= 0) {
+				if (bitLength1 > 0) {
 					array[minBlockIndex] = remainingBitsInFirstBlock | 
 							array[minBlockIndex + blockShift] << (BLOCK_SIZE - bitLength2b) >>> bitLength1 |
 							array[minBlockIndex + blockShift + 1] >>> bitLength4b;
 				}
-				for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
-					array[blockIndex] = array[blockIndex + blockShift] << bitLength3b |
-							array[blockIndex + blockShift + 1] >>> bitLength4b;
+//	  	  System.out.println("1: " + TestTools.toBinaryRepresentation(array[minBlockIndex]));
+				if (maxBlockIndex > minBlockIndex) {
+					for (int blockIndex = minBlockIndex + 1; blockIndex < maxBlockIndex; blockIndex++) {
+						array[blockIndex] = array[blockIndex + blockShift] << bitLength3b |
+								array[blockIndex + blockShift + 1] >>> bitLength4b;
+					}
+					array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitLength3b;
+					if (array.length > maxBlockIndex + blockShift + 1) {
+						array[maxBlockIndex] |= array[maxBlockIndex + blockShift + 1] >>> bitLength4b;
+					}
 				}
-				array[maxBlockIndex] = array[maxBlockIndex + blockShift] << bitLength3b;
-				if (array.length > maxBlockIndex + blockShift + 1) {
-					array[maxBlockIndex] |= array[maxBlockIndex + blockShift + 1] >>> bitLength4b;
-				}
+//	  	  System.out.println("2: " + TestTools.toBinaryRepresentation(array[minBlockIndex]));
 			}
 		}
 		
