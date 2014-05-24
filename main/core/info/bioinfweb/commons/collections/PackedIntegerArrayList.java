@@ -150,7 +150,9 @@ public class PackedIntegerArrayList {
 
     	int start = Math.max(0, firstBlockIndex);
       if (bitShiftInLeftBlock == 0) {
-      	System.arraycopy(array, start + blockShift, array, start, lastBlockIndex - start + 1);
+				for (int blockIndex = start; blockIndex <= lastBlockIndex; blockIndex++) {  // System.arraycopy() would make a copy to a temporary array.
+					array[blockIndex] = array[blockIndex + blockShift];
+				}
       }
       else { 
 				for (int blockIndex = start; blockIndex < lastBlockIndex; blockIndex++) {
