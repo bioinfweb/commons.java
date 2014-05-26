@@ -247,7 +247,6 @@ test/src/info/bioinfweb/commons/collections/IntervalElement.java -text svneol=un
 test/src/info/bioinfweb/commons/collections/MultiTreeMapTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/NonOverlappingIntervalListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/PackedIntegerArrayListTest.java -text svneol=unset#text/plain
-test/src/info/bioinfweb/commons/collections/PackedSignedIntegerArrayListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/SequenceIntervalListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/guavatest/TreeMultisetTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/TableReaderTest.java -text svneol=unset#text/plain
