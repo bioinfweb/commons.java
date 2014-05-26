@@ -287,7 +287,7 @@ public class Math2 {
 
   
   /**
-   * Checks if the specified value is greater of equal to the specified minimum and
+   * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
    * @param value - the value to be tested
@@ -301,7 +301,7 @@ public class Math2 {
   
   
   /**
-   * Checks if the specified value is greater of equal to the specified minimum and
+   * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
    * @param value - the value to be tested
@@ -315,7 +315,7 @@ public class Math2 {
   
   
   /**
-   * Checks if the specified value is greater of equal to the specified minimum and
+   * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
    * @param value - the value to be tested
@@ -329,7 +329,7 @@ public class Math2 {
   
   
   /**
-   * Checks if the specified value is greater of equal to the specified minimum and
+   * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
    * @param value - the value to be tested
@@ -343,7 +343,7 @@ public class Math2 {
   
   
   /**
-   * Checks if the specified value is greater of equal to the specified minimum and
+   * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
    * @param value - the value to be tested

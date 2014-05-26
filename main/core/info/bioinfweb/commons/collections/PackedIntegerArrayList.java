@@ -19,6 +19,8 @@
 package info.bioinfweb.commons.collections;
 
 
+import info.bioinfweb.commons.Math2;
+
 import java.util.Arrays;
 
 
@@ -35,6 +37,9 @@ public class PackedIntegerArrayList {
   
   /** The number of bits one value uses in {@link #array}. */
 	private long bitsPerValue;
+	
+	/** Stores the maximum value that can saved  */
+	private long maxValue;
 	
   /** A right-aligned mask of width BitsPerValue used by {@link #get(long)}. */
   private final long maskRight;
@@ -172,9 +177,18 @@ public class PackedIntegerArrayList {
 			size -= length;
 		}
 	}
+	
+	
+	private void checkIndex(long index, long additionalSpace) {
+		if (!Math2.isBetween(index, 0, size + additionalSpace - 1)) {
+			throw new IndexOutOfBoundsException("The index " + index + " is out of bounds (" + 0 + ", " + 
+		      (size + additionalSpace - 1) + ").");
+		}
+	}
 
 	
 	public void add(long index, long value) {
+		checkIndex(index, 1);
 		insertRange(index, 1);
 		set(index, value);
 	}
@@ -188,6 +202,8 @@ public class PackedIntegerArrayList {
 	
 
 	public long get(long index) {
+		checkIndex(index, 0);
+		
     final long majorBitPos = index * bitsPerValue;  // The abstract index in a contiguous bit stream
     final int elementPos = (int)(majorBitPos >>> BLOCK_BITS);  // divide by BLOCK_SIZE  // The index in the backing long-array
     final long endBits = (majorBitPos & MOD_MASK) + bpvMinusBlockSize;  // The number of value-bits in the second long

@@ -44,5 +44,5 @@ public class PackedSignedIntegerArrayList extends PackedIntegerArrayList {
 	@Override
 	public void set(long index, long value) {  // This method is also called by add(). Therefore these method must not be overwritten to shift the value in there as well!
 		super.set(index, shiftValue(value));
-	}	
+	}
 }
