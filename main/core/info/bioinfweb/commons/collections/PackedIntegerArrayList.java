@@ -69,6 +69,11 @@ public class PackedIntegerArrayList {
 	    this.bitsPerValue = bitsPerValue;
 	    this.minValue = minValue;
 	    maxValue = minValue + Math2.longPow(2, bitsPerValue) - 1;
+	    if (maxValue < this.minValue) {  // overflow, maxValue was higher than Long.MAX_VALUE
+	    	throw new IllegalArgumentException("The specified combination of bitsPerValue (" + bitsPerValue + 
+	    			") and minValue (" + minValue + ") cannot be represented by a long value.");
+	    }
+	    
 	    this.array = new long[calculateArrayLength(initialCapacity)];
 	    maskRight = ~0L << (BLOCK_SIZE - bitsPerValue) >>> (BLOCK_SIZE - bitsPerValue);
 	    bpvMinusBlockSize = bitsPerValue - BLOCK_SIZE;
