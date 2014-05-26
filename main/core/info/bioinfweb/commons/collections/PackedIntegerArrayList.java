@@ -38,6 +38,8 @@ public class PackedIntegerArrayList {
   /** The number of bits one value uses in {@link #array}. */
 	private long bitsPerValue;
 	
+	private long minValue;
+
 	/** Stores the maximum value that can saved  */
 	private long maxValue;
 	
@@ -55,15 +57,18 @@ public class PackedIntegerArrayList {
    * Creates a new instance of this class.
    * 
    * @param bitsPerValue - the number of bit each value will consume in memory
+   * @param minValue - the minimum value to be stored in the list
    * @param initialCapacity - the number of values the underlying array can take up initially
    */
-  public PackedIntegerArrayList(int bitsPerValue, long initialCapacity) {
+  public PackedIntegerArrayList(int bitsPerValue, long minValue, long initialCapacity) {
     this.size = 0;
-    if ((bitsPerValue <= 0) || (bitsPerValue > 64)) {
-    	throw new IllegalArgumentException("At least 1 and at most 64 bits per value are allowed to be used.");
+    if ((bitsPerValue <= 0) || (bitsPerValue >= 64)) {  // Unsigned 64 bits cannot be stored. 
+    	throw new IllegalArgumentException("At least 1 and at most 63 bits per value are allowed to be used.");
     }
     else {
 	    this.bitsPerValue = bitsPerValue;
+	    this.minValue = minValue;
+	    maxValue = minValue + Math2.longPow(2, bitsPerValue) - 1;
 	    this.array = new long[calculateArrayLength(initialCapacity)];
 	    maskRight = ~0L << (BLOCK_SIZE - bitsPerValue) >>> (BLOCK_SIZE - bitsPerValue);
 	    bpvMinusBlockSize = bitsPerValue - BLOCK_SIZE;
@@ -71,7 +76,17 @@ public class PackedIntegerArrayList {
   }
   
   
-  protected int calculateArrayLength(long capacity) {
+  public long getMinValue() {
+		return minValue;
+	}
+
+
+	public long getMaxValue() {
+		return maxValue;
+	}
+
+
+	protected int calculateArrayLength(long capacity) {
     long bitLength = capacity * bitsPerValue;
     long result = bitLength / BLOCK_SIZE;
     if (bitLength % BLOCK_SIZE > 0) {
@@ -185,16 +200,26 @@ public class PackedIntegerArrayList {
 		      (size + additionalSpace - 1) + ").");
 		}
 	}
+	
+	
+	private void checkValue(long value) {
+		if (!Math2.isBetween(value, minValue, maxValue)) {
+			throw new IllegalArgumentException("The specified value " + value + " is not in the element range of this list (" + 
+		      minValue + ", " + maxValue + ").");
+		}
+	}
 
 	
 	public void add(long index, long value) {
 		checkIndex(index, 1);
+		checkValue(value);
 		insertRange(index, 1);
 		set(index, value);
 	}
 	
 
 	public void add(long value) {
+		checkValue(value);
 		size++;
 		ensureCapacity(size);
 		set(size - 1, value);
@@ -208,13 +233,16 @@ public class PackedIntegerArrayList {
     final int elementPos = (int)(majorBitPos >>> BLOCK_BITS);  // divide by BLOCK_SIZE  // The index in the backing long-array
     final long endBits = (majorBitPos & MOD_MASK) + bpvMinusBlockSize;  // The number of value-bits in the second long
 
+    long result;
     if (endBits <= 0) { // Single block
-      return (array[elementPos] >>> -endBits) & maskRight;
+      result = (array[elementPos] >>> -endBits) & maskRight;
     }
-    // Two blocks
-    return ((array[elementPos] << endBits)
-        | (array[elementPos+1] >>> (BLOCK_SIZE - endBits)))
-        & maskRight;
+    else {  // Two blocks
+    	result = ((array[elementPos] << endBits)
+          | (array[elementPos+1] >>> (BLOCK_SIZE - endBits)))
+          & maskRight;
+    }
+    return result + minValue;
 	}
 	
 
@@ -224,6 +252,10 @@ public class PackedIntegerArrayList {
 	
 
 	public void set(long index, long value) {
+		checkIndex(index, 0);
+		checkValue(value);
+		value = value - minValue;
+		
     final long majorBitPos = index * bitsPerValue;  // The abstract index in a contiguous bit stream
     final int elementPos = (int)(majorBitPos >>> BLOCK_BITS);  // divide by BLOCK_SIZE  // The index in the backing long-array
     final long endBits = (majorBitPos & MOD_MASK) + bpvMinusBlockSize;  // The number of value-bits in the second long

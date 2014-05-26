@@ -38,6 +38,21 @@ public class Math2 {
   }
   
   
+  public static long longPow(long basis, long exponent) {
+  	if (exponent < 0) {
+      throw new IllegalArgumentException("The exponent must be greater or equal to zero (" + 
+      		exponent + ").");
+  	}
+  	else {
+  		long result = 1;
+  		for (long i = 0; i < exponent; i++) {
+				result *= basis;
+			}
+  		return result;
+  	}
+  }
+  
+  
   public static int divAbove(int divided, int divisor) {
 	  int result = divided / divisor;
 	  if (divided % divisor > 0) {
