@@ -21,69 +21,111 @@ package info.bioinfweb.commons.collections;
 
 import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.lucene.util.packed.PackedInts;
 
 
 
 public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E> {
-	private PackedInts.Mutable packedInts;
+	private PackedIntegerArrayList packedList;
 	private List<E> objectList;
-	private Map<E, Integer> indexMap;
+	private Map<E, Integer> intMap;
 	
 	
-	public PackedObjectArrayList() {
+	private int calculateBitsPerValue(int objectTypeCount) {
+		int result = 1;
+		int maxCount = 2;
+		while (maxCount < objectTypeCount) {  // 63 bit border cannot be reached with int values
+			result++;
+			maxCount *= 2;
+		}
+		return result;
+	}
+	
+	
+	public PackedObjectArrayList(int objectTypeCount, int initialCapacity) {
 		super();
-		packedInts = PackedInts.getMutable(valueCount, bitsPerValue, acceptableOverheadRatio);
+		if (objectTypeCount < 0) {
+			throw new IllegalArgumentException("A negative objectTypeCount (" + objectTypeCount + ") is not valid.");
+		}
+		packedList = new PackedIntegerArrayList(calculateBitsPerValue(objectTypeCount), 0, initialCapacity);
+		objectList = new ArrayList<E>(objectTypeCount);
+		intMap = new HashMap<E, Integer>();
 	}
 
+	
+	private int getIntByObject(E object) {
+		Integer result = intMap.get(object);
+		if (result == null) {
+			if (objectList.size() <= packedList.getMaxValue()) {
+				objectList.add(object);
+				result = objectList.size() - 1;
+				intMap.put(object, result);
+			}
+			else {
+				throw new IndexOutOfBoundsException("There are already " + objectList.size() + 
+						" different object types registered in this list which is the maximum number of different objects this " +
+						"list can manage. The specified object is not equal to any of these objects and therefore cannot be added.");
+			}
+		}
+		return result;
+	}
+	
+	
+	private E getObjectByInt(int intRepresentation) {
+		return objectList.get(intRepresentation);
+	}
+	
 
 	@Override
 	public boolean add(E e) {
-
+    packedList.add(getIntByObject(e));
+    return true;
 	}
 
 	
 	@Override
 	public void add(int index, E element) {
-
+    packedList.add(index, getIntByObject(element));
 	}
 
 	
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return getObjectByInt((int)packedList.get(index));
 	}
 	
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return super.remove(index);
+		E result = get(index);
+		packedList.remove(index);
+		return result;
 	}
 	
 
 	@Override
 	protected void removeRange(int fromIndex, int toIndex) {
-		// TODO Auto-generated method stub
-		super.removeRange(fromIndex, toIndex);
+		packedList.removeRange(fromIndex, toIndex - fromIndex);
 	}
 	
 
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return super.set(index, element);
+		E result = get(index);
+    packedList.set(index, getIntByObject(element));
+		return result;
 	}
 	
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int)packedList.size();
+	}
+	
+	
+	public int getMaxObjectTypeCount() {
+		return (int)packedList.getMaxValue() + 1;  //TODO Could the result be one greater than Integer.MAX_VALUE? 
 	}
 }
