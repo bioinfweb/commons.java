@@ -31,7 +31,7 @@ import static org.junit.Assert.* ;
 public class PackedPrimitiveWrapperArrayListTest {
   @Test
   public void testInteger() {
-  	PackedPrimitiveWrapperArrayList<Integer> list = PackedPrimitiveWrapperArrayList.getIntegerInstance(15, -10, 32);
+  	PackedPrimitiveWrapperArrayList<Integer> list = PackedPrimitiveWrapperArrayList.newIntegerInstance(15, -10, 32);
   	//System.out.println(TestTools.toBinaryRepresentation(list.packedList.array[0]));
   	list.add(0);
   	//System.out.println(TestTools.toBinaryRepresentation(list.packedList.array[0]));
@@ -45,7 +45,7 @@ public class PackedPrimitiveWrapperArrayListTest {
   	assertEquals(32757, list.get(2).intValue());
   	assertEquals(3, list.size());
   	
-  	PackedPrimitiveWrapperArrayList<Integer> list2 = PackedPrimitiveWrapperArrayList.getIntegerInstance(15, -10, 32);
+  	PackedPrimitiveWrapperArrayList<Integer> list2 = PackedPrimitiveWrapperArrayList.newIntegerInstance(15, -10, 32);
   	list2.add(0);
   	list2.add(247);
   	list2.add(32757);
@@ -62,49 +62,49 @@ public class PackedPrimitiveWrapperArrayListTest {
   
   @Test(expected=IllegalArgumentException.class)
   public void test_getBytenstance_exception() {
-  	PackedPrimitiveWrapperArrayList.getByteInstance(7, 1, 32);
+  	PackedPrimitiveWrapperArrayList.newByteInstance(7, 1, 32);
   }
   
   
   @Test
   public void test_getByteInstance_exception2() {
-  	PackedPrimitiveWrapperArrayList.getByteInstance(7, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
+  	PackedPrimitiveWrapperArrayList.newByteInstance(7, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
   }
   
   
   @Test(expected=IllegalArgumentException.class)
   public void test_getShortInstance_exception() {
-  	PackedPrimitiveWrapperArrayList.getShortInstance(15, 1, 32);
+  	PackedPrimitiveWrapperArrayList.newShortInstance(15, 1, 32);
   }
   
   
   @Test
   public void test_getShortInstance_exception2() {
-  	PackedPrimitiveWrapperArrayList.getShortInstance(15, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
+  	PackedPrimitiveWrapperArrayList.newShortInstance(15, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
   }
   
   
   @Test(expected=IllegalArgumentException.class)
   public void test_getIntegerInstance_exception() {
-  	PackedPrimitiveWrapperArrayList.getIntegerInstance(31, 1, 32);
+  	PackedPrimitiveWrapperArrayList.newIntegerInstance(31, 1, 32);
   }
   
   
   @Test
   public void test_getIntegerInstance_exception2() {
-  	PackedPrimitiveWrapperArrayList.getIntegerInstance(31, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
+  	PackedPrimitiveWrapperArrayList.newIntegerInstance(31, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
   }
   
   
   @Test(expected=IllegalArgumentException.class)
   public void test_getLongInstance_exception() {
-  	PackedPrimitiveWrapperArrayList.getLongInstance(63, 1, 32);
+  	PackedPrimitiveWrapperArrayList.newLongInstance(63, 1, 32);
   }
   
   
   @Test
   public void test_getLongInstance_exception2() {
-  	PackedPrimitiveWrapperArrayList.getLongInstance(63, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
+  	PackedPrimitiveWrapperArrayList.newLongInstance(63, 0, 32); 	// Just tests that no IllegalArgumentException is thrown.
   }
   
   
