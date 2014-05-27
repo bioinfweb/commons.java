@@ -27,6 +27,28 @@ import java.util.Map;
 
 
 
+/**
+ * Implements a packed list of objects which uses an underlying instance of {@link PackedIntegerArrayList}.
+ * All equal objects in the list are represented by the an integer number stored in the underlying list and
+ * the methods reading and writing objects perform a conversion between these numbers and the concrete object
+ * instances.
+ * <p>
+ * The compression method of this class works best of the list contains a limited set of different objects
+ * multiple times. If different equal object instances are added to this list only the object that was added 
+ * first will be returned for all positions occupied by an equal object (which should not be a problem with
+ * equal objects.)
+ * <p>
+ * Due to the compression method the maximum number of expected different objects has to be specified when
+ * creating instances of this class. Each a new type of object is added to the list an specific integer value
+ * will be assigned to it. Note that such values will always remain associated with this object even if
+ * all objects of this kind (objects that are equal to each other) are removed from the list. So each object
+ * that differs from all previously added objects that is added will contribute to the number of supported
+ * different objects that can be stored, no matter if any of these objects is removed again later on. 
+ * 
+ * @author Ben St&ouml;ver
+ *
+ * @param <E> - the type of element this list shall contain
+ */
 public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E> {
 	private PackedIntegerArrayList packedList;
 	private List<E> objectList;
@@ -44,6 +66,13 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param objectTypeCount - the number of different objects that will at most be contained in the returned list
+	 * @param initialCapacity - the number of entries the list will be able to store before the underlying array
+	 *                          will be resized
+	 */
 	public PackedObjectArrayList(int objectTypeCount, int initialCapacity) {
 		super();
 		if (objectTypeCount < 0) {
@@ -125,6 +154,19 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	}
 	
 	
+	/**
+	 * Returns the number of different objects this list can manage. Note that this value might be higher than
+	 * the value passed to the constructor depending on the maximum integer value that can be represented by
+	 * the number of necessary bits.
+	 * <p>
+	 * <b>Example:</b> A number of 12 different objects is passed to the constructor.
+	 * 4 bits will be necessary to store 12 different values (0..11) 16 different values (0..15) would be possible 
+	 * in 4 bits. Therefore this method would return 16 instead of 12 in this case and the list could also manage
+	 * 16 different objects.
+	 *  
+	 * @return the number of different objects that can be managed (This is not equal to maximum length this list
+	 *         could have.)
+	 */
 	public int getMaxObjectTypeCount() {
 		return (int)packedList.getMaxValue() + 1;  //TODO Could the result be one greater than Integer.MAX_VALUE? 
 	}
