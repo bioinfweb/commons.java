@@ -44,6 +44,21 @@ import java.util.Arrays;
 
 
 
+/**
+ * Implements a list of packed integer values which can occupy a space between 1 and 63 bits per value
+ * depending on the specified constructor parameter. The number space represented by these integers may
+ * but does not have to include negative values, depending on the constructor parameter {@code minValue}.
+ * <p>
+ * All elements are stored in an array of long values. If the number of bits in this array is not sufficient
+ * anymore to take up the values of this list, a new array is created automatically. The initial number of 
+ * elements (not equal to the number of longs in the underlying array object) the list can take up before
+ * creating a new array object can be specified in the constructor.
+ * <p>
+ * This class can be used to store large lists of integer values in a specific range in a memory efficient 
+ * way.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class PackedIntegerArrayList {
 	public static final int MAX_ARRAY_LENGTH = Integer.MAX_VALUE - 8;
 	public static final int BLOCK_SIZE = 64; // 32 = int, 64 = long
@@ -57,9 +72,10 @@ public class PackedIntegerArrayList {
   /** The number of bits one value uses in {@link #array}. */
 	private long bitsPerValue;
 	
+	/** The minimum value that can be represented by an element of this list. */
 	private long minValue;
 
-	/** Stores the maximum value that can saved  */
+	/** The maximum value that can be represented by an element of this list. */
 	private long maxValue;
 	
   /** A right-aligned mask of width BitsPerValue used by {@link #get(long)}. */
@@ -100,16 +116,34 @@ public class PackedIntegerArrayList {
   }
   
   
+  /**
+   * Returns the minimum value that can be represented by an element of this list.
+   * 
+   * @return the minimum value specified in the constructor
+   */
   public long getMinValue() {
 		return minValue;
 	}
 
 
+	/**
+   * Returns the maximum value that can be represented by an element of this list.
+   * 
+	 * @return a value depending on {@link #getMinValue()} and the specified number of
+	 *         bits per value
+	 */
 	public long getMaxValue() {
 		return maxValue;
 	}
 
 
+	/**
+	 * Calculates the number of {@code long} array elements necessary to store the specified
+	 * number of elements.
+	 * 
+	 * @param capacity - the number of list elements to be stored
+	 * @return the needed array size
+	 */
 	protected int calculateArrayLength(long capacity) {
     long bitLength = capacity * bitsPerValue;
     long result = bitLength / BLOCK_SIZE;
@@ -124,6 +158,13 @@ public class PackedIntegerArrayList {
   }
   
   
+  /**
+   * Makes sure that the underlying array can take up at least the specified number of elements.
+   * If the current array is too small a new array which 1.5 times as large as the current one
+   * is created and the current contents are copied there.
+   * 
+   * @param newCapacity - the number of elements that need to be stored in the array
+   */
   protected void ensureCapacity(long newCapacity) {
   	int newArrayLength = calculateArrayLength(newCapacity);
   	if (newArrayLength > array.length) {
@@ -133,6 +174,14 @@ public class PackedIntegerArrayList {
   }
   
   
+	/**
+	 * Reserves space for the specified number of elements at the specified position. Elements right of
+	 * the specified position are moved accordingly. The new elements are not initialized. The underlying
+	 * array is resized if necessary.
+	 * 
+	 * @param index - the index of the first element to be inserted
+	 * @param length - the number of elements to be inserted
+	 */
 	protected void insertRange(long index, long length) {
 		if (length > 0) {
 			ensureCapacity(size + length);  // Throws an IllegalArgumentException if the array will become longer than 2 GB
@@ -168,6 +217,14 @@ public class PackedIntegerArrayList {
 	}
 
 	
+	/**
+	 * Removes the specified elements from this list. All elements to the right of the removed sequence
+	 * are copied to the left accordingly.
+	 * 
+	 * @param index - the index of the first element to be removed
+	 * @param length - the number of elements to be removed
+	 * @throws IllegalArgumentException if the specified range is ouside the current size of the list
+	 */
 	protected void removeRange(long index, long length) {
 		if ((index < 0) || (index + length > size)) {
 			throw new IllegalArgumentException("The specified range starting at " + index + " with the length " + 
@@ -234,6 +291,17 @@ public class PackedIntegerArrayList {
 	}
 
 	
+	/**
+	 * Adds the specified element to this list and moves other elements to the right if necessary.
+	 * 
+	 * @param index - the index where the new element shall be inserted
+	 * @param value - the value to be inserted
+	 * 
+	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater than the current size of 
+	 *         the list
+	 * @throws IllegalArgumentException if {@code value} does not fit into the range specified by the constructor
+	 *         parameters {@code bitsPerValue} and {@code minValue}
+	 */
 	public void add(long index, long value) {
 		checkIndex(index, 1);
 		checkValue(value);
@@ -242,6 +310,13 @@ public class PackedIntegerArrayList {
 	}
 	
 
+	/**
+	 * Adds the specified element to the end of this list.
+	 * 
+	 * @param value - the value to be appended
+	 * @throws IllegalArgumentException if {@code value} does not fit into the range specified by the constructor
+	 *         parameters {@code bitsPerValue} and {@code minValue}
+	 */
 	public void add(long value) {
 		checkValue(value);
 		size++;
@@ -250,6 +325,14 @@ public class PackedIntegerArrayList {
 	}
 	
 
+	/**
+	 * Returns the element stored at the specified index.
+	 * 
+	 * @param index - the index of the element to be read
+	 * @return the integer value stored at this position
+	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
+	 *         of the list
+	 */
 	public long get(long index) {
 		checkIndex(index, 0);
 		
@@ -270,11 +353,28 @@ public class PackedIntegerArrayList {
 	}
 	
 
+	/**
+	 * Removes the element at the specified position from this list.
+	 * 
+	 * @param index - the index of the element to be removed
+	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
+	 *         of the list
+	 */
 	public void remove(long index) {
 		removeRange(index, 1);
 	}
 	
 
+	/**
+	 * Replaces the value at the specified position with the new value.
+	 * 
+	 * @param index - the index of the value to be replaced
+	 * @param value - the new value for the specified position
+	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
+	 *         of the list
+	 * @throws IllegalArgumentException if {@code value} does not fit into the range specified by the constructor
+	 *         parameters {@code bitsPerValue} and {@code minValue}
+	 */
 	public void set(long index, long value) {
 		checkIndex(index, 0);
 		checkValue(value);
@@ -294,6 +394,12 @@ public class PackedIntegerArrayList {
 	}
 
 	
+	/**
+	 * Returns the number of elements currently contained in this list. (This is not equal to the size
+	 * of the underlying {@code long} array.
+	 * 
+	 * @return the current size of the list
+	 */
 	public long size() {
 		return size;
 	}
