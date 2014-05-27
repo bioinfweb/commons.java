@@ -22,10 +22,21 @@ package info.bioinfweb.commons.collections;
 import info.bioinfweb.commons.Math2;
 
 import java.util.AbstractList;
+import java.util.List;
 
 
 
-public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends AbstractList<E>{
+/**
+ * An adapter class providing access to an instance if {@link PackedIntegerArrayList} using the {@link List}
+ * interface where the element type can be any primitive wrapper class of the Java API, namely {@link Byte},
+ * {@link Short}, {@link Integer} or {@link Long}. The number of bits per value to be stored in the underlying
+ * packed list can be determined independently of the selected wrapper type. 
+ * 
+ * @author Ben St&ouml;ver
+ *
+ * @param <E> - the primitive wrapper class to use 
+ */
+public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends AbstractList<E> {
 	protected PackedIntegerArrayList packedList;
 
 	
@@ -50,7 +61,18 @@ public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends 
 	}
 	
 	
-	public static PackedPrimitiveWrapperArrayList<Byte> getByteInstance(int bitsPerValue, 
+	/**
+	 * Creates a new instance of this class using {@link Byte} elements.
+	 * 
+	 * @param bitsPerValue - the number of bits per value that shall be stored
+	 * @param minValue - the minimal value to be represented by the underlying packed list
+	 * @param initialCapacity - the initial number of elements the underlying packed list can take up before 
+	 *        resizing its array
+	 * @return the new instance
+	 * @throws IllegalArgumentException if the combination if bits per value and the minimal value could lead to
+	 *         values that cannot be stored in a {@code byte}
+	 */
+	public static PackedPrimitiveWrapperArrayList<Byte> newByteInstance(int bitsPerValue, 
 			long minValue, int initialCapacity) {
 		
 		checkParameters(bitsPerValue, 8, minValue, Byte.MAX_VALUE);
@@ -63,7 +85,18 @@ public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends 
 	}
 
 	
-	public static PackedPrimitiveWrapperArrayList<Short> getShortInstance(int bitsPerValue, 
+	/**
+	 * Creates a new instance of this class using {@link Short} elements.
+	 * 
+	 * @param bitsPerValue - the number of bits per value that shall be stored
+	 * @param minValue - the minimal value to be represented by the underlying packed list
+	 * @param initialCapacity - the initial number of elements the underlying packed list can take up before 
+	 *        resizing its array
+	 * @return the new instance
+	 * @throws IllegalArgumentException if the combination if bits per value and the minimal value could lead to
+	 *         values that cannot be stored in a {@code short}
+	 */
+	public static PackedPrimitiveWrapperArrayList<Short> newShortInstance(int bitsPerValue, 
 			long minValue, int initialCapacity) {
 		
 		checkParameters(bitsPerValue, 16, minValue, Short.MAX_VALUE);
@@ -76,7 +109,18 @@ public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends 
 	}
 
 	
-	public static PackedPrimitiveWrapperArrayList<Integer> getIntegerInstance(int bitsPerValue, 
+	/**
+	 * Creates a new instance of this class using {@link Integer} elements.
+	 * 
+	 * @param bitsPerValue - the number of bits per value that shall be stored
+	 * @param minValue - the minimal value to be represented by the underlying packed list
+	 * @param initialCapacity - the initial number of elements the underlying packed list can take up before 
+	 *        resizing its array
+	 * @return the new instance
+	 * @throws IllegalArgumentException if the combination if bits per value and the minimal value could lead to
+	 *         values that cannot be stored in a {@code int}
+	 */
+	public static PackedPrimitiveWrapperArrayList<Integer> newIntegerInstance(int bitsPerValue, 
 			long minValue, int initialCapacity) {
 		
 		checkParameters(bitsPerValue, 32, minValue, Integer.MAX_VALUE);
@@ -89,7 +133,18 @@ public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends 
 	}
 
 	
-	public static PackedPrimitiveWrapperArrayList<Long> getLongInstance(int bitsPerValue, 
+	/**
+	 * Creates a new instance of this class using {@link Long} elements.
+	 * 
+	 * @param bitsPerValue - the number of bits per value that shall be stored
+	 * @param minValue - the minimal value to be represented by the underlying packed list
+	 * @param initialCapacity - the initial number of elements the underlying packed list can take up before 
+	 *        resizing its array
+	 * @return the new instance
+	 * @throws IllegalArgumentException if the combination if bits per value and the minimal value could lead to
+	 *         values that cannot be stored in a {@code long}
+	 */
+	public static PackedPrimitiveWrapperArrayList<Long> newLongInstance(int bitsPerValue, 
 			long minValue, int initialCapacity) {
 		
 		checkParameters(bitsPerValue, 63, minValue, Long.MAX_VALUE);
