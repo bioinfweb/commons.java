@@ -19,6 +19,8 @@
 package info.bioinfweb.commons.graphics;
 
 
+import info.bioinfweb.commons.Math2;
+
 import java.awt.Color;
 
 
@@ -27,6 +29,72 @@ import java.awt.Color;
  * @author Ben St&ouml;ver
  */
 public class GraphicsUtils {
+	/**
+	 * Returns the according gray scale value to the specified color. That value is calculated as the arithmetic
+	 * mean if the red, green and blue color values.
+	 * 
+	 * @param color - the color to be converted
+	 * @return an integer between 0 and 255
+	 * @see #rgbToGrayColor(Color)
+	 */
+	public static int rgbToGrayValue(Color color) {
+		return (color.getRed() + color.getGreen() + color.getBlue()) / 3;
+	}
+	
+	
+	/**
+	 * Returns the according gray scale color to the specified color. The values for all channels are calculated as 
+	 * the arithmetic mean of the red, green and blue color values of the specified color. The alpha channel is 
+	 * preserved.
+	 * 
+	 * @param color - the color to be converted
+	 * @return a color where all color channels have an equal value
+	 * @see #rgbToGrayValue(Color)
+	 */
+	public static Color rgbToGrayColor(Color color) {
+		int gray = rgbToGrayValue(color);
+    return new Color(gray, gray, gray, color.getAlpha());
+	}
+	
+	
+	/**
+	 * Multiplies all color channels of the specified color with the specified value. (The alpha channel is preserved).
+	 * Channel values will never become higher than 255.
+	 * <p>
+	 * This method can be used as an alternative to {@link Color#brighter()} and {@link Color#darker()}n which
+	 * always multiply with a constant factor.
+	 * 
+	 * @param color - the color to changed
+	 * @param factor - the factor to be multiplied with the channel values
+	 * @return the changed color
+	 */
+	public static Color multiplyColorChannels(Color color, float factor) {
+		return new Color(
+				Math2.moveBetween(Math.round(color.getRed() * factor), 0, 255), 
+				Math2.moveBetween(Math.round(color.getGreen() * factor), 0, 255), 
+				Math2.moveBetween(Math.round(color.getBlue() * factor), 0, 255), 
+				color.getAlpha());
+	}
+	
+	
+	/**
+	 * Adds a constant value to all color channels of the specified color. (The alpha channel is preserved).
+	 * <p>
+	 * Channel values will never become higher than 255 or lower than 0.  
+	 * 
+	 * @param color - the color to changed
+	 * @param addend - the value to be added to all color channels
+	 * @return the changed color
+	 */
+	public static Color addToColorChannels(Color color, int addend) {
+		return new Color(
+				Math2.moveBetween(color.getRed() + addend, 0, 255), 
+				Math2.moveBetween(color.getGreen() + addend, 0, 255), 
+				Math2.moveBetween(color.getBlue() + addend, 0, 255), 
+				color.getAlpha());
+	}
+	
+	
   /**
    * Returns the sum of the absolute differences the three channels of the two colors.
    * @param c1

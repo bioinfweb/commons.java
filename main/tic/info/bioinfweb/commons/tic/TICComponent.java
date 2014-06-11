@@ -109,10 +109,10 @@ public abstract class TICComponent {
 	
 	/**
 	 * Adopts the current component size to the underlying GUI toolkit, if a toolkit specific component
-	 * has already been created..
+	 * has already been created.
 	 */
-	protected void assignSize() {
-		
+	public void assignSize() {
+		//TODO impl.
 	}
 	
 	
