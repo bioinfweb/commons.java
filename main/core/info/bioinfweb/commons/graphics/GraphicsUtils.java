@@ -67,6 +67,8 @@ public class GraphicsUtils {
 	 * @param color - the color to changed
 	 * @param factor - the factor to be multiplied with the channel values
 	 * @return the changed color
+	 * 
+	 * @see GraphicsUtils#moveColorToCenter(Color, float)
 	 */
 	public static Color multiplyColorChannels(Color color, float factor) {
 		return new Color(
@@ -92,6 +94,27 @@ public class GraphicsUtils {
 				Math2.moveBetween(color.getGreen() + addend, 0, 255), 
 				Math2.moveBetween(color.getBlue() + addend, 0, 255), 
 				color.getAlpha());
+	}
+	
+	
+	/**
+	 * The result of the method depends on the specified color. If the gray value of {@code color} is greater than
+	 * 127 all color channels are multiplied by {@code factor}. If the gray value is lower all color channels are
+	 * divided by {@code factor}. The alpha channel is not changed.
+	 * <p>
+	 * Channel values will never become higher than 255 or lower than 0.  
+	 * 
+	 * @param color - the color to be modified
+	 * @param factor - the scale factor for the color channels
+	 * @return the modified color
+	 * 
+	 * @see #multiplyColorChannels(Color, float)
+	 */
+	public static Color moveColorToCenter(Color color, float factor) {
+		if (rgbToGrayValue(color) > 127) {
+			factor = 1f / factor;
+		}
+		return multiplyColorChannels(color, factor);
 	}
 	
 	
