@@ -36,7 +36,6 @@ import org.eclipse.swt.graphics.GC;
  */
 public class TICPaintEvent extends EventObject {
   private Graphics2D graphics;
-  private GC gc;
   private Rectangle rectangle;
   
   
@@ -48,22 +47,8 @@ public class TICPaintEvent extends EventObject {
 	 * @param rectangle - the rectangle that has to be repainted
 	 */
 	public TICPaintEvent(Object source, Graphics2D graphics, Rectangle rectangle) {
-		this(source, graphics, null, rectangle);
-	}
-
-	
-	/**
-	 * Creates a new instance of this class.
-	 * 
-	 * @param source - the object that triggered the event
-	 * @param graphics - the swing graphics context
-	 * @param gc - the SWT graphics context (Provided as an possible alternative for toolkit specific drawing.) 
-	 * @param rectangle - the rectangle that has to be repainted
-	 */
-	public TICPaintEvent(Object source, Graphics2D graphics, GC gc, Rectangle rectangle) {
 		super(source);
 		this.graphics = graphics;
-		this.gc = gc;
 		this.rectangle = rectangle;
 	}
 	
@@ -80,27 +65,6 @@ public class TICPaintEvent extends EventObject {
 	}
 
 	
-	/**
-	 * Checks if an SWT graphics context is available.
-	 * 
-	 * @return {@code true} if a SWT graphics context is available, {@code false} otherwise.
-	 */
-	public boolean hasGC() {
-		return gc != null;
-	}
-	
-
-	/**
-	 * The SWT graphics context, if one is available. This method will only return an instance if SWT
-	 * is currently used as the toolkit.
-	 * 
-	 * @return the SWT graphics context or {@code null} if SWT is not the toolkit currently used
-	 */
-	public GC getGC() {
-		return gc;
-	}
-
-
 	/**
 	 * Returns the rectangle that needs to be repainted.
 	 * 

@@ -19,13 +19,20 @@
 package info.bioinfweb.commons.tic.toolkit;
 
 
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 
 import info.bioinfweb.commons.tic.SWTGraphics2D;
 import info.bioinfweb.commons.tic.TICComponent;
 import info.bioinfweb.commons.tic.TICPaintEvent;
 
 import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.widgets.Composite;
 
 
@@ -45,9 +52,15 @@ public class DefaultSWTComposite extends AbstractSWTWidget {
 
 	@Override
 	public void paintControl(PaintEvent e) {
-		SWTGraphics2D g = new SWTGraphics2D(e.gc);
+		BufferedImage refreshArea = new BufferedImage(e.width, e.height, BufferedImage.TYPE_3BYTE_BGR);
+		Graphics2D g = refreshArea.createGraphics();
 		try {
+			g.translate(-e.x, -e.y);
 			getIndependentComponent().paint(new TICPaintEvent(this, g, new Rectangle(e.x, e.y, e.width, e.height)));
+      ImageData data = new ImageData(refreshArea.getWidth(), refreshArea.getHeight(), 24, 
+      		new PaletteData(0xff, 0xff00, 0xff0000), 3 * refreshArea.getWidth(), 
+      		((DataBufferByte)refreshArea.getRaster().getDataBuffer()).getData());
+      e.gc.drawImage(new Image(e.gc.getDevice(), data), e.x, e.y);
 		}
 		finally {
 			g.dispose();

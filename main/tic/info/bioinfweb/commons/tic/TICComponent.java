@@ -112,7 +112,18 @@ public abstract class TICComponent {
 	 * has already been created.
 	 */
 	public void assignSize() {
-		//TODO impl.
+		if (hasToolkitComponent()) {
+			Dimension size = getSize();
+			if (getCurrentToolkit().equals(TargetToolkit.SWT)) {
+				System.out.println("Setting SWT width to " + size);
+				((Composite)getToolkitComponent()).setSize(size.width, size.height);
+			}
+			else {
+				JComponent component = (JComponent)getToolkitComponent(); 
+				component.setSize(size);
+				component.setPreferredSize(size);  //TODO Also set minSize?
+			}
+		}
 	}
 	
 	
