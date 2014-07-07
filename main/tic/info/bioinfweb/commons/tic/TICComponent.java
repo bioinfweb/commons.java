@@ -115,7 +115,6 @@ public abstract class TICComponent {
 		if (hasToolkitComponent()) {
 			Dimension size = getSize();
 			if (getCurrentToolkit().equals(TargetToolkit.SWT)) {
-				System.out.println("Setting SWT width to " + size);
 				((Composite)getToolkitComponent()).setSize(size.width, size.height);
 			}
 			else {
