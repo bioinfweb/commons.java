@@ -45,6 +45,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/swt.jar"/>
-	<classpathentry kind="lib" path="lib/JFreeChartSWTExperimental.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
