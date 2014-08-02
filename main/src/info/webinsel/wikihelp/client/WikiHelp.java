@@ -1,9 +1,10 @@
 package info.webinsel.wikihelp.client;
 
 
-import edu.stanford.ejalbert.BrowserLauncher;
-import edu.stanford.ejalbert.exception.BrowserLaunchingInitializingException;
-import edu.stanford.ejalbert.exception.UnsupportedOperatingSystemException;
+import java.awt.Desktop;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 
@@ -15,15 +16,12 @@ public class WikiHelp {
 	
 	private String wikiURL = null;
 	private String redirectURL = null;
-	private WikiHelpErrorHandler errorHandler = null;
-	private BrowserLauncher launcher = null;
 	
 
 	public WikiHelp(String wikiHelpURL) {
 		super();
 		wikiURL = wikiHelpURL + WIKI_FOLDER;
 		redirectURL = wikiHelpURL + CODE_REDIRECTOR;
-		useDefaultErrorHandler();
 	}
 
 
@@ -31,52 +29,9 @@ public class WikiHelp {
 		super();
 		this.wikiURL = wikiURL;
 		this.redirectURL = redirectURL;
-		useDefaultErrorHandler();
 	}
 	
 	
-	public WikiHelp(String wikiHelpURL, WikiHelpErrorHandler errorHandler) {
-		super();
-		wikiURL = wikiHelpURL + WIKI_FOLDER;
-		redirectURL = wikiHelpURL + CODE_REDIRECTOR;
-		this.errorHandler = errorHandler;
-	}
-
-
-	public WikiHelp(String wikiURL, String redirectURL, WikiHelpErrorHandler errorHandler) {
-		super();
-		this.wikiURL = wikiURL;
-		this.redirectURL = redirectURL;
-		this.errorHandler = errorHandler;
-	}
-	
-	
-	private void useDefaultErrorHandler() {
-		errorHandler = new DefaultErrorHandler();
-	}
-	
-	
-	public WikiHelpErrorHandler getErrorHandler() {
-		return errorHandler;
-	}
-
-
-	private BrowserLauncher getLauncher() {
-		if (launcher == null) {
-			try {
-				launcher = new BrowserLauncher();
-			}
-			catch (UnsupportedOperatingSystemException e) {
-				getErrorHandler().unsupportedOperatingSystem(e);
-			}
-			catch (BrowserLaunchingInitializingException e) {
-				getErrorHandler().initFail(e);
-			}
-		}
-		return launcher;
-	}
-
-
 	public void displayTopic(int code) {
 		setPage(redirectURL + code);
 	}
@@ -88,7 +43,7 @@ public class WikiHelp {
   
   
   public void displayContents() {
-  	displayTopic("");  // Es sollte nun ein redirect zu "Main_Page" erfolgen.
+  	displayTopic("");  // A redirect to "Main_Page" will be done.
 	}
   
   
@@ -98,9 +53,14 @@ public class WikiHelp {
   
   
   public void setPage(String url) {
-  	BrowserLauncher launcher = getLauncher();
-  	if (launcher != null) {
-  		launcher.openURLinBrowser(url); 
+  	try {
+  		Desktop.getDesktop().browse(new URI(url));
+  	}
+  	catch (IOException e) {
+  		throw new RuntimeException(e);
+  	}
+  	catch (URISyntaxException e) {
+  		throw new RuntimeException(e);
   	}
   }
 }

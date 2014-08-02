@@ -139,7 +139,6 @@ main/experimental/info/bioinfweb/commons/servlet/webapp/session/Sessions.java -t
 main/experimental/info/bioinfweb/commons/swing/ToolBarPopup.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrToken.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
-main/lib/BrowserLauncher2-1_3.jar -text
 main/lib/biojava3-alignment-3.0.5.jar -text
 main/lib/biojava3-core-3.0.5.jar -text
 main/lib/bytecode-1.8.jar -text
@@ -167,11 +166,8 @@ main/sql/info/bioinfweb/commons/sql/sqlproperties/ConcreteSQLProperties.java -te
 main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
 main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
 main/sql/info/bioinfweb/commons/sql/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
-main/src/info/webinsel/wikihelp/client/DefaultErrorHandler.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/OkCancelApplyWikiHelpDialog.java -text svneol=unset#text/plain
-main/src/info/webinsel/wikihelp/client/SwingErrorHandler.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/WikiHelp.java -text svneol=unset#text/plain
-main/src/info/webinsel/wikihelp/client/WikiHelpErrorHandler.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/client/WikiHelpOptionPane.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/server/IndexManagement.java -text svneol=unset#text/plain
 main/src/info/webinsel/wikihelp/server/RedirectServlet.java -text svneol=unset#text/plain
