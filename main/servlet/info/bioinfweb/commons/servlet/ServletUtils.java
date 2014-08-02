@@ -14,6 +14,45 @@ import javax.servlet.http.HttpServletRequest;
  * @author Ben St&ouml;ver
  */
 public class ServletUtils {
+	public static int getIntParameter(HttpServletRequest request, String name, 
+			int defaultValue) {
+		
+		if (request.getParameter(name) != null) {
+			try {
+				return Integer.parseInt(request.getParameter(name));
+			}
+			catch (NumberFormatException e) {}
+		}
+		return defaultValue;
+	}
+	
+	
+	public static long getLongParameter(HttpServletRequest request, String name, 
+			long defaultValue) {
+		
+		if (request.getParameter(name) != null) {
+			try {
+				return Long.parseLong(request.getParameter(name));
+			}
+			catch (NumberFormatException e) {}
+		}
+		return defaultValue;
+	}
+	
+	
+	public static boolean getBooleanParameter(HttpServletRequest request, String name, 
+			boolean defaultValue) {
+		
+		if (request.getParameter(name) != null) {
+			try {
+				return Boolean.parseBoolean(request.getParameter(name));
+			}
+			catch (NumberFormatException e) {}
+		}
+		return defaultValue;
+	}
+	
+	
   /**
    * Reads a set of integer values specified by GET or POST parameters. Non numeric values are skipped.
    */

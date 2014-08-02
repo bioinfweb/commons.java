@@ -43,30 +43,4 @@ public abstract class GetPostServlet extends HttpServlet {
 	
 	
 	protected abstract void doGetPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-	
-	
-	public static int getIntParameter(HttpServletRequest request, String name, 
-			int defaultValue) {
-		
-		if (request.getParameter(name) != null) {
-			try {
-				return Integer.parseInt(request.getParameter(name));
-			}
-			catch (NumberFormatException e) {}
-		}
-		return defaultValue;
-	}
-	
-	
-	public static long getLongParameter(HttpServletRequest request, String name, 
-			long defaultValue) {
-		
-		if (request.getParameter(name) != null) {
-			try {
-				return Long.parseLong(request.getParameter(name));
-			}
-			catch (NumberFormatException e) {}
-		}
-		return defaultValue;
-	}
 }
