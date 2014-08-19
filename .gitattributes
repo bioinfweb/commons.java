@@ -264,5 +264,7 @@ test/src/info/bioinfweb/commons/io/TableReaderTest.java -text svneol=unset#text/
 test/src/info/bioinfweb/commons/io/XMLUtilsTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/sql/SQLUtilsTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/test/KeyCodeTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/test/LuceneTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/text/StringUtilsTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/tic/input/TICInputEventTest.java -text svneol=unset#text/plain
