@@ -20,6 +20,7 @@ package info.bioinfweb.commons.tic.input;
 
 
 import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 
 import org.eclipse.swt.SWT;
 
@@ -38,6 +39,14 @@ public class TICInputEvent {
 	private int modifiers;
 	
 	
+	/**
+	 * Creates a new instance of this class. Objects of this type should not be instantiated directly but an inherited
+	 * class should be used instead.
+	 * 
+	 * @param source - the TIC component triggering this event
+	 * @param time - the time (in milliseconds) when the event happened
+	 * @param modifiers - the modifier keys in AWT format (see constants in {@link KeyEvent})
+	 */
 	public TICInputEvent(TICComponent source, long time, int modifiers) {
 		super();
 		this.source = source;
@@ -153,5 +162,35 @@ public class TICInputEvent {
 	 */
 	public boolean isMetaDown() {
 		return (modifiers & InputEvent.META_DOWN_MASK) != 0;
+	}
+	
+	
+	/**
+	 * Determines whether mouse button 1 was pressed during this event.
+	 * 
+	 * @return {@code true} if the button was pressed while this event happened, {@code false otherwise}.
+	 */
+	public boolean isMouseButton1Down() {
+		return (modifiers & InputEvent.BUTTON1_DOWN_MASK) != 0;
+	}
+	
+	
+	/**
+	 * Determines whether mouse button 2 was pressed during this event.
+	 * 
+	 * @return {@code true} if the button was pressed while this event happened, {@code false otherwise}.
+	 */
+	public boolean isMouseButton2Down() {
+		return (modifiers & InputEvent.BUTTON2_DOWN_MASK) != 0;
+	}
+	
+	
+	/**
+	 * Determines whether mouse button 3 was pressed during this event.
+	 * 
+	 * @return {@code true} if the button was pressed while this event happened, {@code false otherwise}.
+	 */
+	public boolean isMouseButton3Down() {
+		return (modifiers & InputEvent.BUTTON3_DOWN_MASK) != 0;
 	}
 }

@@ -29,15 +29,52 @@ import info.bioinfweb.commons.tic.TICComponent;
  * @author Ben St&ouml;ver
  */
 public interface TICMouseListener {
+  /**
+   * This method is called when a mouse button is pressed down.
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mousePressed(TICMouseEvent event);
   
+  /**
+   * This method is called when a mouse button is released.
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mouseReleased(TICMouseEvent event);
   
+  /**
+   * This method is called when a mouse button is pressed down.
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mouseEntered(TICMouseEvent event);
   
+  /**
+   * This method is called when a mouse button is pressed down.
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mouseExited(TICMouseEvent event);
   
+  /**
+   * This method is called if the mouse is moved over the component while no mouse button is pressed.
+   * If a button is pressed, {@link #mouseDragged(TICMouseEvent)} is called instead.
+   * <p>
+   * In contrast to drag events this event is only fired, if the mouse is located over the component. 
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mouseMoved(TICMouseEvent event);
   
+  /**
+   * This method is called if the mouse is moved over the component while a mouse button is held down.
+   * If no button is pressed, {@link #mouseMoved(TICMouseEvent)} is called instead. 
+   * <p>
+   * Note that drag events are still fired if the mouse has already left the component until the according mouse 
+   * button is released.
+   * 
+   * @param event - the object containing information about the event 
+   */
   public void mouseDragged(TICMouseEvent event);
 }
