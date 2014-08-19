@@ -1,6 +1,6 @@
 /*
  * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
- * Copyright (C) 2010-2014  Ben Stöver
+ * Copyright (C) 2010-2014  Ben Stï¿½ver
  * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
@@ -19,6 +19,10 @@
 package info.bioinfweb.commons.tic;
 
 
+import info.bioinfweb.commons.tic.input.TICComponentKeyListenersList;
+import info.bioinfweb.commons.tic.input.TICComponentMouseListenersList;
+import info.bioinfweb.commons.tic.input.TICKeyListener;
+import info.bioinfweb.commons.tic.input.TICMouseListener;
 import info.bioinfweb.commons.tic.toolkit.AbstractSWTWidget;
 import info.bioinfweb.commons.tic.toolkit.AbstractSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
@@ -40,6 +44,8 @@ import org.eclipse.swt.widgets.Composite;
  */
 public abstract class TICComponent {
 	private ToolkitComponent toolkitComponent = null;
+	private TICComponentKeyListenersList keyListenersList = new TICComponentKeyListenersList(this);
+	private TICComponentMouseListenersList mouseListenersList = new TICComponentMouseListenersList(this);
 	
 	
 	/**
@@ -167,7 +173,7 @@ public abstract class TICComponent {
 	 * The returned instance will be returned by {@link #getToolkitComponent()} from now on. Subsequent
 	 * calls of this method will return the same instance again. 
 	 * <p>
-	 * Note that this method can only be if {@link #createSWTWidget(Composite, int)} has not been called 
+	 * Note that this method can only be called if {@link #createSWTWidget(Composite, int)} has not been called 
 	 * before.
 	 * <p>
 	 * If you want to provide a custom Swing component overwrite {@link #doCreateSwingComponent()} 
@@ -178,7 +184,11 @@ public abstract class TICComponent {
 	 */
 	public JComponent createSwingComponent() {
 		if (toolkitComponent == null) {
-			toolkitComponent = (ToolkitComponent)doCreateSwingComponent();
+			JComponent component = doCreateSwingComponent();
+			component.addKeyListener(keyListenersList);
+			component.addMouseListener(mouseListenersList);
+			component.addMouseMotionListener(mouseListenersList);
+			toolkitComponent = (ToolkitComponent)component;
 		}
 		else if (!getCurrentToolkit().equals(TargetToolkit.SWING)) {
 			throw new IllegalStateException("A non Swing component has already been created.");
@@ -202,13 +212,23 @@ public abstract class TICComponent {
 	}
 	
 	
+	private ToolkitComponent createAndRegisterSWTWidget(Composite parent, int style) {
+		Composite result = doCreateSWTWidget(parent, style);
+		result.addKeyListener(keyListenersList);
+		result.addMouseListener(mouseListenersList);
+		result.addMouseMoveListener(mouseListenersList);
+		result.addMouseTrackListener(mouseListenersList);
+		return (ToolkitComponent)result;
+	}
+	
+	
 	/**
 	 * Creates the SWT component that will be associated with this instance if it was not created before. 
 	 * The returned instance will be returned by {@link #getToolkitComponent()} from now on. Subsequent
 	 * calls of this method will return the same instance again. The specified parameters will not be
 	 * considered in that case. 
 	 * <p>
-	 * Note that this method can only be if {@link #createSWTWidget(Composite, int)} has not been called 
+	 * Note that this method can only be called if {@link #createSWTWidget(Composite, int)} has not been called 
 	 * before.
 	 * <p>
 	 * If you want to provide a custom Swing component overwrite {@link #doCreateSwingComponent()} 
@@ -219,15 +239,35 @@ public abstract class TICComponent {
 	 */
 	public Composite createSWTWidget(Composite parent, int style) {
 		if (toolkitComponent == null) {
-			toolkitComponent = (ToolkitComponent)doCreateSWTWidget(parent, style);
+			toolkitComponent = createAndRegisterSWTWidget(parent, style);
 		}
 		else if (!getCurrentToolkit().equals(TargetToolkit.SWT)) {
 			throw new IllegalStateException("A non Swing component has already been created.");
 		}
 		else if (((Composite)toolkitComponent).isDisposed()) {  // && getCurrentToolkit().equals(TargetToolkit.SWT)
-			toolkitComponent = (ToolkitComponent)doCreateSWTWidget(parent, style);  // Create new component if previous one was disposed.
+			toolkitComponent = createAndRegisterSWTWidget(parent, style);  // Create new component if previous one was disposed.
 			//TODO Does this make sense this way? Anything else to be done about disposing of SWT elements?
 		}
 		return (Composite)toolkitComponent;
+	}
+	
+	
+	public void addKeyListener(TICKeyListener listener) {
+		keyListenersList.getListeners().add(listener);
+	}
+	
+	
+	public boolean removeKeyListener(TICKeyListener listener) {
+		return keyListenersList.getListeners().remove(listener);
+	}
+	
+	
+	public void addMouseListener(TICMouseListener listener) {
+		mouseListenersList.getListeners().add(listener);
+	}
+	
+	
+	public boolean removeMouseListener(TICMouseListener listener) {
+		return mouseListenersList.getListeners().remove(listener);
 	}
 }
