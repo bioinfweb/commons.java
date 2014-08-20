@@ -18,6 +18,8 @@
  */
 package info.bioinfweb.commons.tic.input;
 
+import java.util.EventListener;
+
 import info.bioinfweb.commons.tic.TICComponent;
 
 
@@ -27,7 +29,7 @@ import info.bioinfweb.commons.tic.TICComponent;
  * 
  * @author Ben St&ouml;ver
  */
-public interface TICKeyListener {
+public interface TICKeyListener extends EventListener {
   public void keyPressed(TICKeyEvent event);	
 
   public void keyReleased(TICKeyEvent event);	

@@ -19,6 +19,8 @@
 package info.bioinfweb.commons.tic.input;
 
 
+import java.util.EventListener;
+
 import info.bioinfweb.commons.tic.TICComponent;
 
 
@@ -28,7 +30,7 @@ import info.bioinfweb.commons.tic.TICComponent;
  * 
  * @author Ben St&ouml;ver
  */
-public interface TICMouseListener {
+public interface TICMouseListener extends EventListener {
   /**
    * This method is called when a mouse button is pressed down.
    * 
