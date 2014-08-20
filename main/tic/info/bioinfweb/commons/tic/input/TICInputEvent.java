@@ -21,6 +21,7 @@ package info.bioinfweb.commons.tic.input;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.util.EventObject;
 
 import org.eclipse.swt.SWT;
 
@@ -33,8 +34,7 @@ import info.bioinfweb.commons.tic.TICComponent;
  * 
  * @author Ben St&ouml;ver
  */
-public class TICInputEvent {
-	private TICComponent source;
+public class TICInputEvent extends EventObject {
 	private long time;
 	private int modifiers;
 	
@@ -48,8 +48,7 @@ public class TICInputEvent {
 	 * @param modifiers - the modifier keys in AWT format (see constants in {@link KeyEvent})
 	 */
 	public TICInputEvent(TICComponent source, long time, int modifiers) {
-		super();
-		this.source = source;
+		super(source);
 		this.time = time;
 		this.modifiers = modifiers;
 	}
@@ -94,8 +93,9 @@ public class TICInputEvent {
 	}
 	
 	
+  @Override
 	public TICComponent getSource() {
-		return source;
+		return (TICComponent)super.getSource();
 	}
 
 
