@@ -1,6 +1,8 @@
 package info.bioinfweb.commons;
 
 
+import java.awt.Rectangle;
+
 import org.junit.* ;
 
 
@@ -8,7 +10,37 @@ import static org.junit.Assert.* ;
 
 
 
+/**
+ * Tests {@link Math2}.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class Math2Test {
+	@Test
+	public void test_containsRect() {
+		Rectangle r1 = new Rectangle(5, 5, 10, 10);
+		Rectangle r2 = new Rectangle(6, 7, 6, 6);
+		assertTrue(Math2.containsRect(r2, r1));
+		assertFalse(Math2.containsRect(r1, r2));
+		assertTrue(Math2.containsRect(r1, r1));
+
+		r2 = new Rectangle(6, 7, 9, 8);
+		assertTrue(Math2.containsRect(r2, r1));
+
+		r2 = new Rectangle(6, 7, 10, 8);
+		assertFalse(Math2.containsRect(r2, r1));
+
+		r2 = new Rectangle(6, 7, 9, 9);
+		assertFalse(Math2.containsRect(r2, r1));
+
+		r2 = new Rectangle(4, 5, 2, 2);
+		assertFalse(Math2.containsRect(r2, r1));
+
+		r2 = new Rectangle(5, 4, 2, 2);
+		assertFalse(Math2.containsRect(r2, r1));
+	}
+	
+	
 	@Test
   public void test_sum1ToN() {
 		assertEquals(0, Math2.sum1ToN(0));
