@@ -1,6 +1,7 @@
 package info.bioinfweb.commons;
 
 
+import java.awt.Rectangle;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
@@ -638,6 +639,21 @@ public class Math2 {
   public static boolean overlapsNE(double min1, double max1, double min2, double max2) {
   	return ((min1 >= min2) && (min1 < max2)) || ((max1 > min2) && (max1 <= max2)) || 
            ((min2 >= min1) && (min2 < max1)) || ((max2 > min1) && (max2 <= max1));
+  }
+  
+  
+  /**
+   * Checks if one rectangle is completely contained inside the other.
+   * 
+   * @param containedRect - the rectangle that shall be tested to be contained in {@code containingRect}
+   * @param containingRect - the rectangle that shall be tested to contain {@code containedRect}
+   * @return {@code true} if the one rectangle is contained in the other, {@code false} otherwise
+   */
+  public static boolean containsRect(Rectangle containedRect, Rectangle containingRect) {
+  	int dx = containedRect.x - containingRect.x;
+  	int dy = containedRect.y - containingRect.y;
+  	return (dx >= 0) && (containedRect.width <= containingRect.width - dx) &&
+  			(dy >= 0) && (containedRect.height <= containingRect.height - dy);
   }
   
   
