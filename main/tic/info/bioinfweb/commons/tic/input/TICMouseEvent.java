@@ -52,8 +52,8 @@ public class TICMouseEvent extends TICInputEvent {
 
 
 	public TICMouseEvent(TICComponent source, org.eclipse.swt.events.MouseEvent swtEvent) {
-		this(source, convertSWTEventTime(swtEvent.time), convertSWTStateMask(swtEvent.stateMask, swtEvent.button), swtEvent.button, 
-				swtEvent.count,	false, swtEvent.x, swtEvent.y);
+		this(source, convertSWTEventTime(swtEvent.time), convertSWTStateMask(swtEvent.stateMask, swtEvent.button), 
+				swtEvent.button, swtEvent.count,	false, swtEvent.x, swtEvent.y);
 		//TODO Determine popup trigger
 	}
 
