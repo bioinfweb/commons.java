@@ -1,6 +1,6 @@
 /*
  * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
- * Copyright (C) 2010-2014  Ben Stöver
+ * Copyright (C) 2010-2014  Ben Stï¿½ver
  * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
@@ -25,7 +25,6 @@ import javax.swing.JComponent;
 
 
 
-
 /**
  * The Swing component displaying a {@link PaintableArea}.
  * 
@@ -39,6 +38,7 @@ public abstract class AbstractSwingComponent extends JComponent implements Toolk
 	public AbstractSwingComponent(TICComponent ticComponent) {
 		super();
 		this.independentComponent = ticComponent;
+		setFocusable(true);
 	}
 
 

@@ -30,6 +30,7 @@ import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
 
 import java.awt.Dimension;
+import java.awt.Point;
 
 import javax.swing.JComponent;
 
@@ -128,6 +129,24 @@ public abstract class TICComponent {
 				component.setSize(size);
 				component.setPreferredSize(size);  //TODO Also set minSize?
 			}
+		}
+	}
+	
+	
+	/**
+	 * Returns the location of this component in the coordinate space of the parent component.
+	 * 
+	 * @return the location or {@code null} if neither a Swing nor a SWT component has yet been created.
+	 */
+	public Point getLocationInParent() {
+		switch (getCurrentToolkit()) {
+			case SWING:
+				return ((JComponent)getToolkitComponent()).getLocation();
+			case SWT:
+				org.eclipse.swt.graphics.Point location = ((Composite)getToolkitComponent()).getLocation();
+				return new Point(location.x, location.y);
+			default:
+				return null;
 		}
 	}
 	
