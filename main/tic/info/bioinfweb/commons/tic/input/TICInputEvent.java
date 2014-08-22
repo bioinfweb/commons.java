@@ -194,4 +194,14 @@ public class TICInputEvent extends EventObject {
 	public boolean isMouseButton3Down() {
 		return (modifiers & InputEvent.BUTTON3_DOWN_MASK) != 0;
 	}
+	
+	
+	/**
+	 * Tests whether the menu shortcut key is pressed (<i>Command</i> on Mac and <i>Control</i> on the other OS).
+	 * 
+	 * @return {@code true} if the button was pressed while this event happened, {@code false otherwise}.
+	 */
+	public boolean isMenuShortcutKeyDown() {
+		return (isMetaDown() && SystemUtils.IS_OS_MAC) || (isControlDown()&&  !SystemUtils.IS_OS_MAC);  // This workaround needs to be done, because getMenuShortcutKeyMask() does not return extended modifiers.
+	}
 }
