@@ -25,6 +25,7 @@ import java.util.EventObject;
 
 import org.eclipse.swt.SWT;
 
+import info.bioinfweb.commons.SystemUtils;
 import info.bioinfweb.commons.tic.TICComponent;
 
 
@@ -71,12 +72,15 @@ public class TICInputEvent extends EventObject {
 			result |= InputEvent.SHIFT_DOWN_MASK;
 		}
 		if ((stateMask & SWT.CONTROL) != 0) {
+			if (!SystemUtils.IS_OS_MAC) {
+				result |= InputEvent.META_DOWN_MASK;
+			}
 			result |= InputEvent.CTRL_DOWN_MASK;
 		}
 		if ((stateMask & SWT.ALT) != 0) {
 			result |= InputEvent.ALT_DOWN_MASK;
 		}
-		if ((stateMask & SWT.COMMAND) != 0) {  // TODO Does this really only happen, if this is the MenuShortcutKeyMask?
+		if ((stateMask & SWT.COMMAND) != 0) {
 			result |= InputEvent.META_DOWN_MASK;
 		}
 		if (((stateMask & SWT.BUTTON1) != 0) || (mouseButton == 1)) {
