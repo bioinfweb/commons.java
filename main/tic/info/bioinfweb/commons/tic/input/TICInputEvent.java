@@ -72,9 +72,6 @@ public class TICInputEvent extends EventObject {
 			result |= InputEvent.SHIFT_DOWN_MASK;
 		}
 		if ((stateMask & SWT.CONTROL) != 0) {
-			if (!SystemUtils.IS_OS_MAC) {
-				result |= InputEvent.META_DOWN_MASK;
-			}
 			result |= InputEvent.CTRL_DOWN_MASK;
 		}
 		if ((stateMask & SWT.ALT) != 0) {
