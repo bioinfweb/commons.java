@@ -163,7 +163,7 @@ public class ScrollPaneSelector extends JComponent {
 	protected void paintComponent(Graphics g1D) {
 		if (theImage == null || theRectangle == null) return;
 		Graphics2D g = (Graphics2D)g1D;
-  	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // Eingefügt
+  	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // EingefÃ¶gt
 		Insets insets = getInsets();
 		int xOffset = insets.left;
 		int yOffset = insets.top;
@@ -215,8 +215,8 @@ public class ScrollPaneSelector extends JComponent {
 									 BufferedImage.TYPE_INT_RGB);
 
 		Graphics2D g = theImage.createGraphics();
-  	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,	RenderingHints.VALUE_ANTIALIAS_ON);  // Eingefügt
-		g.scale(theScale, theScale);  // Tranformation scheint die Ursache für mangeldes Weichnzeichnen zu sein. (?)
+  	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,	RenderingHints.VALUE_ANTIALIAS_ON);  // EingefÃ¶gt
+		g.scale(theScale, theScale);  // Tranformation scheint die Ursache fÃ¶r mangeldes Weichnzeichnen zu sein. (?)
 		theComponent.paint(g);  
 		theStartRectangle = theComponent.getVisibleRect();
 		Insets insets = getInsets();

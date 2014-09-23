@@ -46,7 +46,7 @@ public class HTTPIncludeServlet extends GetPostServlet {
 	
 	@Override
 	protected void doGetPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Vor dem Lesen des Streams darf nicht getParameter() o.ä. aufgerufen worden sein.
+		// Vor dem Lesen des Streams darf nicht getParameter() o.Ã¤. aufgerufen worden sein.
 		String targetURL = extractTargetURL(request.getQueryString());
 		if (targetURL != null) {
 			URLConnection connection = new URL(targetURL + "?" +

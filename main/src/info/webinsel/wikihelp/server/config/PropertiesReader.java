@@ -32,25 +32,25 @@ public class PropertiesReader implements WikiHelpXMLConstants {
       	StartElement element = event.asStartElement();
         if (element.getName().equals(TAG_DB)) {
         	SQLXMLReader.readDatabase(reader, properties);
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
         }
         else if (element.getName().equals(TAG_WIKI_BASE_URL)) {
         	properties.setWikiBaseURL(
         			reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
         }
         else if (element.getName().equals(TAG_INVALID_CODE_URL)) {
         	properties.setInvalidHelpCodeURL(
         			reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
         }
         else if (element.getName().equals(TAG_ERROR_URL)) {
         	properties.setErrorURL(
         			reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
         }
-        else {  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
-          XMLUtils.reachElementEnd(reader);  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
+        else {  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
+          XMLUtils.reachElementEnd(reader);  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
         }
       }
       event = reader.nextEvent();
@@ -74,10 +74,10 @@ public class PropertiesReader implements WikiHelpXMLConstants {
         	StartElement element = event.asStartElement();
           if (element.getName().equals(TAG_ROOT)) {
         	  readRoot();
-          	reader.nextEvent();  // END_ELEMENT überspringen
+          	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
           }
           else {
-            XMLUtils.reachElementEnd(reader);  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
+            XMLUtils.reachElementEnd(reader);  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
           }
           break;
       }

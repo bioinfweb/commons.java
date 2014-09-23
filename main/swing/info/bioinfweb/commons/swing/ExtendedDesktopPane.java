@@ -63,7 +63,7 @@ public class ExtendedDesktopPane extends JDesktopPane {
 				frames[i].setMaximum(false);
 			}
 			catch (PropertyVetoException e) {
-				e.printStackTrace();  //TODO Exception nach auﬂen leiten?
+				e.printStackTrace();  //TODO Exception nach au√∂en leiten?
 			}
 		}
 	}

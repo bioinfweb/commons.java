@@ -41,7 +41,7 @@ public class ConsensusSequenceCreator {
 		mapByBase.put("T", new AmbiguityBaseScore(0, 1, 0, 0));
 		mapByBase.put("C", new AmbiguityBaseScore(0, 0, 1, 0));
 		mapByBase.put("G", new AmbiguityBaseScore(0, 0, 0, 1));
-		mapByBase.put("Y", new AmbiguityBaseScore(0, 1, 1, 0));  //TODO Wäre hier 0, 0.5, 0.5, 0 besser? (Dann müssten auch auf 1 normierte Schlüssel im Algorithmus erzeugt werden.)
+		mapByBase.put("Y", new AmbiguityBaseScore(0, 1, 1, 0));  //TODO WÃ¤re hier 0, 0.5, 0.5, 0 besser? (Dann mÃ¼ssten auch auf 1 normierte SchlÃ¼ssel im Algorithmus erzeugt werden.)
 		mapByBase.put("R", new AmbiguityBaseScore(1, 0, 0, 1));
 		mapByBase.put("W", new AmbiguityBaseScore(1, 1, 0, 0));
 		mapByBase.put("S", new AmbiguityBaseScore(0, 0, 1, 1));

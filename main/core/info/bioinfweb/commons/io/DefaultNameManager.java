@@ -35,6 +35,6 @@ public class DefaultNameManager {
 
 	public String newDefaultName() {
   	count++;
-  	return prefix + count;  // Erster Rückgabewert ist "1".
+  	return prefix + count;  // Erster RÃ¼ckgabewert ist "1".
   }
 }

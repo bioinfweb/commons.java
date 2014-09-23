@@ -188,7 +188,7 @@ public class HTMLTruncater {
 	
 	
 	public static void main(String[] args) {
-		test(10);  //TODO Test mit 10 hätte "a" mitnehmen müssen. 15 und 20 funktionieren. => Quellcode überarbeiten. 
+		test(10);  //TODO Test mit 10 hÃ¤tte "a" mitnehmen mÃ¼ssen. 15 und 20 funktionieren. => Quellcode Ã¼berarbeiten. 
 		test(15);
 		test(20);
 	}

@@ -13,8 +13,8 @@ public class SwingSaverMessages {
 	public static final String EN_BUTTON_NO = "No";
 	public static final String EN_BUTTON_CANCEL = "Cancel";
 	
-	public static final String DE_ASK_TO_SAVE_TITLE = "Änderungen";
-	public static final String DE_ASK_TO_SAVE_MESSAGE_BEGINNING = "Möchten Sie Änderungen an ";
+	public static final String DE_ASK_TO_SAVE_TITLE = "Ã¶nderungen";
+	public static final String DE_ASK_TO_SAVE_MESSAGE_BEGINNING = "MÃ¶chten Sie Ã¶nderungen an ";
 	public static final String DE_ASK_TO_SAVE_MESSAGE_END = " speichern?";
 	public static final String DE_BUTTON_YES = "Ja";
 	public static final String DE_BUTTON_NO = "Nein";
@@ -49,7 +49,7 @@ public class SwingSaverMessages {
   	  buttonNo = DE_BUTTON_NO;
   	  buttonCancel = DE_BUTTON_CANCEL;
   	}
-  	else {  // Englisch für alle nicht unterstützten Sprachen
+  	else {  // Englisch fÃ¶r alle nicht unterstÃ¶tzten Sprachen
   	  askToSaveTitle = EN_ASK_TO_SAVE_TITLE;
   	  askToSaveMessageBeginnung = EN_ASK_TO_SAVE_MESSAGE_BEGINNING;
   	  askToSaveMessageEnd = EN_ASK_TO_SAVE_MESSAGE_END;

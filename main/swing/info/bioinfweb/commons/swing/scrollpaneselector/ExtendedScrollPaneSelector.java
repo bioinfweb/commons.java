@@ -222,7 +222,7 @@ public class ExtendedScrollPaneSelector extends JComponent {
 		double scaleX = MAX_SIZE / compWidth;
 		double scaleY = MAX_SIZE / compHeight;
 		theScale = Math.min(scaleX, scaleY);
-		theImage = new BufferedImage(Math.max(1, (int)(theComponent.getWidth() * theScale)),  // Verhindern, dass bei sehr groﬂen Seitenverh‰lntnissen eine Seite zu 0 gerundet wird.
+		theImage = new BufferedImage(Math.max(1, (int)(theComponent.getWidth() * theScale)),  // Verhindern, dass bei sehr gro√∂en Seitenverh√∂lntnissen eine Seite zu 0 gerundet wird.
 				Math.max(1, (int)(theComponent.getHeight() * theScale)), BufferedImage.TYPE_INT_RGB);
 
 		Graphics2D g = theImage.createGraphics();

@@ -119,7 +119,7 @@ public class IOUtils {
 	    throws IOException {
 		
 		copy(new FileInputStream(src), new FileOutputStream(dest), progressListener);
-		//TODO Time etc. auch von src nach dest übertragen
+		//TODO Time etc. auch von src nach dest Ã¼bertragen
 	}
 	
 	
@@ -200,7 +200,7 @@ public class IOUtils {
 			IOProgressListener progressListener) throws IOException {
 		
 		copy(file.getInputStream(file.getEntry(path)), new FileOutputStream(dest), progressListener);
-		//TODO Time etc. auch von src nach dest übertragen
+		//TODO Time etc. auch von src nach dest Ã¼bertragen
 	}
 	
 	

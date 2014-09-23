@@ -213,7 +213,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 		while (iterator.hasNext()) {
 			result = result && iterator.next().add(element);
 		}
-		size++;  //TODO Müsste eigentlich result prüfen. (Macht aber nur Sinn, wenn einzelne Rückgabewerte der Schleife betrachtet werden.)
+		size++;  //TODO MÃ¼sste eigentlich result prÃ¼fen. (Macht aber nur Sinn, wenn einzelne RÃ¼ckgabewerte der Schleife betrachtet werden.)
 		return result;
 	}
 	

@@ -82,7 +82,7 @@ public class SetsBlockParser extends NexusBlockParser.Abstract {
 				  	}
 				  	catch (NumberFormatException e) {
 				  		System.err.println("WARNING: Interval '" + token + "' could not be parsed. Skipped.");
-				  	}  // Eintrag wird übersprungen  //TODO Ggf. später Fehlermeldung ausgeben.
+				  	}  // Eintrag wird Ã¼bersprungen  //TODO Ggf. spÃ¤ter Fehlermeldung ausgeben.
 				  	break;
 				}
 			}

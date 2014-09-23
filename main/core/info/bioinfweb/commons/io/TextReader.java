@@ -43,7 +43,7 @@ public class TextReader {
 			String line = reader.readLine(); 
 			while (line != null) {
 				bufferList.add(line);
-				length += line.length() + 1;  // + 1 für Zeilenumbruch
+				length += line.length() + 1;  // + 1 fÃ¼r Zeilenumbruch
 				line = reader.readLine(); 
 			}
 		}

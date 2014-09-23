@@ -1,6 +1,6 @@
 /*
  * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
- * Copyright (C) 2010-2014  Ben Stöver
+ * Copyright (C) 2010-2014  Ben StÃ¶ver
  * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
@@ -42,17 +42,17 @@ public class FontCalculator {
 	
 	
 	public float getDescent(Font font) {
-		return new TextLayout("Üg", font, frc).getDescent();
+		return new TextLayout("Ã–g", font, frc).getDescent();
 	}
 	
 	
 	public float getAscent(Font font) {
-		return new TextLayout("Üg", font, frc).getAscent();
+		return new TextLayout("Ã–g", font, frc).getAscent();
 	}
 	
 	
 	public float getHeight(Font font) {
-		TextLayout tl = new TextLayout("Üg", font, frc);
+		TextLayout tl = new TextLayout("Ã–g", font, frc);
 		return tl.getDescent() + tl.getAscent();
 	}
 	
@@ -90,13 +90,13 @@ public class FontCalculator {
 	
 	
 	public float getDescentToHeight(String fontName, int fontStyle, float height) {
-		TextLayout tl = new TextLayout("Üg", new Font(fontName, fontStyle, 12), frc);
+		TextLayout tl = new TextLayout("Ã–g", new Font(fontName, fontStyle, 12), frc);
 		return height * (tl.getDescent() / (tl.getDescent() + tl.getAscent()));
 	}
 	
 	
 	public float getAscentToHeight(String fontName, int fontStyle, float height) {
-		TextLayout tl = new TextLayout("Üg", new Font(fontName, fontStyle, 12), frc);
+		TextLayout tl = new TextLayout("Ã–g", new Font(fontName, fontStyle, 12), frc);
 		return height * (tl.getAscent() / (tl.getDescent() + tl.getAscent()));
 	}
 }

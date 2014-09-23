@@ -65,30 +65,30 @@ public class SQLXMLReader implements SQLXMLConstants {
       	StartElement element = event.asStartElement();
         if (element.getName().getLocalPart().equals(TAG_DB_HOST.getLocalPart())) {
         	properties.setDBHost(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
         else if (element.getName().getLocalPart().equals(TAG_DB_NAME.getLocalPart())) {
         	properties.setDBName(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
         else if (element.getName().getLocalPart().equals(TAG_DB_USER.getLocalPart())) {
         	properties.setDBUser(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
         else if (element.getName().getLocalPart().equals(TAG_DB_PASSWORD.getLocalPart())) {
         	properties.setDBPassword(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
         else if (element.getName().getLocalPart().equals(TAG_DB_DRIVER.getLocalPart())) {
         	properties.setDBDriver(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
         else if (element.getName().getLocalPart().equals(TAG_TABLE_PREFIX.getLocalPart())) {
         	properties.setTablePrefix(reader.nextEvent().asCharacters().getData());
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // skip END_ELEMENT
         }
-        else {  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
-          XMLUtils.reachElementEnd(reader);  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
+        else {  // evtl. zusÃ¤tzlich vorhandenes Element, dass nicht gelesen wird
+          XMLUtils.reachElementEnd(reader);  // evtl. zusÃ¤tzlich vorhandenes Element, dass nicht gelesen wird
         }
       }
       event = reader.nextEvent();
@@ -103,10 +103,10 @@ public class SQLXMLReader implements SQLXMLConstants {
       	StartElement element = event.asStartElement();
         if (element.getName().equals(TAG_DB)) {
         	readDatabase(reader, properties);
-        	reader.nextEvent();  // END_ELEMENT überspringen
+        	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
         }
-        else {  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
-          XMLUtils.reachElementEnd(reader);  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
+        else {  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
+          XMLUtils.reachElementEnd(reader);  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
         }
       }
       event = reader.nextEvent();
@@ -130,10 +130,10 @@ public class SQLXMLReader implements SQLXMLConstants {
         	StartElement element = event.asStartElement();
           if (element.getName().equals(rootTag)) {
         	  readRoot();
-          	reader.nextEvent();  // END_ELEMENT überspringen
+          	reader.nextEvent();  // END_ELEMENT Ã¶berspringen
           }
           else {
-            XMLUtils.reachElementEnd(reader);  // evtl. zusätzlich vorhandenes Element, dass nicht gelesen wird
+            XMLUtils.reachElementEnd(reader);  // evtl. zusÃ¶tzlich vorhandenes Element, dass nicht gelesen wird
           }
           break;
       }

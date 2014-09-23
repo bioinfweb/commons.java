@@ -26,7 +26,7 @@ import org.apache.commons.collections.map.MultiValueMap;
  * @param <K> the type of the keys used
  * @param <V> the type of the values (elements) used
  */
-public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lösen
+public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lÃ¶sen
 	private TreeMap<K, ArrayList<V>> treeMap;
 	private MultiValueMap multiValueMap;
 	
@@ -274,7 +274,7 @@ public class MultiTreeMap<K, V> {  //TODO Impl. von entsprechenden Interfaces lö
 			@Override
 			public V next() {
 				if ((collectionIterator == null) || !collectionIterator.hasNext()) {
-					collectionIterator = get(keyIterator.next()).iterator();  //TODO Könnte zu einem key eine leere Liste zurückgegeben werden? Dann würde der Aufruf von next() zu einem Fehler führen.
+					collectionIterator = get(keyIterator.next()).iterator();  //TODO KÃ¶nnte zu einem key eine leere Liste zurÃ¼ckgegeben werden? Dann wÃ¼rde der Aufruf von next() zu einem Fehler fÃ¼hren.
 				}
 				return collectionIterator.next();
 			}

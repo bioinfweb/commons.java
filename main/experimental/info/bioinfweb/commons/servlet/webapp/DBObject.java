@@ -11,7 +11,7 @@ import java.util.Map.Entry;
 
 
 
-//TODO Klären, inwieweit sich diese Klasse mit ResultSet überschneidet und was sie wirklich leisten soll.
+//TODO KlÃ¤ren, inwieweit sich diese Klasse mit ResultSet Ã¼berschneidet und was sie wirklich leisten soll.
 public class DBObject {
 	public static final String ID_COLUMN_NAME = "id";
 	public static final int UNDEFINED_ID = Integer.MIN_VALUE;
@@ -121,7 +121,7 @@ public class DBObject {
 		values[0] = id;
 		Iterator<Entry<String, Object>> it = properties.entrySet().iterator();
 		for (int i = 1; i <= size(); i++) {
-			Entry<String, Object> entry = it.next();  // Muss genauso oft einen Wert zurückgeben.
+			Entry<String, Object> entry = it.next();  // Muss genauso oft einen Wert zurÃ¼ckgeben.
 			keys[i] = entry.getKey();
 			values[i] = entry.getValue();
 		}

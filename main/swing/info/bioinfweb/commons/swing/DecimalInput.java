@@ -206,7 +206,7 @@ public class DecimalInput {
   
   
   private void setSliderValue(double currentValue) {
-  	//TODO Lˆsung finden, die positive und negative Werte zul‰sst, keine krummen Schrittl‰ngen anzeigt und einen ausreichenden Bereich darstellt. => Scala m¸sste sich immer bei ‹berschreiten einer Zehnerpotenz ‰ndern (ggf. auch Zwischenschritte wie 1, 5, 10, 50, ...)
+  	//TODO L√∂sung finden, die positive und negative Werte zul√∂sst, keine krummen Schrittl√∂ngen anzeigt und einen ausreichenden Bereich darstellt. => Scala m√∂sste sich immer bei √∂berschreiten einer Zehnerpotenz √∂ndern (ggf. auch Zwischenschritte wie 1, 5, 10, 50, ...)
   	
   	getSlider().setPaintLabels(false);
   	double max = Math.pow(10, Math.ceil(Math.log10(10 * currentValue)));

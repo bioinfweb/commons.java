@@ -38,7 +38,7 @@ public class SequenceUtils {
 		result.put('V', 'B');  // V = A v C v G
 		result.put('D', 'H');  // D = A v G v T
 		result.put('H', 'D');  // H = A v C v T
-		// W (weak, A v T), S (strong, C v G), N oder "-" bleiben unverändert.
+		// W (weak, A v T), S (strong, C v G), N oder "-" bleiben unverÃ¤ndert.
 		return result;
 	}
 	

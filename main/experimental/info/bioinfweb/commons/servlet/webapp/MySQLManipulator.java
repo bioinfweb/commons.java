@@ -52,7 +52,7 @@ public class MySQLManipulator {
 	
 	
 	public Statement getStatement() {
-		if ((!isConntected())) { //TODO Hier tritt nach einer Weile, die Tomcat läuft, eine NullPointerException auf. Ggf. wird das Connection-objetc von gc gelöscht. Eigenen Zeiger darauf versuchen.
+		if ((!isConntected())) { //TODO Hier tritt nach einer Weile, die Tomcat lÃ¤uft, eine NullPointerException auf. Ggf. wird das Connection-objetc von gc gelÃ¶scht. Eigenen Zeiger darauf versuchen.
 		  try {
 		    Class.forName(MYSQL_DRIVER);
 		  }

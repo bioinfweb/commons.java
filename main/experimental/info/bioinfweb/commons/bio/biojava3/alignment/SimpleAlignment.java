@@ -304,7 +304,7 @@ public class SimpleAlignment <S extends Sequence<C>, C extends Compound> impleme
 	
 //TODO Method finished but untested. Commented out because sequences in the returned instance are only Views. 
 // => Find BioJava method to clone sequences independently of their implementing class. (Only possible, if all implementing classes implement a clone method?)
-// => AlignmentView API w‰re Alternative, die evtl. zun‰chst verfolgt werden sollte. (Operationen wie in Preprocessor von AlignmentEvaluation.)
+// => AlignmentView API w√§re Alternative, die evtl. zun√§chst verfolgt werden sollte. (Operationen wie in Preprocessor von AlignmentEvaluation.)
 //	/* (non-Javadoc)
 //	 * @see info.bioinfweb.biojava3.alignment.template.Alignment#subAlignment(int, int)
 //	 */

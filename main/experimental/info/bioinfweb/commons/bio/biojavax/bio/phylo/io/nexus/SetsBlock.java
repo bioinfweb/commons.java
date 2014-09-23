@@ -80,7 +80,7 @@ public class SetsBlock extends NexusBlock.Abstract {
 	 */
 	@Override
 	protected void writeBlockContents(Writer writer) throws IOException {
-		//TODO Müssen BEGIN und END hier geschrieben werden?
+		//TODO MÃ¼ssen BEGIN und END hier geschrieben werden?
 		Iterator<String> nameIterator = charSets.keySet().iterator();
 		while (nameIterator.hasNext()) {
 			String name = nameIterator.next();
