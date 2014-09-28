@@ -149,7 +149,7 @@ main/lib/core-1.8.jar -text
 main/lib/guava-13.0.1.jar -text
 main/lib/jgrapht-jdk1.5.jar -text
 main/lib/junit-4.9b1.jar -text
-main/lib/mysql-connector-java-5.1.13-bin.jar -text
+main/lib/mysql-connector-java-5.1.33-bin.jar -text
 main/lib/phylo-1.8.jar -text
 main/lib/servlet.jar -text
 main/lib/swt.jar -text
