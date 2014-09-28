@@ -123,8 +123,6 @@ main/experimental/info/bioinfweb/commons/collections/bitstorage/exception/BitSto
 main/experimental/info/bioinfweb/commons/collections/bitstorage/exception/InvalidBitNumberForPrimitiveException.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/collections/bitstorage/exception/package-info.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/graphics/ImageRescaler.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/graphics/vlcframegrabber/FrameReaderRenderCallback.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/graphics/vlcframegrabber/VLCFrameReader.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/io/streammessage/Message.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/io/streammessage/MessageReader.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/io/streammessage/NewerMessageVersionException.java -text svneol=unset#text/plain
@@ -133,10 +131,6 @@ main/experimental/info/bioinfweb/commons/servlet/CookieManager.java -text svneol
 main/experimental/info/bioinfweb/commons/servlet/DatabaseException.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/HTTPIncludeServlet.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/servlet/SQLManipulator.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/servlet/webapp/DBObject.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/servlet/webapp/MySQLManipulator.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/servlet/webapp/session/Session.java -text svneol=unset#text/plain
-main/experimental/info/bioinfweb/commons/servlet/webapp/session/Sessions.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/swing/ToolBarPopup.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrToken.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/tokenizer/StrTokenizer.java -text svneol=unset#text/plain
