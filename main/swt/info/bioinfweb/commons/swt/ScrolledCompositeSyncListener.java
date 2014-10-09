@@ -19,7 +19,10 @@
 package info.bioinfweb.commons.swt;
 
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.SelectionEvent;
@@ -36,13 +39,14 @@ import org.eclipse.swt.widgets.ScrollBar;
  * @author Ben St&ouml;ver
  */
 public class ScrolledCompositeSyncListener implements SelectionListener {
-  private ScrolledComposite[] scrolledComposites;
+  private Iterable<ScrolledComposite> scrolledComposites;
   private boolean horizontal;
 	
 	
 	/**
-	 * Creates a new instance of this class and registers it as selection listeners at the according scroll bars
-	 * of {@code scrolledComposites}.
+	 * Creates a new instance of this class which uses a deep copy of {@code scrolledComposites}. That means future changes
+	 * to {@code scrolledComposites} will not be reflected by this instance. If you need this functionality use
+	 * {@link #newLinkedInstance(Collection, boolean)} instead.
 	 * <p>
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
@@ -57,7 +61,9 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 
 	
 	/**
-	 * Creates a new instance of this class.
+	 * Creates a new instance of this class which uses a deep copy of {@code scrolledComposites}. That means future changes
+	 * to {@code scrolledComposites} will not be reflected by this instance. If you need this functionality use
+	 * {@link #newLinkedInstance(Collection, boolean)} instead.
 	 * <p>
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
@@ -69,8 +75,39 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	public ScrolledCompositeSyncListener(ScrolledComposite[] scrolledComposites, boolean horizontal) {
 		super();
 		
+		this.scrolledComposites = Arrays.asList(scrolledComposites);
+		this.horizontal = horizontal;
+	}
+	
+	
+	/**
+	 * For internal use in {@link #newLinkedInstance(Collection, boolean)} only.
+	 * 
+	 * @param scrolledComposites
+	 * @param horizontal
+	 * @param linked - the value specified here is not important
+	 */
+	private ScrolledCompositeSyncListener(Iterable<ScrolledComposite> scrolledComposites, 
+			boolean horizontal, boolean linked) {
+		
 		this.scrolledComposites = scrolledComposites;
 		this.horizontal = horizontal;
+	}
+	
+	
+	/**
+	 * Creates a new instance of this class that uses the specified collection as the source. Future changes to that
+	 * collection will be reflected in the behavior of the returned instance. If you do not want that use 
+	 * {@link #ScrolledCompositeSyncListener(Collection, boolean)} instead.
+	 * 
+	 * @param scrolledComposites
+	 * @param horizontal
+	 * @return
+	 */
+	public static ScrolledCompositeSyncListener newLinkedInstance(Iterable<ScrolledComposite> scrolledComposites, 
+			boolean horizontal) {
+		
+		return new ScrolledCompositeSyncListener(scrolledComposites, horizontal, true);
 	}
 	
 	
@@ -87,14 +124,17 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	/**
 	 * Registers this object as the selection listener at all according scroll bars of the specified 
 	 * {@link ScrolledComposite}s.
+	 * <p>
+	 * This method should only be called once to avoid that this instance is registered several times as a 
+	 * listener for some components.
 	 */
 	public void registerToAll() {
-		for (int i = 0; i < scrolledComposites.length; i++) {
+		for (Iterator<ScrolledComposite> iterator = scrolledComposites.iterator(); iterator.hasNext();) {
 			if (horizontal) {
-				scrolledComposites[i].getHorizontalBar().addSelectionListener(this);
+				iterator.next().getHorizontalBar().addSelectionListener(this);
 			}
 			else {
-				scrolledComposites[i].getVerticalBar().addSelectionListener(this);
+				iterator.next().getVerticalBar().addSelectionListener(this);
 			}
 		}
 	}
@@ -107,15 +147,16 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	@Override
 	public void widgetSelected(SelectionEvent e) {
 		int value = ((ScrollBar)e.getSource()).getSelection();
-		for (int i = 0; i < scrolledComposites.length; i++) {
+		for (Iterator<ScrolledComposite> iterator = scrolledComposites.iterator(); iterator.hasNext();) {
+			ScrolledComposite scrolledComposite = iterator.next();
 			if (horizontal) {
-				if (scrolledComposites[i].getHorizontalBar() != e.getSource()) {
-					scrolledComposites[i].setOrigin(value, scrolledComposites[i].getOrigin().y);
+				if (scrolledComposite.getHorizontalBar() != e.getSource()) {
+					scrolledComposite.setOrigin(value, scrolledComposite.getOrigin().y);
 				}
 			}
 			else {
-				if (scrolledComposites[i].getVerticalBar() != e.getSource()) {
-					scrolledComposites[i].setOrigin(scrolledComposites[i].getOrigin().x, value);
+				if (scrolledComposite.getVerticalBar() != e.getSource()) {
+					scrolledComposite.setOrigin(scrolledComposite.getOrigin().x, value);
 				}
 			}
 		}
