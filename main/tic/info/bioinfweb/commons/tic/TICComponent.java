@@ -29,12 +29,14 @@ import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
 import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
 
 import javax.swing.JComponent;
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Widget;
 
 
 
@@ -64,10 +66,10 @@ public abstract class TICComponent {
 	 *         implementation has yet been assigned
 	 */
 	public TargetToolkit getCurrentToolkit() {
-		if (toolkitComponent instanceof AbstractSwingComponent) {
+		if (toolkitComponent instanceof Component) {
 			return TargetToolkit.SWING;
 		}
-		else if (toolkitComponent instanceof AbstractSWTWidget) {
+		else if (toolkitComponent instanceof Widget) {
 			return TargetToolkit.SWT;
 		}
 		else {
