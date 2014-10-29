@@ -23,8 +23,6 @@ import info.bioinfweb.commons.tic.input.TICComponentKeyListenersList;
 import info.bioinfweb.commons.tic.input.TICComponentMouseListenersList;
 import info.bioinfweb.commons.tic.input.TICKeyListener;
 import info.bioinfweb.commons.tic.input.TICMouseListener;
-import info.bioinfweb.commons.tic.toolkit.AbstractSWTWidget;
-import info.bioinfweb.commons.tic.toolkit.AbstractSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
 import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
