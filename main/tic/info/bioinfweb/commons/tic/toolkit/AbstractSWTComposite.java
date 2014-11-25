@@ -1,6 +1,6 @@
 /*
  * bioinfweb.commons - Shared components of bioinfweb projects made available in a Java library
- * Copyright (C) 2010-2014  Ben Stöver
+ * Copyright (C) 2014  Ben Stöver
  * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
@@ -21,29 +21,23 @@ package info.bioinfweb.commons.tic.toolkit;
 
 import info.bioinfweb.commons.tic.TICComponent;
 
-import org.eclipse.swt.events.PaintListener;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 
 
 /**
- * The SWT widget implementing {@link ToolkitComponent} that can be painted toolkit independent.
- * <p>
- * Custom components should not be inherited from this class, but from {@link AbstractSWTComposite} since that class
- * does not inherit from {@link Canvas}.
- * 
+ * The Swing component implementing {@link ToolkitComponent}. Custom Swing components can be inherited from this class.
+ *
  * @author Ben St&ouml;ver
- * @since 1.0.0
+ * @since 1.1.0
  */
-public abstract class AbstractSWTWidget extends Canvas implements PaintListener, ToolkitComponent {
+public class AbstractSWTComposite extends Composite implements ToolkitComponent {
 	private TICComponent independentComponent;
 
 	
-	public AbstractSWTWidget(Composite parent, int style, TICComponent ticComponent) {
+	public AbstractSWTComposite(Composite parent, int style, TICComponent ticComponent) {
 		super(parent, style);
 		independentComponent = ticComponent;
-		addPaintListener(this);
 	}
 
 

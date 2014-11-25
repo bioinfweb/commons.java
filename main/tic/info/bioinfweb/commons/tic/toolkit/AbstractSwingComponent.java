@@ -26,7 +26,7 @@ import javax.swing.JComponent;
 
 
 /**
- * The Swing component displaying a {@link PaintableArea}.
+ * The Swing component implementing {@link ToolkitComponent}. Custom Swing components can be inherited from this class.
  * 
  * @author Ben St&ouml;ver
  * @since 1.0.0
