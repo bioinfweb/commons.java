@@ -48,6 +48,14 @@ public class DefaultSWTComposite extends AbstractSWTWidget {
 	}
 	
 
+	/**
+	 * Fire a TIC paint event internally to let the implementing class draw on a buffered image and than draws
+	 * that image into the SWT graphics context.
+	 * <p>
+	 * Note that the TIC paint event will always cover a rectangle which is extended by one pixel to the left
+	 * and top compared to the SWT paint event. That is done to solve problems with anti-aliased lines passing
+	 * the bounds of that rectangle.
+	 */
 	@Override
 	public void paintControl(PaintEvent e) {
 		BufferedImage refreshArea = new BufferedImage(e.width + 1, e.height + 1, BufferedImage.TYPE_3BYTE_BGR);
