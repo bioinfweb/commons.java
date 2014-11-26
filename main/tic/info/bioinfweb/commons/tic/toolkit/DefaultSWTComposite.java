@@ -50,15 +50,15 @@ public class DefaultSWTComposite extends AbstractSWTWidget {
 
 	@Override
 	public void paintControl(PaintEvent e) {
-		BufferedImage refreshArea = new BufferedImage(e.width, e.height, BufferedImage.TYPE_3BYTE_BGR);
+		BufferedImage refreshArea = new BufferedImage(e.width + 1, e.height + 1, BufferedImage.TYPE_3BYTE_BGR);
 		Graphics2D g = refreshArea.createGraphics();
 		try {
-			g.translate(-e.x, -e.y);
-			getIndependentComponent().paint(new TICPaintEvent(this, g, new Rectangle(e.x, e.y, e.width, e.height)));
+			g.translate(-e.x + 1, -e.y + 1);
+			getIndependentComponent().paint(new TICPaintEvent(this, g, new Rectangle(e.x - 1, e.y - 1, e.width + 1, e.height + 1)));
       ImageData data = new ImageData(refreshArea.getWidth(), refreshArea.getHeight(), 24, 
       		new PaletteData(0xff, 0xff00, 0xff0000), 3 * refreshArea.getWidth(), 
       		((DataBufferByte)refreshArea.getRaster().getDataBuffer()).getData());
-      e.gc.drawImage(new Image(e.gc.getDevice(), data), e.x, e.y);
+      e.gc.drawImage(new Image(e.gc.getDevice(), data), e.x - 1, e.y - 1);
 		}
 		finally {
 			g.dispose();
