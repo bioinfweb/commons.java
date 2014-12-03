@@ -63,6 +63,17 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 
 
 	/**
+	 * This method is called at the beginning of {@link #add(Object)} to indicate that an element will be
+	 * inserted. This default implementation is empty and can be overwritten by inherited classes which want 
+	 * to track modifications made by this iterator.
+	 * 
+	 * @param index - the index where the first new element will be inserted
+	 * @param element - the new element that will be inserted 
+	 */
+	protected void beforeAdd(int index, E element) {}
+  
+
+	/**
 	 * This method is called at the end of {@link #add(Object)} to indicate that an element has been
 	 * inserted. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
@@ -74,15 +85,37 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
   
 
 	/**
+	 * This method is called at the beginning of {@link #set(Object)} to indicate that an element will be
+	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
+	 * to track modifications made by this iterator.
+	 * 
+	 * @param index - the index where the element will be replaced
+	 * @param previousElement - the element that will be replaced
+	 * @param currentElement - the new element that will replace the current element
+	 */
+	protected void beforeReplace(int index, E previousElement, E currentElement) {}
+  
+
+	/**
 	 * This method is called at the end of {@link #set(Object)} to indicate that an element has been
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
 	 * 
-	 * @param index - the index where the element has replaced
-	 * @param previousElement - the element that was replaced
+	 * @param index - the index where the element has been replaced
+	 * @param previousElement - the element that has been replaced
 	 * @param currentElement - the new element that is now contained in the list
 	 */
 	protected void afterReplace(int index, E previousElement, E currentElement) {}
+  
+
+	/**
+	 * This method is called at the beginning of {@link #remove()} to indicate that an element will be removed from
+	 * the associated list. This default implementation is empty and can be overwritten by inherited classes which 
+	 * want to track modifications made by this iterator.
+	 * 
+	 * @param element - the element that will be removed 
+	 */
+  protected void beforeRemove(E element) {}
   
 
 	/**
@@ -97,6 +130,7 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 
 	@Override
 	public void add(E e) {
+		beforeAdd(underlyingIterator.nextIndex(), e);
 		underlyingIterator.add(e);
 		afterAdd(underlyingIterator.nextIndex(), e);
 	}
@@ -141,6 +175,7 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	
 	@Override
 	public void remove() {
+		beforeRemove(current);
 		underlyingIterator.remove();
 		afterRemove(current);
 	}
@@ -148,7 +183,9 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	
 	@Override
 	public void set(E e) {
+		int index = underlyingIterator.nextIndex() - 1;
+		beforeReplace(index, current, e);
 		underlyingIterator.set(e);
-		afterReplace(underlyingIterator.nextIndex() - 1, current, e);
+		afterReplace(index, current, e);
 	}
 }

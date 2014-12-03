@@ -67,12 +67,35 @@ public abstract class ListDecorator<E> implements List<E> {
 	
 	
 	/**
+	 * This method is called at the beginning of all methods of this list that add elements to it (including
+	 * methods called on the results of {@link #subList(int, int)} or iterators) before the actual inserting 
+	 * happens. This default implementation is empty and can be overwritten by inherited classes which want 
+	 * to track modifications of the list.
+	 * <p>
+	 * If more than one element will be added in one operation (e.g. {@link #addAll(Collection)} this method
+	 * is only called once before the first elements is inserted.
+	 * 
+	 * @param index - the index where the first new element will be inserted
+	 * @param addedElements - the elements that shall be added (Always contains at least one element.) 
+	 */
+	protected void beforeAdd(int index, Collection<? extends E> addedElements) {}
+	
+	
+	private void beforeAdd(int index, E element) {
+		beforeAdd(index, Collections.nCopies(1, element));
+	}
+
+	
+	/**
 	 * This method is called at the end of all methods of this list that add elements to it, including
-	 * methods called on the results of {@link #subList(int, int)}. This default implementation is empty
-	 * and can be overwritten by inherited classes which want to track modifications of the list.
+	 * methods called on the results of {@link #subList(int, int) or iterators}. This default implementation 
+	 * is empty and can be overwritten by inherited classes which want to track modifications of the list.
 	 * <p>
 	 * If more than one element is added in one operation (e.g. {@link #addAll(Collection)} this method
 	 * is only called once when all elements have been inserted.
+	 * <p>
+	 * Note that this method is not called if an add operation is not successful. In such a case only
+	 * {@link #beforeAdd(int, Collection)} is called.
 	 * 
 	 * @param index - the index where the first new element has been inserted
 	 * @param addedElements - the elements that have been added (Always contains at least one element.) 
@@ -86,15 +109,46 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	
 	/**
+	 * This method is called at the beginning of {@link #set(int, Object)} to indicate that an element will be
+	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
+	 * to track modifications of the list.
+	 * 
+	 * @param index - the index where the element will be replaced
+	 * @param currentElement - the element that will be replaced
+	 * @param newElement - the new element that shall replace the current one
+	 */
+	protected void beforeReplace(int index, E currentElement, E newElement) {}
+
+	
+	/**
 	 * This method is called at the end of {@link #set(int, Object)} to indicate that an element has been
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications of the list.
 	 * 
-	 * @param index - the index where the element has replaced
+	 * @param index - the index where the element has been replaced
 	 * @param previousElement - the element that was replaced
 	 * @param currentElement - the new element that is now contained in the list
 	 */
 	protected void afterReplace(int index, E previousElement, E currentElement) {}
+
+	
+	/**
+	 * This method is called at the beginning of all methods of this list that remove elements from it (including
+	 * methods called on the results of {@link #subList(int, int)} or iterators) before the actual deletion 
+	 * happens. This default implementation is empty and can be overwritten by inherited classes which want to 
+	 * track modifications of the list.
+	 * <p>
+	 * If more than one element will be removed in one operation (e.g. {@link #retainAll(Collection)} this method
+	 * is only called once before the first element is removed.
+	 * 
+	 * @param removedElements - the elements that have been removed.
+	 */
+	protected void beforeRemove(Collection<?> removedElements) {}
+	
+	
+	private void beforeRemove(Object element) {
+		beforeRemove(Collections.nCopies(1, element));
+	}
 
 	
 	/**
@@ -104,6 +158,9 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * <p>
 	 * If more than one element is removed in one operation (e.g. {@link #retainAll(Collection)} this method
 	 * is only called once when all elements have been removed.
+	 * <p>
+	 * Note that this method is not called if an add operation is not successful. In such a case only
+	 * {@link #beforeRemove(Collection)} is called.
 	 * 
 	 * @param removedElements - the elements that have been removed.
 	 */
@@ -138,9 +195,11 @@ public abstract class ListDecorator<E> implements List<E> {
 	
 	@Override
 	public boolean add(E element) {
+		int index = size() - 1;
+		beforeAdd(index, element);
 		boolean result = underlyingList.add(element);
 		if (result) {
-			afterAdd(size() - 1, element);
+			afterAdd(index, element);
 		}
 		return result;
 	}
@@ -148,6 +207,7 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public void add(int index, E element) {
+		beforeAdd(index, element);
 		underlyingList.add(index, element);
 		afterAdd(index, element);
 	}
@@ -155,6 +215,7 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
+		beforeAdd(size(), c);
 		boolean result = getUnderlyingList().addAll(c);
 		if (result) {
 			afterAdd(size() - c.size(), c);
@@ -165,6 +226,7 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
+		beforeAdd(index, c);
 		boolean result = getUnderlyingList().addAll(index, c);
 		if (result) {
 			afterAdd(index, c);
@@ -175,8 +237,11 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public void clear() {
-		List<E> copy = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
+		Collection<E> copy = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
 		copy.addAll(this);
+		copy = Collections.unmodifiableCollection(copy);
+		
+		beforeRemove(copy);
 		getUnderlyingList().clear();
 		afterRemove(copy);
 	}
@@ -243,6 +308,7 @@ public abstract class ListDecorator<E> implements List<E> {
 		
 					@Override
 					public void remove() {
+						beforeRemove(currentElement);
 						iterator.remove();  // Would throw an exception if currentArea would still be null.
 						afterRemove(currentElement);
 					}
@@ -270,6 +336,7 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
+		beforeRemove(get(index));
 		E result = getUnderlyingList().remove(index);
 		afterRemove(result);
 		return result;
@@ -279,6 +346,7 @@ public abstract class ListDecorator<E> implements List<E> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object o) {
+		beforeRemove(o);
 		boolean result = getUnderlyingList().remove(o);
 		if (result) {
 			afterRemove((E)o);  // If this would not be of type E, result should have been false.
@@ -289,11 +357,14 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		List<E> removedElements = new ArrayList<E>(size());  // c cannot be used here, because it may contain elements which are not contained in this instance.
+		Collection<E> removedElements = new ArrayList<E>(size());  // c cannot be used here, because it may contain elements which are not contained in this instance.
 		removedElements.addAll(this);
+		removedElements.retainAll(c);
+		removedElements = Collections.unmodifiableCollection(removedElements);
+		
+		beforeRemove(removedElements);
 		boolean result = getUnderlyingList().removeAll(c);
 		if (result) {
-			removedElements.retainAll(c);
 			afterRemove(removedElements);
 		}
 		return result;
@@ -302,11 +373,14 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		List<E> removedElements = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
+		Collection<E> removedElements = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
 		removedElements.addAll(this);
+		removedElements.removeAll(c);
+		removedElements = Collections.unmodifiableCollection(removedElements);
+		
+		beforeRemove(removedElements);
 		boolean result = getUnderlyingList().retainAll(c);
 		if (result) {
-			removedElements.removeAll(c);
 			afterRemove(removedElements);
 		}
 		return result;
@@ -315,6 +389,7 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public E set(int index, E element) {
+		beforeReplace(index, get(index), element);
 		E result = getUnderlyingList().set(index, element);
 		afterReplace(index, result, element);
 		return result;
@@ -332,8 +407,18 @@ public abstract class ListDecorator<E> implements List<E> {
 		final ListDecorator<E> thisList = this;
 		return new ListDecorator<E>(getUnderlyingList().subList(fromIndex, toIndex)) {
 					@Override
+					protected void beforeAdd(int index, Collection<? extends E> addedElements) {
+						thisList.beforeAdd(index, addedElements);
+					}
+		
+					@Override
 					protected void afterAdd(int index, Collection<? extends E> addedElements) {
 						thisList.afterAdd(index, addedElements);
+					}
+		
+					@Override
+					protected void beforeReplace(int index, E currentElement, E newElement) {
+						thisList.beforeReplace(index, currentElement, newElement);
 					}
 		
 					@Override
@@ -341,6 +426,11 @@ public abstract class ListDecorator<E> implements List<E> {
 						thisList.afterReplace(index, previousElement, currentElement);
 					}
 		
+					@Override
+					protected void beforeRemove(Collection<?> removedElements) {
+						thisList.beforeRemove(removedElements);
+					}
+
 					@Override
 					protected void afterRemove(Collection<? extends E> removedElements) {
 						thisList.afterRemove(removedElements);
