@@ -27,32 +27,61 @@ package info.bioinfweb.commons.collections.observable;
  * @author Ben St&ouml;ver
  * @since 1.1.0
  *
- * @see ListChangeListener
  * @see ObservableList
  *
  * @param <E> the type of elements in the list where the change occurred
  */
 public class ListChangeAdapter<E> implements ListChangeListener<E> {
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void beforeElementsAdded(ListAddEvent<E> event) {}
 
 	
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void afterElementsAdded(ListAddEvent<E> event) {}
 
 	
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void beforeElementReplaced(ListReplaceEvent<E> event) {}
 
 	
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void afterElementReplaced(ListReplaceEvent<E> event) {}
 	
 
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void beforeElementsRemoved(ListRemoveEvent<E, Object> event) {}
 	
 
+	/**
+	 * Empty implementation to be overwritten if necessary.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
 	@Override
 	public void afterElementsRemoved(ListRemoveEvent<E, E> event) {}	
 }
