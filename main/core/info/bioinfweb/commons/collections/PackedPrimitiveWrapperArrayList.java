@@ -21,6 +21,7 @@ package info.bioinfweb.commons.collections;
 
 import info.bioinfweb.commons.Math2;
 
+import java.math.BigInteger;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -29,12 +30,18 @@ import java.util.List;
 /**
  * An adapter class providing access to an instance if {@link PackedIntegerArrayList} using the {@link List}
  * interface where the element type can be any primitive wrapper class of the Java API, namely {@link Byte},
- * {@link Short}, {@link Integer} or {@link Long}. The number of bits per value to be stored in the underlying
- * packed list can be determined independently of the selected wrapper type. 
+ * {@link Short}, {@link Integer} or {@link Long}.
+ * <p>
+ * The number of bits per value to be stored in the underlying packed list can be determined independently of 
+ * the selected wrapper type. 
+ * <p>
+ * Using {@link Float} or {@link Double} would also be possible but they would be rounded to {@code long} before 
+ * they are stored. If instances of {@link BigInteger} are used they would be treated as described in 
+ * {@link BigInteger#longValue()}. 
  * 
  * @author Ben St&ouml;ver
  *
- * @param <E> - the primitive wrapper class to use 
+ * @param <E> - the primitive wrapper class to use (Should be {@link Byte}, {@link Short}, {@link Integer} or {@link Long})
  */
 public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends AbstractList<E> {
 	protected PackedIntegerArrayList packedList;
