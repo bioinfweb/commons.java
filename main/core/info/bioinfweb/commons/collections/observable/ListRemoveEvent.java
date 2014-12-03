@@ -35,27 +35,58 @@ import java.util.List;
  * @see ListChangeListener
  * @see ObservableList
  *
- * @param <E> the type of elements in the list where the change occurred
+ * @param <L> the type of elements in the list to be modified
+ * @param <E> the type of elements will be or have been removed (Note that these types can only be different if
+ *            this event is fired before the removal, because than elements which are not in the associated list
+ *            might anyway be requested to be removed.)
  */
-public class ListRemoveEvent<E> extends ListMultipleChangesEvent<E> {
+public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
+	private ListMultipleChangesEvent<E> decoratedEvent;
+	
+	
 	/**
 	 * Creates a new event object.
 	 * 
 	 * @param source - the list instance that has been modified
 	 * @param affectedElements - a list of elements that have been removed
 	 */
-public ListRemoveEvent(List<E> source, Collection<? extends E> affectedElements) {
-		super(source, ListChangeType.DELETION, affectedElements);
+	public ListRemoveEvent(List<L> source, Collection<? extends E> affectedElements) {
+		super(source, ListChangeType.DELETION);
+		decoratedEvent = new ListMultipleChangesEvent<E>(null, ListChangeType.DELETION, affectedElements);
 	}
 
 	
-/**
- * Creates a new event object. Use this constructor if only one element is affected.
- * 
- * @param source - the list instance that has been modified
- * @param affectedElements - a list of elements that have been removed
- */
-	public ListRemoveEvent(List<E> source, E affectedElement) {
-		super(source, ListChangeType.DELETION, affectedElement);
-	}	
+	/**
+	 * Creates a new event object. Use this constructor if only one element is affected.
+	 * 
+	 * @param source - the list instance that has been modified
+	 * @param affectedElements - a list of elements that have been removed
+	 */
+	public ListRemoveEvent(List<L> source, E affectedElement) {
+		super(source, ListChangeType.DELETION);
+		decoratedEvent = new ListMultipleChangesEvent<E>(null, ListChangeType.DELETION, affectedElement);
+	}
+
+
+	/**
+	 * Returns a collection of all elements that will be or have been removed from the list.
+	 * <p>
+	 * Note that this collection may contain elements have never been contained in the associated
+	 * list, if this event is fired before the removal operation. 
+	 * 
+	 * @return a collection of the affected list elements
+	 */
+	public Collection<? extends E> getAffectedElements() {
+		return decoratedEvent.getAffectedElements();
+	}
+
+
+	/**
+	 * Returns the first affected element. Convenience method if only one element is affected.
+	 * 
+	 * @return the fist affected element in {@link #getAffectedElements()}
+	 */
+	public E getAffectedElement() {
+		return decoratedEvent.getAffectedElement();
+	}
 }

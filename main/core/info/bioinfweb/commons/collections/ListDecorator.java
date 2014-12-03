@@ -143,7 +143,7 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * 
 	 * @param removedElements - the elements that have been removed.
 	 */
-	protected void beforeRemove(Collection<?> removedElements) {}
+	protected void beforeRemove(Collection<Object> removedElements) {}
 	
 	
 	private void beforeRemove(Object element) {
@@ -176,15 +176,30 @@ public abstract class ListDecorator<E> implements List<E> {
 		final ListDecorator<E> list = this;
 		return new ListIteratorDecorator<E>(iterator) {
 					@Override
+					protected void beforeAdd(int index, E element) {
+						list.beforeAdd(index, element);
+					}
+
+					@Override
 					protected void afterAdd(int index, E element) {
 						list.afterAdd(index, element);
 					}
 		
 					@Override
+					protected void beforeReplace(int index, E currentElement, E newElement) {
+						list.beforeReplace(index, currentElement, newElement);
+					}
+
+					@Override
 					protected void afterReplace(int index, E previousElement, E currentElement) {
 						list.afterReplace(index, previousElement, currentElement);
 					}
 		
+					@Override
+					protected void beforeRemove(Object element) {
+						list.beforeRemove(element);
+					}
+
 					@Override
 					protected void afterRemove(E element) {
 						list.afterRemove(element);
@@ -427,7 +442,7 @@ public abstract class ListDecorator<E> implements List<E> {
 					}
 		
 					@Override
-					protected void beforeRemove(Collection<?> removedElements) {
+					protected void beforeRemove(Collection<Object> removedElements) {
 						thisList.beforeRemove(removedElements);
 					}
 

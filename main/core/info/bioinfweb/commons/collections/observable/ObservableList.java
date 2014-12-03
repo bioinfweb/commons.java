@@ -72,10 +72,28 @@ public class ObservableList<E> extends ListDecorator<E> {
 	
 	
 	@Override
+	protected void beforeAdd(int index, Collection<? extends E> addedElements) {
+		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
+		for (ListChangeListener<E> listener : changeListeners) {
+			listener.beforeElementsAdded(event);
+		}
+	}
+
+
+	@Override
 	protected void afterAdd(int index, Collection<? extends E> addedElements) {
 		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
-			listener.elementsAdded(event);
+			listener.afterElementsAdded(event);
+		}
+	}
+
+
+	@Override
+	protected void beforeReplace(int index, E currentElement, E newElement) {
+		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, currentElement, newElement);
+		for (ListChangeListener<E> listener : changeListeners) {
+			listener.beforeElementReplaced(event);
 		}
 	}
 
@@ -84,16 +102,25 @@ public class ObservableList<E> extends ListDecorator<E> {
 	protected void afterReplace(int index, E previousElement, E currentElement) {
 		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, previousElement, currentElement);
 		for (ListChangeListener<E> listener : changeListeners) {
-			listener.elementReplaced(event);
+			listener.afterElementReplaced(event);
+		}
+	}
+
+
+	@Override
+	protected void beforeRemove(Collection<Object> removedElements) {
+		ListRemoveEvent<E, Object> event = new ListRemoveEvent<E, Object>(this, removedElements);
+		for (ListChangeListener<E> listener : changeListeners) {
+			listener.beforeElementsRemoved(event);
 		}
 	}
 
 
 	@Override
 	protected void afterRemove(Collection<? extends E> removedElements) {
-		ListRemoveEvent<E> event = new ListRemoveEvent<E>(this, removedElements);
+		ListRemoveEvent<E, E> event = new ListRemoveEvent<E, E>(this, removedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
-			listener.elementsRemoved(event);
+			listener.afterElementsRemoved(event);
 		}
 	}
 }

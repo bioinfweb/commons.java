@@ -37,6 +37,7 @@ main/core/info/bioinfweb/commons/collections/SimpleSequenceIntervalFirstPosCompa
 main/core/info/bioinfweb/commons/collections/SimpleSequenceIntervalLastPosComparator.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/SimpleSequenceIntervalPositionAdapter.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/observable/ListAddEvent.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/collections/observable/ListChangeAdapter.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/observable/ListChangeEvent.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/observable/ListChangeListener.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/observable/ListMultipleChangesEvent.java -text svneol=unset#text/plain

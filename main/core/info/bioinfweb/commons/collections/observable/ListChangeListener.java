@@ -34,23 +34,44 @@ import java.util.List;
  */
 public interface ListChangeListener<E> extends EventListener {
 	/**
-	 * Called if one or more elements have been added to monitored list.
+	 * Called before one or more elements are added to monitored list.
 	 * 
 	 * @param event - the event object containing further information on the modification
 	 */
-	public void elementsAdded(ListAddEvent<E> event);
+	public void beforeElementsAdded(ListAddEvent<E> event);
 	
 	/**
-	 * Called if an element in the monitored list has been replaced by another one.
+	 * Called after one or more elements have been added to monitored list.
 	 * 
 	 * @param event - the event object containing further information on the modification
 	 */
-	public void elementReplaced(ListReplaceEvent<E> event);
+	public void afterElementsAdded(ListAddEvent<E> event);
 	
 	/**
-	 * Called if one or more elements have been removed from monitored list.
+	 * Called before an element in the monitored list will be replaced by another one.
 	 * 
 	 * @param event - the event object containing further information on the modification
 	 */
-	public void elementsRemoved(ListRemoveEvent<E> event);
+	public void beforeElementReplaced(ListReplaceEvent<E> event);
+	
+	/**
+	 * Called after an element in the monitored list has been replaced by another one.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
+	public void afterElementReplaced(ListReplaceEvent<E> event);
+	
+	/**
+	 * Called before one or more elements will be removed from monitored list.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
+	public void beforeElementsRemoved(ListRemoveEvent<E, Object> event);
+	
+	/**
+	 * Called after one or more elements have been removed from monitored list.
+	 * 
+	 * @param event - the event object containing further information on the modification
+	 */
+	public void afterElementsRemoved(ListRemoveEvent<E, E> event);
 }

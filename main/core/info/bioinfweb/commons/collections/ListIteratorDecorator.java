@@ -90,10 +90,10 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * to track modifications made by this iterator.
 	 * 
 	 * @param index - the index where the element will be replaced
-	 * @param previousElement - the element that will be replaced
-	 * @param currentElement - the new element that will replace the current element
+	 * @param currentElement - the element that will be replaced
+	 * @param newElement - the new element that will replace the current element
 	 */
-	protected void beforeReplace(int index, E previousElement, E currentElement) {}
+	protected void beforeReplace(int index, E currentElement, E newElement) {}
   
 
 	/**
@@ -115,7 +115,7 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * 
 	 * @param element - the element that will be removed 
 	 */
-  protected void beforeRemove(E element) {}
+  protected void beforeRemove(Object element) {}
   
 
 	/**

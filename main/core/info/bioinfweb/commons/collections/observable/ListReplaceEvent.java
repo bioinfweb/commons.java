@@ -26,7 +26,7 @@ import java.util.List;
 
 
 /**
- * Event that indicates that one or more new elements have been added to an implementation of {@link List}.
+ * Event that indicates that one or more new elements will be or have been added to an implementation of {@link List}.
  * 
  * @author Ben St&ouml;ver
  * @since 1.1.0
@@ -36,41 +36,41 @@ import java.util.List;
  *
  * @param <E> the type of elements in the list where the change occurred
  */
-public class ListReplaceEvent<E> extends ListMultipleChangesEvent<E> {
-	private E previousElement;
-	private E currentElement;
+public class ListReplaceEvent<E> extends ListChangeEvent<E> {
+	private E oldElement;
+	private E newElement;
 
 	
 	/**
 	 * Creates a new event object.
 	 * 
 	 * @param source - the list instance that has been modified
-	 * @param previousElement - the element that has been replaced in the list
-	 * @param currentElement - the element that is now contained in the list
+	 * @param oldElement - the element that will be or has been replaced in the list
+	 * @param newElement - the element that is the replacement for the old element
 	 */
-	public ListReplaceEvent(List<E> source, E previousElement, E currentElement) {
-		super(source, ListChangeType.REPLACEMENT, currentElement);
-		this.previousElement = previousElement;
-		this.currentElement = currentElement;
+	public ListReplaceEvent(List<E> source, E oldElement, E newElement) {
+		super(source, ListChangeType.REPLACEMENT);
+		this.oldElement = oldElement;
+		this.newElement = newElement;
 	}
 
 
 	/**
-	 * Returns the element that has been replaced.
+	 * Returns the element that has been replaced or will be replaced.
 	 * 
 	 * @return the removed element
 	 */
-	public E getPreviousElement() {
-		return previousElement;
+	public E getOldElement() {
+		return oldElement;
 	}
 
 
 	/**
 	 * Returns the element that is now contained in the list.
 	 * 
-	 * @return the element that replaced another element in the list
+	 * @return the element that will or did replaced another element in the list
 	 */
-	public E getCurrentElement() {
-		return currentElement;
+	public E getNewElement() {
+		return newElement;
 	}
 }
