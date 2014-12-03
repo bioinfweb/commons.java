@@ -41,7 +41,7 @@ import java.util.List;
  * 
  * @author Ben St&ouml;ver
  *
- * @param <E> - the primitive wrapper class to use (Should be {@link Byte}, {@link Short}, {@link Integer} or {@link Long})
+ * @param <E> - the primitive wrapper class to use (See above for details on how which classes are treated.)
  */
 public abstract class PackedPrimitiveWrapperArrayList<E extends Number> extends AbstractList<E> {
 	protected PackedIntegerArrayList packedList;
