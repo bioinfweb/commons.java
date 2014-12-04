@@ -40,6 +40,10 @@ import org.eclipse.swt.widgets.Widget;
 
 /**
  * All classes implementing TIC components must inherit from this class.
+ * <p>
+ * Note that depending on your GUI design {@link #assignSize()} might not have the desired if 
+ * {@link #assignSizeToSWTLayoutData(org.eclipse.swt.graphics.Point, Composite)} is not overwritten with an according 
+ * implementation.
  * 
  * @author Ben St&ouml;ver
  */
@@ -122,7 +126,9 @@ public abstract class TICComponent {
 		if (hasToolkitComponent()) {
 			Dimension size = getSize();
 			if (getCurrentToolkit().equals(TargetToolkit.SWT)) {
-				((Composite)getToolkitComponent()).setSize(size.width, size.height);
+				Composite composite = (Composite)getToolkitComponent();
+				composite.setSize(size.width, size.height);
+				assignSizeToSWTLayoutData(composite.getSize(), composite);
 			}
 			else {
 				JComponent component = (JComponent)getToolkitComponent(); 
@@ -131,6 +137,24 @@ public abstract class TICComponent {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Method called by {@link #assignSize()} to be used to adopt the size of the TIC component to the 
+	 * underlying SWT component's layout data. This method is only called if this component is backed
+	 * by an SWT composite and not is the Swing version is used or no toolkit specifc component has
+	 * been created yet.
+	 * <p>
+	 * It can be overwritten by inherited classes that know the class the layout data will have. This 
+	 * default implementation is empty. Note that depending on your GUI design {@link #assignSize()}
+	 * might not have the desired if this method is not overwritten with an according implementation.   
+	 * 
+	 * @param size - the size the composite shall have
+	 * @param composite - the SWT composite that backs this TIC component
+	 * 
+	 * @since 1.1.0
+	 */
+	public void assignSizeToSWTLayoutData(org.eclipse.swt.graphics.Point size, Composite composite) {}
 	
 	
 	/**
