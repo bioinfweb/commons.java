@@ -52,7 +52,7 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	 */
 	public ListRemoveEvent(List<L> source, Collection<? extends E> affectedElements) {
 		super(source, ListChangeType.DELETION);
-		decoratedEvent = new ListMultipleChangesEvent<E>(null, ListChangeType.DELETION, affectedElements);
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, affectedElements);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
 	}
 
 	
@@ -64,7 +64,7 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	 */
 	public ListRemoveEvent(List<L> source, E affectedElement) {
 		super(source, ListChangeType.DELETION);
-		decoratedEvent = new ListMultipleChangesEvent<E>(null, ListChangeType.DELETION, affectedElement);
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, affectedElement);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
 	}
 
 
