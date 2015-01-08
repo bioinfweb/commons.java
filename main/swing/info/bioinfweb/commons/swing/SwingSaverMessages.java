@@ -31,8 +31,8 @@ public class SwingSaverMessages {
 	public static final String EN_BUTTON_NO = "No";
 	public static final String EN_BUTTON_CANCEL = "Cancel";
 	
-	public static final String DE_ASK_TO_SAVE_TITLE = "önderungen";
-	public static final String DE_ASK_TO_SAVE_MESSAGE_BEGINNING = "Möchten Sie önderungen an ";
+	public static final String DE_ASK_TO_SAVE_TITLE = "Änderungen";
+	public static final String DE_ASK_TO_SAVE_MESSAGE_BEGINNING = "Möchten Sie Änderungen an ";
 	public static final String DE_ASK_TO_SAVE_MESSAGE_END = " speichern?";
 	public static final String DE_BUTTON_YES = "Ja";
 	public static final String DE_BUTTON_NO = "Nein";
