@@ -1,14 +1,14 @@
 /*
- * TreeGraph 2 - A feature rich editor for phylogenetic trees
- * Copyright (C) 2007-2013  Ben Stöver, Kai Müller
- * <http://treegraph.bioinfweb.info/>
+ * bioinfweb.commons.java - Shared components of bioinfweb projects made available in a Java library
+ * Copyright (C) 2008 - 2015  Ben StÃ¶ver
+ * <http://commons.bioinfweb.info/Java>
  * 
- * This program is free software: you can redistribute it and/or modify
+ * This file is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  * 
- * This program is distributed in the hope that it will be useful,
+ * This file is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
