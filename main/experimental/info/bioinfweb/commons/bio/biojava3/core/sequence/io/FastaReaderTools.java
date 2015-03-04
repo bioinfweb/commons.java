@@ -1,7 +1,7 @@
 /*
- * AlignmentComparator - Compare and annotate two alternative multiple sequence alignments
- * Copyright (C) 2012  Ben Stöver
- * <http://bioinfweb.info/Software>
+ * bioinfweb.commons.java - Shared components of bioinfweb projects made available in a Java library
+ * Copyright (C) 2008 - 2015  Ben Stöver
+ * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
