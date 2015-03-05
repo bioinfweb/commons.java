@@ -20,6 +20,7 @@ main/core/info/bioinfweb/commons/appversion/ApplicationVersion.java -text svneol
 main/core/info/bioinfweb/commons/changemonitor/ChangeMonitor.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/changemonitor/ChangeMonitorable.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/changemonitor/PropertyChangeMonitor.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/collections/CollectionUtils.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/ListChangeType.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/ListDecorator.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/collections/ListIteratorDecorator.java -text svneol=unset#text/plain
