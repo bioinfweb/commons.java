@@ -7,7 +7,8 @@ package info.bioinfweb.commons.bio.alignment.pairwise;
  * available <a href="https://code.google.com/p/himmele/source/browse/trunk/Bioinformatics/NeedlemanWunsch/src/NeedlemanWunsch.java">here</a>
  * in the version from 7.11.2012 under the terms of Apache License 2.0.
  * 
- * @author Daniel Himmelein, Ben St&ouml;ver
+ * @author Daniel Himmelein
+ * @author Ben St&ouml;ver
  */
 public class NeedlemanWunschAligner implements PairwiseAligner {
 	public static int MATCH_SCORE = 1;

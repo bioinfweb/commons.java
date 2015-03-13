@@ -23,8 +23,6 @@ import info.bioinfweb.commons.tic.TICComponent;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 
 
 
@@ -36,30 +34,17 @@ import java.util.List;
  * 
  * @author Ben St&ouml;ver
  */
-public class TICComponentKeyListenersList implements KeyListener, org.eclipse.swt.events.KeyListener {
-	private TICComponent owner;
-	private List<TICKeyListener> listeners = new ArrayList<TICKeyListener>();
-	
+public class TICComponentKeyListenersList extends AbstractListenerList<TICKeyListener> 
+		implements KeyListener, org.eclipse.swt.events.KeyListener {
 	
 	public TICComponentKeyListenersList(TICComponent owner) {
-		super();
-		this.owner = owner;
-	}
-
-
-	public TICComponent getOwner() {
-		return owner;
-	}
-
-
-	public List<TICKeyListener> getListeners() {
-		return listeners;
+		super(owner);
 	}
 
 
 	@Override
 	public void keyPressed(org.eclipse.swt.events.KeyEvent event) {
-		for (TICKeyListener listener: listeners) {
+		for (TICKeyListener listener: getListeners()) {
 			listener.keyPressed(new TICKeyEvent(getOwner(), event));
 		}
 	}
@@ -67,7 +52,7 @@ public class TICComponentKeyListenersList implements KeyListener, org.eclipse.sw
 	
 	@Override
 	public void keyReleased(org.eclipse.swt.events.KeyEvent event) {
-		for (TICKeyListener listener: listeners) {
+		for (TICKeyListener listener: getListeners()) {
 			listener.keyReleased(new TICKeyEvent(getOwner(), event));
 		}
 	}
@@ -75,7 +60,7 @@ public class TICComponentKeyListenersList implements KeyListener, org.eclipse.sw
 	
 	@Override
 	public void keyPressed(KeyEvent event) {
-		for (TICKeyListener listener: listeners) {
+		for (TICKeyListener listener: getListeners()) {
 			listener.keyPressed(new TICKeyEvent(getOwner(), event));
 		}
 	}
@@ -83,7 +68,7 @@ public class TICComponentKeyListenersList implements KeyListener, org.eclipse.sw
 	
 	@Override
 	public void keyReleased(KeyEvent event) {
-		for (TICKeyListener listener: listeners) {
+		for (TICKeyListener listener: getListeners()) {
 			listener.keyReleased(new TICKeyEvent(getOwner(), event));
 		}
 	}

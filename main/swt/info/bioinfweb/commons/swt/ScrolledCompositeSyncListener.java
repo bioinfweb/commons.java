@@ -21,7 +21,6 @@ package info.bioinfweb.commons.swt;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 
 import org.eclipse.swt.custom.ScrolledComposite;

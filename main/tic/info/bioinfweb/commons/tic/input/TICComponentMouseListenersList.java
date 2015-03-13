@@ -24,8 +24,6 @@ import info.bioinfweb.commons.tic.TICComponent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseTrackListener;
@@ -40,33 +38,20 @@ import org.eclipse.swt.events.MouseTrackListener;
  * 
  * @author Ben St&ouml;ver
  */
-public class TICComponentMouseListenersList implements MouseListener, MouseMotionListener,
-		org.eclipse.swt.events.MouseListener, MouseMoveListener, MouseTrackListener {
+public class TICComponentMouseListenersList extends AbstractListenerList<TICMouseListener> implements MouseListener, 
+		MouseMotionListener, org.eclipse.swt.events.MouseListener, MouseMoveListener, MouseTrackListener {
 	
-	private TICComponent owner;
-	private List<TICMouseListener> listeners = new ArrayList<TICMouseListener>();
 	private int lastPressedButton = 0;
 	
 	
 	public TICComponentMouseListenersList(TICComponent owner) {
-		super();
-		this.owner = owner;
-	}
-
-
-	public TICComponent getOwner() {
-		return owner;
-	}
-
-
-	public List<TICMouseListener> getListeners() {
-		return listeners;
+		super(owner);
 	}
 
 
 	@Override
 	public void mouseDragged(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseDragged(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -74,7 +59,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseMoved(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseMoved(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -86,7 +71,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseEntered(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseEntered(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -94,7 +79,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseExited(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseExited(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -102,7 +87,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mousePressed(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mousePressed(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -110,7 +95,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseReleased(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -118,7 +103,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseEnter(org.eclipse.swt.events.MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseEntered(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -126,7 +111,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 
 	@Override
 	public void mouseExit(org.eclipse.swt.events.MouseEvent event) {
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseExited(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -139,12 +124,12 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 	@Override
 	public void mouseMove(org.eclipse.swt.events.MouseEvent event) {
 		if (lastPressedButton > 0) {
-			for (TICMouseListener listener: listeners) {
+			for (TICMouseListener listener: getListeners()) {
 				listener.mouseDragged(new TICMouseEvent(getOwner(), event));
 			}
 		}
 		else {
-			for (TICMouseListener listener: listeners) {
+			for (TICMouseListener listener: getListeners()) {
 				listener.mouseMoved(new TICMouseEvent(getOwner(), event));
 			}
 		}
@@ -158,7 +143,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 	@Override
 	public void mouseDown(org.eclipse.swt.events.MouseEvent event) {
 		lastPressedButton = event.button;
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mousePressed(new TICMouseEvent(getOwner(), event));
 		}
 	}
@@ -167,7 +152,7 @@ public class TICComponentMouseListenersList implements MouseListener, MouseMotio
 	@Override
 	public void mouseUp(org.eclipse.swt.events.MouseEvent event) {
 		lastPressedButton = 0;
-		for (TICMouseListener listener: listeners) {
+		for (TICMouseListener listener: getListeners()) {
 			listener.mouseReleased(new TICMouseEvent(getOwner(), event));
 		}
 	}

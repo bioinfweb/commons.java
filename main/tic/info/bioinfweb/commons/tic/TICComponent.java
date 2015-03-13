@@ -21,8 +21,10 @@ package info.bioinfweb.commons.tic;
 
 import info.bioinfweb.commons.tic.input.TICComponentKeyListenersList;
 import info.bioinfweb.commons.tic.input.TICComponentMouseListenersList;
+import info.bioinfweb.commons.tic.input.TICComponentMouseWheelListenerList;
 import info.bioinfweb.commons.tic.input.TICKeyListener;
 import info.bioinfweb.commons.tic.input.TICMouseListener;
+import info.bioinfweb.commons.tic.input.TICMouseWheelListener;
 import info.bioinfweb.commons.tic.toolkit.DefaultSWTComposite;
 import info.bioinfweb.commons.tic.toolkit.DefaultSwingComponent;
 import info.bioinfweb.commons.tic.toolkit.ToolkitComponent;
@@ -51,6 +53,7 @@ public abstract class TICComponent {
 	private ToolkitComponent toolkitComponent = null;
 	private TICComponentKeyListenersList keyListenersList = new TICComponentKeyListenersList(this);
 	private TICComponentMouseListenersList mouseListenersList = new TICComponentMouseListenersList(this);
+	private TICComponentMouseWheelListenerList mouseWheelListenersList = new TICComponentMouseWheelListenerList(this);
 	
 	
 	/**
@@ -231,6 +234,7 @@ public abstract class TICComponent {
 			component.addKeyListener(keyListenersList);
 			component.addMouseListener(mouseListenersList);
 			component.addMouseMotionListener(mouseListenersList);
+			component.addMouseWheelListener(mouseWheelListenersList);
 			toolkitComponent = (ToolkitComponent)component;
 		}
 		else if (!getCurrentToolkit().equals(TargetToolkit.SWING)) {
@@ -261,6 +265,7 @@ public abstract class TICComponent {
 		result.addMouseListener(mouseListenersList);
 		result.addMouseMoveListener(mouseListenersList);
 		result.addMouseTrackListener(mouseListenersList);
+		result.addMouseWheelListener(mouseWheelListenersList);
 		return (ToolkitComponent)result;
 	}
 	
@@ -295,22 +300,67 @@ public abstract class TICComponent {
 	}
 	
 	
+	/**
+	 * Adds a key listener to this component (and automatically to the underlying toolkit specific component).
+	 * 
+	 * @param listener - the object to listen to key events
+	 */
 	public void addKeyListener(TICKeyListener listener) {
 		keyListenersList.getListeners().add(listener);
 	}
 	
 	
+	/**
+	 * Removes the specified key listener from this component (and from the underlying toolkit specific component).
+	 * 
+	 * @param listener - the listener to be removed
+	 * @return {@code true} if the specified lister was contained in the list, {@code false} otherwise
+	 */
 	public boolean removeKeyListener(TICKeyListener listener) {
 		return keyListenersList.getListeners().remove(listener);
 	}
 	
 	
+	/**
+	 * Adds a mouse listener to this component (and automatically to the underlying toolkit specific component).
+	 * 
+	 * @param listener - the object to listen to mouse events
+	 * @see #addMouseWheelListener(TICMouseWheelListener)
+	 */
 	public void addMouseListener(TICMouseListener listener) {
 		mouseListenersList.getListeners().add(listener);
 	}
 	
 	
+	/**
+	 * Removes the specified mouse listener from this component (and from the underlying toolkit specific component).
+	 * 
+	 * @param listener - the listener to be removed
+	 * @return {@code true} if the specified lister was contained in the list, {@code false} otherwise
+	 */
 	public boolean removeMouseListener(TICMouseListener listener) {
 		return mouseListenersList.getListeners().remove(listener);
+	}
+	
+	
+	/**
+	 * Adds a mouse wheel listener to this component (and automatically to the underlying toolkit specific component).
+	 * 
+	 * @param listener - the object to listen to mouse wheel events
+	 * @see #addMouseListener(TICMouseListener)
+	 */
+	public void addMouseWheelListener(TICMouseWheelListener listener) {
+		mouseWheelListenersList.getListeners().add(listener);
+	}
+	
+	
+	/**
+	 * Removes the specified mouse wheel listener from this component (and from the underlying toolkit specific component).
+	 * 
+	 * @param listener - the listener to be removed
+	 * @return {@code true} if the specified lister was contained in the list, {@code false} otherwise
+	 */
+	public boolean removeWheelMouseListener(TICMouseWheelListener listener) {
+		return mouseWheelListenersList.getListeners().remove(listener);
 	}
 }
