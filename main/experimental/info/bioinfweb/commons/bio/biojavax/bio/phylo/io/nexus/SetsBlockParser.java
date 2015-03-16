@@ -84,6 +84,8 @@ public class SetsBlockParser extends NexusBlockParser.Abstract {
 				  		System.err.println("WARNING: Interval '" + token + "' could not be parsed. Skipped.");
 				  	}  // Eintrag wird übersprungen  //TODO Ggf. später Fehlermeldung ausgeben.
 				  	break;
+				case OUTSIDE_CHAR_SET_COMMAND:
+					break;
 				}
 			}
 		}

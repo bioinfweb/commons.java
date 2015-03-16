@@ -35,6 +35,11 @@ public class CollectionUtils {
 			public E next() {
 				return iterator.next();
 			}
+
+			@Override
+			public void remove() {
+				throw new UnsupportedOperationException();  // Manually implemented to keep Java 6 compatibility.
+			}
 		};
 	}
 }
