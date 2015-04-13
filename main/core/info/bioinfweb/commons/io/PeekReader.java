@@ -19,6 +19,8 @@
 package info.bioinfweb.commons.io;
 
 
+import info.bioinfweb.commons.text.StringUtils;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.Reader;
@@ -167,31 +169,44 @@ public class PeekReader extends Reader {
 	 * {@code newCharsRead} is lower than {@link #getPeekLength()}, {@link #bufferContentLength} 
 	 * will be set accordingly. If {@code newCharsRead}  is -1, not characters are written to the 
 	 * peek buffer.
-	 * <p>
-	 * This method should not called, if {@code newCharsRead} is 0.
 	 * 
 	 * @param newChars the characters that have just been read from the underlying reader
 	 * @param newCharsRead the number of characters that have just been read from the underlying reader
 	 */
 	private void writeToPeekBuffer(char[] newChars, int newCharsRead) {
-		if (newCharsRead >= peekLength) {  // In this case the whole buffer is overwritten with the end of newChars.
-			System.arraycopy(newChars, newChars.length - peekLength, peekBuffer, 0, peekLength);
-			bufferContentLength = peekLength;
-			bufferStartPos = 0;
+		if (newCharsRead == -1) {  // end of stream was reached
+			newCharsRead = 0;
 		}
-		else {  // Only a part of the buffer will be replaced.
-			int firstPartLength = Math.min(peekLength - bufferStartPos, newCharsRead);
-			System.arraycopy(newChars, 0, peekBuffer, bufferStartPos, firstPartLength);
-			if (firstPartLength < newChars.length) {
-				int secondPartLength = newChars.length - firstPartLength;
-				System.arraycopy(newChars, firstPartLength, peekBuffer, 0, secondPartLength);
-				bufferStartPos = secondPartLength;
+		if (newCharsRead > 0) {
+			if (newCharsRead >= peekLength) {  // In this case the whole buffer is overwritten with the end of newChars.
+				System.arraycopy(newChars, newChars.length - peekLength, peekBuffer, 0, peekLength);
+				bufferContentLength = peekLength;
+				bufferStartPos = 0;
 			}
-			else {
-				bufferStartPos += firstPartLength;
+			else {  // Only a part of the buffer will be replaced.
+				int firstPartLength = Math.min(peekLength - bufferStartPos, newCharsRead);
+				System.arraycopy(newChars, 0, peekBuffer, bufferStartPos, firstPartLength);
+				if (firstPartLength < newChars.length) {
+					int secondPartLength = newChars.length - firstPartLength;
+					System.arraycopy(newChars, firstPartLength, peekBuffer, 0, secondPartLength);
+					bufferStartPos = secondPartLength;
+				}
+				else {
+					bufferStartPos += firstPartLength;
+					if (bufferStartPos >= peekLength) {
+						bufferStartPos -= peekLength;  // Otherwise bufferStartPos could be equal to peekLength. 
+					}
+				}
 			}
+			bufferContentLength -= newChars.length - newCharsRead;  // If the same number of new characters could be read from the underlying reader as were requested from this reader, bufferContentLength will not be changed here.
 		}
-		bufferContentLength -= newChars.length - newCharsRead;  // If the same number of new characters could be read from the underlying reader as were requested from this reader, bufferContentLength will not be changed here.
+		else {
+			bufferStartPos += newChars.length;
+			if (bufferStartPos >= peekLength) {
+				bufferStartPos -= peekLength;
+			}
+			bufferContentLength = Math.max(0, bufferContentLength - newChars.length);
+		}
 	}
 	
 
@@ -210,17 +225,27 @@ public class PeekReader extends Reader {
 		char[] newChars = new char[len];
 		int newCharsRead = underlyingReader.read(newChars);  //TODO Some streams may read only a part of the requested bytes, although the end of the stream is not reached. That would currently result in a smaller peek size.
 		
-		int positionsCopied = peek(cbuf, off, len);
-		
-		int additionalPositionsToCopy = Math.min(newCharsRead, len - positionsCopied);
-		if (additionalPositionsToCopy > 0) {
-			System.arraycopy(newChars, 0, cbuf, off + positionsCopied, additionalPositionsToCopy);
-			positionsCopied += additionalPositionsToCopy;
+		if ((newCharsRead == -1) && (getAvailablePeek() == 0)) {  // End of stream and buffer empty.
+			return -1;
 		}
-		
-		writeToPeekBuffer(newChars, newCharsRead);
-		
-		return positionsCopied;
+		else {
+			int positionsCopied = peek(cbuf, off, len);
+			
+			int additionalPositionsToCopy = Math.min(newCharsRead, len - positionsCopied);
+			if (additionalPositionsToCopy > 0) {
+				System.arraycopy(newChars, 0, cbuf, off + positionsCopied, additionalPositionsToCopy);
+				positionsCopied += additionalPositionsToCopy;
+			}
+			
+			writeToPeekBuffer(newChars, newCharsRead);
+	
+			return positionsCopied;
+		}
+	}
+	
+	
+	public char readChar() throws IOException {
+		return (char)read();
 	}
 	
 	
@@ -279,5 +304,84 @@ public class PeekReader extends Reader {
 	
 	public int peek(int offset) throws EOFException, IndexOutOfBoundsException {
 		return (int)peekChar(offset);
+	}
+	
+	
+	/**
+	 * Tests of the character that will be returned by the next call of e.g. {@link #read()} will be a
+	 * new line character ({@code \n} or ({@code \r}).  
+	 * 
+	 * @return {@code true} if the next character will be a new line character or {@code false} if it will be some
+	 *         other character or the end of the underlying stream has been reached.
+	 */
+	public boolean isNewLineNext() {
+		try {
+			return StringUtils.isNewLineChar(peekChar());
+		}
+		catch (EOFException e) {
+			return false;
+		}
+	}
+	
+	
+	public void consumeNewLine() throws IOException {
+		if (isNewLineNext()) {
+			int c = read();
+			if (c != -1) {  // Not end of stream
+				try {
+					if (peekChar() == '\n') {  // Treat \r\n as one new line event.
+						read();
+					}
+				}
+				catch (EOFException e) {}  // Nothing to do. (Stream ends of the first new line character.)
+			}
+		}
+	}
+	
+	
+	/**
+	 * Reads a line of text. A line is considered to be terminated by any one of a line feed {@code '\n'}, 
+	 * a carriage return {@code '\r'}, or a carriage return followed immediately by a line feed.
+	 * <p>
+	 * The terminating new line characters are consumed from the underlying reader by this method although
+	 * they are not contained in the returned value.
+	 * 
+	 * @return the line of text not including the terminal new line character(s)
+	 * @throws IOException
+	 */
+	public CharSequence readLine() throws IOException {
+		return readLine(Integer.MAX_VALUE);
+	}
+	
+	
+	/**
+	 * Reads a line of text with the specified maximum length. A line is considered to be terminated by any 
+	 * one of a line feed {@code '\n'}, a carriage return {@code '\r'}, or a carriage return followed 
+	 * immediately by a line feed.
+	 * <p>
+	 * If terminating new line characters are reached, they are consumed from the underlying reader by this 
+	 * method although they are not contained in the returned value.
+	 * 
+	 * @param maxLength the maximum length the returned line may have
+	 * @return a line of text with the specified length or shorter if a new character or the end of the stream 
+	 *         were found earlier (Does not include the terminal new line character(s).)
+	 * @throws IOException if an I/O exception occurs   
+	 */
+	public CharSequence readLine(int maxLength) throws IOException {
+		StringBuffer result = new StringBuffer();
+		boolean endOfStream = false;
+		while ((result.length() < maxLength) && !endOfStream && !isNewLineNext()) { 	//TODO check eof
+			int c = read();
+			if (c == -1) {
+				endOfStream = true;
+			}
+			else {
+				result.append((char)c);
+			}
+		}
+		if (!endOfStream) {
+			consumeNewLine();
+		}
+		return result;
 	}
 }
