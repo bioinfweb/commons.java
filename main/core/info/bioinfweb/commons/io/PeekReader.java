@@ -39,6 +39,29 @@ public class PeekReader extends Reader {
 	public static final int DEFAULT_PEEK_BUFFER_SIZE = 8192;
 	
 	
+	public static class ReadLineResult {
+		private CharSequence line;
+		private boolean lineCompletelyRead;
+		
+		
+		public ReadLineResult(CharSequence line, boolean lineCompletelyRead) {
+			super();
+			this.line = line;
+			this.lineCompletelyRead = lineCompletelyRead;
+		}
+
+
+		public CharSequence getLine() {
+			return line;
+		}
+
+
+		public boolean isLineCompletelyRead() {
+			return lineCompletelyRead;
+		}
+	}
+	
+	
 	private Reader underlyingReader;
 	private int peekLength;
 	private char[] peekBuffer;
@@ -279,11 +302,15 @@ public class PeekReader extends Reader {
 	 * Returns integer representation of the character at the current position of this reader without 
 	 * moving forward in the stream.
 	 * 
-	 * @return the integer representation of next the character
-	 * @throws EOFException if the end of the stream was already reached
+	 * @return the integer representation of next the character or -1 if the end of the stream has been reached
 	 */
 	public int peek() throws EOFException {
-		return (int)peekChar();  //TODO Is this the correct transformation?
+		if (getAvailablePeek() > 0) {
+			return (int)peekBuffer[bufferStartPos];
+		}
+		else {
+			return -1;
+		}
 	}
 	
 	
@@ -293,12 +320,14 @@ public class PeekReader extends Reader {
 	 * @param offset the index of the character relative to the current reader position (The character at the current
 	 *        position (that would be returned by the next call of {@link #read()}) would have the index 0.)
 	 * @return
-	 * @throws EOFException if the specified index lies behind the end of the stream
 	 * @throws IndexOutOfBoundsException if the specified index lies further away from the current reader position
 	 *         than the number of precached characters allows
+	 * @throws EOFException if this reader already knows that the specified offset lies behind the end of the 
+	 *         underlying stream. (This is only possible for offsets below the buffer size, specified in the
+	 *         constructor.)
 	 * @see #getAvailablePeek()
 	 */
-	public char peekChar(int offset) throws IndexOutOfBoundsException {
+	public char peekChar(int offset) throws IndexOutOfBoundsException, EOFException {
 		if (getAvailablePeek() > offset) {
 			int index = bufferStartPos + offset;
 			if (index >= peekBuffer.length) {
@@ -306,14 +335,34 @@ public class PeekReader extends Reader {
 			}
 			return peekBuffer[index];
 		}
+		else if ((getAvailablePeek() < peekLength) && (peekLength > offset)) {
+			throw new EOFException("The specified offset lies behind the end of the stream.");
+		}
 		else {
-			throw new IndexOutOfBoundsException("The specified offset (" + offset + ") is outside the current buffer range.");  //TODO Should EOFException be thrown instead in some cases?
+			throw new IndexOutOfBoundsException("The specified offset (" + offset + ") is outside the current buffer range.");
 		}
 	}
 	
 	
+	/**
+	 * Returns the integer representation of the character that would be returned after {@code offset} calls of {@link #read()}.
+	 * 
+	 * @param offset the index of the character relative to the current reader position (The character at the current
+	 *        position (that would be returned by the next call of {@link #read()}) would have the index 0.)
+	 * @return the integer representation of the character at the specified offset or -1 if this reader already knows
+	 *         that the specified offset lies behind the end of the underlying stream. (This is only possible for 
+	 *         offsets below the buffer size, specified in the constructor.)
+	 * @throws IndexOutOfBoundsException if the specified index lies further away from the current reader position
+	 *         than the number of precached characters allows
+	 * @see #getAvailablePeek()
+	 */
 	public int peek(int offset) throws EOFException, IndexOutOfBoundsException {
-		return (int)peekChar(offset);
+		try {
+			return (int)peekChar(offset);
+		}
+		catch (EOFException e) {
+			return -1;
+		}
 	}
 	
 	
@@ -334,18 +383,29 @@ public class PeekReader extends Reader {
 	}
 	
 	
-	public void consumeNewLine() throws IOException {
+	/**
+	 * Consumes any one of a line feed {@code '\n'},  a carriage return {@code '\r'}, or a carriage return 
+	 * followed immediately by a line feed, if found at the current position of the reader.
+	 * 
+	 * @return the number of characters that have been consumed by this method (0 - 2)
+	 * @throws IOException if an I/O error occurs during the read operation
+	 */
+	public int consumeNewLine() throws IOException {
+		int result = 0;
 		if (isNewLineNext()) {
 			int c = read();
+			result++;
 			if (c != -1) {  // Not end of stream
 				try {
 					if (peekChar() == '\n') {  // Treat \r\n as one new line event.
 						read();
+						result++;
 					}
 				}
 				catch (EOFException e) {}  // Nothing to do. (Stream ends of the first new line character.)
 			}
 		}
+		return result;
 	}
 	
 	
@@ -359,7 +419,7 @@ public class PeekReader extends Reader {
 	 * @return the line of text not including the terminal new line character(s)
 	 * @throws IOException
 	 */
-	public CharSequence readLine() throws IOException {
+	public ReadLineResult readLine() throws IOException {
 		return readLine(Integer.MAX_VALUE);
 	}
 	
@@ -377,21 +437,25 @@ public class PeekReader extends Reader {
 	 *         were found earlier (Does not include the terminal new line character(s).)
 	 * @throws IOException if an I/O exception occurs   
 	 */
-	public CharSequence readLine(int maxLength) throws IOException {
-		StringBuffer result = new StringBuffer();
+	public ReadLineResult readLine(int maxLength) throws IOException {
+		StringBuffer line = new StringBuffer();
 		boolean endOfStream = false;
-		while ((result.length() < maxLength) && !endOfStream && !isNewLineNext()) { 	//TODO check eof
+		while ((line.length() < maxLength) && !endOfStream && !isNewLineNext()) { 	//TODO check eof
 			int c = read();
 			if (c == -1) {
 				endOfStream = true;
 			}
 			else {
-				result.append((char)c);
+				line.append((char)c);
 			}
 		}
+		int newLinesConsumed = 1;  // Indicates end of stream that was already reached.
 		if (!endOfStream) {
-			consumeNewLine();
+			newLinesConsumed = consumeNewLine();
+			if ((newLinesConsumed == 0) && (peek() == -1)) {
+				newLinesConsumed = 1;  // Indicate end of stream that will be reached.
+			}
 		}
-		return result;
+		return new ReadLineResult(line, newLinesConsumed > 0);
 	}
 }
