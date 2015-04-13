@@ -60,6 +60,7 @@ main/core/info/bioinfweb/commons/io/IOProgressListenerVector.java -text svneol=u
 main/core/info/bioinfweb/commons/io/IOUtils.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/InternationalFileFilter.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/InvalidXSDPathException.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/io/PeekReader.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/Savable.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/TableReader.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/TextReader.java -text svneol=unset#text/plain

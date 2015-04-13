@@ -21,7 +21,7 @@ package info.bioinfweb.commons.testing;
 
 import static org.junit.Assert.* ;
 
-
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 
@@ -48,8 +48,35 @@ public class TestTools {
   	catch (NoSuchMethodException e) {
   		e.printStackTrace();
   		fail("Private method " + name + " not found.");
-  		return null;
+  		return null;  // unreachable code
   	}
+	}
+	
+	
+	public static Field getPrivateField(Class<? extends Object> objectClass, String name) {
+		try {
+			Field field = objectClass.getDeclaredField(name);
+			field.setAccessible(true);
+			return field;
+		}
+		catch (NoSuchFieldException e) {
+			e.printStackTrace();
+			fail("Private field " + name + " not found.");
+			return null;  // unreachable code
+		}
+	}
+	
+	
+	public static Object getPrivateFieldValue(Object object, String name) {
+		try {
+			Field field = getPrivateField(object.getClass(), name);
+			return field.get(object);
+		}
+		catch (IllegalAccessException e) {
+			e.printStackTrace();
+			fail("The private field " + name + " is not accesible.");
+			return null;  // unreachable code
+		}
 	}
 	
 	

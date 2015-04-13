@@ -183,4 +183,9 @@ public class StringUtils {
   		return text.toLowerCase();
   	}
   }
+  
+  
+  public static boolean isNewLineChar(char c) {
+  	return (c == '\n') || (c == '\r');
+  }
 }
