@@ -275,6 +275,7 @@ test/src/info/bioinfweb/commons/collections/PackedObjectArrayListTest.java -text
 test/src/info/bioinfweb/commons/collections/PackedPrimitiveWrapperArrayListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/SequenceIntervalListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/guavatest/TreeMultisetTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/io/PeekReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/TableReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/XMLUtilsTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageParserTest.java -text svneol=unset#text/plain
