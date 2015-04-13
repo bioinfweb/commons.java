@@ -19,14 +19,15 @@
 package info.bioinfweb.commons.io;
 
 
+import info.bioinfweb.commons.io.PeekReader.ReadLineResult;
 import info.bioinfweb.commons.testing.TestTools;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Method;
 
 import org.junit.* ;
-
 
 import static org.junit.Assert.* ;
 
@@ -398,7 +399,19 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test(expected=IndexOutOfBoundsException.class)
 	public void test_peak_single_exceptionStart() {
-		createPeekReader(TEST_CONTENT).peekChar(10);
+		try {
+			createPeekReader(TEST_CONTENT).peekChar(10);
+		}
+		catch (EOFException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	private void assertReadLineResult(String expectedLine, boolean expectedConsumedCompletely, ReadLineResult result) {
+		assertEquals(expectedLine, result.getLine().toString());
+		assertEquals(expectedConsumedCompletely, result.isLineCompletelyRead());
 	}
 	
 	
@@ -406,10 +419,10 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public void test_readLine() {
 		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
 		try {
-			assertEquals("Line 1", reader.readLine().toString());
-			assertEquals("Line 2", reader.readLine().toString());
-			assertEquals("Line 3", reader.readLine().toString());
-			assertEquals("Line 4", reader.readLine().toString());
+			assertReadLineResult("Line 1", true, reader.readLine());
+			assertReadLineResult("Line 2", true, reader.readLine());
+			assertReadLineResult("Line 3", true, reader.readLine());
+			assertReadLineResult("Line 4", true, reader.readLine());
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -422,14 +435,34 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public void test_readLine_maxLength() {
 		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
 		try {
-			assertEquals("Line", reader.readLine(4).toString());
-			assertEquals(" 1", reader.readLine(2).toString());
-			assertEquals("Line", reader.readLine(4).toString());
-			assertEquals(" 2", reader.readLine(4).toString());  // Test both exact and higher numbers.
-			assertEquals("Line", reader.readLine(4).toString());
-			assertEquals(" 3", reader.readLine(2).toString());
-			assertEquals("Line", reader.readLine(4).toString());
-			assertEquals(" 4", reader.readLine(2).toString());
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 1", true, reader.readLine(4));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 2", true, reader.readLine(4));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 3", true, reader.readLine(4));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 4", true, reader.readLine(4));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readLine_maxLengthExactEnd() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
+		try {
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 1", true, reader.readLine(2));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 2", true, reader.readLine(2));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 3", true, reader.readLine(2));
+			assertReadLineResult("Line", false, reader.readLine(4));
+			assertReadLineResult(" 4", true, reader.readLine(2));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
