@@ -244,8 +244,18 @@ public class PeekReader extends Reader {
 	}
 	
 	
+	/**
+	 * Reads the next character.
+	 * 
+	 * @return the next character
+	 * @throws IOException if there are no more characters to read (the end of the stream has been reached)
+	 */
 	public char readChar() throws IOException {
-		return (char)read();
+		int code = read();
+		if (code == -1) {
+			throw new EOFException("The end of the underlying stream was already reached.");
+		}
+		return (char)code;
 	}
 	
 	
