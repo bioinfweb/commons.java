@@ -34,12 +34,13 @@ import static org.junit.Assert.* ;
                                           //           1         2         3         4         5         6
 public class PeekReaderTest {             // 01234567890123456789012345678901234567890123456789012345678901
 	public static final String TEST_CONTENT = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; 
+	public static final String TEST_CONTENT_LINE_BREAK = "Line 1\r\nLine 2\nLine 3\rLine 4"; 
 	public static final int PEEK_BUFFER_SIZE = 10; 
 	
 	
-	private PeekReader createPeekReader() {
+	private PeekReader createPeekReader(String content) {
 		try {
-			return new PeekReader(new StringReader(TEST_CONTENT), PEEK_BUFFER_SIZE);
+			return new PeekReader(new StringReader(content), PEEK_BUFFER_SIZE);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -80,7 +81,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void test_initPeekBuffer() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		char[] peekBuffer = getPeekBuffer(reader);
 		
 		for (int i = 0; i < peekBuffer.length; i++) {
@@ -91,7 +92,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void test_peek_array() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		try {
 			// Test reading from the beginning:
 			char[] cbuf = new char[10];
@@ -191,7 +192,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void test_writeToPeekBuffer() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		Method method = TestTools.getPrivateMethod(reader.getClass(), "writeToPeekBuffer", char[].class, int.class);
 		
 		try {
@@ -258,7 +259,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	 */
 	@Test
 	public void test_writeToPeekBuffer2() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		Method method = TestTools.getPrivateMethod(reader.getClass(), "writeToPeekBuffer", char[].class, int.class);
 		
 		try {
@@ -301,7 +302,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void test_read() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		char[] cbuf = new char[20];
 		for (int i = 0; i < cbuf.length; i++) {
 			cbuf[i] = '_';
@@ -360,7 +361,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void test_peak_single() {
-		PeekReader reader = createPeekReader();
+		PeekReader reader = createPeekReader(TEST_CONTENT);
 		
 		try {
 			assertEquals('0', reader.peekChar());
@@ -397,6 +398,42 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test(expected=IndexOutOfBoundsException.class)
 	public void test_peak_single_exceptionStart() {
-		createPeekReader().peekChar(10);
+		createPeekReader(TEST_CONTENT).peekChar(10);
+	}
+	
+	
+	@Test
+	public void test_readLine() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
+		try {
+			assertEquals("Line 1", reader.readLine().toString());
+			assertEquals("Line 2", reader.readLine().toString());
+			assertEquals("Line 3", reader.readLine().toString());
+			assertEquals("Line 4", reader.readLine().toString());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readLine_maxLength() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
+		try {
+			assertEquals("Line", reader.readLine(4).toString());
+			assertEquals(" 1", reader.readLine(2).toString());
+			assertEquals("Line", reader.readLine(4).toString());
+			assertEquals(" 2", reader.readLine(4).toString());  // Test both exact and higher numbers.
+			assertEquals("Line", reader.readLine(4).toString());
+			assertEquals(" 3", reader.readLine(2).toString());
+			assertEquals("Line", reader.readLine(4).toString());
+			assertEquals(" 4", reader.readLine(2).toString());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
 	}
 }
