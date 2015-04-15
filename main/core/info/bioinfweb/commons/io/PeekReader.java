@@ -24,6 +24,7 @@ import info.bioinfweb.commons.text.StringUtils;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.regex.Pattern;
 
 
 
@@ -39,12 +40,12 @@ public class PeekReader extends Reader {
 	public static final int DEFAULT_PEEK_BUFFER_SIZE = 8192;
 	
 	
-	public static class ReadLineResult {
+	public static class ReadResult {
 		private CharSequence line;
 		private boolean lineCompletelyRead;
 		
 		
-		public ReadLineResult(CharSequence line, boolean lineCompletelyRead) {
+		public ReadResult(CharSequence line, boolean lineCompletelyRead) {
 			super();
 			this.line = line;
 			this.lineCompletelyRead = lineCompletelyRead;
@@ -384,6 +385,30 @@ public class PeekReader extends Reader {
 	
 	
 	/**
+	 * Tests of the specified string is contained in the underlying character stream at the current position.
+	 * 
+	 * @param sequence the string to search for
+	 * @return {@code true} if the specified string is found, {@code false} otherwise
+	 * @throws EOFException if the end of the underlying stream was be reached while checking for the stream
+	 * @throws IllegalArgumentException if the specified string is longer than the peek length
+	 */
+	public boolean isNext(String sequence) throws EOFException {
+		try {
+			for (int i = 0; i < sequence.length(); i++) {
+				if (sequence.charAt(i) != peekChar(i)) {
+					return false;
+				}
+			}
+			return true;
+		}
+		catch (IndexOutOfBoundsException e) {
+			throw new IllegalArgumentException("The specified sequence is longer than the available peek length (" + 
+					sequence.length() + " > " + getAvailablePeek() + ")");
+		}
+	}
+	
+	
+	/**
 	 * Consumes any one of a line feed {@code '\n'},  a carriage return {@code '\r'}, or a carriage return 
 	 * followed immediately by a line feed, if found at the current position of the reader.
 	 * 
@@ -417,9 +442,9 @@ public class PeekReader extends Reader {
 	 * they are not contained in the returned value.
 	 * 
 	 * @return the line of text not including the terminal new line character(s)
-	 * @throws IOException
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadLineResult readLine() throws IOException {
+	public ReadResult readLine() throws IOException {
 		return readLine(Integer.MAX_VALUE);
 	}
 	
@@ -435,12 +460,12 @@ public class PeekReader extends Reader {
 	 * @param maxLength the maximum length the returned line may have
 	 * @return a line of text with the specified length or shorter if a new character or the end of the stream 
 	 *         were found earlier (Does not include the terminal new line character(s).)
-	 * @throws IOException if an I/O exception occurs   
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadLineResult readLine(int maxLength) throws IOException {
+	public ReadResult readLine(int maxLength) throws IOException {
 		StringBuffer line = new StringBuffer();
 		boolean endOfStream = false;
-		while ((line.length() < maxLength) && !endOfStream && !isNewLineNext()) { 	//TODO check eof
+		while ((line.length() < maxLength) && !endOfStream && !isNewLineNext()) {
 			int c = read();
 			if (c == -1) {
 				endOfStream = true;
@@ -449,6 +474,7 @@ public class PeekReader extends Reader {
 				line.append((char)c);
 			}
 		}
+		
 		int newLinesConsumed = 1;  // Indicates end of stream that was already reached.
 		if (!endOfStream) {
 			newLinesConsumed = consumeNewLine();
@@ -456,6 +482,157 @@ public class PeekReader extends Reader {
 				newLinesConsumed = 1;  // Indicate end of stream that will be reached.
 			}
 		}
-		return new ReadLineResult(line, newLinesConsumed > 0);
+		return new ReadResult(line, newLinesConsumed > 0);
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the specified termination sequence is found. 
+	 * <p>
+	 * The returned result does not contain the termination sequence, although these characters have been consumed. 
+	 * 
+	 * @param terminationSequence a string specifying the termination sequence
+	 * @return the character sequence read from the underlying stream not containing the specified termination sequence
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 */
+	public ReadResult readUntil(String terminationSequence) throws IOException {
+		return readUntil(Integer.MAX_VALUE, terminationSequence);
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the specified termination sequence is found or the end of the 
+	 * stream is reached.
+	 * <p>
+	 * The returned result does not contain the termination sequence, if it was found, although these characters 
+	 * have been consumed. 
+	 * 
+	 * @param maxLength the maximum length the read sequence (including the termination sequence) may have
+	 * @param terminationSequence a string specifying the termination sequence
+	 * @return the character sequence read from the underlying stream
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 * @throws IllegalArgumentException if the {@code terminationSequence} is longer than {@code maxLength}  
+	 */
+	public ReadResult readUntil(int maxLength, String terminationSequence) throws IOException {
+		if (terminationSequence.length() > maxLength) {
+			throw new IllegalArgumentException(
+					"The allowed maximal length must be greater of equal to the length of the termination sequence.");
+		}
+		else {
+			StringBuffer result = new StringBuffer();
+			boolean endOfStream = false;
+			
+			while ((result.length() < maxLength) && !endOfStream && !org.apache.commons.lang3.StringUtils.endsWith(result, terminationSequence)) {
+				int c = read();
+				if (c == -1) {
+					endOfStream = true;
+				}
+				else {
+					result.append((char)c);
+				}
+			}
+			
+			if (org.apache.commons.lang3.StringUtils.endsWith(result, terminationSequence)) {  // Remove terminating sequence from return value:
+				return new ReadResult(result.delete(result.length() - terminationSequence.length(), result.length()), true);
+			}
+			else {  // Return incomplete result:
+				return new ReadResult(result, endOfStream);
+			}
+		}
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the contents of this buffer match the specified pattern or the end
+	 * of the stream is reached.
+	 * <p>
+	 * This method is useful to read strings that can be separated by different character patterns. To e.g. allow all white
+	 * spaces as separators the following call could be made: {@code readRagExp(100, ".+\\s+")}.
+	 * <p>
+	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
+	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
+	 * 
+	 * @param regExp the regular expression defining how the returned sequence should look like
+	 * @return a character sequence matching the specified pattern (or the end of the stream is reached if the pattern could 
+	 *         not be matched before)
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 */
+	public ReadResult readRegExp(String regExp) throws IOException {
+		return readRegExp(Integer.MAX_VALUE, regExp);
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the contents of this buffer match the specified pattern or the end
+	 * of the stream is reached or the maximum number of characters was read.
+	 * <p>
+	 * This method is useful to read strings that can be separated by different character patterns. To e.g. allow all white
+	 * spaces as separators the following call could be made: {@code readRagExp(100, ".+\\s+")}.
+	 * <p>
+	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
+	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
+	 * 
+	 * @param maxLength the maximum length the returned sequence may have
+	 * @param regExp the regular expression defining how the returned sequence should look like
+	 * @return a character sequence matching the specified pattern (or the characters from the current position until
+	 *         {@code maxLength} or the end of the stream is reached if the pattern could not be matched before)
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 */
+	public ReadResult readRegExp(int maxLength, String regExp) throws IOException {
+		return readRegExp(maxLength, Pattern.compile(regExp));
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the contents of this buffer match the specified pattern or the end
+	 * of the stream is reached.
+	 * <p>
+	 * This method is useful to read strings that can be separated by different character patterns. To e.g. allow all white
+	 * spaces as separators the following call could be made: {@code readRagExp(100, ".+\\s+")}.
+	 * <p>
+	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
+	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
+	 * 
+	 * @param regExp the regular expression pattern defining how the returned sequence should look like
+	 * @return a character sequence matching the specified pattern (or the end of the stream is reached if the pattern could 
+	 *         not be matched before)
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 */
+	public ReadResult readRegExp(Pattern pattern) throws IOException {
+		return readRegExp(Integer.MAX_VALUE, pattern);
+	}
+	
+	
+	/**
+	 * Reads characters into a string buffer until the contents of this buffer match the specified pattern or the end
+	 * of the stream is reached or the maximum number of characters was read.
+	 * <p>
+	 * This method is useful to read strings that can be separated by different character patterns. To e.g. allow all white
+	 * spaces as separators the following call could be made: {@code readRagExp(100, ".+\\s+")}.
+	 * <p>
+	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
+	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
+	 * 
+	 * @param maxLength the maximum length the read sequence may have
+	 * @param pattern the regular expression pattern defining how the returned sequence should look like
+	 * @return a character sequence matching the specified pattern (or the characters from the current position until
+	 *         {@code maxLength} or the end of the stream is reached if the pattern could not be matched before)
+	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
+	 */
+	public ReadResult readRegExp(int maxLength, Pattern pattern) throws IOException {
+		StringBuffer result = new StringBuffer();
+		boolean endOfStream = false;
+		
+		while ((result.length() < maxLength) && !endOfStream && !pattern.matcher(result).matches()) {
+			int c = read();
+			if (c == -1) {
+				endOfStream = true;
+			}
+			else {
+				result.append((char)c);
+			}
+		}
+		
+		return new ReadResult(result, endOfStream || pattern.matcher(result).matches());
 	}
 }
