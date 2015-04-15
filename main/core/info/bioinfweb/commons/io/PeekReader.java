@@ -160,6 +160,11 @@ public class PeekReader extends Reader {
 	}
 	
 	
+	public int peek(char[] cbuf) {
+		return peek(cbuf, 0, cbuf.length);
+	}
+	
+	
 	/**
 	 * Copies the specified number of positions from the peek buffer to the specified array. If more characters are requested
 	 * than are contained in the buffer, all characters in the buffer are copied. 
@@ -181,6 +186,47 @@ public class PeekReader extends Reader {
 		}
 		
 		return lengthToCopy;
+	}
+	
+	
+	private String charArrayToString(char[] chars, int length) {
+		StringBuilder result = new StringBuilder(length);
+		for (int i = 0; i < length; i++) {
+			result.append(chars[i]);
+		}
+		return result.toString();
+	}
+	
+	
+	/**
+	 * Previews the specified number of characters and returns them as a string. If the end of the stream is
+	 * reached before the specified number of characters have been read, the returned string will be shorter
+	 * than {@code length}.
+	 * 
+	 * @param length the number of characters to preview
+	 * @return the characters that would be read next as a string
+	 * @throws IOException
+	 */
+	public String peekString(int length) {
+		char[] chars = new char[length]; 
+		int lengthRead = peek(chars);
+		return charArrayToString(chars, lengthRead);
+	}
+	
+	
+	/**
+	 * Reads the specified number of characters and returns them as a string. If the end of the stream is
+	 * reached before the specified number of characters have been read, the returned string will be shorter
+	 * than {@code length}.
+	 * 
+	 * @param length the number of characters to read
+	 * @return the read characters as a string
+	 * @throws IOException if an I/O error occurs during the read operation
+	 */
+	public String readString(int length) throws IOException {
+		char[] chars = new char[length]; 
+		int lengthRead = read(chars);
+		return charArrayToString(chars, lengthRead);
 	}
 	
 	
