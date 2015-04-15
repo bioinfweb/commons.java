@@ -357,7 +357,7 @@ public class PeekReader extends Reader {
 	 *         than the number of precached characters allows
 	 * @see #getAvailablePeek()
 	 */
-	public int peek(int offset) throws EOFException, IndexOutOfBoundsException {
+	public int peek(int offset) throws IndexOutOfBoundsException {
 		try {
 			return (int)peekChar(offset);
 		}
@@ -389,13 +389,13 @@ public class PeekReader extends Reader {
 	 * 
 	 * @param sequence the string to search for
 	 * @return {@code true} if the specified string is found, {@code false} otherwise
-	 * @throws EOFException if the end of the underlying stream was be reached while checking for the stream
 	 * @throws IllegalArgumentException if the specified string is longer than the peek length
 	 */
-	public boolean isNext(String sequence) throws EOFException {
+	public boolean isNext(String sequence) throws IllegalArgumentException {
 		try {
 			for (int i = 0; i < sequence.length(); i++) {
-				if (sequence.charAt(i) != peekChar(i)) {
+				int c = peek(i);
+				if ((c == -1) || (sequence.charAt(i) != (char)c)) {
 					return false;
 				}
 			}
@@ -507,11 +507,12 @@ public class PeekReader extends Reader {
 	 * The returned result does not contain the termination sequence, if it was found, although these characters 
 	 * have been consumed. 
 	 * 
-	 * @param maxLength the maximum length the read sequence (including the termination sequence) may have
+	 * @param maxLength the maximum length the read sequence (not including the termination sequence) may have
 	 * @param terminationSequence a string specifying the termination sequence
 	 * @return the character sequence read from the underlying stream
 	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
-	 * @throws IllegalArgumentException if the {@code terminationSequence} is longer than {@code maxLength}  
+	 * @throws IllegalArgumentException if the {@code terminationSequence} is longer than {@code maxLength} or 
+	 *         longer than the available peek length 
 	 */
 	public ReadResult readUntil(int maxLength, String terminationSequence) throws IOException {
 		if (terminationSequence.length() > maxLength) {
@@ -522,7 +523,7 @@ public class PeekReader extends Reader {
 			StringBuffer result = new StringBuffer();
 			boolean endOfStream = false;
 			
-			while ((result.length() < maxLength) && !endOfStream && !org.apache.commons.lang3.StringUtils.endsWith(result, terminationSequence)) {
+			while ((result.length() < maxLength) && !endOfStream && !isNext(terminationSequence)) {
 				int c = read();
 				if (c == -1) {
 					endOfStream = true;
@@ -532,12 +533,17 @@ public class PeekReader extends Reader {
 				}
 			}
 			
-			if (org.apache.commons.lang3.StringUtils.endsWith(result, terminationSequence)) {  // Remove terminating sequence from return value:
-				return new ReadResult(result.delete(result.length() - terminationSequence.length(), result.length()), true);
+			boolean completelyRead = endOfStream;
+			if (!endOfStream && isNext(terminationSequence)) {
+				for (int i = 0; i < terminationSequence.length(); i++) {  // Consume termination sequence
+					readChar();
+				}
+				completelyRead = true;
 			}
-			else {  // Return incomplete result:
-				return new ReadResult(result, endOfStream);
+			else {
+				completelyRead = completelyRead || (peek() == -1);  // Check if the end of the stream is reached at the same time as the maximum length
 			}
+			return new ReadResult(result, completelyRead);
 		}
 	}
 	
@@ -550,15 +556,17 @@ public class PeekReader extends Reader {
 	 * spaces as separators the following call could be made: {@code readRagExp(100, ".+\\s+")}.
 	 * <p>
 	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
-	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
+	 * will be removed from the returned result, because the whole result is matched against the specified pattern.
 	 * 
 	 * @param regExp the regular expression defining how the returned sequence should look like
+	 * @param greedy Specify {@code true} here if the longest possible sequence matching the pattern shall be read or
+	 *        {@code false} if the algorithms should stop already when the shortest possible matching sequence was found.  
 	 * @return a character sequence matching the specified pattern (or the end of the stream is reached if the pattern could 
 	 *         not be matched before)
 	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadResult readRegExp(String regExp) throws IOException {
-		return readRegExp(Integer.MAX_VALUE, regExp);
+	public ReadResult readRegExp(String regExp, boolean greedy) throws IOException {
+		return readRegExp(Integer.MAX_VALUE, regExp, greedy);
 	}
 	
 	
@@ -574,12 +582,15 @@ public class PeekReader extends Reader {
 	 * 
 	 * @param maxLength the maximum length the returned sequence may have
 	 * @param regExp the regular expression defining how the returned sequence should look like
+	 * @param greedy Specify {@code true} here if the longest possible sequence (considering {@code maxLength}) matching the 
+	 *        pattern shall be read or {@code false} if the algorithms should stop already when the shortest possible matching 
+	 *        sequence was found.  
 	 * @return a character sequence matching the specified pattern (or the characters from the current position until
 	 *         {@code maxLength} or the end of the stream is reached if the pattern could not be matched before)
 	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadResult readRegExp(int maxLength, String regExp) throws IOException {
-		return readRegExp(maxLength, Pattern.compile(regExp));
+	public ReadResult readRegExp(int maxLength, String regExp, boolean greedy) throws IOException {
+		return readRegExp(maxLength, Pattern.compile(regExp), greedy);
 	}
 	
 	
@@ -594,12 +605,14 @@ public class PeekReader extends Reader {
 	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
 	 * 
 	 * @param regExp the regular expression pattern defining how the returned sequence should look like
+	 * @param greedy Specify {@code true} here if the longest possible sequence matching the pattern shall be read or
+	 *        {@code false} if the algorithms should stop already when the shortest possible matching sequence was found.  
 	 * @return a character sequence matching the specified pattern (or the end of the stream is reached if the pattern could 
 	 *         not be matched before)
 	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadResult readRegExp(Pattern pattern) throws IOException {
-		return readRegExp(Integer.MAX_VALUE, pattern);
+	public ReadResult readRegExp(Pattern pattern, boolean greedy) throws IOException {
+		return readRegExp(Integer.MAX_VALUE, pattern, greedy);
 	}
 	
 	
@@ -615,11 +628,14 @@ public class PeekReader extends Reader {
 	 * 
 	 * @param maxLength the maximum length the read sequence may have
 	 * @param pattern the regular expression pattern defining how the returned sequence should look like
+	 * @param greedy Specify {@code true} here if the longest possible sequence (considering {@code maxLength}) matching the 
+	 *        pattern shall be read or {@code false} if the algorithms should stop already when the shortest possible matching 
+	 *        sequence was found.  
 	 * @return a character sequence matching the specified pattern (or the characters from the current position until
 	 *         {@code maxLength} or the end of the stream is reached if the pattern could not be matched before)
 	 * @throws IOException if an I/O exception occurs while reading from the underlying stream
 	 */
-	public ReadResult readRegExp(int maxLength, Pattern pattern) throws IOException {
+	public ReadResult readRegExp(int maxLength, Pattern pattern, boolean greedy) throws IOException {
 		StringBuffer result = new StringBuffer();
 		boolean endOfStream = false;
 		
@@ -633,6 +649,26 @@ public class PeekReader extends Reader {
 			}
 		}
 		
-		return new ReadResult(result, endOfStream || pattern.matcher(result).matches());
+		// Try to consume additional characters while still matching the pattern:
+		if (greedy) {
+			while ((result.length() < maxLength) && !endOfStream) {
+				int c = peek();
+				if (c == -1) {
+					endOfStream = true;
+				}
+				else {
+					result.append((char)c);
+					if (pattern.matcher(result).matches()) {
+						read();  // Consume character
+					}
+					else {
+						result.delete(result.length() - 1, result.length());
+						break;
+					}
+				}
+			}
+		}
+		
+		return new ReadResult(result, endOfStream || pattern.matcher(result).matches() || (peek() == -1));
 	}
 }
