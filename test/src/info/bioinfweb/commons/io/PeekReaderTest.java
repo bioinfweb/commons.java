@@ -19,7 +19,6 @@
 package info.bioinfweb.commons.io;
 
 
-import info.bioinfweb.commons.io.PeekReader.ReadLineResult;
 import info.bioinfweb.commons.testing.TestTools;
 
 import java.io.EOFException;
@@ -37,6 +36,10 @@ import static org.junit.Assert.* ;
 public class PeekReaderTest {             // 01234567890123456789012345678901234567890123456789012345678901
 	public static final String TEST_CONTENT = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; 
 	public static final String TEST_CONTENT_LINE_BREAK = "Line 1\r\nLine 2\nLine 3\rLine 4"; 
+	public static final String TERMINATION_SEQ = "ABC"; 
+	public static final String TEST_CONTENT_TERMINATION_SEQ = "A 1ABCBC 2ABCText AB 3ABCLine 4"; 
+	public static final String REG_EXP = ".+\\s+"; 
+	public static final String TEST_CONTENT_REG_EXP = "Line1\tLine2   Line3 \t Line4"; 
 	public static final int PEEK_BUFFER_SIZE = 10; 
 	
 	
@@ -410,7 +413,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	}
 	
 	
-	private void assertReadLineResult(String expectedLine, boolean expectedConsumedCompletely, ReadLineResult result) {
+	private void assertReadResult(String expectedLine, boolean expectedConsumedCompletely, PeekReader.ReadResult result) {
 		assertEquals(expectedLine, result.getLine().toString());
 		assertEquals(expectedConsumedCompletely, result.isLineCompletelyRead());
 	}
@@ -420,10 +423,10 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public void test_readLine() {
 		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
 		try {
-			assertReadLineResult("Line 1", true, reader.readLine());
-			assertReadLineResult("Line 2", true, reader.readLine());
-			assertReadLineResult("Line 3", true, reader.readLine());
-			assertReadLineResult("Line 4", true, reader.readLine());
+			assertReadResult("Line 1", true, reader.readLine());
+			assertReadResult("Line 2", true, reader.readLine());
+			assertReadResult("Line 3", true, reader.readLine());
+			assertReadResult("Line 4", true, reader.readLine());
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -436,14 +439,14 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public void test_readLine_maxLength() {
 		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
 		try {
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 1", true, reader.readLine(4));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 2", true, reader.readLine(4));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 3", true, reader.readLine(4));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 4", true, reader.readLine(4));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 1", true, reader.readLine(4));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 2", true, reader.readLine(4));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 3", true, reader.readLine(4));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 4", true, reader.readLine(4));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -456,14 +459,146 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public void test_readLine_maxLengthExactEnd() {
 		PeekReader reader = createPeekReader(TEST_CONTENT_LINE_BREAK);
 		try {
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 1", true, reader.readLine(2));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 2", true, reader.readLine(2));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 3", true, reader.readLine(2));
-			assertReadLineResult("Line", false, reader.readLine(4));
-			assertReadLineResult(" 4", true, reader.readLine(2));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 1", true, reader.readLine(2));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 2", true, reader.readLine(2));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 3", true, reader.readLine(2));
+			assertReadResult("Line", false, reader.readLine(4));
+			assertReadResult(" 4", true, reader.readLine(2));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_readUntil_illegalArgument() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_TERMINATION_SEQ);
+		try {
+			reader.readUntil(2, "ABC");
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readUntil() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_TERMINATION_SEQ);
+		try {
+			assertReadResult("A 1", true, reader.readUntil(20, TERMINATION_SEQ));
+			assertReadResult("BC 2", true, reader.readUntil(20, TERMINATION_SEQ));
+			assertReadResult("Text AB 3", true, reader.readUntil(20, TERMINATION_SEQ));
+			assertReadResult("Line 4", true, reader.readUntil(20, TERMINATION_SEQ));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readUntil_exactEnd() {
+		// "A 1ABCBC 2ABCText AB 3ABCLine 4"
+		PeekReader reader = createPeekReader(TEST_CONTENT_TERMINATION_SEQ);
+		try {
+			assertReadResult("A 1", true, reader.readUntil(3, TERMINATION_SEQ));
+			assertReadResult("BC 2", true, reader.readUntil(4, TERMINATION_SEQ));
+			assertReadResult("Text AB 3", true, reader.readUntil(9, TERMINATION_SEQ));
+			assertReadResult("Line 4", true, reader.readUntil(6, TERMINATION_SEQ));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readRegExp_maxLength() {
+		// "Line1\tLine2   Line3 \t Line4"
+		PeekReader reader = createPeekReader(TEST_CONTENT_REG_EXP);
+		try {
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("1\t", true, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("2   ", true, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("3 \t ", true, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("4", true, reader.readRegExp(4, REG_EXP, true));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readRegExp_maxLengthExactEnd() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_REG_EXP);
+		try {
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("1\t", true, reader.readRegExp(2, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("2   ", true, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("3 \t ", true, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, true));
+			assertReadResult("4", true, reader.readRegExp(1, REG_EXP, true));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readRegExp_maxLengthNotGreedy() {
+		// "Line1\tLine2   Line3 \t Line4"
+		PeekReader reader = createPeekReader(TEST_CONTENT_REG_EXP);
+		try {
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("1\t", true, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("2 ", true, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("  ", true, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("3 ", true, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("\t ", true, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("4", true, reader.readRegExp(4, REG_EXP, false));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
+	public void test_readRegExp_maxLengthExactEndNotGreedy() {
+		PeekReader reader = createPeekReader(TEST_CONTENT_REG_EXP);
+		try {
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("1\t", true, reader.readRegExp(2, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("2 ", true, reader.readRegExp(2, REG_EXP, false));
+			assertReadResult("  ", true, reader.readRegExp(2, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("3 ", true, reader.readRegExp(2, REG_EXP, false));
+			assertReadResult("\t ", true, reader.readRegExp(2, REG_EXP, false));
+			assertReadResult("Line", false, reader.readRegExp(4, REG_EXP, false));
+			assertReadResult("4", true, reader.readRegExp(1, REG_EXP, false));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
