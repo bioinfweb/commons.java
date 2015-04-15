@@ -414,8 +414,8 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	
 	private void assertReadResult(String expectedLine, boolean expectedConsumedCompletely, PeekReader.ReadResult result) {
-		assertEquals(expectedLine, result.getLine().toString());
-		assertEquals(expectedConsumedCompletely, result.isLineCompletelyRead());
+		assertEquals(expectedLine, result.getSequence().toString());
+		assertEquals(expectedConsumedCompletely, result.isCompletelyRead());
 	}
 	
 	
