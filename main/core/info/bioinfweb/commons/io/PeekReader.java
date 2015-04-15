@@ -41,24 +41,24 @@ public class PeekReader extends Reader {
 	
 	
 	public static class ReadResult {
-		private CharSequence line;
-		private boolean lineCompletelyRead;
+		private CharSequence sequence;
+		private boolean completelyRead;
 		
 		
-		public ReadResult(CharSequence line, boolean lineCompletelyRead) {
+		public ReadResult(CharSequence sequence, boolean completelyRead) {
 			super();
-			this.line = line;
-			this.lineCompletelyRead = lineCompletelyRead;
+			this.sequence = sequence;
+			this.completelyRead = completelyRead;
 		}
 
 
-		public CharSequence getLine() {
-			return line;
+		public CharSequence getSequence() {
+			return sequence;
 		}
 
 
-		public boolean isLineCompletelyRead() {
-			return lineCompletelyRead;
+		public boolean isCompletelyRead() {
+			return completelyRead;
 		}
 	}
 	
