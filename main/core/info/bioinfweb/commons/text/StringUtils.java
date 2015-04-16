@@ -185,7 +185,42 @@ public class StringUtils {
   }
   
   
+  /**
+   * Checks if the specified character is a new line character
+   * 
+   * @param c the character to be tested
+   * @return {@code true} if {@code c} is either {@code '\n'} or {@code '\r'}, {@code false} otherwise.  
+   */
   public static boolean isNewLineChar(char c) {
   	return (c == '\n') || (c == '\r');
+  }
+  
+  
+  /**
+   * Returns the first index of any whitespace character.
+   * 
+   * @param sequence the character sequence to be searched
+   * @return the index of the first white space character (as defined by {@link Character#isWhitespace(char)}) 
+   */
+  public static int indexOfWhiteSpace(CharSequence sequence) {
+  	return indexOfWhiteSpace(sequence, 0);
+  }
+  
+  
+  /**
+   * Returns the first index of any whitespace character.
+   * 
+   * @param sequence the character sequence to be searched
+   * @param fromIndex the index to start the search
+   * @return the index of the first white space character (as defined by {@link Character#isWhitespace(char)}) 
+   *         at or after {@code fromIndex}  
+   */
+  public static int indexOfWhiteSpace(CharSequence sequence, int fromIndex) {
+  	for (int i = fromIndex; i < sequence.length(); i++) {
+			if (Character.isWhitespace(sequence.charAt(i))) {
+				return i;
+			}
+		}
+  	return -1;
   }
 }
