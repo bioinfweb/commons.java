@@ -49,4 +49,19 @@ public class StringUtilsTest {
   	assertEquals("", StringUtils.convertCamelCase("", "-"));
   	assertEquals("a", StringUtils.convertCamelCase("A", "-"));
   }
+  
+  
+  @Test
+  public void test_indexOfWhiteSpace() {
+  	assertEquals(0, StringUtils.indexOfWhiteSpace(" "));
+  	assertEquals(3, StringUtils.indexOfWhiteSpace("ABC DEF "));
+  	assertEquals(3, StringUtils.indexOfWhiteSpace("ABC\t DEF "));
+  	assertEquals(3, StringUtils.indexOfWhiteSpace("ABC \tDEF "));
+  	assertEquals(3, StringUtils.indexOfWhiteSpace("ABC  DEF "));
+  	assertEquals(-1, StringUtils.indexOfWhiteSpace("ABCDEF"));
+
+  	assertEquals(3, StringUtils.indexOfWhiteSpace("ABC DEF ", 3));
+  	assertEquals(7, StringUtils.indexOfWhiteSpace("ABC DEF ", 4));
+  	assertEquals(7, StringUtils.indexOfWhiteSpace("ABC DEF ", 7));
+  }
 }
