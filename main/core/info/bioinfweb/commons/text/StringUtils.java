@@ -223,4 +223,55 @@ public class StringUtils {
 		}
   	return -1;
   }
+  
+  
+  /**
+   * Tests whether a character sequence ends with a specified character.
+   * 
+   * @param sequence the sequence to be tested
+   * @param terminalSymbol the expected last character of the sequence
+   * @return {@code true} if the sequence is at least one character long and last character is equal to
+   *         {@code terminalSymbol}, {@code false} otherwise. 
+   */
+  public static boolean endsWith(CharSequence sequence, char terminalSymbol) {
+  	return (sequence.length() == 0) || (sequence.charAt(sequence.length() - 1) == terminalSymbol);
+  }
+  
+  
+  /**
+   * Cuts off the specified number of characters from the end of the specified character sequence.
+   * <p>
+   * If {@code length} is higher than the length of {@code sequence} an empty string is returned.
+   * 
+   * @param sequence the character sequence to be cut
+   * @param length the number of characters to be removed from the end
+   * @return the shorter sequence
+   */
+  public static CharSequence cutEnd(CharSequence sequence, int length) {
+  	if (length > sequence.length()) {
+  		return "";
+  	}
+  	else {
+  		return sequence.subSequence(0, sequence.length() - length);
+  	}
+  }
+  
+  
+  /**
+   * Cuts off the specified number of characters from the end of the specified string.
+   * <p>
+   * If {@code length} is higher than the length of {@code sequence} an empty string is returned.
+   * 
+   * @param sequence the string to be cut
+   * @param length the number of characters to be removed from the end
+   * @return the shorter string
+   */
+  public static String cutEnd(String sequence, int length) {
+  	if (length > sequence.length()) {
+  		return "";
+  	}
+  	else {
+  		return sequence.substring(0, sequence.length() - length);
+  	}
+  }
 }

@@ -226,7 +226,12 @@ public class PeekReader extends Reader {
 	public String readString(int length) throws IOException {
 		char[] chars = new char[length]; 
 		int lengthRead = read(chars);
-		return charArrayToString(chars, lengthRead);
+		if (lengthRead == -1) {  // end of file
+			return "";
+		}
+		else {
+			return charArrayToString(chars, lengthRead);
+		}
 	}
 	
 	
@@ -254,7 +259,7 @@ public class PeekReader extends Reader {
 				bufferStartPos = 0;
 			}
 			else {  // Only a part of the buffer will be replaced.
-				int firstPartLength = Math.min(peekLength - bufferStartPos, newCharsRead);
+				int firstPartLength = Math.min(peekLength - bufferStartPos, newChars.length/*newCharsRead*/);
 				System.arraycopy(newChars, 0, peekBuffer, bufferStartPos, firstPartLength);
 				if (firstPartLength < newChars.length) {
 					int secondPartLength = newChars.length - firstPartLength;
@@ -455,6 +460,35 @@ public class PeekReader extends Reader {
 	
 	
 	/**
+	 * Tests if one of the specified strings is contained in the underlying character stream at the current position.
+	 * 
+	 * @param sequence the strings to search for
+	 * @return {@code true} if one of the specified strings is found, {@code false} otherwise
+	 * @throws IllegalArgumentException if one of the specified strings is longer than the peek length
+	 */
+	public boolean isNext(String[] sequences) throws IllegalArgumentException {
+		return whichIsNext(sequences) != -1;
+	}
+	
+	
+	/**
+	 * Determines which of the specified strings is located at the current position of this reader.
+	 * 
+	 * @param sequences the strings to check for
+	 * @return the index of the string in {@code sequences} that was found or -1 if none of the strings was found
+	 * @throws IllegalArgumentException if one of the specified strings is longer than the peek length
+	 */
+	public int whichIsNext(String[] sequences) throws IllegalArgumentException {
+		for (int i = 0; i < sequences.length; i++) {
+			if (isNext(sequences[i])) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	
+	/**
 	 * Consumes any one of a line feed {@code '\n'},  a carriage return {@code '\r'}, or a carriage return 
 	 * followed immediately by a line feed, if found at the current position of the reader.
 	 * 
@@ -561,36 +595,49 @@ public class PeekReader extends Reader {
 	 *         longer than the available peek length 
 	 */
 	public ReadResult readUntil(int maxLength, String terminationSequence) throws IOException {
-		if (terminationSequence.length() > maxLength) {
-			throw new IllegalArgumentException(
-					"The allowed maximal length must be greater of equal to the length of the termination sequence.");
-		}
-		else {
-			StringBuffer result = new StringBuffer();
-			boolean endOfStream = false;
-			
-			while ((result.length() < maxLength) && !endOfStream && !isNext(terminationSequence)) {
-				int c = read();
-				if (c == -1) {
-					endOfStream = true;
-				}
-				else {
-					result.append((char)c);
-				}
+		return readUntil(maxLength, new String[]{terminationSequence});
+	}
+	
+	
+	public ReadResult readUntil(String[] terminationSequences) throws IOException {
+		return readUntil(Integer.MAX_VALUE, terminationSequences);
+	}
+	
+	
+	public ReadResult readUntil(int maxLength, String[] terminationSequences) throws IOException {
+		for (int i = 0; i < terminationSequences.length; i++) {
+			if (terminationSequences[i].length() > maxLength) {
+				throw new IllegalArgumentException(
+						"The allowed maximal length must be greater of equal to the length of the termination sequence.");
 			}
-			
-			boolean completelyRead = endOfStream;
-			if (!endOfStream && isNext(terminationSequence)) {
-				for (int i = 0; i < terminationSequence.length(); i++) {  // Consume termination sequence
-					readChar();
-				}
-				completelyRead = true;
+		}
+		
+		StringBuffer result = new StringBuffer();
+		boolean endOfStream = false;
+		
+		while ((result.length() < maxLength) && !endOfStream && !isNext(terminationSequences)) {
+			int c = read();
+			if (c == -1) {
+				endOfStream = true;
 			}
 			else {
-				completelyRead = completelyRead || (peek() == -1);  // Check if the end of the stream is reached at the same time as the maximum length
+				result.append((char)c);
 			}
-			return new ReadResult(result, completelyRead);
 		}
+		
+		boolean completelyRead = endOfStream;
+		int index = whichIsNext(terminationSequences);
+		if (!endOfStream && (index != -1)) {
+			skip(terminationSequences[index].length());
+//			for (int i = 0; i < terminationSequences[index].length(); i++) {  // Consume termination sequence
+//				readChar();
+//			}
+			completelyRead = true;
+		}
+		else {
+			completelyRead = completelyRead || (peek() == -1);  // Check if the end of the stream is reached at the same time as the maximum length
+		}
+		return new ReadResult(result, completelyRead);
 	}
 	
 	
