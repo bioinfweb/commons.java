@@ -522,6 +522,27 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	
 	@Test
+	public void test_ReadUntilWhitespace() {
+		PeekReader reader = createPeekReader("ABC DEF; GHI[");
+		final String[] terminationSeqs = new String[]{";", "["};
+		try {
+			assertReadResult("ABC", true, reader.readUntilWhitespace(terminationSeqs));
+			assertReadResult("DEF", true, reader.readUntilWhitespace(terminationSeqs));
+			assertReadResult("", true, reader.readUntilWhitespace(terminationSeqs));
+			assertReadResult("GHI", true, reader.readUntilWhitespace(terminationSeqs));
+
+			reader = createPeekReader("ABC DEF; GHI[");
+			assertReadResult("ABC DEF", true, reader.readUntil(terminationSeqs));
+			assertReadResult(" GHI", true, reader.readUntil(terminationSeqs));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	@Test
 	public void test_readRegExp_maxLength() {
 		// "Line1\tLine2   Line3 \t Line4"
 		PeekReader reader = createPeekReader(TEST_CONTENT_REG_EXP);
