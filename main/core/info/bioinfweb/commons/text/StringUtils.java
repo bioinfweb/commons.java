@@ -274,4 +274,21 @@ public class StringUtils {
   		return sequence.substring(0, sequence.length() - length);
   	}
   }
+  
+  
+  /**
+   * Returns the last character of the specified sequence.
+   * 
+   * @param sequence the character sequence to extract the last character from
+   * @return the last character of the sequence
+   * @throws IllegalArgumentException if {@code sequence} is not at least one character long
+   */
+  public static char lastChar(CharSequence sequence) {
+  	if (sequence.length() == 0) {
+  		throw new IllegalArgumentException("The specified character sequence needs to be at least one character long.");
+  	}
+  	else {
+  		return sequence.charAt(sequence.length() - 1);
+  	}
+  }
 }

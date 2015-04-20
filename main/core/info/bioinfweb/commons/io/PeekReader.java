@@ -595,16 +595,36 @@ public class PeekReader extends Reader {
 	 *         longer than the available peek length 
 	 */
 	public ReadResult readUntil(int maxLength, String terminationSequence) throws IOException {
-		return readUntil(maxLength, new String[]{terminationSequence});
+		return readUntil(maxLength, new String[]{terminationSequence}, false);
+	}
+	
+	
+	public ReadResult readUntilWhitespace(int maxLength, String terminationSequence) throws IOException {
+		return readUntil(maxLength, new String[]{terminationSequence}, true);
 	}
 	
 	
 	public ReadResult readUntil(String[] terminationSequences) throws IOException {
-		return readUntil(Integer.MAX_VALUE, terminationSequences);
+		return readUntil(Integer.MAX_VALUE, terminationSequences, false);
+	}
+	
+	
+	public ReadResult readUntilWhitespace(String[] terminationSequences) throws IOException {
+		return readUntil(Integer.MAX_VALUE, terminationSequences, true);
 	}
 	
 	
 	public ReadResult readUntil(int maxLength, String[] terminationSequences) throws IOException {
+		return readUntil(maxLength, terminationSequences, false);
+	}
+	
+	
+	public ReadResult readUntilWhitespace(int maxLength, String[] terminationSequences) throws IOException {
+		return readUntil(maxLength, terminationSequences, true);
+	}
+	
+	
+	protected ReadResult readUntil(int maxLength, String[] terminationSequences, boolean untilWhitespace) throws IOException {
 		for (int i = 0; i < terminationSequences.length; i++) {
 			if (terminationSequences[i].length() > maxLength) {
 				throw new IllegalArgumentException(
@@ -615,27 +635,34 @@ public class PeekReader extends Reader {
 		StringBuffer result = new StringBuffer();
 		boolean endOfStream = false;
 		
-		while ((result.length() < maxLength) && !endOfStream && !isNext(terminationSequences)) {
-			int c = read();
+		int c = peek();
+		while ((result.length() < maxLength) && !endOfStream && !isNext(terminationSequences) && 
+				(!untilWhitespace || !Character.isWhitespace(c))) {
+			
 			if (c == -1) {
 				endOfStream = true;
 			}
 			else {
 				result.append((char)c);
 			}
+			skip(1);
+			c= peek();
 		}
 		
 		boolean completelyRead = endOfStream;
-		int index = whichIsNext(terminationSequences);
-		if (!endOfStream && (index != -1)) {
-			skip(terminationSequences[index].length());
-//			for (int i = 0; i < terminationSequences[index].length(); i++) {  // Consume termination sequence
-//				readChar();
-//			}
+		if (Character.isWhitespace(c)) {
+			skip(1);
 			completelyRead = true;
 		}
 		else {
-			completelyRead = completelyRead || (peek() == -1);  // Check if the end of the stream is reached at the same time as the maximum length
+			int index = whichIsNext(terminationSequences);
+			if (!endOfStream && (index != -1)) {
+				skip(terminationSequences[index].length());
+				completelyRead = true;
+			}
+			else {
+				completelyRead = completelyRead || (peek() == -1);  // Check if the end of the stream is reached at the same time as the maximum length
+			}
 		}
 		return new ReadResult(result, completelyRead);
 	}
