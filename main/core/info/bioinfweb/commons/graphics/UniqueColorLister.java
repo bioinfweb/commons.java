@@ -26,14 +26,19 @@ import java.awt.Color;
 /**
  * Allows to subsequently generate a list of unique colors that are equally distributed along the spectrum.
  * 
- * @author BenStoever
- *
+ * @author Ben St&ouml;ver
+ * @since 1.2.0
  */
 public class UniqueColorLister {
 	private float currentHue = 0;
 	private float stepLength = 1;
 	
 	
+	/**
+	 * Returns a new color which differs from all colors previously returned by this method.
+	 * 
+	 * @return a new color which is unique for this instance 
+	 */
 	public Color generateNext() {
 		Color result = Color.getHSBColor(currentHue, 1, 1);
 		do {
