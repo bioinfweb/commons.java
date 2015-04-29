@@ -40,11 +40,26 @@ public class PeekReader extends Reader {
 	public static final int DEFAULT_PEEK_BUFFER_SIZE = 8192;
 	
 	
+	/**
+	 * Stores information about the result of a read operation, as it is returned by some methods of 
+	 * {@link PeekReader}.
+	 * 
+	 * @author Ben St&ouml;ver
+	 * @since 1.2.0	 
+	 */
 	public static class ReadResult {
 		private CharSequence sequence;
 		private boolean completelyRead;
 		
 		
+		/**
+		 * Creates a new instance of this class
+		 * 
+		 * @param sequence the character sequence that was read
+		 * @param completelyRead Specify {@code true} here if the returned sequence contains all characters that
+		 *        should have been read or {@code false} if reading was aborted because the maximum number of 
+		 *        characters was read. 
+		 */
 		public ReadResult(CharSequence sequence, boolean completelyRead) {
 			super();
 			this.sequence = sequence;
@@ -52,11 +67,23 @@ public class PeekReader extends Reader {
 		}
 
 
+		/**
+		 * The character sequence that was read from the underlying data source.
+		 * 
+		 * @return the read characters
+		 */
 		public CharSequence getSequence() {
 			return sequence;
 		}
 
 
+		/**
+		 * Allows to determine whether the specified maximum number of characters were read or all characters
+		 * were read as intended. 
+		 * 
+		 * @return {@code true} if the returned sequence contains all characters that should have been read or 
+		 *         {@code false} if reading was aborted because the maximum number of characters was reached 
+		 */
 		public boolean isCompletelyRead() {
 			return completelyRead;
 		}
