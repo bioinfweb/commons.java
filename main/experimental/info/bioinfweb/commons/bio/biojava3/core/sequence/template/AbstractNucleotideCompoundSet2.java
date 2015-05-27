@@ -21,7 +21,8 @@ public abstract class AbstractNucleotideCompoundSet2 extends AbstractNucleotideC
    * @param base - the name of the base (e.g. <i>A</i>)
    * @param complement - the name of the complementary base (e.g. <i>T</i>)
    * @param equivalents - the bases represented by <code>base</code> if <code>base</code> 
-   *        and <code>complement</code> are ambiguity codes  
+   *        and <code>complement</code> are ambiguity codes
+   * @return the new nucleotide compound
    * @see org.biojava3.core.sequence.template.AbstractNucleotideCompoundSet#newNucleotideCompound(java.lang.String, java.lang.String, java.lang.String[])
    */
 	@Override

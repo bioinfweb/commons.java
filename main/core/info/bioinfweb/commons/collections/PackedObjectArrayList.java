@@ -168,6 +168,6 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	 *         could have.)
 	 */
 	public int getMaxObjectTypeCount() {
-		return (int)packedList.getMaxValue() + 1;  //TODO Could the result be one greater than Integer.MAX_VALUE? 
+		return (int)(packedList.getMaxValue() + 1);  // One must be added before the conversion to avoid possible overflow. 
 	}
 }
