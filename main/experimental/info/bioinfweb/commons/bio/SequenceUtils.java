@@ -1,6 +1,7 @@
 package info.bioinfweb.commons.bio;
 
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -14,50 +15,234 @@ import info.bioinfweb.commons.text.StringUtils;
  * @author Ben St&ouml;ver
  */
 public class SequenceUtils {
+	private static class NucleotideInfo {
+		public char complement;
+		public char[] constituents;
+		
+		
+		public NucleotideInfo(char complement, char[] constituents) {
+			super();
+			this.complement = complement;
+			this.constituents = constituents;
+		}
+	}
+	
+	
+	private static class AminoAcidInfo {
+		private char oneLetterCode;
+		private String threeLetterCode;
+		private char[] constituents;
+		
+		
+		public AminoAcidInfo(char oneLetterCode, String threeLetterCode,
+				char[] constituents) {
+			super();
+			this.oneLetterCode = oneLetterCode;
+			this.threeLetterCode = threeLetterCode;
+			this.constituents = constituents;
+		}
+	}
+	
+	
 	public static final char GAP_CHAR = '-';	
 	public static final String DNA_CHARS = "CGAT";  // Order is relevant for randSequence() 	
 	public static final String ALL_DNA_CHARS = "CGATYRKMBVDHN"; 	
 	public static final String RNA_CHARS = "CGAU";  // Order is relevant for randSequence()	
 	public static final String ALL_RNA_CHARS = "CGAUYRKMBVDHN"; 	
 	
-	private static final Map<Character, Character> complementMap = createComplementMap();
+	private static final Map<Character, NucleotideInfo> nucleotideInfoMap = createNucleotideInfoMap();
+	private static final Map<String, AminoAcidInfo> aminoAcidInfoMap = createAminoAcidInfoMap();
 	
 	
-	private static Map<Character, Character> createComplementMap() {
-		Map<Character, Character> result = new TreeMap<Character, Character>();
-		result.put('A', 'T');
-		result.put('T', 'A');
-		result.put('U', 'A');
-		result.put('C', 'G');
-		result.put('G', 'C');
-		result.put('Y', 'R');  // Y = C v T (Pyrimidin)
-		result.put('R', 'Y');  // R = A v G (Purin)
-		result.put('K', 'M');  // K = G v T (Ketogruppe)
-		result.put('M', 'K');  // M = A v C (Aminogruppe)
-		result.put('B', 'V');  // B = C v G v T
-		result.put('V', 'B');  // V = A v C v G
-		result.put('D', 'H');  // D = A v G v T
-		result.put('H', 'D');  // H = A v C v T
-		// W (weak, A v T), S (strong, C v G), N oder "-" bleiben unverändert.
+	private static Map<Character, NucleotideInfo> createNucleotideInfoMap() {
+		Map<Character, NucleotideInfo> result = new TreeMap<Character, NucleotideInfo>();
+		result.put('A', new NucleotideInfo('T', new char[]{'A'}));
+		result.put('T', new NucleotideInfo('A', new char[]{'T'}));
+		result.put('U', new NucleotideInfo('A', new char[]{'U'}));
+		result.put('C', new NucleotideInfo('G', new char[]{'C'}));
+		result.put('G', new NucleotideInfo('C', new char[]{'G'}));
+		result.put('Y', new NucleotideInfo('R', new char[]{'C', 'T'}));  // Y = C v T (Pyrimidin)
+		result.put('R', new NucleotideInfo('Y', new char[]{'A', 'G'}));  // R = A v G (Purin)
+		result.put('K', new NucleotideInfo('M', new char[]{'G', 'T'}));  // K = G v T (Ketogruppe)
+		result.put('M', new NucleotideInfo('K', new char[]{'A', 'C'}));  // M = A v C (Aminogruppe)
+		result.put('W', new NucleotideInfo('W', new char[]{'A', 'T'}));  // W (weak) = A v T
+		result.put('S', new NucleotideInfo('S', new char[]{'C', 'G'}));  // S (strong) = C v G
+		result.put('B', new NucleotideInfo('V', new char[]{'C', 'G', 'T'}));  // B = C v G v T
+		result.put('V', new NucleotideInfo('B', new char[]{'A', 'C', 'G'}));  // V = A v C v G
+		result.put('D', new NucleotideInfo('H', new char[]{'A', 'G', 'T'}));  // D = A v G v T
+		result.put('H', new NucleotideInfo('D', new char[]{'A', 'C', 'T'}));  // H = A v C v T
+		result.put('N', new NucleotideInfo('N', new char[]{'A', 'T', 'C', 'T'}));
+		result.put('X', new NucleotideInfo('X', new char[]{'A', 'T', 'C', 'T'}));
 		return result;
 	}
 	
 	
+	private static void putAminoAcidInfo(Map<String, AminoAcidInfo> map, char oneLetterCode, String threeLetterCode, 
+			char... constituents) {
+		
+		if (constituents.length == 0) {
+			constituents = new char[]{oneLetterCode};
+		}
+		AminoAcidInfo info = new AminoAcidInfo(oneLetterCode, threeLetterCode, constituents);
+		map.put(Character.toString(oneLetterCode), info);
+		map.put(threeLetterCode.toUpperCase(), info);
+	}
+	
+	
+	private static Map<String, AminoAcidInfo> createAminoAcidInfoMap() {
+		Map<String, AminoAcidInfo> result = new TreeMap<String, AminoAcidInfo>();
+		
+		putAminoAcidInfo(result, 'A', "Ala");
+		putAminoAcidInfo(result, 'C', "Cys");
+		putAminoAcidInfo(result, 'D', "Asp");
+		putAminoAcidInfo(result, 'E', "Glu");
+		putAminoAcidInfo(result, 'F', "Phe");
+		putAminoAcidInfo(result, 'G', "Gly");
+		putAminoAcidInfo(result, 'H', "His");
+		putAminoAcidInfo(result, 'I', "Ile");
+		putAminoAcidInfo(result, 'K', "Lys");
+		putAminoAcidInfo(result, 'L', "Leu");
+		putAminoAcidInfo(result, 'M', "Met");
+		putAminoAcidInfo(result, 'N', "Asn");
+		putAminoAcidInfo(result, 'P', "Pro");
+		putAminoAcidInfo(result, 'Q', "Gln");
+		putAminoAcidInfo(result, 'R', "Arg");
+		putAminoAcidInfo(result, 'S', "Ser");
+		putAminoAcidInfo(result, 'T', "Thr");
+		putAminoAcidInfo(result, 'V', "Val");
+		putAminoAcidInfo(result, 'W', "Trp");
+		putAminoAcidInfo(result, 'Y', "Tyr");
+		
+		putAminoAcidInfo(result, 'O', "Pyl");
+		putAminoAcidInfo(result, 'U', "Sec");
+		
+		putAminoAcidInfo(result, 'B', "Asx", 'N', 'D');
+		putAminoAcidInfo(result, 'Z', "Glx", 'Q', 'E');
+		
+		AminoAcidInfo info = new AminoAcidInfo('X', "Xaa", 
+				new char[]{'A', 'C', 'D', 'E', 'F','G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'O', 'U'});
+		aminoAcidInfoMap.put("X", info);
+		aminoAcidInfoMap.put("XAA", info);
+		aminoAcidInfoMap.put("UNK", info);
+		
+		return result;
+	}
+	
+	
+	/**
+	 * If the specified nucleotide is an IUPAC ambiguity code this method returns an array
+	 * containing all nucleotides that could be represented by the code. 
+	 * <p>
+	 * Constituents returned for ambiguity code are always DNA nucleotides (thymine is always used instead 
+	 * of uracil). (Anyway, if {@code 'U'} is specified for {@code nucleotide} the returned array will contain 
+	 * {@code 'U'} as the only element and not {@code 'T'}). 
+	 * <p>
+	 * If the specified character is not an ambiguity code character, an array containing 
+	 * this character as the only element is returned.  
+	 * 
+	 * @param nucleotide the character that may be an ambiguity code
+	 * @return an array of the nucleotides as upper case letters
+	 */
+	public static char[] nucleotideConstituents(char nucleotide) {
+		nucleotide = Character.toUpperCase(nucleotide);
+		NucleotideInfo result = nucleotideInfoMap.get(nucleotide);
+		if (result == null) {  // e.g. for '-'
+			return new char[]{nucleotide};
+		}
+		else {
+			return Arrays.copyOf(result.constituents, result.constituents.length);  // Copy array to avoid modifications of the arrays in nucleotideInfoMap by external code.
+		}
+	}
+	
+	
+	/**
+	 * Determines whether the specified character is an IUPAC ambiguity code.
+	 * 
+	 * @param nucleotide the character that may be an ambiguity code
+	 * @return {@code true} of the specified character is a valid ambiguity code, {@code false} otherwise.
+	 */
+	public static boolean isNucleotideAmbuguityCode(char nucleotide) {
+		return nucleotideConstituents(nucleotide).length > 1;
+	}
+	
+	
+	public static char oneLetterAminoAcidByThreeLetter(String threeLetterCode) {
+		if (threeLetterCode.length() == 3) {
+			AminoAcidInfo info = aminoAcidInfoMap.get(threeLetterCode);
+			if (info != null) {
+				return info.oneLetterCode;
+			}
+		}
+		throw new IllegalArgumentException("The specified string \"" + threeLetterCode + 
+				"\" is not a valid three letter amino acid code.");
+	}
+	
+	
+	public static String threeLetterAminoAcidByOneLetter(char oneLetterCode) {
+		AminoAcidInfo info = aminoAcidInfoMap.get(Character.toChars(oneLetterCode));
+		if (info != null) {
+			return info.threeLetterCode;
+		}
+		else {
+			throw new IllegalArgumentException("The specified character '" + oneLetterCode + 
+					"' is not a valid one letter amino acid code.");
+		}
+	}
+	
+	
+	public static char[] oneLetterAminoAcidConstituents(String code) {
+		AminoAcidInfo info = aminoAcidInfoMap.get(code);
+		if (info != null) {
+			return Arrays.copyOf(info.constituents, info.constituents.length);
+		}
+		else {
+			return null;
+		}
+	}
+	
+	
+	public static String[] threeLetterAminoAcidConstituents(String code) {
+		char[] oneLetterConstituents = oneLetterAminoAcidConstituents(code);
+		if (oneLetterConstituents == null) {
+			return null;
+		}
+		else {
+			String[] result = new String[oneLetterConstituents.length];
+			for (int i = 0; i < result.length; i++) {
+				result[i] = threeLetterAminoAcidByOneLetter(oneLetterConstituents[i]);
+			}
+			return result;
+		}
+	}
+	
+	
+	/**
+	 * Returns the reverse of the specified sequence.
+	 * 
+	 * @param sequence the source sequence
+	 * @return the inverse sequence
+	 */
 	public static String reverse(CharSequence sequence) {
   	return StringUtils.invert(sequence);
   }
   
   
   /**
-   * Returns the complement of the specified character. If an undefined character is specified
-   * (e.g. "-") it is returned unchanged.
-   * @param c
-   * @return
+   * Returns the complement of the specified character. (IUPAC ambiguity codes are also supported.) 
+   * If an undefined character is specified (e.g. "-") it is returned unchanged. 
+   * 
+   * @param c the nucleotide to be complemented
+   * @return the complemented nucleotide character in upper or lower case depending on {@code c}
    */
   public static char complement(char c) {
-  	Character result = complementMap.get(Character.toUpperCase(c));
+  	NucleotideInfo result = nucleotideInfoMap.get(Character.toUpperCase(c));
   	if (result != null) {
-  		return result;
+  		if (Character.isUpperCase(c)) {
+  			return result.complement;
+  		}
+  		else {
+  			return Character.toLowerCase(result.complement);
+  		}
   	}
   	else {
   		return c;
@@ -66,7 +251,9 @@ public class SequenceUtils {
 	
 	
 	/**
-   * Returns the complementing sequence. Ambiguity codes are supported.
+   * Returns the complementing sequence. Ambiguity codes are supported. Upper case and lower case
+   * characters are replaced by their according complements.
+   * 
    * @param sequence - the sequence to be complemented
    * @return always a DNA sequence (no matter if the input was RNA or not)
    */
@@ -80,7 +267,9 @@ public class SequenceUtils {
   
   
   /**
-   * Returns the reverse complemented sequence. Ambiguity codes are supported.
+   * Returns the reverse complemented sequence. Ambiguity codes are supported. Upper case and lower 
+   * case characters are replaced by their according complements.
+   * 
    * @param sequence - the sequence to be reverse complemented
    * @return always a DNA sequence (no matter if the input was RNA or not)
    */
@@ -90,12 +279,12 @@ public class SequenceUtils {
   
   
   public static String rnaToDNA(String rna) {
-  	return rna.toUpperCase().replaceAll("U", "T");
+  	return rna.replaceAll("U", "T").replaceAll("u", "t");
   }
   
   
   public static String dnaToRNA(String dna) {
-  	return dna.toUpperCase().replaceAll("T", "U");
+  	return dna.replaceAll("T", "U").replaceAll("t", "u");
   }
   
   
