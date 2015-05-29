@@ -71,6 +71,37 @@ public class SequenceUtilsTest {
 	public void test_oneLetterAminoAcidByThreeLetter() {
 		assertEquals('A', SequenceUtils.oneLetterAminoAcidByThreeLetter("Ala"));
 		assertEquals('B', SequenceUtils.oneLetterAminoAcidByThreeLetter("Asx"));
+		assertEquals('-', SequenceUtils.oneLetterAminoAcidByThreeLetter("---"));
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_oneLetterAminoAcidByThreeLetterException1() {
+		SequenceUtils.oneLetterAminoAcidByThreeLetter("A");
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_oneLetterAminoAcidByThreeLetterException2() {
+		SequenceUtils.oneLetterAminoAcidByThreeLetter("--");
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_oneLetterAminoAcidByThreeLetterException3() {
+		SequenceUtils.oneLetterAminoAcidByThreeLetter("----");
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_oneLetterAminoAcidByThreeLetterException4() {
+		SequenceUtils.oneLetterAminoAcidByThreeLetter("Mom");
+	}
+	
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void test_oneLetterAminoAcidByThreeLetterException5() {
+		SequenceUtils.oneLetterAminoAcidByThreeLetter("-.-");
 	}
 	
 	
@@ -78,6 +109,7 @@ public class SequenceUtilsTest {
 	public void test_threeLetterAminoAcidByOneLetter() {
 		assertEquals("Met", SequenceUtils.threeLetterAminoAcidByOneLetter('M'));
 		assertEquals("Leu", SequenceUtils.threeLetterAminoAcidByOneLetter('L'));
+		assertEquals("---", SequenceUtils.threeLetterAminoAcidByOneLetter('-'));
 	}
 	
 	@Test
