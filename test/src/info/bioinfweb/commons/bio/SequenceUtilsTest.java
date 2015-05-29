@@ -34,6 +34,93 @@ import org.junit.Test;
  */
 public class SequenceUtilsTest {
 	@Test
+	public void test_nucleotideConstituents() {
+		assertArrayEquals(new char[]{'A'}, SequenceUtils.nucleotideConstituents('A'));
+		assertArrayEquals(new char[]{'T'}, SequenceUtils.nucleotideConstituents('t'));
+		assertArrayEquals(new char[]{'-'}, SequenceUtils.nucleotideConstituents('-'));
+		assertArrayEquals(new char[]{'U'}, SequenceUtils.nucleotideConstituents('U'));
+		assertArrayEquals(new char[]{'A', 'T', 'C', 'G'}, SequenceUtils.nucleotideConstituents('N'));
+		assertArrayEquals(new char[]{'A', 'T', 'C', 'G'}, SequenceUtils.nucleotideConstituents('x'));
+	}
+	
+	
+	@Test
+	public void test_isNucleotideAmbuguityCode() {
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('A'));
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('C'));
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('G'));
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('T'));
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('U'));
+		assertFalse(SequenceUtils.isNucleotideAmbuguityCode('-'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('N'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('X'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('Y'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('R'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('M'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('K'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('W'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('S'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('V'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('B'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('H'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('D'));
+	}
+	
+	
+	@Test
+	public void test_oneLetterAminoAcidByThreeLetter() {
+		assertEquals('A', SequenceUtils.oneLetterAminoAcidByThreeLetter("Ala"));
+		assertEquals('B', SequenceUtils.oneLetterAminoAcidByThreeLetter("Asx"));
+	}
+	
+	
+	@Test
+	public void test_threeLetterAminoAcidByOneLetter() {
+		assertEquals("Met", SequenceUtils.threeLetterAminoAcidByOneLetter('M'));
+		assertEquals("Leu", SequenceUtils.threeLetterAminoAcidByOneLetter('L'));
+	}
+	
+	@Test
+	public void test_oneLetterAminoAcidConstituents() {
+		assertArrayEquals(new char[]{'P'}, SequenceUtils.oneLetterAminoAcidConstituents("Pro"));
+		assertArrayEquals(new char[]{'N', 'D'}, SequenceUtils.oneLetterAminoAcidConstituents("B"));
+		assertArrayEquals(new char[]{'N', 'D'}, SequenceUtils.oneLetterAminoAcidConstituents("Asx"));
+		assertArrayEquals(new char[]{'Q', 'E'}, SequenceUtils.oneLetterAminoAcidConstituents("Z"));
+		assertArrayEquals(new char[]{'Q', 'E'}, SequenceUtils.oneLetterAminoAcidConstituents("glx"));
+		assertArrayEquals(new char[]{'I', 'L'}, SequenceUtils.oneLetterAminoAcidConstituents("J"));
+		assertArrayEquals(new char[]{'I', 'L'}, SequenceUtils.oneLetterAminoAcidConstituents("XLE"));
+	}
+	
+	
+	@Test
+	public void test_threeLetterAminoAcidConstituents() {
+		assertArrayEquals(new String[]{"Pro"}, SequenceUtils.threeLetterAminoAcidConstituents("Pro"));
+		assertArrayEquals(new String[]{"Asn", "Asp"}, SequenceUtils.threeLetterAminoAcidConstituents("B"));
+		assertArrayEquals(new String[]{"Asn", "Asp"}, SequenceUtils.threeLetterAminoAcidConstituents("Asx"));
+		assertArrayEquals(new String[]{"Gln", "Glu"}, SequenceUtils.threeLetterAminoAcidConstituents("Z"));
+		assertArrayEquals(new String[]{"Gln", "Glu"}, SequenceUtils.threeLetterAminoAcidConstituents("glx"));
+		assertArrayEquals(new String[]{"Ile", "Leu"}, SequenceUtils.threeLetterAminoAcidConstituents("J"));
+		assertArrayEquals(new String[]{"Ile", "Leu"}, SequenceUtils.threeLetterAminoAcidConstituents("XLE"));
+	}
+	
+	
+	@Test
+	public void test_isAminoAcidAmbiguityCode() {
+		assertFalse(SequenceUtils.isAminoAcidAmbiguityCode(""));
+		assertFalse(SequenceUtils.isAminoAcidAmbiguityCode("Asp"));
+		assertFalse(SequenceUtils.isAminoAcidAmbiguityCode("pro"));
+		assertFalse(SequenceUtils.isAminoAcidAmbiguityCode("P"));
+		assertFalse(SequenceUtils.isAminoAcidAmbiguityCode("-"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("b"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("asx"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("Z"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("Glx"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("j"));
+		assertTrue(SequenceUtils.isAminoAcidAmbiguityCode("XLE"));
+	}
+	
+	
+	@Test
 	public void test_deleteGapsFromLeft() {
     assertEquals("ATCG-TTAGT-TGA", SequenceUtils.deleteGapsFromLeft("-AT-CG--TTAGT-TGA", 3));
     assertEquals("ATCGTTAGTTGA", SequenceUtils.deleteGapsFromLeft("-AT-CG--TTAGT-TGA", 20));
@@ -60,7 +147,7 @@ public class SequenceUtilsTest {
 				cgCount++;
 			}
 		}
-		System.out.println(cgCount);
+		//System.out.println(cgCount);
 		assertTrue(Math2.isBetween(cgCount, 2900, 3100));
 	}
 }
