@@ -167,11 +167,24 @@ public class SequenceUtils {
 	}
 	
 	
+	/**
+	 * Converts the specified three letter amino acid code into a one letter representation. Besides the defined
+	 * amino acid codes this method also accepts any string which consists of one character that is repeated three
+	 * times. (E.g. {@code "---"} would be converted to {@code '-'}).
+	 * 
+	 * @param threeLetterCode the three letter code to be converted
+	 * @return the according three letter code in upper case
+	 * @throws IllegalArgumentException if the specified code is not a valid one letter amino acid code or a three 
+	 *         character long repetition of the same character
+	 */
 	public static char oneLetterAminoAcidByThreeLetter(String threeLetterCode) {
 		if (threeLetterCode.length() == 3) {
 			AminoAcidInfo info = aminoAcidInfoMap.get(threeLetterCode.toUpperCase());
 			if (info != null) {
 				return info.oneLetterCode;
+			}
+			else if ((threeLetterCode.charAt(0) == threeLetterCode.charAt(1)) && (threeLetterCode.charAt(0) == threeLetterCode.charAt(2))) {
+				return threeLetterCode.charAt(0);
 			}
 		}
 		throw new IllegalArgumentException("The specified string \"" + threeLetterCode + 
@@ -179,18 +192,33 @@ public class SequenceUtils {
 	}
 	
 	
+	/**
+	 * Converts the specified one letter amino acid code into a three letter representation.
+	 * 
+	 * @param oneLetterCode the one letter code to be converted
+	 * @return the according three letter code where the first letter is in upper case (e.g. {@code "Pro"})
+	 *         if {@code oneLetterCode} was a valid amino acid representation or a string consisting of three
+	 *         repetitions of the specified character otherwise (E.g. '-' would be converted to "---".) 
+	 */
 	public static String threeLetterAminoAcidByOneLetter(char oneLetterCode) {
 		AminoAcidInfo info = aminoAcidInfoMap.get(Character.toString(oneLetterCode));
 		if (info != null) {
 			return info.threeLetterCode;
 		}
 		else {
-			throw new IllegalArgumentException("The specified character '" + oneLetterCode + 
-					"' is not a valid one letter amino acid code.");
+			return StringUtils.repeat(Character.toString(oneLetterCode), 3);
 		}
 	}
 	
 	
+	/**
+	 * Returns the one letter amino acid representations of all compounds that could be represented by the
+	 * specified ambiguity code.
+	 * 
+	 * @param code the ambiguity one or three letter ambiguity code to be converted 
+	 * @return an array with the one letter representations of the according amino acids or {@code null}
+	 *         if {@code code} was not a valid ambiguity code
+	 */
 	public static char[] oneLetterAminoAcidConstituents(String code) {
 		AminoAcidInfo info = aminoAcidInfoMap.get(code.toUpperCase());
 		if (info != null) {
@@ -202,6 +230,14 @@ public class SequenceUtils {
 	}
 	
 	
+	/**
+	 * Returns the three letter amino acid representations of all compounds that could be represented by the
+	 * specified ambiguity code.
+	 * 
+	 * @param code the ambiguity one or three letter ambiguity code to be converted 
+	 * @return an array with the three letter representations of the according amino acids or {@code null}
+	 *         if {@code code} was not a valid ambiguity code
+	 */
 	public static String[] threeLetterAminoAcidConstituents(String code) {
 		char[] oneLetterConstituents = oneLetterAminoAcidConstituents(code);
 		if (oneLetterConstituents == null) {
@@ -217,6 +253,12 @@ public class SequenceUtils {
 	}
 
 	
+	/**
+	 * Determines whether the specified character is an amino acid ambiguity code.
+	 * 
+	 * @param code the string that may be an ambiguity code (one and three letter codes are supported)
+	 * @return {@code true} of the specified character is a valid amino acid ambiguity code, {@code false} otherwise.
+	 */
 	public static boolean isAminoAcidAmbiguityCode(String code) {
 		char[] constituents = oneLetterAminoAcidConstituents(code);
 		return (constituents != null) && (constituents.length > 1);
