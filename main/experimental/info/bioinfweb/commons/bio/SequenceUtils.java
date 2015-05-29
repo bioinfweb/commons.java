@@ -71,8 +71,8 @@ public class SequenceUtils {
 		result.put('V', new NucleotideInfo('B', new char[]{'A', 'C', 'G'}));  // V = A v C v G
 		result.put('D', new NucleotideInfo('H', new char[]{'A', 'G', 'T'}));  // D = A v G v T
 		result.put('H', new NucleotideInfo('D', new char[]{'A', 'C', 'T'}));  // H = A v C v T
-		result.put('N', new NucleotideInfo('N', new char[]{'A', 'T', 'C', 'T'}));
-		result.put('X', new NucleotideInfo('X', new char[]{'A', 'T', 'C', 'T'}));
+		result.put('N', new NucleotideInfo('N', new char[]{'A', 'T', 'C', 'G'}));
+		result.put('X', new NucleotideInfo('X', new char[]{'A', 'T', 'C', 'G'}));
 		return result;
 	}
 	
@@ -118,12 +118,13 @@ public class SequenceUtils {
 		
 		putAminoAcidInfo(result, 'B', "Asx", 'N', 'D');
 		putAminoAcidInfo(result, 'Z', "Glx", 'Q', 'E');
+		putAminoAcidInfo(result, 'J', "Xle", 'I', 'L');
 		
 		AminoAcidInfo info = new AminoAcidInfo('X', "Xaa", 
 				new char[]{'A', 'C', 'D', 'E', 'F','G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y', 'O', 'U'});
-		aminoAcidInfoMap.put("X", info);
-		aminoAcidInfoMap.put("XAA", info);
-		aminoAcidInfoMap.put("UNK", info);
+		result.put("X", info);
+		result.put("XAA", info);
+		result.put("UNK", info);
 		
 		return result;
 	}
@@ -138,7 +139,7 @@ public class SequenceUtils {
 	 * {@code 'U'} as the only element and not {@code 'T'}). 
 	 * <p>
 	 * If the specified character is not an ambiguity code character, an array containing 
-	 * this character as the only element is returned.  
+	 * this character (in upper case) as the only element is returned.  
 	 * 
 	 * @param nucleotide the character that may be an ambiguity code
 	 * @return an array of the nucleotides as upper case letters
@@ -168,7 +169,7 @@ public class SequenceUtils {
 	
 	public static char oneLetterAminoAcidByThreeLetter(String threeLetterCode) {
 		if (threeLetterCode.length() == 3) {
-			AminoAcidInfo info = aminoAcidInfoMap.get(threeLetterCode);
+			AminoAcidInfo info = aminoAcidInfoMap.get(threeLetterCode.toUpperCase());
 			if (info != null) {
 				return info.oneLetterCode;
 			}
@@ -179,7 +180,7 @@ public class SequenceUtils {
 	
 	
 	public static String threeLetterAminoAcidByOneLetter(char oneLetterCode) {
-		AminoAcidInfo info = aminoAcidInfoMap.get(Character.toChars(oneLetterCode));
+		AminoAcidInfo info = aminoAcidInfoMap.get(Character.toString(oneLetterCode));
 		if (info != null) {
 			return info.threeLetterCode;
 		}
@@ -191,7 +192,7 @@ public class SequenceUtils {
 	
 	
 	public static char[] oneLetterAminoAcidConstituents(String code) {
-		AminoAcidInfo info = aminoAcidInfoMap.get(code);
+		AminoAcidInfo info = aminoAcidInfoMap.get(code.toUpperCase());
 		if (info != null) {
 			return Arrays.copyOf(info.constituents, info.constituents.length);
 		}
@@ -213,6 +214,12 @@ public class SequenceUtils {
 			}
 			return result;
 		}
+	}
+
+	
+	public static boolean isAminoAcidAmbiguityCode(String code) {
+		char[] constituents = oneLetterAminoAcidConstituents(code);
+		return (constituents != null) && (constituents.length > 1);
 	}
 	
 	
