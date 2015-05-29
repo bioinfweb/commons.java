@@ -72,6 +72,8 @@ public class SequenceUtilsTest {
 		assertEquals('A', SequenceUtils.oneLetterAminoAcidByThreeLetter("Ala"));
 		assertEquals('B', SequenceUtils.oneLetterAminoAcidByThreeLetter("Asx"));
 		assertEquals('-', SequenceUtils.oneLetterAminoAcidByThreeLetter("---"));
+		assertEquals('O', SequenceUtils.oneLetterAminoAcidByThreeLetter("Pyl"));
+		assertEquals('U', SequenceUtils.oneLetterAminoAcidByThreeLetter("Sec"));
 	}
 	
 	
