@@ -22,6 +22,10 @@ package info.bioinfweb.commons.graphics;
 import info.bioinfweb.commons.Math2;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 
 
 /**
@@ -172,5 +176,20 @@ public class GraphicsUtils {
 			b += colors[i].getBlue();
 		}
   	return new Color(r / colors.length, g / colors.length, b / colors.length);
+  }
+  
+  
+  /**
+   * Draws the specified string into the center of the specified rectangle.
+   * 
+   * @param g the graphics context to paint to
+   * @param rectangle the rectangle to fit the text into
+   * @param text the text to be drawn
+   * @see #fontToFitRectangle(Rectangle2D, double, String, String, int, int)
+   */
+  public static void drawStringInRectangle(Graphics2D g, Rectangle2D rectangle, String text) {
+		FontMetrics fm = g.getFontMetrics();
+  	g.drawString(text, (int)(rectangle.getX() + 0.5 * (rectangle.getWidth() - fm.stringWidth(text))), 
+  			(int)(rectangle.getY() + 0.5 * (rectangle.getHeight() - fm.getHeight())));  // int needs to be used because the precision of float is not sufficient to paint to high coordinate space
   }
 }

@@ -21,6 +21,7 @@ package info.bioinfweb.commons.graphics;
 
 import java.awt.*;
 import java.awt.font.*;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 
@@ -68,9 +69,11 @@ public class FontCalculator {
 	
 	
 	/**
-	 * Returns the with of the given text divided by the height.
-	 * The value is identical with <code>getWidth() / getHeight()</code> although it
-	 * is calculated more efficiently.
+	 * Returns the width of the given text divided by the height.
+	 * <p>
+	 * The value is identical with {@code getWidth() / getHeight()} but is calculated more efficiently.
+	 * 
+	 * @return the aspect ratio of the specified text using the specified font
 	 */
 	public float getAspectRatio(Font font, String text) {
 		TextLayout tl = new TextLayout(text, font, frc);
@@ -99,4 +102,64 @@ public class FontCalculator {
 		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, 12), frc);
 		return height * (tl.getAscent() / (tl.getDescent() + tl.getAscent()));
 	}
+	
+	
+  /**
+   * Returns a font object that has the correct height to draw the specified text in the specified rectangle using
+   * no minimal font height.
+   * 
+   * @param rectangle the rectangle to fit the text into
+   * @param scaleFactor the factor by which the font height should be scaled (If 1.0 is provided here, the text will
+   *        will the width or the height of the rectangle completely. Note that due to possible rounding imprecision 
+   *        a value below 1.0 is recommended so that the text fits completely into the rectangle.)
+   * @param text the text to be drawn
+   * @param fontName the name of the font to be used
+   * @param fontStyle the style of the font to be used
+   * @return the new font object
+   * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
+   */
+  public static Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
+  		String fontName, int fontStyle) {
+  	
+  	return fontToFitRectangle(rectangle, scaleFactor, text, fontName, fontStyle, 0);
+  }
+  
+  	
+  /**
+   * Returns a font object that has the correct height to draw the specified text in the specified rectangle.
+   * 
+   * @param rectangle the rectangle to fit the text into
+   * @param scaleFactor the factor by which the font height should be scaled (If 1.0 is provided here, the text will
+   *        will the width or the height of the rectangle completely. Note that due to possible rounding imprecision 
+   *        a value below 1.0 is recommended so that the text fits completely into the rectangle.)
+   * @param text the text to be drawn
+   * @param fontName the name of the font to be used
+   * @param fontStyle the style of the font to be used
+   * @param minHeight the minimal font height the text should have
+   * @return the new font object of {@code null} if the font would have to be smaller than the specified minimal height
+   * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
+   */
+  public static Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
+  		String fontName, int fontStyle, int minHeight) {
+  	
+		Font result = null;
+		int height = (int)Math.round(rectangle.getHeight() * scaleFactor);
+		if (height < minHeight) {
+			return null;
+		}
+		else {
+			result = new Font(fontName, fontStyle, height);  // Font with maximum height.
+			double aspectRatio = FontCalculator.getInstance().getAspectRatio(result, text);
+			if (aspectRatio * rectangle.getHeight() > rectangle.getWidth()) {  // Maximum height cannot be used, because string would be to wide then.
+				height = (int)Math.round((rectangle.getWidth() / aspectRatio) * scaleFactor);
+				if (height < minHeight) {
+					return null;
+				}
+				else {
+					result = new Font(fontName, fontStyle, height);
+				}
+			}
+		}
+		return result;
+  }
 }
