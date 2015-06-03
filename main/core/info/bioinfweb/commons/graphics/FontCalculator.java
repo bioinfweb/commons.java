@@ -118,7 +118,7 @@ public class FontCalculator {
    * @return the new font object
    * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
    */
-  public static Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
+  public Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
   		String fontName, int fontStyle) {
   	
   	return fontToFitRectangle(rectangle, scaleFactor, text, fontName, fontStyle, 0);
@@ -139,7 +139,7 @@ public class FontCalculator {
    * @return the new font object of {@code null} if the font would have to be smaller than the specified minimal height
    * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
    */
-  public static Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
+  public Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
   		String fontName, int fontStyle, int minHeight) {
   	
 		Font result = null;
@@ -149,7 +149,7 @@ public class FontCalculator {
 		}
 		else {
 			result = new Font(fontName, fontStyle, height);  // Font with maximum height.
-			double aspectRatio = FontCalculator.getInstance().getAspectRatio(result, text);
+			double aspectRatio = getAspectRatio(result, text);
 			if (aspectRatio * rectangle.getHeight() > rectangle.getWidth()) {  // Maximum height cannot be used, because string would be to wide then.
 				height = (int)Math.round((rectangle.getWidth() / aspectRatio) * scaleFactor);
 				if (height < minHeight) {
