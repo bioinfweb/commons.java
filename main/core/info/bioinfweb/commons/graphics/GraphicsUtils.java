@@ -189,7 +189,7 @@ public class GraphicsUtils {
    */
   public static void drawStringInRectangle(Graphics2D g, Rectangle2D rectangle, String text) {
 		FontMetrics fm = g.getFontMetrics();
-  	g.drawString(text, (int)(rectangle.getX() + 0.5 * (rectangle.getWidth() - fm.stringWidth(text))), 
-  			(int)(rectangle.getY() + 0.5 * (rectangle.getHeight() - fm.getHeight())));  // int needs to be used because the precision of float is not sufficient to paint to high coordinate space
+  	g.drawString(text, (int)Math.round(rectangle.getX() + 0.5 * (rectangle.getWidth() - fm.stringWidth(text))), 
+  			(int)Math.round(rectangle.getY() + 0.5 * (rectangle.getHeight() - fm.getHeight()) + fm.getAscent()));  // int needs to be used because the precision of float is not sufficient to paint to high coordinate space
   }
 }
