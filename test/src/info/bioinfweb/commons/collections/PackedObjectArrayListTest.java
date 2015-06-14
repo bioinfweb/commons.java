@@ -19,8 +19,9 @@
 package info.bioinfweb.commons.collections;
 
 
-import org.junit.* ;
+import java.util.List;
 
+import org.junit.* ;
 
 import static org.junit.Assert.* ;
 
@@ -56,5 +57,37 @@ public class PackedObjectArrayListTest {
     list.retainAll(list2);
   	assertEquals(1, list.size());
   	assertEquals("DEF", list.get(0));
+  }
+
+
+  private void printList(List<String> list) {
+  	for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i));
+		}
+  	System.out.println();
+  }
+  
+  
+  @Test
+  public void test_shiftAddDelete() {
+  	PackedObjectArrayList<String> list = new PackedObjectArrayList<String>(11, 20);
+  	for (int i = 0; i < 10; i++) {
+    	list.add("A");
+    	list.add("B");
+		}
+  	printList(list);
+  	list.add(17, "C");  // Test case created from a bug observed in LibrAlign, which occurs only at this index.
+  	printList(list);
+  	list.remove(16);
+  	printList(list);
+
+  	for (int i = 0; i <= 14; i += 2) {
+    	assertEquals("A", list.get(i));
+    	assertEquals("B", list.get(i + 1));
+		}
+  	assertEquals("C", list.get(16));
+  	assertEquals("B", list.get(17));
+  	assertEquals("A", list.get(18));
+  	assertEquals("B", list.get(19));
   }
 }
