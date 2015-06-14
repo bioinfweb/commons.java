@@ -223,7 +223,7 @@ public class PackedIntegerArrayList {
 	 * 
 	 * @param index - the index of the first element to be removed
 	 * @param length - the number of elements to be removed
-	 * @throws IllegalArgumentException if the specified range is ouside the current size of the list
+	 * @throws IllegalArgumentException if the specified range is outside the current size of the list
 	 */
 	protected void removeRange(long index, long length) {
 		if ((index < 0) || (index + length > size)) {
@@ -235,7 +235,7 @@ public class PackedIntegerArrayList {
 		}
 		else if (length > 0) {
 			long lengthInBits = length * bitsPerValue;
-			int firstBlockIndex = calculateArrayLength(index) - 1;
+			int firstBlockIndex = calculateArrayLength(index + 1) - 1;
 			int lastBlockIndex = calculateArrayLength(size - length) - 1;
 			int blockShift = (int)lengthInBits / BLOCK_SIZE;
 			
