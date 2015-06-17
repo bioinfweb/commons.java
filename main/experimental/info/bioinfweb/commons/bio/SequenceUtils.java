@@ -2,7 +2,6 @@ package info.bioinfweb.commons.bio;
 
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -14,7 +13,8 @@ import info.bioinfweb.commons.text.StringUtils;
 
 
 /**
- * Useful tools to manipulate DNA and RNA sequences stored as strings. 
+ * Useful tools to manipulate nucleotide and amino acid sequences stored as character sequences. 
+ * 
  * @author Ben St&ouml;ver
  */
 public class SequenceUtils {
@@ -169,6 +169,12 @@ public class SequenceUtils {
 		else {
 			return Arrays.copyOf(result.constituents, result.constituents.length);  // Copy array to avoid modifications of the arrays in nucleotideInfoMap by external code.
 		}
+	}
+	
+	
+	public static boolean isNonAmbiguityNucleotide(char c) {
+		c = Character.toUpperCase(c);
+		return (c == 'A') || (c == 'T') || (c == 'C') || (c == 'G') || (c == 'U');
 	}
 	
 	
@@ -628,12 +634,13 @@ public class SequenceUtils {
   
   /**
    * Returns a sequence of random DNA or RNA characters. (The three rates together have to be lower 
-   * than 1. The rate for Thymidine or Uracil is determined from the others.)
+   * than 1. The rate for thymidine or uracil is determined from the others.)
+   * 
    * @param dna - determines whether a DNA sequence shall be returned (RNA id <code>false</code>)
    * @param length - the length of the sequence
-   * @param rateC - the rate for Cytosine
-   * @param rateG - the rate for Guanine
-   * @param rateA - the rate for Adenine
+   * @param rateC - the rate for cytosine
+   * @param rateG - the rate for guanine
+   * @param rateA - the rate for adenine
    * @return the random sequence
    */
   public static String randSequence(boolean dna, int length, double rateC,  double rateG, double rateA) {
@@ -664,9 +671,10 @@ public class SequenceUtils {
   
   /**
    * Returns a sequence of random DNA or RNA characters.
+   * 
    * @param dna - determines whether a DNA sequence shall be returned (RNA id <code>false</code>)
    * @param length - the length of the sequence
-   * @param rateC - the rate for Cytosine and Guanine (must lower than 1)
+   * @param rateC - the rate for cytosine and guanine (must lower than 1)
    * @return the random sequence
    */
   public static String randSequence(boolean dna, int length, double rateCG) {
@@ -674,5 +682,65 @@ public class SequenceUtils {
   	return randSequence(dna, length, half, half, (1.0 - rateCG) / 2.0);
   }
   
+  
+  /**
+   * Counts the nucleotide frequencies in the specified alignment column.
+   * <p>
+   * IUPAC ambiguity codes are supported and counted accordingly for several nucleotides.
+   * (Examples: N would be counted as 0.25 for each nucleotide, R would be counted as 0.5 for C and 0.5 for T.)
+   * 
+   * @param alignmentColumn the contents of the alignment column from which the consensus shall be calculated
+   * @return a map with the nucleotides as keys and their frequencies as values
+   */
+  public static Map<Character, Double> nucleotideFrequencies(char[] alignmentColumn) {
+  	// Initialize:
+  	Map<Character, Double> result = new TreeMap<Character, Double>();
+  	result.put('A', 0.0);
+  	result.put('T', 0.0);
+  	result.put('C', 0.0);
+  	result.put('G', 0.0);
+  	
+  	// Calculate:
+  	double sum = 0.0;
+  	for (int i = 0; i < alignmentColumn.length; i++) {
+  		char[] constituents = nucleotideConstituents(alignmentColumn[i]);
+  		double addend = 1.0 / (double)constituents.length;
+  		for (int j = 0; j < constituents.length; j++) {
+  			if (isNonAmbiguityNucleotide(constituents[j])) {
+  				result.put(constituents[j], result.get(constituents[j]) + addend);
+  				sum += addend;
+  			}
+			}
+		}
+  	
+  	// Normalize to 1:
+  	result.put('A', result.get('A') / sum);
+  	result.put('T', result.get('T') / sum);
+  	result.put('C', result.get('C') / sum);
+  	result.put('G', result.get('G') / sum);
+  	
+  	return result;
+  }
+  
+  
+  /**
+   * Returns the nucleotide that occurs most often in the specified alignment row. IUPAC
+   * ambiguity codes are recognized and counted accordingly for several nucleotides. 
+   * 
+   * @param alignmentColumn the contents of the alignment column from which the consensus shall be calculated
+   * @return the most frequent nucleotide (If several nucleotides occur equally often, one of them is chosen arbitrarily.)
+   */
+  public static char nucleotideConsensus(char[] alignmentColumn) {
+  	Map<Character, Double> counts = nucleotideFrequencies(alignmentColumn);
+  	char result = ' ';
+  	double max = -1;
+  	for (Character c : counts.keySet()) {
+			if (counts.get(c) > max) {
+				result = c;
+				max = counts.get(c);
+			}
+		}
+  	return result;
+  }
 }
 	
