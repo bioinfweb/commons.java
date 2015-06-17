@@ -20,7 +20,11 @@ package info.bioinfweb.commons.bio;
 
 
 import static org.junit.Assert.*;
+
+import java.util.Map;
+
 import info.bioinfweb.commons.Math2;
+
 
 
 import org.junit.Test;
@@ -183,5 +187,22 @@ public class SequenceUtilsTest {
 		}
 		//System.out.println(cgCount);
 		assertTrue(Math2.isBetween(cgCount, 2900, 3100));
+	}
+	
+	
+	@Test
+	public void test_nucleotideFrequencies() {
+		Map<Character, Double> frequencies = SequenceUtils.nucleotideFrequencies("ACAT-CGGWNA".toCharArray());
+		assertEquals(0.375, frequencies.get('A').doubleValue(), 0.0000000001);
+		assertEquals(0.175, frequencies.get('T').doubleValue(), 0.0000000001);
+		assertEquals(0.225, frequencies.get('C').doubleValue(), 0.0000000001);
+		assertEquals(0.225, frequencies.get('G').doubleValue(), 0.0000000001);
+	}
+	
+	
+	@Test
+	public void test_nucleotideConsensus() {
+		assertEquals('A', SequenceUtils.nucleotideConsensus("ACAT-CGGWNA".toCharArray()));
+		assertEquals('T', SequenceUtils.nucleotideConsensus("TCTA-CGGWNT".toCharArray()));
 	}
 }
