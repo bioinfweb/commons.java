@@ -2,8 +2,11 @@ package info.bioinfweb.commons.bio;
 
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import info.bioinfweb.commons.Math2;
 import info.bioinfweb.commons.text.StringUtils;
@@ -131,6 +134,19 @@ public class SequenceUtils {
 	
 	
 	/**
+	 * Returns a set of all nucleotide characters, including 'T' and 'U' as well as all IUPAC 
+	 * ambiguity codes.
+	 * 
+	 * @return a new set with all nucleotide tokens
+	 */
+	public static Set<Character> getNucleotideCharacters() {
+		Set<Character> result = new TreeSet<Character>();
+		result.addAll(nucleotideInfoMap.keySet());
+		return result;
+	}
+	
+	
+	/**
 	 * If the specified nucleotide is an IUPAC ambiguity code this method returns an array
 	 * containing all nucleotides that could be represented by the code. 
 	 * <p>
@@ -164,6 +180,38 @@ public class SequenceUtils {
 	 */
 	public static boolean isNucleotideAmbuguityCode(char nucleotide) {
 		return nucleotideConstituents(nucleotide).length > 1;
+	}
+	
+	
+	/**
+	 * Returns a set of all amino acid one letter codes, including ambiguity codes.
+	 * 
+	 * @return a new set of amino acid codes
+	 */
+	public static Set<Character> getAminoAcidOneLetterCodes() {
+		Set<Character> result = new TreeSet<Character>();
+		for (String key : aminoAcidInfoMap.keySet()) {
+			if (key.length() == 1) {
+				result.add(key.charAt(0));
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * Returns a set of all amino acid three letter codes, including ambiguity codes.
+	 * 
+	 * @return a new set of amino acid codes
+	 */
+	public static Set<String> getAminoAcidThreeLetterCodes() {
+		Set<String> result = new TreeSet<String>();
+		for (String key : aminoAcidInfoMap.keySet()) {
+			if (key.length() == 3) {
+				result.add(key);
+			}
+		}
+		return result;
 	}
 	
 	
@@ -322,7 +370,7 @@ public class SequenceUtils {
    * @param sequence - the sequence to be reverse complemented
    * @return always a DNA sequence (no matter if the input was RNA or not)
    */
-  public static String reverseComplement(String sequence) {
+  public static String reverseComplement(CharSequence sequence) {
   	return reverse(complement(sequence));
   }
   
