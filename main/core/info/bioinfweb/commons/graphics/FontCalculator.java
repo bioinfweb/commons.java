@@ -116,7 +116,7 @@ public class FontCalculator {
    * @param fontName the name of the font to be used
    * @param fontStyle the style of the font to be used
    * @return the new font object
-   * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
+   * @see GraphicsUtils#drawStringInRectangle(Graphics2D, Rectangle2D, String)
    */
   public Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
   		String fontName, int fontStyle) {
@@ -137,7 +137,7 @@ public class FontCalculator {
    * @param fontStyle the style of the font to be used
    * @param minHeight the minimal font height the text should have
    * @return the new font object of {@code null} if the font would have to be smaller than the specified minimal height
-   * @see #drawStringInRectangle(Graphics2D, Rectangle2D, String)
+   * @see GraphicsUtils#drawStringInRectangle(Graphics2D, Rectangle2D, String)
    */
   public Font fontToFitRectangle(Rectangle2D rectangle, double scaleFactor, String text, 
   		String fontName, int fontStyle, int minHeight) {
