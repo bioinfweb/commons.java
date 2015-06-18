@@ -185,7 +185,7 @@ public class GraphicsUtils {
    * @param g the graphics context to paint to
    * @param rectangle the rectangle to fit the text into
    * @param text the text to be drawn
-   * @see #fontToFitRectangle(Rectangle2D, double, String, String, int, int)
+   * @see FontCalculator#fontToFitRectangle(Rectangle2D, double, String, String, int, int)
    */
   public static void drawStringInRectangle(Graphics2D g, Rectangle2D rectangle, String text) {
 		FontMetrics fm = g.getFontMetrics();
