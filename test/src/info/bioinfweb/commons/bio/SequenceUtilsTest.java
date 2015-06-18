@@ -191,6 +191,16 @@ public class SequenceUtilsTest {
 	
 	
 	@Test
+	public void test_isNonAmbiguityAminoAcid() {
+		assertTrue(SequenceUtils.isNonAmbiguityAminoAcid("A"));
+		assertFalse(SequenceUtils.isNonAmbiguityAminoAcid("B"));
+		assertFalse(SequenceUtils.isNonAmbiguityAminoAcid("-"));
+		assertTrue(SequenceUtils.isNonAmbiguityAminoAcid("Ala"));
+		assertFalse(SequenceUtils.isNonAmbiguityAminoAcid("Asx"));
+	}
+	
+	
+	@Test
 	public void test_nucleotideFrequencies() {
 		Map<Character, Double> frequencies = SequenceUtils.nucleotideFrequencies("ACAT-CGGWNA".toCharArray());
 		assertEquals(0.375, frequencies.get('A').doubleValue(), 0.0000000001);
@@ -204,5 +214,21 @@ public class SequenceUtilsTest {
 	public void test_nucleotideConsensus() {
 		assertEquals('A', SequenceUtils.nucleotideConsensus("ACAT-CGGWNA".toCharArray()));
 		assertEquals('T', SequenceUtils.nucleotideConsensus("TCTA-CGGWNT".toCharArray()));
+	}
+	
+	
+	@Test
+	public void test_aminoAcidFrequencies() {                                                         // N v D
+		Map<Character, Double> frequencies = SequenceUtils.aminoAcidFrequencies(new String[]{"A", "C", "D", "B", "X", "-"});
+		assertEquals(0.25, frequencies.get('A').doubleValue(), 0.0000000001);
+		assertEquals(0.25, frequencies.get('C').doubleValue(), 0.0000000001);
+		assertEquals(0.375, frequencies.get('D').doubleValue(), 0.0000000001);
+		assertEquals(0.125, frequencies.get('N').doubleValue(), 0.0000000001);
+	}
+
+
+	@Test
+	public void test_aminoAcidConsensus() {                                      // N v D
+		assertEquals('C', SequenceUtils.aminoAcidConsensus(new String[]{"A", "C", "D", "B", "X", "-", "C"}));
 	}
 }
