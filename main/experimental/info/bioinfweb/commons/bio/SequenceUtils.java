@@ -135,7 +135,7 @@ public class SequenceUtils {
 	
 	/**
 	 * Returns a set of all nucleotide characters, including 'T' and 'U' as well as all IUPAC 
-	 * ambiguity codes.
+	 * ambiguity codes in upper case.
 	 * 
 	 * @return a new set with all nucleotide tokens
 	 */
@@ -190,32 +190,53 @@ public class SequenceUtils {
 	
 	
 	/**
-	 * Returns a set of all amino acid one letter codes, including ambiguity codes.
+	 * Returns a set of all amino acid one letter codes in upper case.
 	 * 
+	 * @param includeAmbiguity Specify {@code true} here if amino acid ambiguity codes shall also be
+	 *        contained in the returned set or {@code false} if only unambiguous characters shall be
+	 *        contained.
 	 * @return a new set of amino acid codes
 	 */
-	public static Set<Character> getAminoAcidOneLetterCodes() {
+	public static Set<Character> getAminoAcidOneLetterCodes(boolean includeAmbiguity) {
 		Set<Character> result = new TreeSet<Character>();
 		for (String key : aminoAcidInfoMap.keySet()) {
 			if (key.length() == 1) {
 				result.add(key.charAt(0));
 			}
 		}
+		
+		if (!includeAmbiguity) {
+			result.remove('B');
+			result.remove('Z');
+			result.remove('J');
+			result.remove('X');
+		}
 		return result;
 	}
 	
 	
 	/**
-	 * Returns a set of all amino acid three letter codes, including ambiguity codes.
+	 * Returns a set of all amino acid three letter codes in upper case.
 	 * 
+	 * @param includeAmbiguity Specify {@code true} here if amino acid ambiguity codes shall also be
+	 *        contained in the returned set or {@code false} if only unambiguous characters shall be
+	 *        contained.
 	 * @return a new set of amino acid codes
 	 */
-	public static Set<String> getAminoAcidThreeLetterCodes() {
+	public static Set<String> getAminoAcidThreeLetterCodes(boolean includeAmbiguity) {
 		Set<String> result = new TreeSet<String>();
 		for (String key : aminoAcidInfoMap.keySet()) {
 			if (key.length() == 3) {
 				result.add(key);
 			}
+		}
+		
+		if (!includeAmbiguity) {
+			result.remove("ASX");
+			result.remove("GLX");
+			result.remove("XLE");
+			result.remove("XAA");
+			result.remove("UNK");
 		}
 		return result;
 	}
@@ -306,6 +327,12 @@ public class SequenceUtils {
 		}
 	}
 
+	
+	public static boolean isNonAmbiguityAminoAcid(String code) {
+		AminoAcidInfo info = aminoAcidInfoMap.get(code.toUpperCase());
+		return (info != null) && (info.constituents.length == 1);
+	}
+	
 	
 	/**
 	 * Determines whether the specified character is an amino acid ambiguity code.
@@ -714,10 +741,9 @@ public class SequenceUtils {
 		}
   	
   	// Normalize to 1:
-  	result.put('A', result.get('A') / sum);
-  	result.put('T', result.get('T') / sum);
-  	result.put('C', result.get('C') / sum);
-  	result.put('G', result.get('G') / sum);
+  	for (Character c : result.keySet()) {
+    	result.put(c, result.get(c) / sum);
+		}
   	
   	return result;
   }
@@ -732,6 +758,51 @@ public class SequenceUtils {
    */
   public static char nucleotideConsensus(char[] alignmentColumn) {
   	Map<Character, Double> counts = nucleotideFrequencies(alignmentColumn);
+  	char result = ' ';
+  	double max = -1;
+  	for (Character c : counts.keySet()) {
+			if (counts.get(c) > max) {
+				result = c;
+				max = counts.get(c);
+			}
+		}
+  	return result;
+  }
+  
+  
+  public static Map<Character, Double> aminoAcidFrequencies(String[] alignmentColumn) {
+  	// Initialize:
+  	Map<Character, Double> result = new TreeMap<Character, Double>();
+  	for (Character aminoAcid : getAminoAcidOneLetterCodes(false)) {
+			result.put(aminoAcid, 0.0);
+		}
+  	
+  	// Calculate:
+  	double sum = 0.0;
+  	for (int i = 0; i < alignmentColumn.length; i++) {
+  		char[] constituents = oneLetterAminoAcidConstituents(alignmentColumn[i]);
+  		if ((constituents != null) && (constituents.length <= 2)) {  // Also ignore X because it counts equally for all amino acids anyway and its not clear if post-translational amino acids are included in the alphabet.
+	  		double addend = 1.0 / (double)constituents.length;
+	  		for (int j = 0; j < constituents.length; j++) {
+	  			if (isNonAmbiguityAminoAcid(Character.toString(constituents[j]))) {
+	  				result.put(constituents[j], result.get(constituents[j]) + addend);
+	  				sum += addend;
+	  			}
+				}
+  		}
+		}
+  	
+  	// Normalize to 1:
+  	for (Character c : result.keySet()) {
+    	result.put(c, result.get(c) / sum);
+		}
+  	
+  	return result;
+  }
+
+
+  public static char aminoAcidConsensus(String[] alignmentColumn) {
+  	Map<Character, Double> counts = aminoAcidFrequencies(alignmentColumn);
   	char result = ' ';
   	double max = -1;
   	for (Character c : counts.keySet()) {
