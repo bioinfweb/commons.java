@@ -55,8 +55,8 @@ public class TICMouseWheelEvent extends TICMouseEvent {
 
 	public TICMouseWheelEvent(TICComponent source, org.eclipse.swt.events.MouseEvent swtEvent) {
 		super(source, swtEvent);
-		wheelRotation = swtEvent.count;  //TODO Is this the correct field?
-		preciseWheelRotation = swtEvent.count;  //TODO Is this the correct field?
+		wheelRotation = -swtEvent.count;  //TODO Is this the correct field?
+		preciseWheelRotation = -swtEvent.count;  //TODO Is this the correct field?
 	}
 
 
