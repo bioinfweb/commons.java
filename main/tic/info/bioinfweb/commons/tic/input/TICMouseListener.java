@@ -35,29 +35,37 @@ public interface TICMouseListener extends EventListener {
    * This method is called when a mouse button is pressed down.
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mousePressed(TICMouseEvent event);
+  public boolean mousePressed(TICMouseEvent event);
   
   /**
    * This method is called when a mouse button is released.
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mouseReleased(TICMouseEvent event);
+  public boolean mouseReleased(TICMouseEvent event);
   
   /**
    * This method is called when a mouse button is pressed down.
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mouseEntered(TICMouseEvent event);
+  public boolean mouseEntered(TICMouseEvent event);
   
   /**
    * This method is called when a mouse button is pressed down.
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mouseExited(TICMouseEvent event);
+  public boolean mouseExited(TICMouseEvent event);
   
   /**
    * This method is called if the mouse is moved over the component while no mouse button is pressed.
@@ -66,8 +74,10 @@ public interface TICMouseListener extends EventListener {
    * In contrast to drag events this event is only fired, if the mouse is located over the component. 
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mouseMoved(TICMouseEvent event);
+  public boolean mouseMoved(TICMouseEvent event);
   
   /**
    * This method is called if the mouse is moved over the component while a mouse button is held down.
@@ -77,6 +87,8 @@ public interface TICMouseListener extends EventListener {
    * button is released.
    * 
    * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-  public void mouseDragged(TICMouseEvent event);
+  public boolean mouseDragged(TICMouseEvent event);
 }

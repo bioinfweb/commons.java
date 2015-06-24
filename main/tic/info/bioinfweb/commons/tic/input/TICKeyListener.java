@@ -31,7 +31,21 @@ import info.bioinfweb.commons.tic.TICComponent;
  * @author Ben St&ouml;ver
  */
 public interface TICKeyListener extends EventListener {
-  public void keyPressed(TICKeyEvent event);	
+  /**
+   * This method is called when a key on the keyboard is pressed down.
+   * 
+   * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
+   */
+  public boolean keyPressed(TICKeyEvent event);	
 
-  public void keyReleased(TICKeyEvent event);	
+  /**
+   * This method is called when a key on the keyboard is released.
+   * 
+   * @param event - the object containing information about the event 
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
+   */
+  public boolean keyReleased(TICKeyEvent event);	
 }

@@ -20,11 +20,23 @@ package info.bioinfweb.commons.tic.input;
 
 
 
+/**
+ * Adapter class that implements all methods of an {@link TICKeyListener}. All implementing
+ * methods return {@code false} to indicate that the event was not consumed. This is a convenience
+ * class allowing inherited classes to overwrite single methods, without having to provide 
+ * additional empty implementations for unused methods.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class TICKeyAdapter implements TICKeyListener {
 	@Override
-	public void keyPressed(TICKeyEvent event) {}
+	public boolean keyPressed(TICKeyEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void keyReleased(TICKeyEvent event) {}
+	public boolean keyReleased(TICKeyEvent event) {
+		return false;
+	}
 }

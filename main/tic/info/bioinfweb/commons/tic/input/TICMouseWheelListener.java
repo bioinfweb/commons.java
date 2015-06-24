@@ -34,7 +34,9 @@ public interface TICMouseWheelListener extends EventListener {
   /**
    * This method is called when the mouse wheel is moved.
    * 
-   * @param event - the object containing information about the event 
+   * @param event - the object containing information about the event
+   * @return {@code true} if the event was consumed by this listener, {@code false otherwise} (See 
+   *         {@link TICComponent} for information on how the return value is used.) 
    */
-	public void mouseWheelMoved(TICMouseWheelEvent e);
+	public boolean mouseWheelMoved(TICMouseWheelEvent e);
 }

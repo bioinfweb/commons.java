@@ -20,27 +20,47 @@ package info.bioinfweb.commons.tic.input;
 
 
 
+/**
+ * Adapter class that implements all methods of an {@link TICMouseListener}. All implementing
+ * methods return {@code false} to indicate that the event was not consumed. This is a convenience
+ * class allowing inherited classes to overwrite single methods, without having to provide 
+ * additional empty implementations for unused methods.
+ * 
+ * @author Ben St&ouml;ver
+ */
 public class TICMouseAdapter implements TICMouseListener {
 	@Override
-	public void mousePressed(TICMouseEvent event) {}
+	public boolean mousePressed(TICMouseEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void mouseReleased(TICMouseEvent event) {}
+	public boolean mouseReleased(TICMouseEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void mouseEntered(TICMouseEvent event) {}
+	public boolean mouseEntered(TICMouseEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void mouseExited(TICMouseEvent event) {}
+	public boolean mouseExited(TICMouseEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void mouseMoved(TICMouseEvent event) {}
+	public boolean mouseMoved(TICMouseEvent event) {
+		return false;
+	}
 
 	
 	@Override
-	public void mouseDragged(TICMouseEvent event) {}
+	public boolean mouseDragged(TICMouseEvent event) {
+		return false;
+	}
 }

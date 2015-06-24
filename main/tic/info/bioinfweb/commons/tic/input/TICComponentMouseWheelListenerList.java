@@ -35,8 +35,8 @@ public class TICComponentMouseWheelListenerList extends AbstractListenerList<TIC
 	public TICComponentMouseWheelListenerList(TICComponent owner) {
 		super(owner);
 	}
-
-
+	
+	
 	@Override
 	public void mouseScrolled(MouseEvent event) {
 		for (TICMouseWheelListener listener: getListeners()) {
@@ -47,8 +47,10 @@ public class TICComponentMouseWheelListenerList extends AbstractListenerList<TIC
 	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent event) {
+		boolean consumed = false;
 		for (TICMouseWheelListener listener: getListeners()) {
-			listener.mouseWheelMoved(new TICMouseWheelEvent(getOwner(), event));
+			consumed = consumed || listener.mouseWheelMoved(new TICMouseWheelEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 }

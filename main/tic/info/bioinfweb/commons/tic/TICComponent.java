@@ -46,6 +46,20 @@ import org.eclipse.swt.widgets.Widget;
  * Note that depending on your GUI design {@link #assignSize()} might not have the desired if 
  * {@link #assignSizeToSWTLayoutData(org.eclipse.swt.graphics.Point, Composite)} is not overwritten with an according 
  * implementation.
+ * <p>
+ * <b>Mouse and keyboard events</b>
+ * <p>
+ * TIC components support adding TIC event listeners for mouse and keyboard events. Due to the implementation of this 
+ * behavior the toolkit specific components always have mouse and key listeners attached, no matter if a TIC listener 
+ * was attached to the owning TIC component. In the case of Swing components events will not be forwarded to parent
+ * components anymore, even if no listener in this component consumed the event. Therefore TIC components automatically
+ * forward events to parent Swing components, if no TIC listener for the according event type consumed that event.
+ * TIC listener indicate whether they consumed an event by the return value of their handler methods (e.g. 
+ * {@link TICMouseWheelListener#mouseWheelMoved(info.bioinfweb.commons.tic.input.TICMouseWheelEvent)}).
+ * <p>
+ * If more than one listener for the same event type is attached to a TIC component, all listeners will be informed
+ * on events, no matter if a previous listener in the list already consumed the event. (Only forwarding to parent events
+ * is influenced by the return value of TIC event listeners.)
  * 
  * @author Ben St&ouml;ver
  */
@@ -134,7 +148,7 @@ public abstract class TICComponent {
 				assignSizeToSWTLayoutData(composite.getSize(), composite);
 			}
 			else {
-				JComponent component = (JComponent)getToolkitComponent(); 
+				JComponent component = (JComponent)getToolkitComponent();
 				component.setSize(size);
 				component.setPreferredSize(size);  //TODO Also set minSize?
 			}

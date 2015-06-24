@@ -51,17 +51,21 @@ public class TICComponentMouseListenersList extends AbstractListenerList<TICMous
 
 	@Override
 	public void mouseDragged(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mouseDragged(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mouseDragged(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 
 	@Override
 	public void mouseMoved(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mouseMoved(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mouseMoved(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 
@@ -71,33 +75,41 @@ public class TICComponentMouseListenersList extends AbstractListenerList<TICMous
 
 	@Override
 	public void mouseEntered(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mouseEntered(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mouseEntered(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 
 	@Override
 	public void mouseExited(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mouseExited(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mouseExited(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 
 	@Override
 	public void mousePressed(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mousePressed(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mousePressed(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 
 	@Override
 	public void mouseReleased(MouseEvent event) {
+		boolean consumed = false;
 		for (TICMouseListener listener: getListeners()) {
-			listener.mouseReleased(new TICMouseEvent(getOwner(), event));
+			consumed = consumed || listener.mouseReleased(new TICMouseEvent(getOwner(), event));
 		}
+		forwardMouseEvent(event, consumed);
 	}
 
 

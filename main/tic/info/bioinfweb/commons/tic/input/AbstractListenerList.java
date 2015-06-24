@@ -20,10 +20,15 @@ package info.bioinfweb.commons.tic.input;
 
 
 import info.bioinfweb.commons.tic.TICComponent;
+import info.bioinfweb.commons.tic.TargetToolkit;
 
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.EventListener;
 import java.util.List;
+
+import javax.swing.JComponent;
+import javax.swing.SwingUtilities;
 
 
 
@@ -45,5 +50,14 @@ public abstract class AbstractListenerList<L extends EventListener> {
 
 	public List<L> getListeners() {
 		return listeners;
+	}
+	
+	
+	protected void forwardMouseEvent(MouseEvent event, boolean consumed) {
+		if (getOwner().getCurrentToolkit().equals(TargetToolkit.SWING) && !consumed) {
+			JComponent component = (JComponent)getOwner().getToolkitComponent(); 
+			component.getParent().dispatchEvent(SwingUtilities.convertMouseEvent(
+					component, event, component.getParent()));
+		}
 	}
 }
