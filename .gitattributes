@@ -17,6 +17,7 @@ main/core/info/bioinfweb/commons/appversion/AppVersionXMLConstants.java -text sv
 main/core/info/bioinfweb/commons/appversion/AppVersionXMLReadWrite.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/appversion/ApplicationType.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/appversion/ApplicationVersion.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/beans/PropertyChangeEventForwarder.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/changemonitor/ChangeMonitor.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/changemonitor/ChangeMonitorable.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/changemonitor/PropertyChangeMonitor.java -text svneol=unset#text/plain
@@ -52,6 +53,7 @@ main/core/info/bioinfweb/commons/graphics/DoubleDimension.java -text svneol=unse
 main/core/info/bioinfweb/commons/graphics/FontCalculator.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/graphics/GraphicsUtils.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/graphics/UniqueColorLister.java -text svneol=unset#text/plain
+main/core/info/bioinfweb/commons/graphics/ZoomableFont.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/AbstractSaver.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/DefaultNameManager.java -text svneol=unset#text/plain
 main/core/info/bioinfweb/commons/io/FormatVersion.java -text svneol=unset#text/plain
