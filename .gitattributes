@@ -87,6 +87,7 @@ main/core/info/bioinfweb/commons/text/UniqueNameMap.java -text svneol=unset#text
 main/core/info/bioinfweb/commons/text/UniqueNameMapParameters.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/HTMLTruncater.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/bio/AmbiguityBaseScore.java -text svneol=unset#text/plain
+main/experimental/info/bioinfweb/commons/bio/CharacterStateType.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/bio/ConsensusSequenceCreator.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/bio/SequenceUtils.java -text svneol=unset#text/plain
 main/experimental/info/bioinfweb/commons/bio/alignment/pairwise/NeedlemanWunschAligner.java -text svneol=unset#text/plain
