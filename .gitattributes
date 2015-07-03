@@ -406,6 +406,7 @@ main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/Con
 main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/xsd/SQLConnection/1.0.xsd -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
