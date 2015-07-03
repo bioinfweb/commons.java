@@ -324,6 +324,16 @@ main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlan
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageParser.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageRedirectServlet.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/QualityComparator.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/.classpath -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/.project -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/IDGenerator.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/SQLConnector.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/SQLUtils.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/ConcreteSQLProperties.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLProperties.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLXMLConstants.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.sql/src/info/bioinfweb/commons/sql/sqlproperties/SQLXMLReader.java -text svneol=unset#text/plain
 test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
