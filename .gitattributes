@@ -361,6 +361,11 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpanesel
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneBidule.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneSelector.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/TweakedScrollPaneLayout.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swt/.classpath -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swt/.project -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swt/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swt/lib/swt.jar -text
+main/info.bioinfweb.commons.swt/src/info/bioinfweb/commons/swt/ScrolledCompositeSyncListener.java -text svneol=unset#text/plain
 test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
