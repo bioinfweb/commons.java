@@ -1,47 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="src" path="experimental"/>
-	<classpathentry kind="src" path="core"/>
-	<classpathentry kind="src" path="applet"/>
-	<classpathentry kind="src" path="testing"/>
-	<classpathentry kind="src" path="servlet"/>
-	<classpathentry kind="src" path="sql"/>
-	<classpathentry kind="src" path="swing"/>
-	<classpathentry kind="src" path="swt"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="lib/servlet.jar"/>
-	<classpathentry kind="lib" path="lib/bytecode-1.8.jar"/>
-	<classpathentry kind="lib" path="lib/jgrapht-jdk1.5.jar"/>
-	<classpathentry kind="lib" path="lib/phylo-1.8.jar"/>
-	<classpathentry kind="lib" path="lib/core-1.8.jar"/>
-	<classpathentry kind="lib" path="lib/junit-4.9b1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://junit.sourceforge.net/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://commons.apache.org/proper/commons-collections/javadocs/api-release/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/guava-13.0.1.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/biojava3-alignment-3.0.5.jar" sourcepath="/BioJava Alignment/src">
-		<attributes>
-			<attribute name="javadoc_location" value="http://www.biojava.org/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/biojava3-core-3.0.5.jar" sourcepath="/BioJava Core/src">
-		<attributes>
-			<attribute name="javadoc_location" value="http://www.biojava.org/docs/api/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-lang3-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/swt.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.33-bin.jar"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/bin" sourcepath="/info.bioinfweb.commons.core/src"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.swing/bin"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.servlet/lib/servlet.jar"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.sql/bin"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.servlet/bin" sourcepath="/info.bioinfweb.commons.servlet/src"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.experimental/bin"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
