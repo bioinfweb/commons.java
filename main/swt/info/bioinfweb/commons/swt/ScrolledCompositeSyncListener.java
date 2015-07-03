@@ -24,9 +24,10 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.widgets.ScrollBar;
+import org.eclipse.swt.events.ControlAdapter;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.widgets.Control;
 
 
 
@@ -37,9 +38,37 @@ import org.eclipse.swt.widgets.ScrollBar;
  * 
  * @author Ben St&ouml;ver
  */
-public class ScrolledCompositeSyncListener implements SelectionListener {
+public class ScrolledCompositeSyncListener {
   private Iterable<ScrolledComposite> scrolledComposites;
   private boolean horizontal;
+  
+  private final ControlListener SCROLL_LISTENER = new ControlAdapter() {
+		@Override
+		public void controlMoved(ControlEvent e) {
+			ScrolledComposite source = (ScrolledComposite)((Control)e.getSource()).getParent();
+			int value;
+			if (horizontal) {
+				value = source.getHorizontalBar().getSelection();
+			}
+			else {
+				value = source.getVerticalBar().getSelection();
+			}
+			
+			for (Iterator<ScrolledComposite> iterator = scrolledComposites.iterator(); iterator.hasNext();) {
+				ScrolledComposite scrolledComposite = iterator.next();
+				if (horizontal) {
+					if (scrolledComposite.getHorizontalBar() != e.getSource()) {
+						scrolledComposite.setOrigin(value, scrolledComposite.getOrigin().y);
+					}
+				}
+				else {
+					if (scrolledComposite.getVerticalBar() != e.getSource()) {
+						scrolledComposite.setOrigin(scrolledComposite.getOrigin().x, value);
+					}
+				}
+			}
+		}
+	};
 	
 	
 	/**
@@ -84,10 +113,9 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	 * 
 	 * @param scrolledComposites
 	 * @param horizontal
-	 * @param linked - the value specified here is not important
 	 */
 	private ScrolledCompositeSyncListener(Iterable<ScrolledComposite> scrolledComposites, 
-			boolean horizontal, boolean linked) {
+			boolean horizontal) {
 		
 		this.scrolledComposites = scrolledComposites;
 		this.horizontal = horizontal;
@@ -106,7 +134,7 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	public static ScrolledCompositeSyncListener newLinkedInstance(Iterable<ScrolledComposite> scrolledComposites, 
 			boolean horizontal) {
 		
-		return new ScrolledCompositeSyncListener(scrolledComposites, horizontal, true);
+		return new ScrolledCompositeSyncListener(scrolledComposites, horizontal);
 	}
 	
 	
@@ -128,36 +156,17 @@ public class ScrolledCompositeSyncListener implements SelectionListener {
 	 * listener for some components.
 	 */
 	public void registerToAll() {
+	  // Adding a selection listener to the scroll bar does not work if the component scrolls due to insertion 
+		// of new tokens at the end. Therefore the movement of the content component is used as the event instead.
 		for (Iterator<ScrolledComposite> iterator = scrolledComposites.iterator(); iterator.hasNext();) {
 			if (horizontal) {
-				iterator.next().getHorizontalBar().addSelectionListener(this);
+				iterator.next().getContent().addControlListener(SCROLL_LISTENER);
+				//iterator.next().getHorizontalBar().addSelectionListener(this);
 			}
 			else {
-				iterator.next().getVerticalBar().addSelectionListener(this);
+				iterator.next().getContent().addControlListener(SCROLL_LISTENER);
+				//iterator.next().getVerticalBar().addSelectionListener(this);
 			}
 		}
 	}
-
-	
-	@Override
-	public void widgetDefaultSelected(SelectionEvent e) {}
-
-	
-	@Override
-	public void widgetSelected(SelectionEvent e) {
-		int value = ((ScrollBar)e.getSource()).getSelection();
-		for (Iterator<ScrolledComposite> iterator = scrolledComposites.iterator(); iterator.hasNext();) {
-			ScrolledComposite scrolledComposite = iterator.next();
-			if (horizontal) {
-				if (scrolledComposite.getHorizontalBar() != e.getSource()) {
-					scrolledComposite.setOrigin(value, scrolledComposite.getOrigin().y);
-				}
-			}
-			else {
-				if (scrolledComposite.getVerticalBar() != e.getSource()) {
-					scrolledComposite.setOrigin(scrolledComposite.getOrigin().x, value);
-				}
-			}
-		}
-	}	
 }
