@@ -313,6 +313,17 @@ main/info.bioinfweb.commons.oldcombined/swt/info/bioinfweb/commons/swt/ScrolledC
 main/info.bioinfweb.commons.oldcombined/testing/info/bioinfweb/commons/testing/TestLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.oldcombined/testing/info/bioinfweb/commons/testing/TestTools.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.oldcombined/xsd/SQLConnection/1.0.xsd -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/.classpath -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/.project -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/lib/servlet.jar -text
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/GetPostServlet.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/Model2Servlet.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/ServletUtils.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageEntry.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageParser.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/AcceptLanguageRedirectServlet.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/acceptlanguage/QualityComparator.java -text svneol=unset#text/plain
 test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
