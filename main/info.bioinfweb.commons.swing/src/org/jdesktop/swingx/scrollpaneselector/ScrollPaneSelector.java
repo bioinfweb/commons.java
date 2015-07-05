@@ -9,17 +9,38 @@ package org.jdesktop.swingx.scrollpaneselector;
 
 
 
-import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.MouseInputListener;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.RenderingHints;
+import java.awt.Robot;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.MouseInputListener;
 
 
 
@@ -36,7 +57,8 @@ public class ScrollPaneSelector extends JComponent {
 	// static final fields
 	private static final double MAX_SIZE = 200;
 	private static final Icon LAUNCH_SELECTOR_ICON = new Icon() {
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		@Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
 			Color tmpColor = g.getColor();
 			g.setColor(Color.BLACK);
 			g.drawRect(2, 2, 10, 10);
@@ -44,11 +66,13 @@ public class ScrollPaneSelector extends JComponent {
 			g.setColor(tmpColor);
 		}
 
-		public int getIconWidth() {
+		@Override
+        public int getIconWidth() {
 			return 15;
 		}
 
-		public int getIconHeight() {
+		@Override
+        public int getIconHeight() {
 			return 15;
 		}
 	};
@@ -75,9 +99,13 @@ public class ScrollPaneSelector extends JComponent {
 	 * @param aScrollPane
 	 */
 	public synchronized static void installScrollPaneSelector(JScrollPane aScrollPane) {
-		if (aScrollPane == null) return;
-		if (theInstalledScrollPaneSelectors.containsKey(aScrollPane)) return;
-		ScrollPaneSelector scrollPaneSelector = scrollPaneSelector = new ScrollPaneSelector();
+		if (aScrollPane == null) {
+            return;
+        }
+		if (theInstalledScrollPaneSelectors.containsKey(aScrollPane)) {
+            return;
+        }
+		ScrollPaneSelector scrollPaneSelector = new ScrollPaneSelector();
 		scrollPaneSelector.installOnScrollPane(aScrollPane);
 		theInstalledScrollPaneSelectors.put(aScrollPane, scrollPaneSelector);
 	}
@@ -87,9 +115,13 @@ public class ScrollPaneSelector extends JComponent {
 	 * @param aScrollPane
 	 */
 	public synchronized static void uninstallScrollPaneSelector(JScrollPane aScrollPane) {
-		if (aScrollPane == null) return;
+		if (aScrollPane == null) {
+            return;
+        }
 		ScrollPaneSelector scrollPaneSelector = theInstalledScrollPaneSelectors.get(aScrollPane);
-		if (scrollPaneSelector == null) return;
+		if (scrollPaneSelector == null) {
+            return;
+        }
 		scrollPaneSelector.uninstallFromScrollPane();
 		theInstalledScrollPaneSelectors.remove(aScrollPane);
 	}
@@ -105,13 +137,15 @@ public class ScrollPaneSelector extends JComponent {
 		theScale = 0.0;
 		theButton = new JLabel(LAUNCH_SELECTOR_ICON);
 		MouseInputListener mil = new MouseInputAdapter() {
-			public void mousePressed(MouseEvent e) {
+			@Override
+            public void mousePressed(MouseEvent e) {
 				Point p = e.getPoint();
 				SwingUtilities.convertPointToScreen(p, theButton);
 				display(p);
 			}
 
-			public void mouseReleased(MouseEvent e) {
+			@Override
+            public void mouseReleased(MouseEvent e) {
 				if (theStartPoint != null) {
 					Point newPoint = e.getPoint();
 					SwingUtilities.convertPointToScreen(newPoint, (Component)e.getSource());
@@ -123,8 +157,11 @@ public class ScrollPaneSelector extends JComponent {
 				theStartRectangle = theRectangle;
 			}
 
-			public void mouseDragged(MouseEvent e) {
-				if (theStartPoint == null) return;
+			@Override
+            public void mouseDragged(MouseEvent e) {
+				if (theStartPoint == null) {
+                    return;
+                }
 				Point newPoint = e.getPoint();
 				SwingUtilities.convertPointToScreen(newPoint, (Component)e.getSource());
 				moveRectangle(newPoint.x - theStartPoint.x, newPoint.y - theStartPoint.y);
@@ -137,15 +174,21 @@ public class ScrollPaneSelector extends JComponent {
 		thePopupMenu.setLayout(new BorderLayout());
 		thePopupMenu.add(this, BorderLayout.CENTER);
 		theComponentOrientationListener = new PropertyChangeListener() {
-			public void propertyChange(PropertyChangeEvent evt) {
-				if (theScrollPane == null) return;
+			@Override
+            public void propertyChange(PropertyChangeEvent evt) {
+				if (theScrollPane == null) {
+                    return;
+                }
 				theScrollPane.setCorner(JScrollPane.LOWER_LEADING_CORNER, null);
 				theScrollPane.setCorner(JScrollPane.LOWER_TRAILING_CORNER, theButton);
 			}
 		};
 		theViewPortViewListener = new ContainerAdapter() {
-			public void componentAdded(ContainerEvent e) {
-				if (thePopupMenu.isVisible()) thePopupMenu.setVisible(false);
+			@Override
+            public void componentAdded(ContainerEvent e) {
+				if (thePopupMenu.isVisible()) {
+                    thePopupMenu.setVisible(false);
+                }
 				Component comp = theScrollPane.getViewport().getView();
 				theComponent = (comp instanceof JComponent)? (JComponent)comp : null;
 			}
@@ -153,15 +196,21 @@ public class ScrollPaneSelector extends JComponent {
 	}
 
 //-- JComponent overriden methods ------
-	public Dimension getPreferredSize() {
-		if (theImage == null || theRectangle == null) return new Dimension();
+	@Override
+    public Dimension getPreferredSize() {
+		if (theImage == null || theRectangle == null) {
+            return new Dimension();
+        }
 		Insets insets = getInsets();
 		return new Dimension(theImage.getWidth(null) + insets.left + insets.right,
 							 theImage.getHeight(null) + insets.top + insets.bottom);
 	}
 
-	protected void paintComponent(Graphics g1D) {
-		if (theImage == null || theRectangle == null) return;
+	@Override
+    protected void paintComponent(Graphics g1D) {
+		if (theImage == null || theRectangle == null) {
+            return;
+        }
 		Graphics2D g = (Graphics2D)g1D;
   	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  // Eingefögt
 		Insets insets = getInsets();
@@ -182,7 +231,9 @@ public class ScrollPaneSelector extends JComponent {
 
 //-- Private methods ------
 	private void installOnScrollPane(JScrollPane aScrollPane) {
-		if (theScrollPane != null) uninstallFromScrollPane();
+		if (theScrollPane != null) {
+            uninstallFromScrollPane();
+        }
 		theScrollPane = aScrollPane;
 		theFormerLayoutManager = theScrollPane.getLayout();
 		theScrollPane.setLayout(new TweakedScrollPaneLayout());
@@ -194,8 +245,12 @@ public class ScrollPaneSelector extends JComponent {
 	}
 
 	private void uninstallFromScrollPane() {
-		if (theScrollPane == null) return;
-		if (thePopupMenu.isVisible()) thePopupMenu.setVisible(false);
+		if (theScrollPane == null) {
+            return;
+        }
+		if (thePopupMenu.isVisible()) {
+            thePopupMenu.setVisible(false);
+        }
 		theScrollPane.setCorner(JScrollPane.LOWER_TRAILING_CORNER, null);
 		theScrollPane.removePropertyChangeListener(COMPONENT_ORIENTATION, theComponentOrientationListener);
 		theScrollPane.getViewport().removeContainerListener(theViewPortViewListener);
@@ -204,7 +259,9 @@ public class ScrollPaneSelector extends JComponent {
 	}
 
 	private void display(Point aPointOnScreen) {
-		if (theComponent == null) return;
+		if (theComponent == null) {
+            return;
+        }
 		double compWidth = theComponent.getWidth();
 		double compHeight = theComponent.getHeight();
 		double scaleX = MAX_SIZE / compWidth;
@@ -217,7 +274,7 @@ public class ScrollPaneSelector extends JComponent {
 		Graphics2D g = theImage.createGraphics();
   	g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,	RenderingHints.VALUE_ANTIALIAS_ON);  // Eingefögt
 		g.scale(theScale, theScale);  // Tranformation scheint die Ursache för mangeldes Weichnzeichnen zu sein. (?)
-		theComponent.paint(g);  
+		theComponent.paint(g);
 		theStartRectangle = theComponent.getVisibleRect();
 		Insets insets = getInsets();
 		theStartRectangle.x = (int)(theScale * theStartRectangle.x + insets.left);
@@ -246,7 +303,9 @@ public class ScrollPaneSelector extends JComponent {
 	}
 
 	private void moveRectangle(int aDeltaX, int aDeltaY) {
-		if (theStartRectangle == null) return;
+		if (theStartRectangle == null) {
+            return;
+        }
 
 		Insets insets = getInsets();
 		Rectangle newRect = new Rectangle(theStartRectangle);
@@ -262,7 +321,9 @@ public class ScrollPaneSelector extends JComponent {
 	}
 
 	private void scroll(int aDeltaX, int aDeltaY) {
-		if (theComponent == null) return;
+		if (theComponent == null) {
+            return;
+        }
 		Rectangle rect = theComponent.getVisibleRect();
 		rect.x += aDeltaX;
 		rect.y += aDeltaY;
