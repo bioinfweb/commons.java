@@ -215,7 +215,6 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/DecimalInputD
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedAbstractAction.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedDesktopPane.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/FileChooserDirModel.java -text svneol=unset#text/plain
-main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/JHTMLLabel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
