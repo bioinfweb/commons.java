@@ -20,6 +20,7 @@ package info.bioinfweb.commons.text;
 
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -290,5 +291,22 @@ public class StringUtils {
   	else {
   		return sequence.charAt(sequence.length() - 1);
   	}
+  }
+  
+  
+  /**
+   * Converts the specified character sequence to a list strings, where each character of the sequence is 
+   * represented as a single string object.
+   * 
+   * @param sequence the sequence to be converted
+   * @return the resulting list of strings
+   * @since 2.0.0
+   */
+  public static List<String> charSequenceToStringList(CharSequence sequence) {
+  	List<String> result = new ArrayList<String>();
+  	for (int i = 0; i < sequence.length(); i++) {
+			result.add(Character.toString(sequence.charAt(i)));
+		}
+  	return result;
   }
 }
