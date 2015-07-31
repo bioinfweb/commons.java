@@ -201,6 +201,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/DecimalInputD
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedAbstractAction.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedDesktopPane.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/FileChooserDirModel.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/JDropDownSpinner.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
@@ -210,6 +211,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSavable.
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaver.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaverMessages.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/TableColumnModelAdapter.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/WrapLayout.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpaneselector/ExtendedScrollPaneSelector.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpaneselector/ScrollPaneSelectable.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneBidule.java -text svneol=unset#text/plain
