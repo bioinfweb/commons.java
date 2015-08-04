@@ -167,4 +167,10 @@ public class JDropDownSpinner<I> extends JPanel {
 		}
 		return comboBox;
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public I getSelectedItem() {
+		return (I)getComboBox().getSelectedItem();
+	}
 }
