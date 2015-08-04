@@ -169,6 +169,11 @@ public class JDropDownSpinner<I> extends JPanel {
 	}
 	
 	
+	/**
+	 * Delegates to {@link JComboBox#getSelectedItem()} of {@link #getComboBox()}.
+	 * 
+	 * @return the item that is currently selected
+	 */
 	@SuppressWarnings("unchecked")
 	public I getSelectedItem() {
 		return (I)getComboBox().getSelectedItem();
