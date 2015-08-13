@@ -652,4 +652,23 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 			fail(e.getLocalizedMessage());
 		}
 	}
+	
+	
+	@Test
+	public void test_peekLine() {
+		PeekReader reader = createPeekReader("Line 1\r\nLine 0123456789\nLine 3\rLine 4");
+		try {
+			assertReadResult("Line 1", true, reader.peekLine());
+			reader.readLine();
+			assertReadResult("Line 01234", false, reader.peekLine());
+			reader.readLine();
+			assertReadResult("Line 3", true, reader.peekLine());
+			reader.readLine();
+			assertReadResult("Line 4", true, reader.peekLine());
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
 }
