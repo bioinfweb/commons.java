@@ -383,7 +383,7 @@ public class PeekReader extends Reader {
 	 * 
 	 * @return the integer representation of next the character or -1 if the end of the stream has been reached
 	 */
-	public int peek() throws EOFException {
+	public int peek() {
 		if (getAvailablePeek() > 0) {
 			return (int)peekBuffer[bufferStartPos];
 		}
@@ -442,6 +442,22 @@ public class PeekReader extends Reader {
 		catch (EOFException e) {
 			return -1;
 		}
+	}
+	
+	
+	public ReadResult peekLine() {
+		StringBuilder result = new StringBuilder();
+		int c = peek();
+		int pos = 0;
+		while ((pos < getAvailablePeek()) && (c != -1) && !StringUtils.isNewLineChar((char)c)) {
+			result.append((char)c);
+			pos++;
+			if (pos < peekBuffer.length) {
+				c = peek(pos);
+			}		
+		}
+		
+		return new ReadResult(result, (c == -1) || (pos < getAvailablePeek()));
 	}
 	
 	
