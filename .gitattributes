@@ -221,6 +221,7 @@ main/info.bioinfweb.commons.swt/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/lib/swt.jar -text
+main/info.bioinfweb.commons.swt/src/info/bioinfweb/commons/swt/SWTUtils.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/src/info/bioinfweb/commons/swt/ScrolledCompositeSyncListener.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/.project -text svneol=unset#text/plain

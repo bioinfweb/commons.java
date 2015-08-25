@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Control;
  * direction.
  * 
  * @author Ben St&ouml;ver
+ * @bioinfweb.module info.bioinfweb.commons.swt
  */
 public class ScrolledCompositeSyncListener {
   private Iterable<ScrolledComposite> scrolledComposites;
