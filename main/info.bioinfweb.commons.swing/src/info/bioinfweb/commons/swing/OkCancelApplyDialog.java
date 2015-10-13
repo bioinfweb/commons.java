@@ -105,7 +105,8 @@ public abstract class OkCancelApplyDialog extends JDialog {
 	      JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     
     if (closeOnEnter) {
-	    getRootPane().registerKeyboardAction(new ActionListener() {
+	    getRootPane().registerKeyboardAction(
+	    		new ActionListener() {
 	          public final void actionPerformed(final ActionEvent e) {
 	  					if (apply()) {
 	  						canceled = false;
@@ -120,20 +121,21 @@ public abstract class OkCancelApplyDialog extends JDialog {
 
 
 	public boolean execute() {
+		canceled = true;  // Necessary to return the correct value, when the close button in the window heading is used to close the dialog.
 		setVisible(true);
 		return !canceled;
 	}
 	
 	
 	protected void addMoreButtons(JPanel buttonPanel) {
-		// Grundimplemetierung leer
+		// default implementation empty
 	}
 	
 
 	/**
 	 * This method is called if the user clicks <i>OK</i> or <i>Apply</i>. 
 	 * @return <code>true</code> should be returned if the dialog can be closed (when <i>OK</i>
-	 *         was clicked, <code>false</code> if an error accured and the dialog shall remain
+	 *         was clicked, <code>false</code> if an error occurred and the dialog shall remain
 	 *         open
 	 */
 	protected abstract boolean apply();
