@@ -210,6 +210,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingChangeMo
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSavable.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaver.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaverMessages.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingUtils.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/TableColumnModelAdapter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/WrapLayout.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpaneselector/ExtendedScrollPaneSelector.java -text svneol=unset#text/plain
