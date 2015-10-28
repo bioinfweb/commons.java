@@ -143,11 +143,11 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * 
 	 * @param removedElements - the elements that have been removed.
 	 */
-	protected void beforeRemove(Collection<Object> removedElements) {}
+	protected void beforeRemove(int index, Collection<Object> removedElements) {}
 	
 	
-	private void beforeRemove(Object element) {
-		beforeRemove(Collections.nCopies(1, element));
+	private void beforeRemove(int index, Object element) {
+		beforeRemove(index, Collections.nCopies(1, element));
 	}
 
 	
@@ -164,11 +164,11 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * 
 	 * @param removedElements - the elements that have been removed.
 	 */
-	protected void afterRemove(Collection<? extends E> removedElements) {}
+	protected void afterRemove(int index, Collection<? extends E> removedElements) {}
 	
 	
-	private void afterRemove(E element) {
-		afterRemove(Collections.nCopies(1, element));
+	private void afterRemove(int index, E element) {
+		afterRemove(index, Collections.nCopies(1, element));
 	}
 
 	
@@ -196,13 +196,13 @@ public abstract class ListDecorator<E> implements List<E> {
 					}
 		
 					@Override
-					protected void beforeRemove(Object element) {
-						list.beforeRemove(element);
+					protected void beforeRemove(int index, Object element) {
+						list.beforeRemove(index, element);
 					}
 
 					@Override
-					protected void afterRemove(E element) {
-						list.afterRemove(element);
+					protected void afterRemove(int index, E element) {
+						list.afterRemove(index, element);
 					}
 				};
 	}
@@ -210,7 +210,7 @@ public abstract class ListDecorator<E> implements List<E> {
 	
 	@Override
 	public boolean add(E element) {
-		int index = size() - 1;
+		int index = size();
 		beforeAdd(index, element);
 		boolean result = underlyingList.add(element);
 		if (result) {
@@ -256,9 +256,9 @@ public abstract class ListDecorator<E> implements List<E> {
 		copy.addAll(this);
 		copy = Collections.unmodifiableCollection(copy);
 		
-		beforeRemove(copy);
+		beforeRemove(0, copy);
 		getUnderlyingList().clear();
-		afterRemove(copy);
+		afterRemove(0, copy);
 	}
 
 
@@ -309,6 +309,7 @@ public abstract class ListDecorator<E> implements List<E> {
 		final Iterator<E> iterator = getUnderlyingList().iterator();
 		return new Iterator<E>() {
 					private E currentElement = null;
+					private int currentIndex = -1;
 					
 					@Override
 					public boolean hasNext() {
@@ -318,14 +319,21 @@ public abstract class ListDecorator<E> implements List<E> {
 					@Override
 					public E next() {
 						currentElement = iterator.next();
+						currentIndex++;  // Will be 0 after the first call.
 						return currentElement;
 					}
 		
 					@Override
 					public void remove() {
-						beforeRemove(currentElement);
-						iterator.remove();  // Would throw an exception if currentArea would still be null.
-						afterRemove(currentElement);
+						if (currentElement == null) {
+							throw new IllegalStateException("The next() method has never been called.");
+						}
+						else {
+							beforeRemove(currentIndex, currentElement);
+							iterator.remove();
+							afterRemove(currentIndex, currentElement);
+							currentIndex--;  // Move back, because the current element was deleted.
+						}
 					}
 				};
 	}
@@ -351,9 +359,9 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public E remove(int index) {
-		beforeRemove(get(index));
+		beforeRemove(index, get(index));
 		E result = getUnderlyingList().remove(index);
-		afterRemove(result);
+		afterRemove(index, result);
 		return result;
 	}
 
@@ -361,26 +369,55 @@ public abstract class ListDecorator<E> implements List<E> {
 	@Override
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object o) {
-		beforeRemove(o);
-		boolean result = getUnderlyingList().remove(o);
-		if (result) {
-			afterRemove((E)o);  // If this would not be of type E, result should have been false.
+		int index = indexOf(o);
+		if (index != -1) {
+			remove(get(index));
+			return true;
 		}
-		return result;
+		else {
+			return false;
+		}
 	}
 
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		Collection<E> removedElements = new ArrayList<E>(size());  // c cannot be used here, because it may contain elements which are not contained in this instance.
-		removedElements.addAll(this);
-		removedElements.retainAll(c);
-		removedElements = Collections.unmodifiableCollection(removedElements);
-		
-		beforeRemove(removedElements);
-		boolean result = getUnderlyingList().removeAll(c);
-		if (result) {
-			afterRemove(removedElements);
+		boolean result = false;
+		Iterator<?> iterator = c.iterator();
+		if (iterator.hasNext()) {
+			boolean hasNext = true;
+			Object o = iterator.next();
+			while (hasNext) {
+				int blockStartIndex = indexOf(o);
+				if (blockStartIndex != -1) {  // Remove new block:
+					Collection<E> removedElements = new ArrayList<E>();
+					removedElements.add((E)o);
+					
+					// Add elements until the end of a block is reached:
+					hasNext = iterator.hasNext();
+					if (hasNext) {
+						int currentIndex = blockStartIndex + 1;
+						o = iterator.next();
+						while (hasNext && get(currentIndex) == o) {
+							removedElements.add((E)o);
+							hasNext = iterator.hasNext();
+							if (hasNext) {
+								o = iterator.next();
+							}
+							currentIndex++;
+						}
+					}
+					
+					beforeRemove(blockStartIndex, removedElements);
+					if (getUnderlyingList().removeAll(removedElements)) {
+						result = true;
+						afterRemove(blockStartIndex, removedElements);
+					}
+				}
+				else {
+					o = iterator.next();  // Skip current element, because it is not contained in the underlying list.
+				}
+			}
 		}
 		return result;
 	}
@@ -391,14 +428,7 @@ public abstract class ListDecorator<E> implements List<E> {
 		Collection<E> removedElements = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
 		removedElements.addAll(this);
 		removedElements.removeAll(c);
-		removedElements = Collections.unmodifiableCollection(removedElements);
-		
-		beforeRemove(removedElements);
-		boolean result = getUnderlyingList().retainAll(c);
-		if (result) {
-			afterRemove(removedElements);
-		}
-		return result;
+		return removeAll(removedElements);
 	}
 
 
@@ -418,37 +448,37 @@ public abstract class ListDecorator<E> implements List<E> {
 
 
 	@Override
-	public List<E> subList(int fromIndex, int toIndex) {
+	public List<E> subList(final int fromIndex, int toIndex) {
 		final ListDecorator<E> thisList = this;
 		return new ListDecorator<E>(getUnderlyingList().subList(fromIndex, toIndex)) {
 					@Override
 					protected void beforeAdd(int index, Collection<? extends E> addedElements) {
-						thisList.beforeAdd(index, addedElements);
+						thisList.beforeAdd(index + fromIndex, addedElements);
 					}
 		
 					@Override
 					protected void afterAdd(int index, Collection<? extends E> addedElements) {
-						thisList.afterAdd(index, addedElements);
+						thisList.afterAdd(fromIndex + index, addedElements);
 					}
 		
 					@Override
 					protected void beforeReplace(int index, E currentElement, E newElement) {
-						thisList.beforeReplace(index, currentElement, newElement);
+						thisList.beforeReplace(fromIndex + index, currentElement, newElement);
 					}
 		
 					@Override
 					protected void afterReplace(int index, E previousElement, E currentElement) {
-						thisList.afterReplace(index, previousElement, currentElement);
+						thisList.afterReplace(fromIndex + index, previousElement, currentElement);
 					}
 		
 					@Override
-					protected void beforeRemove(Collection<Object> removedElements) {
-						thisList.beforeRemove(removedElements);
+					protected void beforeRemove(int index, Collection<Object> removedElements) {
+						thisList.beforeRemove(fromIndex + index, removedElements);
 					}
 
 					@Override
-					protected void afterRemove(Collection<? extends E> removedElements) {
-						thisList.afterRemove(removedElements);
+					protected void afterRemove(int index, Collection<? extends E> removedElements) {
+						thisList.afterRemove(fromIndex + index, removedElements);
 					}
 				};
 	}

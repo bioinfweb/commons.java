@@ -48,8 +48,8 @@ public class ListReplaceEvent<E> extends ListChangeEvent<E> {
 	 * @param oldElement - the element that will be or has been replaced in the list
 	 * @param newElement - the element that is the replacement for the old element
 	 */
-	public ListReplaceEvent(List<E> source, E oldElement, E newElement) {
-		super(source, ListChangeType.REPLACEMENT);
+	public ListReplaceEvent(List<E> source, int index, E oldElement, E newElement) {
+		super(source, ListChangeType.REPLACEMENT, index);
 		this.oldElement = oldElement;
 		this.newElement = newElement;
 	}

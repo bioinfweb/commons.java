@@ -49,8 +49,8 @@ public class ListMultipleChangesEvent<E> extends ListChangeEvent<E> {
 	 * @param type - the type of modification that happened
 	 * @param affectedElements - a list of elements that have been affected (e.g. inserted or removed)
 	 */
-	public ListMultipleChangesEvent(List<E> source, ListChangeType type,	Collection<? extends E> affectedElements) {
-		super(source, type);
+	public ListMultipleChangesEvent(List<E> source, ListChangeType type, int index, Collection<? extends E> affectedElements) {
+		super(source, type, index);
 		if (affectedElements.isEmpty()) {
 			throw new IllegalArgumentException("At least one affected element has to be specified.");
 		}
@@ -65,8 +65,8 @@ public class ListMultipleChangesEvent<E> extends ListChangeEvent<E> {
 	 * @param type - the type of modification that happened
 	 * @param affectedElements - a list of elements that have been affected (e.g. inserted, removed)
 	 */
-	public ListMultipleChangesEvent(List<E> source, ListChangeType type,	E affectedElement) {
-		super(source, type);
+	public ListMultipleChangesEvent(List<E> source, ListChangeType type, int index, E affectedElement) {
+		super(source, type, index);
 
 		if (affectedElement == null) {
 			throw new NullPointerException("Null is not a valid value for the affected element.");

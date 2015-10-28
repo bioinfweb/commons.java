@@ -67,8 +67,8 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * inserted. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
 	 * 
-	 * @param index - the index where the first new element will be inserted
-	 * @param element - the new element that will be inserted 
+	 * @param index the index where the first new element will be inserted
+	 * @param element the new element that will be inserted 
 	 */
 	protected void beforeAdd(int index, E element) {}
   
@@ -78,8 +78,8 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * inserted. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
 	 * 
-	 * @param index - the index where the first new element has been inserted
-	 * @param element - the new element that has been inserted 
+	 * @param index the index where the first new element has been inserted
+	 * @param element the new element that has been inserted 
 	 */
 	protected void afterAdd(int index, E element) {}
   
@@ -89,9 +89,9 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
 	 * 
-	 * @param index - the index where the element will be replaced
-	 * @param currentElement - the element that will be replaced
-	 * @param newElement - the new element that will replace the current element
+	 * @param index the index where the element will be replaced
+	 * @param currentElement the element that will be replaced
+	 * @param newElement the new element that will replace the current element
 	 */
 	protected void beforeReplace(int index, E currentElement, E newElement) {}
   
@@ -101,9 +101,9 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications made by this iterator.
 	 * 
-	 * @param index - the index where the element has been replaced
-	 * @param previousElement - the element that has been replaced
-	 * @param currentElement - the new element that is now contained in the list
+	 * @param index the index where the element has been replaced
+	 * @param previousElement the element that has been replaced
+	 * @param currentElement the new element that is now contained in the list
 	 */
 	protected void afterReplace(int index, E previousElement, E currentElement) {}
   
@@ -113,9 +113,10 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * the associated list. This default implementation is empty and can be overwritten by inherited classes which 
 	 * want to track modifications made by this iterator.
 	 * 
-	 * @param element - the element that will be removed 
+	 * @param index the index of the element to be removed
+	 * @param element the element that will be removed 
 	 */
-  protected void beforeRemove(Object element) {}
+  protected void beforeRemove(int index, Object element) {}
   
 
 	/**
@@ -123,9 +124,10 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	 * the associated list. This default implementation is empty and can be overwritten by inherited classes which 
 	 * want to track modifications made by this iterator.
 	 * 
-	 * @param element - the element that has been removed 
+	 * @param index the index of the element that has been removed
+	 * @param element the element that has been removed 
 	 */
-  protected void afterRemove(E element) {}
+  protected void afterRemove(int index, E element) {}
   
 
 	@Override
@@ -175,9 +177,10 @@ public class ListIteratorDecorator<E> implements ListIterator<E> {
 	
 	@Override
 	public void remove() {
-		beforeRemove(current);
+		int index = underlyingIterator.nextIndex() - 1;
+		beforeRemove(index, current);
 		underlyingIterator.remove();
-		afterRemove(current);
+		afterRemove(index, current);
 	}
 
 	

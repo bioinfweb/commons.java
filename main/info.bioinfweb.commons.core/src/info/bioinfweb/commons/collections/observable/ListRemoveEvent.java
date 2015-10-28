@@ -50,9 +50,9 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	 * @param source - the list instance that has been modified
 	 * @param affectedElements - a list of elements that have been removed
 	 */
-	public ListRemoveEvent(List<L> source, Collection<? extends E> affectedElements) {
-		super(source, ListChangeType.DELETION);
-		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, affectedElements);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
+	public ListRemoveEvent(List<L> source, int index, Collection<? extends E> affectedElements) {
+		super(source, ListChangeType.DELETION, index);
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElements);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
 	}
 
 	
@@ -62,9 +62,9 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	 * @param source - the list instance that has been modified
 	 * @param affectedElements - a list of elements that have been removed
 	 */
-	public ListRemoveEvent(List<L> source, E affectedElement) {
-		super(source, ListChangeType.DELETION);
-		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, affectedElement);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
+	public ListRemoveEvent(List<L> source, int index, E affectedElement) {
+		super(source, ListChangeType.DELETION, index);
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElement);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
 	}
 
 

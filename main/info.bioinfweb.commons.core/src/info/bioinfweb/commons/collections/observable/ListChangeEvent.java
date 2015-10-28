@@ -39,6 +39,7 @@ import java.util.List;
  */
 public class ListChangeEvent<E> extends EventObject {
 	private ListChangeType type;
+	private int index;
 	
 	
 	/**
@@ -47,9 +48,10 @@ public class ListChangeEvent<E> extends EventObject {
 	 * @param source - the list instance that has been modified
 	 * @param type - the type of modification that happened
 	 */
-	public ListChangeEvent(List<E> source, ListChangeType type) {
+	public ListChangeEvent(List<E> source, ListChangeType type, int index) {
 		super(source);
 		this.type = type;
+		this.index = index;
 	}
 
 
@@ -70,5 +72,15 @@ public class ListChangeEvent<E> extends EventObject {
 	 */
 	public ListChangeType getType() {
 		return type;
+	}
+
+
+	/**
+	 * Returns the index the first inserted element has in the list.
+	 * 
+	 * @return the index of the first new element
+	 */
+	public int getIndex() {
+		return index;
 	}
 }

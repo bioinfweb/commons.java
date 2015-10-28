@@ -38,9 +38,6 @@ import java.util.List;
  * @param <E> the type of elements in the list where the change occurred
  */
 public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
-	private int index;
-
-	
 	/**
 	 * Creates a new instance of this class.
 	 * 
@@ -49,8 +46,7 @@ public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
 	 * @param affectedElements - a list of elements that have been inserted
 	 */
 	public ListAddEvent(List<E> source, int index, Collection<? extends E> addedElements) {
-		super(source, ListChangeType.INSERTION, addedElements);
-		this.index = index;
+		super(source, ListChangeType.INSERTION, index, addedElements);
 	}
 
 
@@ -61,17 +57,6 @@ public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
 	 * @param affectedElements - a list of elements that have been inserted
 	 */
 	public ListAddEvent(List<E> source, int index, E affectedElement) {
-		super(source, ListChangeType.INSERTION, affectedElement);
-		this.index = index;
-	}
-
-
-	/**
-	 * Returns the index the first inserted element has in the list.
-	 * 
-	 * @return the index of the first new element
-	 */
-	public int getIndex() {
-		return index;
+		super(source, ListChangeType.INSERTION, index, affectedElement);
 	}
 }

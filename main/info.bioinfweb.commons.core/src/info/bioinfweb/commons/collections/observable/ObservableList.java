@@ -91,7 +91,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 	@Override
 	protected void beforeReplace(int index, E currentElement, E newElement) {
-		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, currentElement, newElement);
+		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, index, currentElement, newElement);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.beforeElementReplaced(event);
 		}
@@ -100,7 +100,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 	@Override
 	protected void afterReplace(int index, E previousElement, E currentElement) {
-		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, previousElement, currentElement);
+		ListReplaceEvent<E> event = new ListReplaceEvent<E>(this, index, previousElement, currentElement);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.afterElementReplaced(event);
 		}
@@ -108,8 +108,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 
 	@Override
-	protected void beforeRemove(Collection<Object> removedElements) {
-		ListRemoveEvent<E, Object> event = new ListRemoveEvent<E, Object>(this, removedElements);
+	protected void beforeRemove(int index, Collection<Object> removedElements) {
+		ListRemoveEvent<E, Object> event = new ListRemoveEvent<E, Object>(this, index, removedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.beforeElementsRemoved(event);
 		}
@@ -117,8 +117,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 
 	@Override
-	protected void afterRemove(Collection<? extends E> removedElements) {
-		ListRemoveEvent<E, E> event = new ListRemoveEvent<E, E>(this, removedElements);
+	protected void afterRemove(int index, Collection<? extends E> removedElements) {
+		ListRemoveEvent<E, E> event = new ListRemoveEvent<E, E>(this, index, removedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.afterElementsRemoved(event);
 		}
