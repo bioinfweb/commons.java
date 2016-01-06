@@ -17,7 +17,7 @@ public class LongIDManager {
 	 * 
 	 * @return an integer greater or equal to zero
 	 */
-	protected long createNewID() {
+	public long createNewID() {
 		nextID++;
 		return nextID - 1;
 	}
@@ -28,7 +28,7 @@ public class LongIDManager {
 	 * 
 	 * @return an integer greater or equal to zero
 	 */
-	protected long peekNextID() {
+	public long peekNextID() {
 		return nextID;
 	}
 }
