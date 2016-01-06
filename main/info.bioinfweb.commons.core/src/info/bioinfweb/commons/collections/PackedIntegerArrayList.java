@@ -116,7 +116,24 @@ public class PackedIntegerArrayList {
   }
   
   
-  /**
+	/**
+	 * Calculates how many bits are necessary to represent the specified number of different values.
+	 * 
+	 * @param elementCount the number of elements to be represented
+	 * @return the necessary length in bits for a representation of {@code elementCount} different values/objects
+	 */
+	public static int calculateBitsPerValue(int elementCount) {
+		int result = 1;
+		int maxCount = 2;
+		while (maxCount < elementCount) {  // 63 bit border cannot be reached with int values
+			result++;
+			maxCount *= 2;
+		}
+		return result;
+	}
+
+	
+	/**
    * Returns the minimum value that can be represented by an element of this list.
    * 
    * @return the minimum value specified in the constructor
@@ -134,6 +151,16 @@ public class PackedIntegerArrayList {
 	 */
 	public long getMaxValue() {
 		return maxValue;
+	}
+
+
+	/**
+	 * Returns the length in bits of an entry in this list.
+	 * 
+	 * @return the number of bits each element in this list uses
+	 */
+	public long getBitsPerValue() {
+		return bitsPerValue;
 	}
 
 
@@ -160,12 +187,13 @@ public class PackedIntegerArrayList {
   
   /**
    * Makes sure that the underlying array can take up at least the specified number of elements.
-   * If the current array is too small a new array which 1.5 times as large as the current one
-   * is created and the current contents are copied there.
+   * If the current array is too small a new array which is at least 1.5 times as large as the 
+   * current one (or larger if the requested capacity requires it) is created and the current 
+   * contents are copied there.
    * 
    * @param newCapacity - the number of elements that need to be stored in the array
    */
-  protected void ensureCapacity(long newCapacity) {
+  public void ensureCapacity(long newCapacity) {
   	int newArrayLength = calculateArrayLength(newCapacity);
   	if (newArrayLength > array.length) {
       array = Arrays.copyOf(array, Math.max(newArrayLength, 

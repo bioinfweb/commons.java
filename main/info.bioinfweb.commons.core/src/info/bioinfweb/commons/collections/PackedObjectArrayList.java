@@ -55,17 +55,6 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	private Map<E, Integer> intMap;
 	
 	
-	private int calculateBitsPerValue(int objectTypeCount) {
-		int result = 1;
-		int maxCount = 2;
-		while (maxCount < objectTypeCount) {  // 63 bit border cannot be reached with int values
-			result++;
-			maxCount *= 2;
-		}
-		return result;
-	}
-	
-	
 	/**
 	 * Creates a new instance of this class.
 	 * 
@@ -78,7 +67,7 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 		if (objectTypeCount < 0) {
 			throw new IllegalArgumentException("A negative objectTypeCount (" + objectTypeCount + ") is not valid.");
 		}
-		packedList = new PackedIntegerArrayList(calculateBitsPerValue(objectTypeCount), 0, initialCapacity);
+		packedList = new PackedIntegerArrayList(PackedIntegerArrayList.calculateBitsPerValue(objectTypeCount), 0, initialCapacity);
 		objectList = new ArrayList<E>(objectTypeCount);
 		intMap = new HashMap<E, Integer>();
 	}
