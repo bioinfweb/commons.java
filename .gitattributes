@@ -12,6 +12,7 @@ main/info.bioinfweb.commons.bio/src/info/bioinfweb/commons/bio/SequenceUtils.jav
 main/info.bioinfweb.commons.core/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/lib/commons-collections-3.2.1.jar -text
 main/info.bioinfweb.commons.core/lib/commons-lang3-3.1.jar -text
 main/info.bioinfweb.commons.core/lib/guava-13.0.1.jar -text
