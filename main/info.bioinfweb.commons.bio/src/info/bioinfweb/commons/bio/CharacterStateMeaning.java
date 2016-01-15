@@ -25,7 +25,7 @@ package info.bioinfweb.commons.bio;
  * @author Ben St&ouml;ver
  * @since 1.2.0
  */
-public enum ChracterStateMeaning {
+public enum CharacterStateMeaning {
 	/** Indicates that the string representation of a token is the gap character or token (e.g. '-'). */
 	GAP,
 	
