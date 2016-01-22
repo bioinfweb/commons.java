@@ -96,6 +96,10 @@ public class PeekReader extends Reader {
 	private int bufferStartPos = -1;
 	private int bufferContentLength = -1;
 	
+	private long characterOffset = 0;
+	private long lineNumber = 0;
+	private long columnNumber = 0;
+	
 	
 	/**
 	 * Creates a new instance of this class and fills the initial peek buffer.
@@ -127,6 +131,44 @@ public class PeekReader extends Reader {
 	}
 	
 	
+	/**
+	 * Returns the number of characters that have been read from this reader since the beginning of the 
+	 * underlying stream.
+	 * <p>
+	 * Note that due to the buffering of this class, this value may differ from the number of characters
+	 * that have been read from the underlying stream.
+	 * 
+	 * @return the number of characters that have currently been read from this reader instance
+	 */
+	public long getCharacterOffset() {
+		return characterOffset;
+	}
+
+
+	/**
+	 * Returns the number of the line in the stream, where the cursor of this reader is currently located.
+	 * <p>
+	 * This reader keeps track of the line number by monitoring each line separator that is read. Supported
+	 * line separators are {@code '\n'}, {@code '\r'} or {@code '\r\n'}. 
+	 * 
+	 * @return the current line number
+	 */
+	public long getLineNumber() {
+		return lineNumber;
+	}
+
+
+	/**
+	 * Returns the column of the current line, where the cursor of this reader is currently located.
+	 * 
+	 * @return the current column number in the current line
+	 * @see #getLineNumber() 
+	 */
+	public long getColumnNumber() {
+		return columnNumber;
+	}
+
+
 	/**
 	 * Returns the last index (with the character which is closest to the end of the underlying stream)
 	 * in the peek buffer containing a defined value.
@@ -203,8 +245,10 @@ public class PeekReader extends Reader {
 	 *         buffer content length.)
 	 */
 	public int peek(char[] cbuf, int off, int len) {
-		int lengthToCopy = Math.min(len, bufferContentLength);
+		int lengthToCopy = Math.min(len, bufferContentLength);  //TODO Problem: bufferContentLength ist -1 => In Debugmodus schauen, wo es so gesetzt wird.
 		int firstLengthToCopy = Math.min(lengthToCopy, peekLength - bufferStartPos);  // The number of positions to be copied between bufferStartPos and the end of the buffer
+		//System.out.println("peek(): " + lengthToCopy + " " + peekLength + " " + bufferStartPos + " " + len + " " + bufferContentLength);
+		//System.out.println("peek(): " + peekBuffer.length + " " + bufferStartPos + " " + cbuf.length + " " + off + " " + firstLengthToCopy);
 		System.arraycopy(peekBuffer, bufferStartPos, cbuf, off, firstLengthToCopy);
 		
 		int secondLengthToCopy = lengthToCopy - firstLengthToCopy;  // The number of positions to copy between the beginning of the buffer and bufferStartPos
@@ -311,6 +355,35 @@ public class PeekReader extends Reader {
 		}
 	}
 	
+	
+	private boolean isCharNextInBuffer(char c, char[] cbuf, int pos, int end) {
+		if (pos + 1 < end) {
+			return cbuf[pos + 1] == c;
+		}
+		else {
+			int code = peek();
+			return (code != -1) && ((char)code == c);
+		}
+	}
+	
+	
+	private void countPositionChange(char[] cbuf, int offset, int copiedLength) {
+		characterOffset += copiedLength;
+		
+		int end = offset + copiedLength;
+		for (int pos = offset; pos < end; pos++) {
+			if (((cbuf[pos] == '\r') && !isCharNextInBuffer('\n', cbuf, pos, end))  // Line number will be increased in the next loop cycle or method call.
+					|| (cbuf[pos] == '\n')) {
+				
+				lineNumber++;
+				columnNumber = 0;
+			}
+			else {
+				columnNumber++;
+			}
+		}
+	}
+	
 
 	/**
 	 * Copies the specified number of characters into the specified array. The characters are taken from the peek buffer
@@ -322,7 +395,7 @@ public class PeekReader extends Reader {
 	 * @param len the maximum number of characters to read
 	 */
 	@Override
-	public int read(char[] cbuf, int off, int len) throws IOException {
+	public int read(char[] cbuf, int off, int len) throws IOException {  // All inherited read methods seem to call this method.
 		//TODO Check correct minimal size of cbuf?
 		char[] newChars = new char[len];
 		int newCharsRead = underlyingReader.read(newChars);  //TODO Some streams may read only a part of the requested bytes, although the end of the stream is not reached. That would currently result in a smaller peek size.
@@ -340,7 +413,8 @@ public class PeekReader extends Reader {
 			}
 			
 			writeToPeekBuffer(newChars, newCharsRead);
-	
+			
+			countPositionChange(cbuf, off, positionsCopied);
 			return positionsCopied;
 		}
 	}
@@ -545,7 +619,7 @@ public class PeekReader extends Reader {
 			result++;
 			if (c != -1) {  // Not end of stream
 				try {
-					if (peekChar() == '\n') {  // Treat \r\n as one new line event.
+					if (peekChar() == '\n') {  // Treat \r\n as one new line event.  //TODO Is \n\n also consumed this way?
 						read();
 						result++;
 					}
