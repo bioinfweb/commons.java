@@ -43,7 +43,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	public static final int PEEK_BUFFER_SIZE = 10; 
 	
 	
-	private PeekReader createPeekReader(String content) {
+	private static PeekReader createPeekReader(String content) {
 		try {
 			return new PeekReader(new StringReader(content), PEEK_BUFFER_SIZE);
 		}
@@ -365,7 +365,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	
 	@Test
-	public void test_peak_single() {
+	public void test_peek_single() {
 		PeekReader reader = createPeekReader(TEST_CONTENT);
 		
 		try {
@@ -402,7 +402,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	
 	@Test(expected=IndexOutOfBoundsException.class)
-	public void test_peak_single_exceptionStart() {
+	public void test_peek_single_exceptionStart() {
 		try {
 			createPeekReader(TEST_CONTENT).peekChar(10);
 		}
@@ -670,5 +670,42 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
+	}
+	
+	
+	@Test
+	public void testLocation() {
+		PeekReader reader = createPeekReader("Line 1\r\nLine 0123456789\nLine 3\rLine 4");
+		try {
+			assertLocation(0, 0, 0, reader);
+			reader.readLine();
+			assertLocation(8, 1, 0, reader);
+			reader.readLine();
+			assertLocation(24, 2, 0, reader);
+			System.out.println("testLocation ");
+			try {
+				reader.skip(14);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				fail();
+			}
+			
+			assertLocation(38, 2, 14, reader);
+			
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
+	
+	
+	private static void assertLocation(long expectedCharacterOffset, long expectedLineNumner, long expectedColumnNumber, 
+			PeekReader reader) {
+		
+		assertEquals(expectedCharacterOffset, reader.getCharacterOffset());
+		assertEquals(expectedLineNumner, reader.getLineNumber());
+		assertEquals(expectedColumnNumber, reader.getColumnNumber());
 	}
 }
