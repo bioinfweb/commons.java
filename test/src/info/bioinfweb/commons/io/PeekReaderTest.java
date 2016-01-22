@@ -675,24 +675,27 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void testLocation() {
-		PeekReader reader = createPeekReader("Line 1\r\nLine 0123456789\nLine 3\rLine 4");
+		PeekReader reader = createPeekReader("Line 1\nLine 0123456789\r\nLine 3\n\rLine 4");
 		try {
 			assertLocation(0, 0, 0, reader);
 			reader.readLine();
-			assertLocation(8, 1, 0, reader);
-			reader.readLine();
+			assertLocation(7, 1, 0, reader);
+			reader.skip(14);
+			assertLocation(21, 1, 14, reader);
+			reader.read();  // 9
+			assertLocation(22, 1, 15, reader);
+			reader.read();  // \r
+			assertLocation(23, 1, 16, reader);
+			reader.read();  // \n
 			assertLocation(24, 2, 0, reader);
-			System.out.println("testLocation ");
-			try {
-				reader.skip(14);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-				fail();
-			}
-			
-			assertLocation(38, 2, 14, reader);
-			
+			reader.readLine();
+			assertLocation(31, 3, 0, reader);
+			reader.readLine();
+			assertLocation(32, 4, 0, reader);
+			reader.readLine();
+			assertLocation(38, 4, 6, reader);
+			assertEquals(-1, reader.read());
+			assertLocation(38, 4, 6, reader);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
