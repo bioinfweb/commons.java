@@ -617,7 +617,7 @@ public class PeekReader extends Reader {
 			result++;
 			if (c != -1) {  // Not end of stream
 				try {
-					if (peekChar() == '\n') {  // Treat \r\n as one new line event.  //TODO Is \n\n also consumed this way?
+					if ((c == '\r') && (peekChar() == '\n')) {  // Treat \r\n as one new line event.
 						read();
 						result++;
 					}
