@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * @author Ben St&ouml;ver
  * @since 1.2.0
  */
-public class PeekReader extends Reader {
+public class PeekReader extends Reader implements StreamLocationProvider {
 	public static final int DEFAULT_PEEK_BUFFER_SIZE = 8192;
 	
 	
@@ -140,6 +140,7 @@ public class PeekReader extends Reader {
 	 * 
 	 * @return the number of characters that have currently been read from this reader instance
 	 */
+	@Override
 	public long getCharacterOffset() {
 		return characterOffset;
 	}
@@ -153,6 +154,7 @@ public class PeekReader extends Reader {
 	 * 
 	 * @return the current line number
 	 */
+	@Override
 	public long getLineNumber() {
 		return lineNumber;
 	}
@@ -164,6 +166,7 @@ public class PeekReader extends Reader {
 	 * @return the current column number in the current line
 	 * @see #getLineNumber() 
 	 */
+	@Override
 	public long getColumnNumber() {
 		return columnNumber;
 	}
