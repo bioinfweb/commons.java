@@ -26,8 +26,9 @@ package info.bioinfweb.commons.io;
  * 
  * @author Ben St&ouml;ver
  * @since 1.2.0
+ * @see StreamLocationProviderOffsetComparator
  */
-public class StreamLocation implements StreamLocationProvider, Comparable<StreamLocationProvider> {
+public class StreamLocation implements StreamLocationProvider {
 	private long characterOffset = 0;
 	private long lineNumber = 0;
 	private long columnNumber = 0;
@@ -103,11 +104,5 @@ public class StreamLocation implements StreamLocationProvider, Comparable<Stream
 		if (lineNumber != other.lineNumber)
 			return false;
 		return true;
-	}
-
-
-	@Override
-	public int compareTo(StreamLocationProvider o) {
-		return (int)Math.signum(characterOffset - o.getCharacterOffset());  // Signum is used to convert long to int.
 	}
 }

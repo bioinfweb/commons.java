@@ -81,6 +81,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/PeekReader.java -
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/Savable.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/StreamLocation.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/StreamLocationProvider.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/StreamLocationProviderOffsetComparator.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/TableReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/TextReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/XMLUtils.java -text svneol=unset#text/plain
