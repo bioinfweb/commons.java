@@ -247,8 +247,6 @@ public class PeekReader extends Reader {
 	public int peek(char[] cbuf, int off, int len) {
 		int lengthToCopy = Math.min(len, bufferContentLength);  //TODO Problem: bufferContentLength ist -1 => In Debugmodus schauen, wo es so gesetzt wird.
 		int firstLengthToCopy = Math.min(lengthToCopy, peekLength - bufferStartPos);  // The number of positions to be copied between bufferStartPos and the end of the buffer
-		//System.out.println("peek(): " + lengthToCopy + " " + peekLength + " " + bufferStartPos + " " + len + " " + bufferContentLength);
-		//System.out.println("peek(): " + peekBuffer.length + " " + bufferStartPos + " " + cbuf.length + " " + off + " " + firstLengthToCopy);
 		System.arraycopy(peekBuffer, bufferStartPos, cbuf, off, firstLengthToCopy);
 		
 		int secondLengthToCopy = lengthToCopy - firstLengthToCopy;  // The number of positions to copy between the beginning of the buffer and bufferStartPos
@@ -344,7 +342,7 @@ public class PeekReader extends Reader {
 					}
 				}
 			}
-			bufferContentLength -= newChars.length - newCharsRead;  // If the same number of new characters could be read from the underlying reader as were requested from this reader, bufferContentLength will not be changed here.
+			bufferContentLength = Math.max(0, bufferContentLength - (newChars.length - newCharsRead));  // If the same number of new characters could be read from the underlying reader as were requested from this reader, bufferContentLength will not be changed here.
 		}
 		else {
 			bufferStartPos += newChars.length;
