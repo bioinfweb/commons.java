@@ -95,6 +95,15 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	}
 	
 	
+	private static void assertLocation(long expectedCharacterOffset, long expectedLineNumner, long expectedColumnNumber, 
+			PeekReader reader) {
+		
+		assertEquals(expectedCharacterOffset, reader.getCharacterOffset());
+		assertEquals(expectedLineNumner, reader.getLineNumber());
+		assertEquals(expectedColumnNumber, reader.getColumnNumber());
+	}
+
+	
 	@Test
 	public void test_peek_array() {
 		PeekReader reader = createPeekReader(TEST_CONTENT);
@@ -675,7 +684,7 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	@Test
 	public void testLocation() {
-		PeekReader reader = createPeekReader("Line 1\nLine 0123456789\r\nLine 3\n\rLine 4");
+		PeekReader reader = createPeekReader("Line 0\nLine 0123456789\r\nLine 2\n\rLine 4\r\nLine 5\r");
 		try {
 			assertLocation(0, 0, 0, reader);
 			reader.readLine();
@@ -692,23 +701,16 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 			assertLocation(31, 3, 0, reader);
 			reader.readLine();
 			assertLocation(32, 4, 0, reader);
+			reader.skip(10);
+			assertLocation(42, 5, 2, reader);
 			reader.readLine();
-			assertLocation(38, 4, 6, reader);
+			assertLocation(47, 6, 0, reader);
 			assertEquals(-1, reader.read());
-			assertLocation(38, 4, 6, reader);
+			assertLocation(47, 6, 0, reader);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
-	}
-	
-	
-	private static void assertLocation(long expectedCharacterOffset, long expectedLineNumner, long expectedColumnNumber, 
-			PeekReader reader) {
-		
-		assertEquals(expectedCharacterOffset, reader.getCharacterOffset());
-		assertEquals(expectedLineNumner, reader.getLineNumber());
-		assertEquals(expectedColumnNumber, reader.getColumnNumber());
 	}
 }
