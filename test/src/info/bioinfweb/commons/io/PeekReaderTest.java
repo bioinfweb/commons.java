@@ -84,6 +84,15 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	}
 
 	
+	private static void assertLocation(long expectedCharacterOffset, long expectedLineNumner, long expectedColumnNumber, 
+			PeekReader reader) {
+		
+		assertEquals(expectedCharacterOffset, reader.getCharacterOffset());
+		assertEquals(expectedLineNumner, reader.getLineNumber());
+		assertEquals(expectedColumnNumber, reader.getColumnNumber());
+	}
+
+	
 	@Test
 	public void test_initPeekBuffer() {
 		PeekReader reader = createPeekReader(TEST_CONTENT);
@@ -94,15 +103,6 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 		}
 	}
 	
-	
-	private static void assertLocation(long expectedCharacterOffset, long expectedLineNumner, long expectedColumnNumber, 
-			PeekReader reader) {
-		
-		assertEquals(expectedCharacterOffset, reader.getCharacterOffset());
-		assertEquals(expectedLineNumner, reader.getLineNumber());
-		assertEquals(expectedColumnNumber, reader.getColumnNumber());
-	}
-
 	
 	@Test
 	public void test_peek_array() {
@@ -683,34 +683,55 @@ public class PeekReaderTest {             // 01234567890123456789012345678901234
 	
 	
 	@Test
-	public void testLocation() {
+	public void testLocation() throws IOException {
 		PeekReader reader = createPeekReader("Line 0\nLine 0123456789\r\nLine 2\n\rLine 4\r\nLine 5\r");
+		assertLocation(0, 0, 0, reader);
+		reader.readLine();
+		assertLocation(7, 1, 0, reader);
+		reader.skip(14);
+		assertLocation(21, 1, 14, reader);
+		reader.read();  // 9
+		assertLocation(22, 1, 15, reader);
+		reader.read();  // \r
+		assertLocation(23, 1, 16, reader);
+		reader.read();  // \n
+		assertLocation(24, 2, 0, reader);
+		reader.readLine();
+		assertLocation(31, 3, 0, reader);
+		reader.readLine();
+		assertLocation(32, 4, 0, reader);
+		reader.skip(10);
+		assertLocation(42, 5, 2, reader);
+		reader.readLine();
+		assertLocation(47, 6, 0, reader);
+		assertEquals(-1, reader.read());
+		assertLocation(47, 6, 0, reader);
+	}
+	
+	
+	@Test
+	public void test_skip() throws IOException {
+		PeekReader reader = createPeekReader("0123456789");
+		assertEquals(6, reader.skip(6));
+		assertEquals(4, reader.skip(6));
+		assertEquals(0, reader.skip(6));
+	}
+	
+	
+	@Test
+	public void test_skip2() {
+		PeekReader reader = createPeekReader("Line 1\r\nLine 0123456789\nLine 3\rLine 4");
 		try {
 			assertLocation(0, 0, 0, reader);
 			reader.readLine();
-			assertLocation(7, 1, 0, reader);
-			reader.skip(14);
-			assertLocation(21, 1, 14, reader);
-			reader.read();  // 9
-			assertLocation(22, 1, 15, reader);
-			reader.read();  // \r
-			assertLocation(23, 1, 16, reader);
-			reader.read();  // \n
+			assertLocation(8, 1, 0, reader);
+			reader.readLine();
 			assertLocation(24, 2, 0, reader);
-			reader.readLine();
-			assertLocation(31, 3, 0, reader);
-			reader.readLine();
-			assertLocation(32, 4, 0, reader);
-			reader.skip(10);
-			assertLocation(42, 5, 2, reader);
-			reader.readLine();
-			assertLocation(47, 6, 0, reader);
-			assertEquals(-1, reader.read());
-			assertLocation(47, 6, 0, reader);
+			assertEquals(13, reader.skip(14));
+			assertLocation(37, 3, 6, reader);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
 			fail(e.getLocalizedMessage());
 		}
-	}
-}
+	}}
