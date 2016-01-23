@@ -18,6 +18,8 @@
  */
 package info.bioinfweb.commons.io;
 
+import javax.xml.stream.Location;
+
 
 
 /**
@@ -47,6 +49,14 @@ public class StreamLocation implements StreamLocationProvider {
 		this.characterOffset = locationProvider.getCharacterOffset();
 		this.lineNumber = locationProvider.getLineNumber();
 		this.columnNumber = locationProvider.getColumnNumber();
+	}
+
+
+	public StreamLocation(Location location) {
+		super();
+		this.characterOffset = location.getCharacterOffset();
+		this.lineNumber = location.getLineNumber();
+		this.columnNumber = location.getColumnNumber();
 	}
 
 

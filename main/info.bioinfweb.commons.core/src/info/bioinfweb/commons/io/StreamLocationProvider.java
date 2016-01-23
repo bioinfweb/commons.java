@@ -27,7 +27,7 @@ import javax.xml.stream.Location;
  * Interface to be implemented by classes (e.g. readers) that offer properties to determine their
  * current location in a stream.
  * <p>
- * The properties in this interface have the same names as in {@link Location}.
+ * For compatibility, the properties in this interface have the same names as in {@link Location}.
  * 
  * @author Ben St&ouml;ver
  * @since 1.2.0
