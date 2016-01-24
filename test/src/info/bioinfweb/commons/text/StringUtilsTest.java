@@ -64,4 +64,14 @@ public class StringUtilsTest {
   	assertEquals(7, StringUtils.indexOfWhiteSpace("ABC DEF ", 4));
   	assertEquals(7, StringUtils.indexOfWhiteSpace("ABC DEF ", 7));
   }
+  
+  
+  @Test
+  public void test_containsWhitespace() {
+  	assertFalse(StringUtils.containsWhitespace("AB_C"));
+  	assertTrue(StringUtils.containsWhitespace("A B"));
+  	assertTrue(StringUtils.containsWhitespace("A\nB"));
+  	assertTrue(StringUtils.containsWhitespace("A\tB"));
+  	assertFalse(StringUtils.containsWhitespace(""));
+  }
 }
