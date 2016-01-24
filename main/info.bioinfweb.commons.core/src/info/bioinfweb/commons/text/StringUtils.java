@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 
 
@@ -34,6 +35,9 @@ import java.util.Locale;
 public class StringUtils {
 	public static final NumberFormat DOUBLE_FORMAT = NumberFormat.getNumberInstance(Locale.getDefault());
 	public static final NumberFormat INTEGER_FORMAT = NumberFormat.getIntegerInstance(Locale.getDefault());  //new DecimalFormat("#########");
+	
+	private static final Pattern NO_WHITESPACE_PATTERN = Pattern.compile("\\S*");
+	
 	
 	
   public static String invert(CharSequence s)  {
@@ -201,7 +205,8 @@ public class StringUtils {
    * Returns the first index of any whitespace character.
    * 
    * @param sequence the character sequence to be searched
-   * @return the index of the first white space character (as defined by {@link Character#isWhitespace(char)}) 
+   * @return the index of the first white space character (as defined by {@link Character#isWhitespace(char)})
+   *         or -1 if the sequence does not contain any whitespace
    */
   public static int indexOfWhiteSpace(CharSequence sequence) {
   	return indexOfWhiteSpace(sequence, 0);
@@ -214,7 +219,8 @@ public class StringUtils {
    * @param sequence the character sequence to be searched
    * @param fromIndex the index to start the search
    * @return the index of the first white space character (as defined by {@link Character#isWhitespace(char)}) 
-   *         at or after {@code fromIndex}  
+   *         at or after {@code fromIndex} or -1 if the sequence does not contain any whitespace behind that
+   *         position
    */
   public static int indexOfWhiteSpace(CharSequence sequence, int fromIndex) {
   	for (int i = fromIndex; i < sequence.length(); i++) {
@@ -223,6 +229,20 @@ public class StringUtils {
 			}
 		}
   	return -1;
+  }
+  
+  
+  /**
+   * Tests if the specified character sequence does not contain any whitespace.
+   * <p>
+   * Note this method will return {@code false}, if an empty sequence ({@code ""}) is specified.
+   * 
+   * @param sequence the character sequence to be tested
+   * @return {@code true} if the sequence contains no whitespace or {@code false} otherwise
+   * @throws NullPointerException if {@code sequence} is {@code null}
+   */
+  public static boolean containsWhitespace(CharSequence sequence) {
+  	return !NO_WHITESPACE_PATTERN.matcher(sequence).matches();
   }
   
   
