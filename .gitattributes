@@ -91,6 +91,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/ApplicationLogge
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/ApplicationLoggerMessageType.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/ApplicationLoggerParameterMap.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/JTextAreaApplicationLogger.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/MessageListApplicationLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/MultipleApplicationLoggersAdapter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/SwingDocumentApplicationLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/TextFileApplicationLogger.java -text svneol=unset#text/plain
