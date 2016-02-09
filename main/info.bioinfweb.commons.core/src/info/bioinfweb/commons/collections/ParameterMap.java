@@ -19,6 +19,9 @@
 package info.bioinfweb.commons.collections;
 
 
+import info.bioinfweb.commons.log.ApplicationLogger;
+import info.bioinfweb.commons.log.VoidApplicationLogger;
+
 import java.io.File;
 import java.util.TreeMap;
 
@@ -36,8 +39,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Checks if an object is stored under the specified key. If so the result of {@link Object#toString()} is
 	 * returned, otherwise <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return the string representation of the stored object or <code>defaultValue</code>
 	 */
 	public String getString(String key, String defaultValue) {
@@ -55,7 +58,7 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Checks if an object is stored under the specified key. If so the result of {@link Object#toString()} is
 	 * returned, otherwise <code>null</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
+	 * @param key the key under which the result is stored
 	 * @return the string representation of the stored object or <code>null</code>
 	 */
 	public String getString(String key) {
@@ -68,8 +71,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * {@link Long} are converted.) If the stored object has another type or no object is found, 
 	 * <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public float getFloat(String key, float defaultValue) {
@@ -94,8 +97,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * it is converted to <code>double</code>. If it has a non-numeric type or no object is found, 
 	 * <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public double getDouble(String key, double defaultValue) {
@@ -122,8 +125,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Checks if a {@link Integer} object is stored under the specified key. If the stored object has another type 
 	 * or no object is found, <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public int getInteger(String key, int defaultValue) {
@@ -141,8 +144,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Checks if a {@link Long} object is stored under the specified key. (Objects of the types {@link Integer} are 
 	 * converted.) If the stored object has another type or no object is found, <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public long getLong(String key, long defaultValue) {
@@ -163,8 +166,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Checks if a {@link Boolean} object is stored under the specified key. If the stored object has another type 
 	 * or no object is found, <code>defaultValue</code> is returned.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public boolean getBoolean(String key, boolean defaultValue) {
@@ -183,8 +186,8 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * or no object is found, <code>defaultValue</code> is returned. (This method does not convert String objects
 	 * into File objects, even if the string represents a valid file path.)
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return an appropriate object or <code>defaultValue</code>
 	 */
 	public File getFile(String key, File defaultValue) {
@@ -203,7 +206,7 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * or no object is found, <code>null</code> is returned. (This method does not convert String objects
 	 * into File objects, even if the string represents a valid file path.)
 	 * 
-	 * @param key - the key under which the result is stored
+	 * @param key the key under which the result is stored
 	 * @return an appropriate object or <code>null</code>
 	 */
 	public File getFile(String key) {
@@ -212,10 +215,56 @@ public class ParameterMap extends TreeMap<String, Object> {
 	
 	
 	/**
+	 * Checks if a {@link ApplicationLogger} object is stored under the specified key. If the stored object has 
+	 * another type or no object is found, {@code defaultValue} is returned.
+	 * 
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
+	 * @return an appropriate object or {@code defaultValue}
+	 */
+	public ApplicationLogger getApplicationLogger(String key, ApplicationLogger defaultValue) {
+		Object result = get(key);
+		if (result instanceof ApplicationLogger) {
+			return (ApplicationLogger)result;
+		}
+		else {
+			return defaultValue;
+		}
+	}
+	
+	
+	/**
+	 * Returns the application logger registered for the specified key.
+	 * <p>
+	 * If no objects with this key is contained in the map, an new instance of {@link VoidApplicationLogger}
+	 * is created, added to the map and returned. 
+	 * 
+	 * @param key the key indent
+	 * @return the application logger stored (from now on) for the specified key
+	 * @throws IllegalArgumentException if an object, that is not an instance of {@link ApplicationLogger}
+	 *         is contained in the map under the specified key
+	 */
+	public ApplicationLogger getApplicationLogger(String key) {
+		Object result = get(key);
+		if (result == null) {
+			result = new VoidApplicationLogger();
+			put(key, result);
+		}
+		if (result instanceof ApplicationLogger) {
+			return (ApplicationLogger)result;
+		}
+		else {
+			throw new IllegalArgumentException(
+					"An object that is not an instance of ApplicationLogger was already registered for the key \"" + key + "\".");
+		}
+	}
+	
+	
+	/**
 	 * Returns the stored object for the key or <code>defaultValue</code> if no object is found.
 	 * 
-	 * @param key - the key under which the result is stored
-	 * @param defaultValue - the value to be returned, if no appropriate object is found
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @return the stored object or <code>defaultValue</code>
 	 */
 	public Object getObject(String key, Object defaultValue) {
