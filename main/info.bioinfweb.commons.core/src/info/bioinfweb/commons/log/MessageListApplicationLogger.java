@@ -64,4 +64,19 @@ public class MessageListApplicationLogger extends AbstractApplicationLogger {
 	public void addMessage(ApplicationLoggerMessage message) {
 		getList().add(message);
 	}
+	
+	
+	/**
+	 * Adds all messages stored in this list to the other logger.
+	 * <p>
+	 * Note that the events of the specified logger may not be in chronological order
+	 * anymore, depending on the time-stamps of the messages in this and in the other logger.
+	 * 
+	 * @param otherLogger the logger to write the messages to
+	 */
+	public void addListToLogger(ApplicationLogger otherLogger) {
+		for (ApplicationLoggerMessage message : getMessageList()) {
+			otherLogger.addMessage(message);
+		}
+	}
 }
