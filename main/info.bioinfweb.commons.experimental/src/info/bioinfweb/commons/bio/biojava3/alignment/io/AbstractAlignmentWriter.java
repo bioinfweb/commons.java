@@ -18,7 +18,7 @@ import org.biojava3.core.sequence.template.Sequence;
 public abstract class AbstractAlignmentWriter<S extends Sequence<C>, C extends Compound> 
     implements AlignmentWriter<S, C> {
 	
-  public static char WHITESPACE_REPLACEMENT = '_'; 
+  public static final char WHITESPACE_REPLACEMENT = '_'; 
 
   
 	private UniqueNameMap nameMap;
