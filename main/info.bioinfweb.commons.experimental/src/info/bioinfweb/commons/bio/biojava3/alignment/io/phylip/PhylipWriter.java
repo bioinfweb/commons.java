@@ -23,7 +23,7 @@ import org.biojavax.bio.phylo.io.phylip.PHYLIPFileFormat;
  * @author Ben St&ouml;ver
  */
 public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends AbstractAlignmentWriter<S, C> {
-  public static int DEFAULT_MAX_NAME_LENGTH = 10;
+  public static final int DEFAULT_MAX_NAME_LENGTH = 10;
   
   
   public PhylipWriter() {
