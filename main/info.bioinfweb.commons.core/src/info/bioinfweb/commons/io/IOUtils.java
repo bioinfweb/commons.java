@@ -42,12 +42,12 @@ public class IOUtils {
 	 * @param c - the class that is contained in the returned JAR-file
 	 * @return the path to the class folder or archive
 	 */
-	public static String getClassLocation(Class c) {
+	public static String getClassLocation(Class<?> c) {
 		return c.getProtectionDomain().getCodeSource().getLocation().getPath().replaceAll("%20", " ");
 	}
 	
 	
-	public static String getClassDir(Class c) {
+	public static String getClassDir(Class<?> c) {
 		File file = new File(getClassLocation(c));
 		if (file.isDirectory()) {
 			return file.getAbsolutePath();
@@ -83,6 +83,7 @@ public class IOUtils {
 
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
+	 * 
 	 * @param in - the stream to read from
 	 * @param out - the stream to write to
 	 * @param close - defines whether the streams shall be closed after the input stream ended.
@@ -128,6 +129,7 @@ public class IOUtils {
 	
 	/**
 	 * Copies a file.
+	 * 
 	 * @param src - the source file
 	 * @param dest - the destination file
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
@@ -143,6 +145,7 @@ public class IOUtils {
 	
 	/**
 	 * Copies a file.
+	 * 
 	 * @param src - the source file
 	 * @param dest - the destination file
 	 * @throws IOException
@@ -156,6 +159,7 @@ public class IOUtils {
 	
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
+	 * 
 	 * @param path - the path to the resource
 	 * @param out - the stream to write to
 	 * @throws IOException
@@ -167,6 +171,7 @@ public class IOUtils {
 	
 	/**
 	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
+	 * 
 	 * @param path - the path to the resource
 	 * @param out - the stream to write to
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
@@ -181,6 +186,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts a file from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param out - the output stream to write the contents of the file to
@@ -196,6 +202,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts a file from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param out - the output stream to write the contents of the file to
@@ -208,6 +215,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts a file from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param dest - the destination file
@@ -224,6 +232,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts a file from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param dest - the destination file
@@ -236,6 +245,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts the contents of a directory from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param sourcePath - the path of the source directory inside the archive (must not start with 
 	 *        a "/")
@@ -271,6 +281,7 @@ public class IOUtils {
 	
 	/**
 	 * Extracts the contents of a directory from an archive (e.g. ZIP or JAR).
+	 * 
 	 * @param file - the source archive file
 	 * @param sourcePath - the path of the source directory inside the archive (must not start with 
 	 *        a "/")
@@ -286,8 +297,9 @@ public class IOUtils {
 	
 	
 	/**
-	 * Calculates the overall uncompressed size of all files inculded in the specified directory of
+	 * Calculates the overall uncompressed size of all files included in the specified directory of
 	 * an archive.
+	 * 
 	 * @param file - the source archive file
 	 * @param path - the path of the source directory inside the archive (must not start with 
 	 *        a "/")
