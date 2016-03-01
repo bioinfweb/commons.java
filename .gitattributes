@@ -70,6 +70,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/graphics/UniqueColor
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/graphics/ZoomableFont.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/AbstractSaver.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/DefaultNameManager.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/ExtensionFileFilter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/FormatVersion.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/IOProgressListener.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/IOProgressListenerAdapter.java -text svneol=unset#text/plain

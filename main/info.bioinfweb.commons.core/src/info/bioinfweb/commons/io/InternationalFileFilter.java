@@ -19,8 +19,9 @@
 package info.bioinfweb.commons.io;
 
 
-import java.util.*;
-import javax.swing.filechooser.*;
+import java.util.Locale;
+
+import javax.swing.filechooser.FileFilter;
 
 
 
