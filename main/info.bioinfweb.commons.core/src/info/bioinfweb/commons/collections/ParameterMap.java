@@ -276,4 +276,26 @@ public class ParameterMap extends TreeMap<String, Object> {
 			return defaultValue;
 		}
 	}
+	
+	
+	/**
+	 * Returns the stored object for the key if it is an instance of the specified class. Otherwise {@code defaultValue}
+	 * is returned.
+	 * 
+	 * @param key the key under which the result is stored
+	 * @param defaultValue the value to be returned, if no appropriate object is found
+	 * @param objectClass the class the returned object must have
+	 * 
+	 * @return the stored object or <code>defaultValue</code>
+	 */
+	@SuppressWarnings("unchecked")
+	public <O> O getObject(String key, O defaultValue, Class<O> objectClass) {
+		Object result = get(key);
+		if (objectClass.isInstance(result)) {
+			return (O)result;
+		}
+		else {
+			return defaultValue;
+		}
+	}
 } 
