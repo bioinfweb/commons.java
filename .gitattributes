@@ -215,6 +215,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/JDropDownSpin
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ProgressDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/RelativeRangeModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingChangeMonitor.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSavable.java -text svneol=unset#text/plain
