@@ -26,27 +26,6 @@ package info.bioinfweb.commons.progress;
  * @author Ben St&ouml;ver
  */
 public class VoidProgressMonitor extends AbstractProgressMonitor implements ProgressMonitor {
-	private double progress = 0;
-	
-	
-	/* (non-Javadoc)
-	 * @see info.bioinfweb.commons.progress.ProgressMonitor#getProgressValue()
-	 */
-	@Override
-	public double getProgressValue() {
-  	return progress;
-	}
-
-	
-	/* (non-Javadoc)
-	 * @see info.bioinfweb.commons.progress.ProgressMonitor#setProgressValue(double)
-	 */
-	@Override
-	public void setProgressValue(double value) {
-		progress = value;
-	}
-	
-	
 	/**
 	 * This method always returnes <code>false</code>.
 	 * 
@@ -56,4 +35,8 @@ public class VoidProgressMonitor extends AbstractProgressMonitor implements Prog
 	public boolean isCanceled() {
 		return false;
 	}
+	
+
+	@Override
+  protected void onProgress(double value, String text) {}
 }

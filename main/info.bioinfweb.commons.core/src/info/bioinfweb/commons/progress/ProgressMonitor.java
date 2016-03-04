@@ -28,9 +28,15 @@ package info.bioinfweb.commons.progress;
 public interface ProgressMonitor {
   public double getProgressValue();
   
+  public String getProgressText();
+  
   public void setProgressValue(double value);
   
+  public void setProgressValue(double value, String text);
+  
   public void addToProgressValue(double addend);
+  
+  public void addToProgressValue(double addend, String text);
   
   public boolean isCanceled();
 }

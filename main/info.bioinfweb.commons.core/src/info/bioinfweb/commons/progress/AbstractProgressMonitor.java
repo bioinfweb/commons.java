@@ -26,7 +26,50 @@ package info.bioinfweb.commons.progress;
  * @author Ben St&ouml;ver
  */
 public abstract class AbstractProgressMonitor implements ProgressMonitor {
+	private double progress = 0;
+	private String text = "";
+	
+	
+	/* (non-Javadoc)
+	 * @see info.bioinfweb.commons.progress.ProgressMonitor#getProgressValue()
+	 */
+	@Override
+	public double getProgressValue() {
+  	return progress;
+	}
+
+	
+	@Override
+  public String getProgressText() {
+	  return text;
+  }
+
+
+	protected abstract void onProgress(double value, String text);
+	
+	
+	@Override
+  public void setProgressValue(double value, String text) {
+		progress = value;
+	  this.text = text;
+	  onProgress(value, text);
+  }
+
+
+	@Override
 	public void addToProgressValue(double addend) {
 		setProgressValue(getProgressValue() + addend);
 	}
+	
+
+	@Override
+  public void setProgressValue(double value) {
+	  setProgressValue(value, getProgressText());
+  }
+
+	
+	@Override
+  public void addToProgressValue(double addend, String text) {
+	  addToProgressValue(addend, getProgressText());
+  }
 }
