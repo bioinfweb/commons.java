@@ -32,6 +32,16 @@ import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 
 /**
@@ -57,42 +67,110 @@ import javax.swing.border.EmptyBorder;
  * </pre> 
  * 
  * @author Ben St&ouml;ver
- * @since 1.2.0
+ * @since 2.0.0
  */
 public class ProgressDialog extends JDialog implements ProgressMonitor {	
-	//TODO Add optional cancel functionality
-	
 	private static final long serialVersionUID = 1L;
 	
-	private static final int MIN_DIALOG_WITH = 250;
+	private static final int MIN_DIALOG_WITH = 350;
 	private static final int PROGRESS_BAR_LENGTH = 1000;
 	private static final double MIN_DISPLAY_INTERVAL = 0.005;
-	private static final DecimalFormat PROGRESS_FORMAT = new DecimalFormat("0.00");
+	private static final DecimalFormat DEFAULT_PROGRESS_FORMAT = new DecimalFormat("0.00");
+	
+	
+	private double progress = 0;
+	private double displayedProgress = 0;
+	private String currentText = "";
+	private boolean canceled = false;
+	private boolean showText = true;
+	private DecimalFormat progressFormat;
 	
 	private final JPanel contentPanel = new JPanel();
 	private JProgressBar progressBar = null;
-	private double progress = 0;
-	private double displayedProgress = 0;
+	private JLabel label = null;
+	private JButton cancelButton = null;
 
 	
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public ProgressDialog(Window owner, String title) {
+		this(owner, title, DEFAULT_PROGRESS_FORMAT);
+	}
+	
+	
+	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat) {
+		this(owner, title, progressFormat, true);
+	}
+	
+	
+	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat, boolean showText) {
+		this(owner, title, progressFormat, showText, "Cancel");
+	}
+	
+	
+	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat, boolean showText, String buttonText) {
 		super(owner, title, Dialog.ModalityType.APPLICATION_MODAL);
-		init();
+		
+		this.showText = showText;
+		if (progressFormat == null) {
+			this.progressFormat = DEFAULT_PROGRESS_FORMAT;
+		}
+		else {
+			this.progressFormat = progressFormat;
+		}
+		
+		init(buttonText);
 	}
 
 
 	/**
 	 * Create the dialog.
 	 */
-	private void init() {
+	private void init(String buttonText) {
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new BorderLayout(0, 0));
+		GridBagLayout gbl_contentPanel = new GridBagLayout();
+		gbl_contentPanel.columnWidths = new int[]{146, 0};
+		gbl_contentPanel.rowHeights = new int[]{0, 0, 19, 0, 0};
+		gbl_contentPanel.columnWeights = new double[]{1.0, Double.MIN_VALUE};
+		gbl_contentPanel.rowWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		contentPanel.setLayout(gbl_contentPanel);
+		
+		if (showText) {
+			label = getLabel();
+			GridBagConstraints gbc_lblText = new GridBagConstraints();
+			gbc_lblText.insets = new Insets(0, 0, 5, 0);
+			gbc_lblText.fill = GridBagConstraints.HORIZONTAL;
+			gbc_lblText.anchor = GridBagConstraints.WEST;
+			gbc_lblText.gridx = 0;
+			gbc_lblText.gridy = 0;
+			contentPanel.add(label, gbc_lblText);
+		}
 		
 		progressBar = getProgressBar();
-		contentPanel.add(progressBar);
+		GridBagConstraints gbc_progressBar = new GridBagConstraints();
+		gbc_progressBar.insets = new Insets(0, 0, 5, 0);
+		gbc_progressBar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_progressBar.anchor = GridBagConstraints.NORTH;
+		gbc_progressBar.gridx = 0;
+		gbc_progressBar.gridy = 2;
+		contentPanel.add(progressBar, gbc_progressBar);
+		
+		if (buttonText != null) {
+			cancelButton = new JButton(buttonText);
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					canceled = true;
+				}
+			});
+			GridBagConstraints gbc_btnCancel = new GridBagConstraints();
+			gbc_btnCancel.gridx = 0;
+			gbc_btnCancel.gridy = 3;
+			contentPanel.add(cancelButton, gbc_btnCancel);
+		}
 		
 		pack();
 		setMinimumSize(getSize());
@@ -112,6 +190,19 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 	}
 	
 	
+	protected JLabel getLabel() {
+		if (label == null) {
+			label = new JLabel("Text");
+		}
+		return label;
+	}
+	
+	
+	protected JButton getCancelButton() {
+		return cancelButton;
+	}
+
+	
 	@Override
 	public double getProgressValue() {
 		return progress;
@@ -119,7 +210,20 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 
 
 	@Override
-	public synchronized void setProgressValue(double value) {
+  public String getProgressText() {
+	  return currentText;
+  }
+
+
+	@Override
+	public void setProgressValue(double value) {
+		setProgressValue(value, currentText);
+	}
+	
+	
+	@Override
+	public synchronized void setProgressValue(double value, String text) {
+		currentText = text;
 		if (progress != value) {
 			progress = Math.max(0, Math.min(1, value));
 			if ((Math.abs(progress - displayedProgress) >= MIN_DISPLAY_INTERVAL) || (progress == 1)) {
@@ -127,7 +231,8 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 		  	SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						getProgressBar().setValue((int)Math.round(progress * PROGRESS_BAR_LENGTH));
-						getProgressBar().setString(PROGRESS_FORMAT.format(progress * 100) + "%");
+						getProgressBar().setString(progressFormat.format(progress * 100) + "%");
+						getLabel().setText(currentText);
 					}
 		  	});
 			}
@@ -142,7 +247,13 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 
 
 	@Override
+	public void addToProgressValue(double addend, String text) {
+		setProgressValue(progress + addend, text);
+	}
+	
+	
+	@Override
 	public boolean isCanceled() {
-		return false;
+		return canceled;
 	}
 }
