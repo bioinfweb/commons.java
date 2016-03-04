@@ -36,12 +36,33 @@ import javax.swing.border.EmptyBorder;
 
 /**
  * A modal dialog displaying a progress bar that can be updated using the methods of {@link ProgressMonitor}.
+ * <p>
+ * This dialog is an alternative to {@link javax.swing.ProgressMonitor} in Swing, which cannot be displayed modal.
+ * <h3><a name="UsageExample"></a>Usage example</h3>
+ * <pre>
+ * final ProgressDialog progressDialog = new ProgressDialog(getMainFrame(), "Doing something...");
+ * new SwingWorker&lt;Void, Void&gt;() {
+ *       {@literal @}Override
+ *       protected Void doInBackground() throws Exception {
+ *         doSomething();
+ *         return null;
+ *       }
+ *
+ *       {@literal @}Override
+ *       protected void done() {
+ *         progressDialog.dispose();
+ *       }
+ *     }.execute();  // Start processing in a separate thread.
+ * progressDialog.setVisible(true);  // Show modal dialog.
+ * </pre> 
  * 
  * @author Ben St&ouml;ver
  * @since 1.2.0
  */
 public class ProgressDialog extends JDialog implements ProgressMonitor {	
 	//TODO Add optional cancel functionality
+	
+	private static final long serialVersionUID = 1L;
 	
 	private static final int MIN_DIALOG_WITH = 250;
 	private static final int PROGRESS_BAR_LENGTH = 1000;
