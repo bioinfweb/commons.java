@@ -54,7 +54,7 @@ import java.awt.event.ActionEvent;
  * new SwingWorker&lt;Void, Void&gt;() {
  *       {@literal @}Override
  *       protected Void doInBackground() throws Exception {
- *         doSomething();
+ *         doSomething();  // In here an update method (e.g. {@link #setProgressValue(double)}) should be called regularly.
  *         return null;
  *       }
  *
@@ -72,10 +72,10 @@ import java.awt.event.ActionEvent;
 public class ProgressDialog extends JDialog implements ProgressMonitor {	
 	private static final long serialVersionUID = 1L;
 	
+	public static final DecimalFormat DEFAULT_PROGRESS_FORMAT = new DecimalFormat("0.00 %");
 	private static final int MIN_DIALOG_WITH = 350;
 	private static final int PROGRESS_BAR_LENGTH = 1000;
 	private static final double MIN_DISPLAY_INTERVAL = 0.005;
-	private static final DecimalFormat DEFAULT_PROGRESS_FORMAT = new DecimalFormat("0.00");
 	
 	
 	private double progress = 0;
@@ -92,23 +92,57 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 
 	
 	/**
-	 * @wbp.parser.constructor
+	 * Creates a new instance of this class with the default cancel button and an updatable progress text which uses
+	 * {@link #DEFAULT_PROGRESS_FORMAT} to display the progrss value.
+	 * 
+	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
 	 */
 	public ProgressDialog(Window owner, String title) {
 		this(owner, title, DEFAULT_PROGRESS_FORMAT);
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class with the default cancel button and an updatable progress text.
+	 * 
+	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
+	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
+	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
+	 */
 	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat) {
 		this(owner, title, progressFormat, true);
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class with the default cancel button.
+	 * 
+	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
+	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
+	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
+	 * @param showText Specify {@code true} here, if an additional text (describing the current operation status) shall be
+	 *        displayed above the progress bar or {@code false} if only the progress bar shall be displayed.)
+	 */
 	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat, boolean showText) {
 		this(owner, title, progressFormat, showText, "Cancel");
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
+	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
+	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
+	 * @param showText Specify {@code true} here, if an additional text (describing the current operation status) shall be
+	 *        displayed above the progress bar or {@code false} if only the progress bar shall be displayed.)
+	 * @param buttonText the text to be displayed in the cancel button (If {@code null} is specified here, no cancel button
+	 *        will be available.)
+	 */
 	public ProgressDialog(Window owner, String title, DecimalFormat progressFormat, boolean showText, String buttonText) {
 		super(owner, title, Dialog.ModalityType.APPLICATION_MODAL);
 		
@@ -231,7 +265,7 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 		  	SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						getProgressBar().setValue((int)Math.round(progress * PROGRESS_BAR_LENGTH));
-						getProgressBar().setString(progressFormat.format(progress * 100) + "%");
+						getProgressBar().setString(progressFormat.format(progress));
 						getLabel().setText(currentText);
 					}
 		  	});
