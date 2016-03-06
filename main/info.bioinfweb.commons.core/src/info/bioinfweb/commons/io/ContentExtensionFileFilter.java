@@ -19,7 +19,10 @@
 package info.bioinfweb.commons.io;
 
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 
 
@@ -69,6 +72,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	
 	
 	private TestStrategy testStrategy;
+	private boolean acceptFilesWithExceptions;
 	
 	
 	/**
@@ -85,10 +89,11 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * @throws NullPointerException if {@code description} or any specified extension are {@code null}
 	 */
 	public ContentExtensionFileFilter(String description, String defaultExtension, boolean addExtensionListToDescription,
-					TestStrategy testStrategy, String... extensions) {
+					TestStrategy testStrategy, boolean acceptFilesWithExceptions, String... extensions) {
 		
 	  super(description, defaultExtension, addExtensionListToDescription, extensions);
 	  this.testStrategy = testStrategy;
+	  this.acceptFilesWithExceptions = acceptFilesWithExceptions;
   }
 
 
@@ -107,7 +112,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	public ContentExtensionFileFilter(String description, String defaultExtension, boolean addExtensionListToDescription,
 					String... extensions) {
 		
-		this(description, defaultExtension, addExtensionListToDescription, TestStrategy.BOTH, extensions);
+		this(description, defaultExtension, addExtensionListToDescription, TestStrategy.BOTH, false, extensions);
 	}
 	
 	
@@ -138,18 +143,63 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	
 	
 	/**
-	 * Inherited classes must implement this method by testing the content of the specified file.
-	 * <p>
-	 * It is also the responsibility of the implementing class to handle exceptions that may occur while processing the file 
-	 * and decide whether files producing exceptions should be accepted or not. (Usually such files will not be accepted,
-	 * but this API does not prescribe this behavior.)
+	 * Determines whether this filter accepts files where {@link IOException}s were thrown while they were tested
+	 * with {@link #acceptContent(BufferedInputStream)}. 
+	 * 
+	 * @return {@code true} if such files shall be accepted or {@code false} otherwise
+	 */
+	public boolean isAcceptFilesWithExceptions() {
+		return acceptFilesWithExceptions;
+	}
+
+
+	/**
+	 * Specifies whether this filter accepts files where {@link IOException}s were thrown while they were tested
+	 * with {@link #acceptContent(BufferedInputStream)}. 
+	 * 
+	 * @param acceptFilesWithExceptions Specify {@code true} here, if such files shall be accepted or {@code false} otherwise
+	 */
+	public void setAcceptFilesWithExceptions(boolean acceptFilesWithExceptions) {
+		this.acceptFilesWithExceptions = acceptFilesWithExceptions;
+	}
+
+
+	/**
+	 * Tests the contents of the specified file. Calls {@link #acceptContent(BufferedInputStream)} internally.
+	 * Inherited classes can overwrite this method, if additional checks shall be performed on the file.
 	 * 
 	 * @param file the file to be tested
 	 * @return {@code true} if the specified file is accepted or {@code false} otherwise
 	 */
-	protected abstract boolean acceptContent(File file);
-
-
+	protected boolean acceptContent(File file) {
+		try {
+			boolean result;
+			FileInputStream stream = new FileInputStream(file);
+			try {
+				result = acceptContent(stream);
+			}
+			finally {
+				stream.close();
+			}
+			return result;
+		}
+		catch (IOException e) {
+			return isAcceptFilesWithExceptions();
+		}
+	}
+	
+	
+	/**
+	 * Inherited classes must implement this method to test the content of a file. Note that buffering this stream (e.g. using
+	 * an instance of {@link BufferedInputStream} way significantly speed up testing, which may be relevant in folders containing
+	 * many files or folders on slow (network) resources..
+	 * 
+	 * @param stream the input stream providing the content of the file to be tested
+	 * @return {@code true} if the specified content is accepted or {@code false} otherwise
+	 */
+	protected abstract boolean acceptContent(FileInputStream stream) throws IOException;
+	
+	
 	@Override
   public boolean accept(File f) {
 		switch (getTestStrategy()) {
