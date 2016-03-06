@@ -165,26 +165,37 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 
 
 	/**
-	 * Tests the contents of the specified file. Calls {@link #acceptContent(BufferedInputStream)} internally.
-	 * Inherited classes can overwrite this method, if additional checks shall be performed on the file.
+	 * Tests the contents of the specified file. It calls {@link #acceptContent(BufferedInputStream)} internally, if the specified
+	 * file is not a directory.
+	 * <p>
+	 * Inherited classes can overwrite this method, if additional checks shall be performed on the file. In some cases it may
+	 * be useful to check in here, if the file extension is unique or not before calling 
 	 * 
 	 * @param file the file to be tested
 	 * @return {@code true} if the specified file is accepted or {@code false} otherwise
 	 */
 	protected boolean acceptContent(File file) {
-		try {
-			boolean result;
-			FileInputStream stream = new FileInputStream(file);
-			try {
-				result = acceptContent(stream);
-			}
-			finally {
-				stream.close();
-			}
-			return result;
+		if (file.isDirectory()) {
+			return true;
 		}
-		catch (IOException e) {
-			return isAcceptFilesWithExceptions();
+		else if (!file.exists()) {
+			return true;  //TODO Does this make sense for save dialogs?
+		}
+		else {
+			try {
+				boolean result;
+				FileInputStream stream = new FileInputStream(file);
+				try {
+					result = acceptContent(stream);
+				}
+				finally {
+					stream.close();
+				}
+				return result;
+			}
+			catch (IOException e) {
+				return isAcceptFilesWithExceptions();
+			}
 		}
 	}
 	
