@@ -36,6 +36,9 @@ import java.util.zip.ZipFile;
  * @author Ben St&ouml;ver
  */
 public class IOUtils {
+	public static final int EOF = -1;
+	
+	
 	/**
 	 * Returns either the path to the class file of the specified class without the package path or 
 	 * the path top the archive file that contains it (e.g. JAR, ZIP, EXE).
