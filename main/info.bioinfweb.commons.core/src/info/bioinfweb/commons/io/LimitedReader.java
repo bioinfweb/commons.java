@@ -116,6 +116,7 @@ public class LimitedReader extends Reader {
 	}
 
 
+	@Override
 	public synchronized void mark(int readAheadLimit) throws IOException {
 		readAheadLimit = (int)Math.min(readAheadLimit, availableCharacters());  // Buffering more than the read limit is unnecessary.
 		markPosition = position;
@@ -123,18 +124,21 @@ public class LimitedReader extends Reader {
 	}
 
 
+	@Override
 	public boolean markSupported() {
 		return underlyingReader.markSupported();
 	}
 
 
+	@Override
 	public boolean ready() throws IOException {
 		return !isLimitReached() && underlyingReader.ready();
 	}
 
 
+	@Override
 	public synchronized void reset() throws IOException {
 		underlyingReader.reset();
-		position = markPosition;
+		position = markPosition;  // Will remain unchanged, if the underlying reader thrown a exception.
 	}
 }
