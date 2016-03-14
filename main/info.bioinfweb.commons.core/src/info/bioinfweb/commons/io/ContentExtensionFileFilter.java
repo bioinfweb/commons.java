@@ -193,7 +193,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 				}
 				return result;
 			}
-			catch (IOException e) {
+			catch (Exception e) {
 				return isAcceptFilesWithExceptions();
 			}
 		}
@@ -208,7 +208,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * @param stream the input stream providing the content of the file to be tested
 	 * @return {@code true} if the specified content is accepted or {@code false} otherwise
 	 */
-	protected abstract boolean acceptContent(FileInputStream stream) throws IOException;
+	protected abstract boolean acceptContent(FileInputStream stream) throws Exception;
 	
 	
 	@Override
