@@ -43,6 +43,7 @@ public class LimitedReader extends Reader {
 	private long limit;
 	private long position = 0;
 	private long markPosition = 0;
+	private boolean allowClose = true;
 	
 	
 	/**
@@ -99,22 +100,58 @@ public class LimitedReader extends Reader {
 	
 	
 	/**
-	 * Closes the decorated reader.
+	 * Determines whether closing this reader shall currently be prevented. Calls of {@link #close()} will throw
+	 * an {@link ClosingNotAllowedException} in such cases.
 	 * 
+	 * @return {@code true}, if closing this reader will currently be prevented or {@code false} otherwise
+	 */
+	public boolean isAllowClose() {
+		return allowClose;
+	}
+
+
+	/**
+	 * Allows to specify whether closing this reader shall currently be prevented. Calls of {@link #close()} will then throw
+	 * an {@link ClosingNotAllowedException}.
+	 * 
+	 * @param allowClose Specify {@code true} here, if closing shall be prevented from now on or {@code false} otherwise.
+	 */
+	public void setAllowClose(boolean allowClose) {
+		this.allowClose = allowClose;
+	}
+
+
+	/**
+	 * Closes the decorated reader, if that is currently allowed. Closing a previously closed reader has no effect..
+	 *
+	 * @throws ClosingNotAllowedException if {@link #isAllowClose()} currently returns {@code true}. (Calling this method, if 
+	 *         the decorated reader was already closed will also throw this exception, if closing is currently not allowed.)
+	 * @throws IOException if an I/O error occurs
+	 * @see #setAllowClose(boolean)
 	 * @see java.io.Reader#close()
 	 */
 	@Override
 	public void close() throws IOException {
-		decoratedReader.close();
+		if (allowClose) {
+			decoratedReader.close();
+		}
+		else {
+			throw new ClosingNotAllowedException();
+		}
 	}
 
 
 	@Override
 	public int read(char[] buffer, int offset, int length) throws IOException {
-		length = (int)Math.min(length, availableCharacters());  // The minimum will always be lower than Integer.MIN_VALUE.
-		int result = decoratedReader.read(buffer, offset, length);
-		position += result;
-		return result;
+		if (isLimitReached()) {
+			return -1;
+		}
+		else {
+			length = (int)Math.min(length, availableCharacters());  // The minimum will always be lower than Integer.MIN_VALUE.
+			int result = decoratedReader.read(buffer, offset, length);
+			position += result;
+			return result;
+		}
 	}
 
 

@@ -41,6 +41,7 @@ public class LimitedInputStream extends InputStream {
 	private long limit;
 	private long position = 0;
 	private long markPosition = 0;
+	private boolean allowClose = true;
 	
 	
 	/**
@@ -97,6 +98,48 @@ public class LimitedInputStream extends InputStream {
 	public boolean isLimitReached() {
 		return availableCharacters() == 0;
 	}
+
+	
+	/**
+	 * Determines whether closing this input stream shall currently be prevented. Calls of {@link #close()} will throw
+	 * an {@link ClosingNotAllowedException} in such cases.
+	 * 
+	 * @return {@code true}, if closing this reader will currently be prevented or {@code false} otherwise
+	 */
+	public boolean isAllowClose() {
+		return allowClose;
+	}
+
+
+	/**
+	 * Allows to specify whether closing this input stream shall currently be prevented. Calls of {@link #close()} will then throw
+	 * an {@link ClosingNotAllowedException}.
+	 * 
+	 * @param allowClose Specify {@code true} here, if closing shall be prevented from now on or {@code false} otherwise.
+	 */
+	public void setAllowClose(boolean allowClose) {
+		this.allowClose = allowClose;
+	}
+
+
+	/**
+	 * Closes the decorated input stream, if that is currently allowed. Closing a previously closed stream has no effect..
+	 *
+	 * @throws ClosingNotAllowedException if {@link #isAllowClose()} currently returns {@code true}. (Calling this method, if 
+	 *         the decorated stream was already closed will also throw this exception, if closing is currently not allowed.)
+	 * @throws IOException if an I/O error occurs
+	 * @see #setAllowClose(boolean)
+	 * @see java.io.Reader#close()
+	 */
+	@Override
+	public void close() throws IOException {
+		if (allowClose) {
+			decoratedStream.close();
+		}
+		else {
+			throw new ClosingNotAllowedException();
+		}
+	}
 	
 	
 	/**
@@ -121,14 +164,14 @@ public class LimitedInputStream extends InputStream {
 	
 
 	@Override
-	public int available() throws IOException {
-		return decoratedStream.available();
+	public boolean markSupported() {
+		return decoratedStream.markSupported();
 	}
 
-	
+
 	@Override
-	public void close() throws IOException {
-		decoratedStream.close();
+	public int available() throws IOException {
+		return (int)Math.min(availableCharacters(), decoratedStream.available());  // The minimum can always be cast to int.
 	}
 
 	
