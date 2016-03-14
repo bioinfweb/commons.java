@@ -31,7 +31,7 @@ public class LimitedReaderTest {
 		
 		assertEquals(3, reader.read(new char[3]));
 		assertEquals(2, reader.read(new char[3]));
-		assertEquals(0, reader.read(new char[3]));
+		assertEquals(-1, reader.read(new char[3]));
 		assertEquals('5', underlyingReader.read());
 	}
 
@@ -43,7 +43,7 @@ public class LimitedReaderTest {
 		
 		assertEquals(3, reader.read(new char[5], 0, 3));
 		assertEquals(2, reader.read(new char[5], 0, 3));
-		assertEquals(0, reader.read(new char[5], 0, 3));
+		assertEquals(-1, reader.read(new char[5], 0, 3));
 		assertEquals('5', underlyingReader.read());
 	}
 
@@ -55,7 +55,7 @@ public class LimitedReaderTest {
 		
 		assertEquals(3, reader.read(new char[3]));
 		assertEquals(2, reader.read(new char[3]));
-		assertEquals(0, reader.read(new char[3]));
+		assertEquals(-1, reader.read(new char[3]));
 		assertEquals('5', underlyingReader.read());  // Would fail, if the buffer size of the BufferedReader would be below or above 5, because it would read beyond the limit, to fill its buffer.
 	}
 
@@ -70,7 +70,7 @@ public class LimitedReaderTest {
 		assertEquals(2, reader.read(new char[5], 0, 3));
 		reader.reset();
 		assertEquals(2, reader.read(new char[5], 0, 3));
-		assertEquals(0, reader.read(new char[5], 0, 3));
+		assertEquals(-1, reader.read(new char[5], 0, 3));
 		assertEquals('5', underlyingReader.read());
 	}
 }
