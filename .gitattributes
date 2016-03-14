@@ -284,6 +284,7 @@ test/src/info/bioinfweb/commons/collections/PackedPrimitiveWrapperArrayListTest.
 test/src/info/bioinfweb/commons/collections/SequenceIntervalListTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/collections/guavatest/TreeMultisetTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/graphics/UniqueColorListerTest.java -text svneol=unset#text/plain
+test/src/info/bioinfweb/commons/io/LimitedInputStreamTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/LimitedReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/PeekReaderTest.java -text svneol=unset#text/plain
 test/src/info/bioinfweb/commons/io/TableReaderTest.java -text svneol=unset#text/plain
