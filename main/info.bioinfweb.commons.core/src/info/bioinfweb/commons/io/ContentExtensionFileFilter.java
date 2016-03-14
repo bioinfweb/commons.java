@@ -134,7 +134,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 */
 	public void setTestStrategy(TestStrategy testStrategy) {
 		if (testStrategy == null) {
-			throw new NullPointerException("The test strategy must not be null-.");
+			throw new NullPointerException("The test strategy must not be null.");
 		}
 		else {
 			this.testStrategy = testStrategy;
@@ -203,7 +203,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	/**
 	 * Inherited classes must implement this method to test the content of a file. Note that buffering this stream (e.g. using
 	 * an instance of {@link BufferedInputStream} way significantly speed up testing, which may be relevant in folders containing
-	 * many files or folders on slow (network) resources..
+	 * many files or folders on slow (network) resources.
 	 * 
 	 * @param stream the input stream providing the content of the file to be tested
 	 * @return {@code true} if the specified content is accepted or {@code false} otherwise
