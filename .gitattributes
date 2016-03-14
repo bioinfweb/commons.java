@@ -79,6 +79,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/IOProgressListene
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/IOUtils.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/InternationalFileFilter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/InvalidXSDPathException.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/LimitedInputStream.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/LimitedReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/PeekReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/Savable.java -text svneol=unset#text/plain

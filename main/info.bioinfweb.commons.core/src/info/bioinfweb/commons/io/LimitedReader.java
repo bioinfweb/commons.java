@@ -29,12 +29,12 @@ import java.io.Reader;
  * Guarantees that no more characters as specified are read from the decorated reader. It is though possible, that the decorated
  * reader reads beyond the read limit from its underlying reader (e.g. if a {@link BufferedReader} is decorated).
  * <p>
- * In contrast to many similar classes, the focus of this class is not on limiting the number of characters to be returned by this
- * reader, but to make sure that not more characters than specified can be read from the underlying reader. It can e.g. be used
- * to ensure that reading beyond the read ahead limit of a call of {@link #mark(int)} is not possible.
+ * The focus of this class is to make sure that not more characters than specified can be read from the underlying reader. It can 
+ * e.g. be used to ensure that reading beyond the read ahead limit of a call of {@link #mark(int)} is not possible.
  * 
  * @author Ben St&ouml;ver
  * @since 2.0.0
+ * @see LimitedInputStream
  */
 public class LimitedReader extends Reader {
 	//TODO Additional methods could be directly delegated to use possible performance increasing implementations of the decorated reader.
@@ -48,19 +48,19 @@ public class LimitedReader extends Reader {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param deoratedReader the reader to be decorated
+	 * @param decoratedReader the reader to be decorated
 	 * @param limit the maximum number of characters that shall be read from the decorated reader
 	 */
-	public LimitedReader(Reader deoratedReader, long limit) {
+	public LimitedReader(Reader decoratedReader, long limit) {
 		super();
-		if (deoratedReader == null) {
+		if (decoratedReader == null) {
 			throw new NullPointerException("The decorated reader must not be null.");
 		}
 		else if (limit < 0) {
 			throw new IllegalArgumentException("The read limit must not be lower than 0, but was " + limit + ".");
 		}
 		else {
-			this.decoratedReader = deoratedReader;
+			this.decoratedReader = decoratedReader;
 			this.limit = limit;
 		}
 	}
@@ -77,10 +77,11 @@ public class LimitedReader extends Reader {
 	
 	
 	/**
-	 * The number of characters available, before the specified maximum number of characters will have been read from the decorated
-	 * reader.
+	 * The number of characters available, before the specified maximum number will have been read from the decorated reader. Note 
+	 * that the end of the input source (e.g. end of file) may possibly be reached before the specified character limit, which is 
+	 * not reflected by the return value of this method.
 	 * 
-	 * @return the number of characters that 
+	 * @return the number of characters that could be read before the limit of this reader is reached
 	 */
 	public long availableCharacters() {
 		return limit - position;
