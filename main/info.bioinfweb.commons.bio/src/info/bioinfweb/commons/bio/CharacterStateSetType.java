@@ -26,7 +26,7 @@ package info.bioinfweb.commons.bio;
  * @author Ben St&ouml;ver
  * @since 1.2.0
  */
-public enum CharacterStateType {
+public enum CharacterStateSetType {
 	/** 
 	 * Indicates that the current alignment contains nucleotide characters from DNA or RNA sequences. This may also include 
 	 * characters like ambiguity codes, gap characters or characters for missing data. 
