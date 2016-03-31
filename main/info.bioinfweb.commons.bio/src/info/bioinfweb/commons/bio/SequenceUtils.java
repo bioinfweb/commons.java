@@ -66,6 +66,8 @@ public class SequenceUtils {
 	
 	
 	public static final char GAP_CHAR = '-';	
+	public static final char MISSING_DATA_CHAR = '?';	
+	public static final char MATCH_CHAR = '.';	
 	public static final String DNA_CHARS = "CGAT";  // Order is relevant for randSequence() 	
 	public static final String ALL_DNA_CHARS = "CGATYRKMBVDHN"; 	
 	public static final String RNA_CHARS = "CGAU";  // Order is relevant for randSequence()	
