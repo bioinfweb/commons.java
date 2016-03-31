@@ -43,4 +43,44 @@ public enum CharacterSymbolMeaning {
 	
 	/** Indicates that a token has some other meaning which is not enumerated by this class. */
 	OTHER;
+	
+	
+	/**
+	 * Returns the symbol usually used to represent this meaning.
+	 * 
+	 * @return the default symbol or {@code null} if the current state is not {@link #GAP}, {@link #MISSING} or {@link #MATCH}
+	 */
+	public Character getDefaultSymbol() {
+		switch (this) {
+			case GAP:
+				return SequenceUtils.GAP_CHAR;
+			case MISSING:
+				return SequenceUtils.MISSING_DATA_CHAR;
+			case MATCH:
+				return SequenceUtils.MATCH_CHAR;
+			default:
+				return null;
+		}
+	}
+	
+	
+	/**
+	 * Returns the according meaning, if the specified character is one of {@value SequenceUtils#GAP_CHAR},
+	 * {@value SequenceUtils#MISSING_DATA_CHAR} or {@value SequenceUtils#MATCH_CHAR}.
+	 * 
+	 * @param c the character to be converted
+	 * @return the according meaning or {@code null} if the meaning could not be determined from the character
+	 */
+	public CharacterSymbolMeaning meaningByDefaultSymbol(char c) {
+		switch (c) {
+			case SequenceUtils.GAP_CHAR:
+				return GAP;
+			case SequenceUtils.MISSING_DATA_CHAR:
+				return MISSING;
+			case SequenceUtils.MATCH_CHAR:
+				return MATCH;
+			default:
+				return null;
+		}
+	}
 }
