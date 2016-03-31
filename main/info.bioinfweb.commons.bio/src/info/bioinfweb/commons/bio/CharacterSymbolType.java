@@ -28,5 +28,5 @@ public enum CharacterSymbolType {
 	POLYMORPHIC,
 	
 	/** Indicates that a character symbol represents a set of states, one of which this character could assume.*/
-	UNCERTAIN,
+	UNCERTAIN;
 }
