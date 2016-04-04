@@ -20,6 +20,13 @@ package info.bioinfweb.commons.bio;
 
 
 
+/**
+ * Enumerates of which type a character symbol may be. It can either represent an atomic character state or a set of
+ * polymorphic or uncertain states.
+ * 
+ * @author Ben St&ouml;ver
+ * @since 2.0.0
+ */
 public enum CharacterSymbolType {
 	/** Indicates that a character symbol represents a single certain state. */
 	ATOMIC_STATE,
