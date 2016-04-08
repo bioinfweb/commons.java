@@ -65,9 +65,10 @@ public class SequenceUtils {
 	}
 	
 	
-	public static final char GAP_CHAR = '-';	
-	public static final char MISSING_DATA_CHAR = '?';	
-	public static final char MATCH_CHAR = '.';	
+	public static final char GAP_CHAR = '-';
+	public static final char MISSING_DATA_CHAR = '?';
+	public static final char MATCH_CHAR = '.';
+	public static final char STOP_CODON_CHAR = '*';
 	public static final String DNA_CHARS = "CGAT";  // Order is relevant for randSequence() 	
 	public static final String ALL_DNA_CHARS = "CGATYRKMBVDHN"; 	
 	public static final String RNA_CHARS = "CGAU";  // Order is relevant for randSequence()	
@@ -189,6 +190,19 @@ public class SequenceUtils {
 		else {
 			return Arrays.copyOf(result.constituents, result.constituents.length);  // Copy array to avoid modifications of the arrays in nucleotideInfoMap by external code.
 		}
+	}
+	
+	
+	public static char[] rnaConstituents(char nucleotide) {
+		char[] constituents = nucleotideConstituents(nucleotide);
+		
+		for (int i = 0; i < constituents.length; i++) {
+			if (constituents[i] == 'T') {
+				constituents[i] = 'U';
+			}			
+		}
+		
+		return constituents;
 	}
 	
 	
