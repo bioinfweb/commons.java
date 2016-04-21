@@ -246,6 +246,7 @@ main/info.bioinfweb.commons.testing/.settings/org.eclipse.jdt.core.prefs -text s
 main/info.bioinfweb.commons.testing/lib/junit-4.9b1.jar -text
 main/info.bioinfweb.commons.testing/src/info/bioinfweb/commons/testing/TestLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/src/info/bioinfweb/commons/testing/TestTools.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.testing/src/info/bioinfweb/commons/testing/TestXMLEvents.java -text svneol=unset#text/plain
 test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
