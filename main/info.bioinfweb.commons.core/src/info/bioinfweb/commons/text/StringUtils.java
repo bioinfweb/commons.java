@@ -29,7 +29,8 @@ import java.util.regex.Pattern;
 
 
 /**
- * Provides general methods to use with character sequences. 
+ * Provides general methods to use with character sequences.
+ * 
  * @author Ben St&ouml;ver
  */
 public class StringUtils {
@@ -165,11 +166,12 @@ public class StringUtils {
   
   
   /**
-   * Converts a camel case keyword to a string with the specified separator where all characters are in lower case.<br />
-   * Example: <code>anExampleKeyword</code> would be converted to <code>an-example-keyword</code> and <code>A</code> 
-   * to <code>a</code>.
-   * @param text - the string to be converted
-   * @param separator - the separator to be inserted
+   * Converts a camel case keyword to a string with the specified separator where all characters are in lower case.
+   * <p>
+   * Example: {@code anExampleKeyword} would be converted to {@code an-example-keyword} and {@code A} to {@code a}.
+   * 
+   * @param text the string to be converted
+   * @param separator the separator to be inserted
    * @return the converted keyword string
    */
   public static String convertCamelCase(String text, String separator) {
