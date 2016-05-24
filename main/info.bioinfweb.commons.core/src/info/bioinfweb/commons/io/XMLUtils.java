@@ -55,6 +55,7 @@ public class XMLUtils {
 	
   /**
    * Reads all events from the reader until one more end element than start elements is found.
+   * 
    * @param reader
    * @return <code>true</code> if anything else than ignorable whitespace is found before the next end element
    * @throws XMLStreamException

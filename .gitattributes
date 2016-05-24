@@ -90,6 +90,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/StreamLocationPro
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/StreamLocationProviderOffsetComparator.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/TableReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/TextReader.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/W3CXSConstants.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/io/XMLUtils.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/AbstractApplicationLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/log/ApplicationLogger.java -text svneol=unset#text/plain
