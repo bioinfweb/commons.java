@@ -25,9 +25,21 @@ import javax.xml.namespace.QName;
 
 
 public interface W3CXSConstants {
-	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "decimal");
+	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");
+	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "string");
+
 	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "integer");
-	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");  //TODO Check name
+	public static final QName DATA_TYPE_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "int");
+	public static final QName DATA_TYPE_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "long");
+	public static final QName DATA_TYPE_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "short");
+	public static final QName DATA_TYPE_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "byte");
+	public static final QName DATA_TYPE_UNSIGNED_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedInt");
+	public static final QName DATA_TYPE_UNSIGNED_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedShort");
+	public static final QName DATA_TYPE_UNSIGNED_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedByte");
 	
+	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "decimal");
+	public static final QName DATA_TYPE_FLOAT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "float");
+	public static final QName DATA_TYPE_DOUBLE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "double");
 	
+	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "QName");
 }

@@ -46,6 +46,8 @@ import javax.xml.stream.events.XMLEvent;
  * @author Ben St&ouml;ver
  */
 public class XMLUtils {
+	public static final String QNAME_SEPARATOR = ":";
+	
 	public static final String ATTR_XSI_NAMESPACE = XMLConstants.XMLNS_ATTRIBUTE + ":xsi";
 	public static final String ATTR_SCHEMA_LOCATION_LOCAL_PART = "schemaLocation";
 	public static final String ATTR_SCHEMA_LOCATION = "xsi:" + ATTR_SCHEMA_LOCATION_LOCAL_PART;
