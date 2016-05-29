@@ -27,6 +27,7 @@ import javax.xml.namespace.QName;
 public interface W3CXSConstants {
 	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "decimal");
 	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "integer");
+	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");  //TODO Check name
 	
 	
 }
