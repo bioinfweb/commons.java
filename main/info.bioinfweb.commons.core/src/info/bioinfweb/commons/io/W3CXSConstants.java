@@ -45,6 +45,7 @@ public interface W3CXSConstants {
 	public static final QName DATA_TYPE_HEX_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "hexBinary");
 
 	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "QName");
+	public static final QName DATA_TYPE_ANY_URI = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "anyURI");
 
 	public static final QName DATA_TYPE_DATE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "dateTime");
 	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "date");
