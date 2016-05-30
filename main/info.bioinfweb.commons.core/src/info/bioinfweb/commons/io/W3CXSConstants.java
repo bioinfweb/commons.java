@@ -41,5 +41,12 @@ public interface W3CXSConstants {
 	public static final QName DATA_TYPE_FLOAT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "float");
 	public static final QName DATA_TYPE_DOUBLE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "double");
 	
+	public static final QName DATA_TYPE_BASE_64_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "base64Binary");
+	public static final QName DATA_TYPE_HEX_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "hexBinary");
+
 	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "QName");
+
+	public static final QName DATA_TYPE_DATE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "dateTime");
+	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "date");
+	public static final QName DATA_TYPE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "time");	
 }
