@@ -32,35 +32,35 @@ import javax.xml.namespace.QName;
  * @since 2.0.0
  */
 public interface W3CXSConstants {
-	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");
-	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "string");
-	public static final QName DATA_TYPE_TOKEN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "token");
+	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "boolean");
+	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "string");
+	public static final QName DATA_TYPE_TOKEN = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "token");
 
-	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "integer");
-	public static final QName DATA_TYPE_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "int");
-	public static final QName DATA_TYPE_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "long");
-	public static final QName DATA_TYPE_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "short");
-	public static final QName DATA_TYPE_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "byte");
-	public static final QName DATA_TYPE_UNSIGNED_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedByte");
-	public static final QName DATA_TYPE_UNSIGNED_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedShort");
-	public static final QName DATA_TYPE_UNSIGNED_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedInt");
-	public static final QName DATA_TYPE_UNSIGNED_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedLong");
-	public static final QName DATA_TYPE_NON_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "nonPositiveInteger");  // {...,-2,-1, 0}
-	public static final QName DATA_TYPE_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "negativeInteger");  // {...,-2,-1}
-	public static final QName DATA_TYPE_NON_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "nonNegativeInteger ");  // {0,1,2,...}
-	public static final QName DATA_TYPE_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "positiveInteger");  // {1,2,...}
+	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "integer");
+	public static final QName DATA_TYPE_INT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "int");
+	public static final QName DATA_TYPE_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "long");
+	public static final QName DATA_TYPE_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "short");
+	public static final QName DATA_TYPE_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "byte");
+	public static final QName DATA_TYPE_UNSIGNED_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "unsignedByte");
+	public static final QName DATA_TYPE_UNSIGNED_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "unsignedShort");
+	public static final QName DATA_TYPE_UNSIGNED_INT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "unsignedInt");
+	public static final QName DATA_TYPE_UNSIGNED_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "unsignedLong");
+	public static final QName DATA_TYPE_NON_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "nonPositiveInteger");  // {...,-2,-1, 0}
+	public static final QName DATA_TYPE_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "negativeInteger");  // {...,-2,-1}
+	public static final QName DATA_TYPE_NON_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "nonNegativeInteger ");  // {0,1,2,...}
+	public static final QName DATA_TYPE_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "positiveInteger");  // {1,2,...}
 	 
-	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "decimal");
-	public static final QName DATA_TYPE_FLOAT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "float");
-	public static final QName DATA_TYPE_DOUBLE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "double");
+	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "decimal");
+	public static final QName DATA_TYPE_FLOAT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "float");
+	public static final QName DATA_TYPE_DOUBLE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "double");
 	
-	public static final QName DATA_TYPE_BASE_64_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "base64Binary");
-	public static final QName DATA_TYPE_HEX_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "hexBinary");
+	public static final QName DATA_TYPE_BASE_64_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "base64Binary");
+	public static final QName DATA_TYPE_HEX_BINARY = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "hexBinary");
 
-	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "QName");
-	public static final QName DATA_TYPE_ANY_URI = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "anyURI");
+	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "QName");
+	public static final QName DATA_TYPE_ANY_URI = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "anyURI");
 
-	public static final QName DATA_TYPE_DATE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "dateTime");
-	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "date");
-	public static final QName DATA_TYPE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "time");
+	public static final QName DATA_TYPE_DATE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "dateTime");
+	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "date");
+	public static final QName DATA_TYPE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "time");
 }
