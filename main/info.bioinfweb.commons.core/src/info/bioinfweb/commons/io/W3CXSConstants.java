@@ -24,6 +24,13 @@ import javax.xml.namespace.QName;
 
 
 
+/**
+ * Provides constants for <a href="https://www.w3.org/TR/xmlschema11-2/#built-in-datatypes">built-in XSD data types</a>.
+ * 
+ * @author Ben St&ouml;ver
+ * @author Sarah Wiechers
+ * @since 2.0.0
+ */
 public interface W3CXSConstants {
 	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");
 	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "string");
