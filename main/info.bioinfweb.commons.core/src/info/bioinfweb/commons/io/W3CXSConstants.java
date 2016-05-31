@@ -27,6 +27,7 @@ import javax.xml.namespace.QName;
 public interface W3CXSConstants {
 	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "boolean");
 	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "string");
+	public static final QName DATA_TYPE_TOKEN = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "token");
 
 	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "integer");
 	public static final QName DATA_TYPE_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "int");
