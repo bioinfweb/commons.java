@@ -34,10 +34,15 @@ public interface W3CXSConstants {
 	public static final QName DATA_TYPE_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "long");
 	public static final QName DATA_TYPE_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "short");
 	public static final QName DATA_TYPE_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "byte");
-	public static final QName DATA_TYPE_UNSIGNED_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedInt");
-	public static final QName DATA_TYPE_UNSIGNED_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedShort");
 	public static final QName DATA_TYPE_UNSIGNED_BYTE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedByte");
-	
+	public static final QName DATA_TYPE_UNSIGNED_SHORT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedShort");
+	public static final QName DATA_TYPE_UNSIGNED_INT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedInt");
+	public static final QName DATA_TYPE_UNSIGNED_LONG = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "unsignedLong");
+	public static final QName DATA_TYPE_NON_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "nonPositiveInteger");  // {...,-2,-1, 0}
+	public static final QName DATA_TYPE_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "negativeInteger");  // {...,-2,-1}
+	public static final QName DATA_TYPE_NON_NEGATIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "nonNegativeInteger ");  // {0,1,2,...}
+	public static final QName DATA_TYPE_POSITIVE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "positiveInteger");  // {1,2,...}
+	 
 	public static final QName DATA_TYPE_DECIMAL = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "decimal");
 	public static final QName DATA_TYPE_FLOAT = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "float");
 	public static final QName DATA_TYPE_DOUBLE = new QName(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI, "double");
