@@ -45,12 +45,12 @@ public class XMLTestTools {
 	}
 	
 	
-	public static void assertAttribute(QName expectedAttributeName, String expectedAttributevalue, StartElement element) {
+	public static void assertAttribute(QName expectedAttributeName, String expectedAttributeValue, StartElement element) {
 		Attribute attribute = element.getAttributeByName(expectedAttributeName);
 		
 		assertTrue((attribute != null));
 		assertEquals(expectedAttributeName, attribute.getName());
-		assertEquals(expectedAttributevalue, attribute.getValue());
+		assertEquals(expectedAttributeValue, attribute.getValue());
 	}
 	
 	
