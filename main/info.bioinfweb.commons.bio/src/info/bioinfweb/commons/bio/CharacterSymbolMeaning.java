@@ -71,7 +71,7 @@ public enum CharacterSymbolMeaning {
 	 * @param c the character to be converted
 	 * @return the according meaning or {@code null} if the meaning could not be determined from the character
 	 */
-	public CharacterSymbolMeaning meaningByDefaultSymbol(char c) {
+	public static CharacterSymbolMeaning meaningByDefaultSymbol(char c) {
 		switch (c) {
 			case SequenceUtils.GAP_CHAR:
 				return GAP;
