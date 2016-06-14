@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  * An adapter class providing access to an instance if {@link PackedIntegerArrayList} using the {@link List}
- * interface where the element type can be any primitive wrapper class of the Java API, namely {@link Byte},
+ * interface where the element type can be any numeric primitive wrapper class of the Java API, namely {@link Byte},
  * {@link Short}, {@link Integer} or {@link Long}.
  * <p>
  * The number of bits per value to be stored in the underlying packed list can be determined independently of 
