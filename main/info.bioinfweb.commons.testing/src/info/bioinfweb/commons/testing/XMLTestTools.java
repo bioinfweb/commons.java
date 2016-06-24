@@ -67,6 +67,14 @@ public class XMLTestTools {
 	}
 	
 	
+	public static void assertDefaultNamespace(QName expectedNameSpace, StartElement element) {
+		NamespaceContext nameSpace = element.getNamespaceContext();
+		
+		assertTrue((nameSpace != null));	
+		assertEquals(expectedNameSpace.getNamespaceURI(), nameSpace.getNamespaceURI(""));
+	}
+	
+	
 	public static void assertNamespace(QName expectedNameSpace, StartElement element) {
 		NamespaceContext nameSpace = element.getNamespaceContext();
 		
