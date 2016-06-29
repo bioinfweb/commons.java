@@ -3,8 +3,8 @@ package info.bioinfweb.commons.testing;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 
 
@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2.0.0
  */
 public class Assert2 {
-  public static void assertListElementTypes(List<?> expectedList, List<?> actualList) {
+  public static void assertCollectionElementTypes(Collection<?> expectedList, Collection<?> actualList) {
   	if (!((expectedList == null) && (actualList == null))) {
     	assertEquals(expectedList.size(), actualList.size());
 
