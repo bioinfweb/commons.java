@@ -19,7 +19,14 @@ import javax.xml.stream.events.XMLEvent;
 
 
 
-public class XMLTestTools {
+/**
+ * Offers assert methods to test events from an {@link XMLEventReader}.
+ * 
+ * @author Sarah Wiechers
+ * @author Ben St&ouml;ver
+ * @since 2.0.0
+ */
+public class XMLAssert {
 	public static void assertStartDocument(XMLEventReader reader) throws XMLStreamException {
 		assertTrue(reader.hasNext());		
 		assertEquals(XMLStreamConstants.START_DOCUMENT, reader.nextEvent().getEventType());
