@@ -52,18 +52,28 @@ public class XMLAssert {
 	}
 	
 	
-	public static void assertAttribute(QName expectedAttributeName, String expectedAttributeValue, StartElement element) {
+	public static String assertAttribute(QName expectedAttributeName, String expectedAttributeValue, StartElement element) {
 		Attribute attribute = element.getAttributeByName(expectedAttributeName);
 		
 		assertTrue((attribute != null));
-		assertEquals(expectedAttributeName, attribute.getName());
-		assertEquals(expectedAttributeValue, attribute.getValue());
+		
+		if (expectedAttributeValue != null) {
+			assertEquals(expectedAttributeValue, attribute.getValue());
+		}
+		
+		return attribute.getValue();
+	}
+	
+	
+	public static String assertAttribute(QName expectedAttributeName, StartElement element) {
+		return assertAttribute(expectedAttributeName, null, element);
 	}
 	
 	
 	public static void assertAttributeCount(int expectedCount, StartElement element) {
 		int count = 0;
 
+		@SuppressWarnings("unchecked")
 		Iterator<Attribute> attributes = element.getAttributes();
 		while (attributes.hasNext()) {
 			attributes.next();
@@ -94,6 +104,7 @@ public class XMLAssert {
 	public static void assertNameSpaceCount(int expectedCount, StartElement element) {
 		int count = 0;
 
+		@SuppressWarnings("unchecked")
 		Iterator<Namespace> nameSpaces = element.getNamespaces();
 		while (nameSpaces.hasNext()) {
 			nameSpaces.next();
