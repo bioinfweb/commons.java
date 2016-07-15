@@ -322,7 +322,8 @@ public class XMLUtils {
 	/**
 	 * Extracts the format version from the <code>xsi:schemaLocation</code> attribute (e.g. <code>1.1</code> from 
 	 * <code>http://bioinfweb.info/xmlns/xtg http://bioinfweb.info/xmlns/xtg/1.1.xsd</code>). The name of the XSD
-	 * file has to consist of the format version where major and minor version are separated by a dot. 
+	 * file has to consist of the format version where major and minor version are separated by a dot.
+	 * 
 	 * @param startElement - the element containing the <code>xsi:schemaLocation</code> attribute 
 	 * @return the format version or <code>null</code> if <code>startElement</code> has no 
 	 *         <code>xsi:schemaLocation</code> attribute  
@@ -334,16 +335,13 @@ public class XMLUtils {
 			return null;
 		}
 		else {
-			String[] parts = version.split("\\.");
-			if (parts.length == 2) {
-				try {
-					return new FormatVersion(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
-				}
-				catch (NumberFormatException e) {}
+			try {
+				return FormatVersion.parseFormatVersion(version);
 			}
-			
-			throw new InvalidXSDPathException("The XSD file name \"" + version + 
-    			"\" does not specify a valid format version.");
+			catch (IllegalArgumentException e) {
+				throw new InvalidXSDPathException("The XSD file name \"" + version + 
+	    			"\" does not specify a valid format version.");
+			}
 		}
 	}
 }

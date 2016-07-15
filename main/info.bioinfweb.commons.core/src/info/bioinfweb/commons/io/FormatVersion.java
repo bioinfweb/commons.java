@@ -57,6 +57,18 @@ public class FormatVersion implements Comparable<FormatVersion>, Cloneable {
 	}
 	
 	
+	public static FormatVersion parseFormatVersion(String text) {
+		String[] parts = text.trim().split("\\.");
+		if (parts.length == 2) {
+			try {
+				return new FormatVersion(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]));
+			}
+			catch (NumberFormatException e) {}
+		}
+		throw new IllegalArgumentException("The specified string \"" + text + "\" cannot be parsed as a format version.");
+	}
+	
+	
 	/**
 	 * Returns whether this version is newer than the specified argument.
 	 * @param other - the version to be compared with this one
@@ -88,22 +100,43 @@ public class FormatVersion implements Comparable<FormatVersion>, Cloneable {
 	}
 
 
-	/**
-	 * Returns <code>true</code> if the passed object is an instance of this class and major and minor version equal
-	 * to the values of this instance.
-	 * @param other - the version to be compared to this one
-	 * @return <code>true</code> of the versions are equal 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
-	public boolean equals(Object other) {
-		return (other instanceof FormatVersion) && (compareTo((FormatVersion)other) == 0);
+	public FormatVersion clone() {
+		return new FormatVersion(getMajor(), getMinor());
 	}
 
 
 	@Override
-	public FormatVersion clone() {
-		return new FormatVersion(getMajor(), getMinor());
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + major;
+		result = prime * result + minor;
+		return result;
+	}
+
+
+	/**
+	 * Returns {@code true} if the passed object is an instance of this class and major and minor version equal
+	 * to the values of this instance.
+	 * 
+	 * @param other - the version to be compared to this one
+	 * @return {@code true} of the versions are equal, {@code false} otherwise 
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FormatVersion other = (FormatVersion) obj;
+		if (major != other.major)
+			return false;
+		if (minor != other.minor)
+			return false;
+		return true;
 	}
 
 
