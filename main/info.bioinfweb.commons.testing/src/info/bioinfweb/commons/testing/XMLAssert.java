@@ -150,7 +150,32 @@ public class XMLAssert {
 	
 	public static void assertShortElement(QName expectedElement, String expectedContent, XMLEventReader reader) throws XMLStreamException {
 		assertStartElement(expectedElement, reader);
-		assertCharactersEvent(expectedContent, reader);
+		
+		if (expectedContent != null) {
+			assertCharactersEvent(expectedContent, reader);
+		}
+		else {
+			XMLEvent event;
+			
+			do {
+				assertTrue(reader.hasNext());
+				event = reader.nextEvent();
+				assertEquals(XMLStreamConstants.CHARACTERS, event.getEventType());				
+			} while (reader.peek().getEventType() == XMLStreamConstants.CHARACTERS);
+		}
+		
 		assertEndElement(expectedElement, reader);
+	}
+	
+	
+	/**
+	 * This method can e.g. be used to assert the presence of an XML elements that only contain an ID as content.
+	 * 
+	 * @param expectedElement the expected name of the XML element
+	 * @param reader the reader used by the test method
+	 * @throws XMLStreamException
+	 */
+	public static void assertShortElement(QName expectedElement, XMLEventReader reader) throws XMLStreamException {
+		assertShortElement(expectedElement, null, reader);
 	}
 }
