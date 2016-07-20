@@ -1,8 +1,7 @@
 package info.bioinfweb.commons.testing;
 
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 
@@ -92,16 +91,27 @@ public class XMLAssert {
 	}
 	
 	
-	public static void assertNamespace(QName expectedNameSpace, StartElement element) {
+	public static String assertNamespace(QName expectedNameSpace, boolean assertPrefix, StartElement element) {
 		NamespaceContext nameSpace = element.getNamespaceContext();
 		
-		assertTrue((nameSpace != null));
-		assertEquals(expectedNameSpace.getPrefix(), nameSpace.getPrefix(expectedNameSpace.getNamespaceURI()));
-		assertEquals(expectedNameSpace.getNamespaceURI(), nameSpace.getNamespaceURI(expectedNameSpace.getPrefix()));
+		assertNotNull(nameSpace);
+		assertNotNull(expectedNameSpace.getNamespaceURI());
+		
+		if (assertPrefix) {
+			assertEquals(expectedNameSpace.getPrefix(), nameSpace.getPrefix(expectedNameSpace.getNamespaceURI()));
+			assertEquals(expectedNameSpace.getNamespaceURI(), nameSpace.getNamespaceURI(expectedNameSpace.getPrefix()));
+		}
+		else {
+			String prefix = nameSpace.getPrefix(expectedNameSpace.getNamespaceURI());
+			assertNotNull(prefix);
+			assertEquals(expectedNameSpace.getNamespaceURI(), nameSpace.getNamespaceURI(prefix));
+		}
+		
+		return nameSpace.getPrefix(expectedNameSpace.getNamespaceURI());
 	}
 	
 	
-	public static void assertNameSpaceCount(int expectedCount, StartElement element) {
+	public static void assertNamespaceCount(int expectedCount, StartElement element) {
 		int count = 0;
 
 		@SuppressWarnings("unchecked")
