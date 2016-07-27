@@ -238,6 +238,7 @@ public class SequenceIntervalList<E> implements Collection<E> {
 	
 	public boolean remove(Object o) {
 		try {
+			@SuppressWarnings("unchecked")
 			E element = (E)o;
 			Iterator<IntervalInformation> iterator = getIntervalInformationIterator(getPositionAdapter().getFirstPos(element), 
 					getPositionAdapter().getLastPos(element));
