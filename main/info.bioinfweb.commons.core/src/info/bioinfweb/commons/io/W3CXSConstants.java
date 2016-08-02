@@ -34,6 +34,7 @@ import javax.xml.namespace.QName;
 public interface W3CXSConstants {
 	public static final QName DATA_TYPE_BOOLEAN = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "boolean");
 	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "string");
+	public static final QName DATA_TYPE_NORMALIZED_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "normalizedString");
 	public static final QName DATA_TYPE_TOKEN = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "token");
 
 	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "integer");
@@ -60,7 +61,13 @@ public interface W3CXSConstants {
 	public static final QName DATA_TYPE_QNAME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "QName");
 	public static final QName DATA_TYPE_ANY_URI = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "anyURI");
 
+	public static final QName DATA_TYPE_DURATION = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "duration");
 	public static final QName DATA_TYPE_DATE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "dateTime");
-	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "date");
 	public static final QName DATA_TYPE_TIME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "time");
+	public static final QName DATA_TYPE_DATE = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "date");
+	public static final QName DATA_TYPE_G_YEAR_MONTH = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "gYearMonth");
+	public static final QName DATA_TYPE_G_YEAR = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "gYear");
+	public static final QName DATA_TYPE_G_MONTH_DAY= new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "gMonthDay");
+	public static final QName DATA_TYPE_G_DAY = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "gDay");
+	public static final QName DATA_TYPE_G_MONTH = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "gMonth");
 }
