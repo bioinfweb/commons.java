@@ -159,7 +159,8 @@ public class XMLAssert {
 	
 	
 	public static void assertShortElement(QName expectedElement, String expectedContent, XMLEventReader reader) throws XMLStreamException {
-		assertStartElement(expectedElement, reader);
+		StartElement element = assertStartElement(expectedElement, reader);
+		assertAttributeCount(0, element);
 		
 		if (expectedContent != null) {
 			assertCharactersEvent(expectedContent, reader);
