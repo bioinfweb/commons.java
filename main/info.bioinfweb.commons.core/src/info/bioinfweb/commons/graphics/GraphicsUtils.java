@@ -179,6 +179,11 @@ public class GraphicsUtils {
   }
   
   
+  public static String colorToHexString(Color color) {
+  	return String.format("#%02X%02X%02X", color.getRed(), color.getGreen(), color.getBlue());
+  }
+  
+  
   /**
    * Draws the specified string into the center of the specified rectangle.
    * 
