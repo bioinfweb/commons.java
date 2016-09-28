@@ -87,11 +87,12 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * @param testStrategy the strategy to be used to accept a file or not
 	 * @param extensions optional alternative extensions can be specified here
 	 * @throws NullPointerException if {@code description} or any specified extension are {@code null}
-	 */
-	public ContentExtensionFileFilter(String description, String defaultExtension, boolean addExtensionListToDescription,
+ 	 * @throws IllegalArgumentException if not at least one extension has been specified
+ 	 */
+	public ContentExtensionFileFilter(String description, boolean addExtensionListToDescription,
 					TestStrategy testStrategy, boolean acceptFilesWithExceptions, String... extensions) {
 		
-	  super(description, defaultExtension, addExtensionListToDescription, extensions);
+	  super(description, addExtensionListToDescription, extensions);
 	  this.testStrategy = testStrategy;
 	  this.acceptFilesWithExceptions = acceptFilesWithExceptions;
   }
@@ -108,11 +109,12 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 *        on the specified description in parentheses.
 	 * @param extensions optional alternative extensions can be specified here
 	 * @throws NullPointerException if {@code description} or any specified extension are {@code null}
+	 * @throws IllegalArgumentException if not at least one extension has been specified
 	 */
-	public ContentExtensionFileFilter(String description, String defaultExtension, boolean addExtensionListToDescription,
+	public ContentExtensionFileFilter(String description, boolean addExtensionListToDescription,
 					String... extensions) {
 		
-		this(description, defaultExtension, addExtensionListToDescription, TestStrategy.BOTH, false, extensions);
+		this(description, addExtensionListToDescription, TestStrategy.BOTH, false, extensions);
 	}
 	
 	
