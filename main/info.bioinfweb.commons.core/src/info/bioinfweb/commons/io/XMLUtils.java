@@ -66,6 +66,7 @@ public class XMLUtils {
   	boolean result = false;
     XMLEvent event = reader.nextEvent();
 		while (event.getEventType() != XMLStreamConstants.END_ELEMENT) {
+			
 			if ((event.getEventType() != XMLStreamConstants.SPACE) && 
 					(event.getEventType() != XMLStreamConstants.CHARACTERS)) {
 				
