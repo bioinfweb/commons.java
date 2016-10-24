@@ -60,7 +60,7 @@ public class NumberedStringsIterator implements Iterator<String> {
 	/**
 	 * Creates a new instance of this class starting with the index 0.
 	 * 
-	 * @param prefix the prefix all returned IDs (strings) shall have
+	 * @param prefix the prefix all returned strings shall have
 	 * @param count the number of elements to be returned by this iterator
 	 */
 	public NumberedStringsIterator(String prefix, long count) {
@@ -88,25 +88,26 @@ public class NumberedStringsIterator implements Iterator<String> {
 
 	@Override
 	public void remove() {
-		throw new UnsupportedOperationException("Removing IDs from this iterator is not legal.");
+		throw new UnsupportedOperationException("Removing elements from this iterator is not legal.");
 	}
 	
 	
 	/**
-	 * Extracts an index from a numbered sequence ID. (Sequence IDs are assumed to start with a common prefix 
-	 * followed by an integer index.
+	 * Extracts an index from a numbered string. (Strings are assumed to start with a common prefix 
+	 * followed by an integer index.)
 	 * 
-	 * @param sequenceID the event ID
+	 * @param string the string containing the index
+	 * @param prefix the prefix strings are expected to contain before the index
 	 * @return the extracted index
-	 * @throws IllegalArgumentException if no index could be extracted from the specified ID
+	 * @throws IllegalArgumentException if no index could be extracted from the specified string
 	 */
-	public static long extractIndexFromID(String id, String prefix) {
-		if (id.startsWith(prefix)) {
+	public static long extractIndexFromString(String string, String prefix) {
+		if (string.startsWith(prefix)) {
 			try {
-				return Long.parseLong(id.substring(prefix.length()));
+				return Long.parseLong(string.substring(prefix.length()));
 			}
 			catch (NumberFormatException e) {}
 		}
-		throw new IllegalArgumentException("The ID \"" + id + "\" is not valid at this position.");
+		throw new IllegalArgumentException("\"" + string + "\" is not valid.");
 	}
 }
