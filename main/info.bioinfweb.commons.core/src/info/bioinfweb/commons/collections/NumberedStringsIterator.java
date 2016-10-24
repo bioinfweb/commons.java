@@ -101,10 +101,30 @@ public class NumberedStringsIterator implements Iterator<String> {
 	 * @return the extracted index
 	 * @throws IllegalArgumentException if no index could be extracted from the specified string
 	 */
-	public static long extractIndexFromString(String string, String prefix) {
+	public static long extractLongIndexFromString(String string, String prefix) {
 		if (string.startsWith(prefix)) {
 			try {
 				return Long.parseLong(string.substring(prefix.length()));
+			}
+			catch (NumberFormatException e) {}
+		}
+		throw new IllegalArgumentException("\"" + string + "\" is not valid.");
+	}
+	
+	
+	/**
+	 * Extracts an index from a numbered string. (Strings are assumed to start with a common prefix 
+	 * followed by an integer index.)
+	 * 
+	 * @param string the string containing the index
+	 * @param prefix the prefix strings are expected to contain before the index
+	 * @return the extracted index
+	 * @throws IllegalArgumentException if no index could be extracted from the specified string
+	 */
+	public static int extractIntIndexFromString(String string, String prefix) {
+		if (string.startsWith(prefix)) {
+			try {
+				return Integer.parseInt(string.substring(prefix.length()));
 			}
 			catch (NumberFormatException e) {}
 		}
