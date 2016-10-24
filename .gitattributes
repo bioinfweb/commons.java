@@ -43,6 +43,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/ListIter
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/MultiTreeMap.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NonOverlappingIntervalList.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NonStoringCollection.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NumberedStringsIterator.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/PackedIntegerArrayList.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/PackedObjectArrayList.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/PackedPrimitiveWrapperArrayList.java -text svneol=unset#text/plain
