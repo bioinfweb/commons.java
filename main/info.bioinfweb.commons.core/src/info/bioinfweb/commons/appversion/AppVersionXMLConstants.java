@@ -30,6 +30,8 @@ import javax.xml.namespace.QName;
  * @author Ben St&ouml;ver
  */
 public class AppVersionXMLConstants {
+	//TODO Should a special namespace be used here? 
+	
   public static final QName TAG_APP_VERSION = new QName("AppVersion");
   public static final QName ATTR_MAJOR_APP_VERSION = new QName("Major");
   public static final QName ATTR_MINOR_APP_VERSION = new QName("Minor");
