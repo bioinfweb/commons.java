@@ -357,4 +357,19 @@ public class XMLUtils {
 	public static void writeStartElement(XMLStreamWriter writer, QName name) throws XMLStreamException {
 		writer.writeStartElement(name.getPrefix(), name.getLocalPart(), name.getNamespaceURI());
 	}
+	
+	
+	/**
+	 * Writes an attribute with a name defined by a {@link QName} to an {@link XMLStreamWriter}.
+	 * 
+	 * @param writer the writer to write the start tag
+	 * @param name the name of the tag
+	 * @param value the value of the attribute
+	 * @throws IllegalStateException if the current state does not allow attribute writing 
+	 * @throws XMLStreamException if the namespace URI has not been bound to a prefix and javax.xml.stream.isRepairingNamespaces 
+	 *         has not been set to true
+	 */
+	public static void writeAttribute(XMLStreamWriter writer, QName name, String value) throws XMLStreamException, IllegalStateException {
+		writer.writeAttribute(name.getPrefix(), name.getNamespaceURI(), name.getLocalPart(), value);
+	}
 }
