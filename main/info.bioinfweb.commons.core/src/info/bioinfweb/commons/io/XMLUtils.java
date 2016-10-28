@@ -345,4 +345,16 @@ public class XMLUtils {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Writes a start element defined by a {@link QName} to an {@link XMLStreamWriter}.
+	 * 
+	 * @param writer the writer to write the start tag
+	 * @param name the name of the tag
+	 * @throws XMLStreamException thrown by the specified writer
+	 */
+	public static void writeStartElement(XMLStreamWriter writer, QName name) throws XMLStreamException {
+		writer.writeStartElement(name.getPrefix(), name.getLocalPart(), name.getNamespaceURI());
+	}
 }
