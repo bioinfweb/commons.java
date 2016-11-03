@@ -303,4 +303,18 @@ public class XMLAssert {
 	public static void assertShortElement(QName expectedElement, XMLStreamReader reader) throws XMLStreamException {
 		assertShortElement(expectedElement, null, reader);
 	}
+	
+	
+	public static void assertEmptyElement(QName expectedElement, XMLEventReader reader) throws XMLStreamException {
+		StartElement element = assertStartElement(expectedElement, reader);
+		assertAttributeCount(0, element);
+		assertEndElement(expectedElement, reader);
+	}
+	
+	
+	public static void assertEmptyElement(QName expectedElement, XMLStreamReader reader) throws XMLStreamException {
+		assertStartElement(expectedElement, reader);
+		assertAttributeCount(0, reader);
+		assertEndElement(expectedElement, reader);
+	}
 }
