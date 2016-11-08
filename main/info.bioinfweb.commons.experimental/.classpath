@@ -5,12 +5,12 @@
 	<classpathentry kind="lib" path="lib/core-1.9.2.jar"/>
 	<classpathentry kind="lib" path="lib/biojava3-core-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/bin" sourcepath="/info.bioinfweb.commons.core/src"/>
-	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-lang3-3.1.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/guava-13.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/phylo-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/biojava3-alignment-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.servlet/lib/servlet.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.servlet/bin" sourcepath="/info.bioinfweb.commons.servlet/src"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-lang3-3.5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
