@@ -53,11 +53,10 @@ public enum CharacterStateSetType {
 	
 	/** 
 	 * Indicates that the current alignment consists of discrete character states that do not represent nucleotide or
-	 * amino acid data (e.g. morphological character data). This type does not allow any conclusion on the tokens used
-	 * to describe the character states, but may be followed by {@link SingleTokenDefinitionEvent}s.
+	 * amino acid data (e.g. morphological character data).
 	 * <p>
 	 * Note that this type will only be selected by the readers if they can determine (e.g. from format conventions) that
-	 * the current character state set is discrete. If that is not possible {@link #OTHER} might be selected as the type
+	 * the current character state set is discrete. If that is not possible {@link #UNKNOWN} might be selected as the type
 	 * although the character states are discrete.  
 	 */
 	DISCRETE,
@@ -67,15 +66,14 @@ public enum CharacterStateSetType {
 	 * e.g. by {@link Double} objects. 
 	 * <p>
 	 * Note that this type will only be selected by the readers if they can determine (e.g. from format conventions) that
-	 * the current character state set is continuous. If that is not possible {@link #OTHER} might be selected as the type
+	 * the current character state set is continuous. If that is not possible {@link #UNKNOWN} might be selected as the type
 	 * although the character states are continuous.  
 	 */
 	CONTINUOUS,
 	
 	/** 
 	 * Indicates that a token set definition not enumerated by this class was found in the parsed file or it is not know
-	 * whether the set is discrete or continuous. The only information about its meaning would than be given by 
-	 * {@link TokenSetDefinition#getParsedName()}.
+	 * whether the set is discrete or continuous.
 	 */
 	UNKNOWN;
 	

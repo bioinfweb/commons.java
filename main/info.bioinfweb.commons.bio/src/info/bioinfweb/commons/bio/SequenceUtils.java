@@ -484,10 +484,11 @@ public class SequenceUtils {
   
   
   /**
-   * Returns the left subsequence with the specified length (which does not include gaps).<br />
+   * Returns the left subsequence with the specified length (which does not include gaps).
+   * <p>
    * If there are less than <code>count</code> characters in <code>seq</code> the whole sequence is 
-   * returned.<br />
-   * <br />
+   * returned.
+   * <p>
    * <b>Example:</b> <code>leftSubsequence("AT-A-GCCTG-CTG", 5)</code> would return <i>AT-A-GC</i>
    *  
    * @param seq - the source sequence
@@ -511,10 +512,11 @@ public class SequenceUtils {
   
   
   /**
-   * Returns the right subsequence with the specified length (which does not include gaps).<br />
+   * Returns the right subsequence with the specified length (which does not include gaps).
+   * <p>
    * If there are less than <code>count</code> characters in <code>seq</code> the whole sequence is 
-   * returned.<br />
-   * <br />
+   * returned.
+   * <p>
    * <b>Example:</b> <code>rightSubsequence("AT-A-GCCTG-CTG", 5)</code> would return <i>TG-CTG</i>
    *  
    * @param seq - the source sequence
@@ -733,9 +735,9 @@ public class SequenceUtils {
   /**
    * Returns a sequence of random DNA or RNA characters.
    * 
-   * @param dna - determines whether a DNA sequence shall be returned (RNA id <code>false</code>)
-   * @param length - the length of the sequence
-   * @param rateC - the rate for cytosine and guanine (must lower than 1)
+   * @param dna determines whether a DNA sequence shall be returned (RNA id <code>false</code>)
+   * @param length the length of the sequence
+   * @param rateCG the rate for cytosine and guanine (must lower than 1)
    * @return the random sequence
    */
   public static String randSequence(boolean dna, int length, double rateCG) {
