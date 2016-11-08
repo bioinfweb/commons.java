@@ -277,7 +277,6 @@ public class PeekReader extends Reader implements StreamLocationProvider {
 	 * 
 	 * @param length the number of characters to preview
 	 * @return the characters that would be read next as a string
-	 * @throws IOException
 	 */
 	public String peekString(int length) {
 		char[] chars = new char[length]; 
@@ -473,7 +472,7 @@ public class PeekReader extends Reader implements StreamLocationProvider {
 	 * 
 	 * @param offset the index of the character relative to the current reader position (The character at the current
 	 *        position (that would be returned by the next call of {@link #read()}) would have the index 0.)
-	 * @return
+	 * @return the peeked character
 	 * @throws IndexOutOfBoundsException if the specified index lies further away from the current reader position
 	 *         than the number of precached characters allows
 	 * @throws EOFException if this reader already knows that the specified offset lies behind the end of the 
@@ -580,7 +579,7 @@ public class PeekReader extends Reader implements StreamLocationProvider {
 	/**
 	 * Tests if one of the specified strings is contained in the underlying character stream at the current position.
 	 * 
-	 * @param sequence the strings to search for
+	 * @param sequences the strings to search for
 	 * @return {@code true} if one of the specified strings is found, {@code false} otherwise
 	 * @throws IllegalArgumentException if one of the specified strings is longer than the peek length
 	 */
@@ -842,7 +841,7 @@ public class PeekReader extends Reader implements StreamLocationProvider {
 	 * Note that in contrast to {@link #readLine(int)} or {@link #readUntil(int, String)} no defined termination sequence
 	 * will be removed from the returned result, because the whole result is matched against the specified pattern.  
 	 * 
-	 * @param regExp the regular expression pattern defining how the returned sequence should look like
+	 * @param pattern the regular expression pattern defining how the returned sequence should look like
 	 * @param greedy Specify {@code true} here if the longest possible sequence matching the pattern shall be read or
 	 *        {@code false} if the algorithms should stop already when the shortest possible matching sequence was found.  
 	 * @return a character sequence matching the specified pattern (or the end of the stream is reached if the pattern could 

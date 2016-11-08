@@ -285,6 +285,7 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * @param key the key under which the result is stored
 	 * @param defaultValue the value to be returned, if no appropriate object is found
 	 * @param objectClass the class the returned object must have
+	 * @param <O> the class of the object to be returned
 	 * 
 	 * @return the stored object or <code>defaultValue</code>
 	 */

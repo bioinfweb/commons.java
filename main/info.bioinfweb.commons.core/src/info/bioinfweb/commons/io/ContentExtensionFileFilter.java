@@ -81,11 +81,13 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * All file extension parameters should be specified without a leading {@code '.'}.
 	 * 
 	 * @param description the description of this file type to be displayed e.g. in open dialogs
-	 * @param defaultExtension the default extension of this file format
 	 * @param addExtensionListToDescription Specify {@code true} here, if a list of valid extensions shall be appended
 	 *        on the specified description in parentheses.
 	 * @param testStrategy the strategy to be used to accept a file or not
-	 * @param extensions optional alternative extensions can be specified here
+	 * @param acceptFilesWithExceptions Specify {@code true} here, if files where {@link IOException}s are thrown while 
+	 *        they were tested should be accepted in {@link #acceptContent(File)} or {@code false} otherwise. 
+	 * @param extensions one and possibly additional alternative extensions accepted by this filter (All file extension 
+	 *        should be specified without a leading {@code '.'}.)
 	 * @throws NullPointerException if {@code description} or any specified extension are {@code null}
  	 * @throws IllegalArgumentException if not at least one extension has been specified
  	 */
@@ -104,10 +106,10 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * All file extension parameters should be specified without a leading {@code '.'}.
 	 * 
 	 * @param description the description of this file type to be displayed e.g. in open dialogs
-	 * @param defaultExtension the default extension of this file format
 	 * @param addExtensionListToDescription Specify {@code true} here, if a list of valid extensions shall be appended
 	 *        on the specified description in parentheses.
-	 * @param extensions optional alternative extensions can be specified here
+	 * @param extensions one and possibly additional alternative extensions accepted by this filter (All file extension 
+	 *        should be specified without a leading {@code '.'}.)
 	 * @throws NullPointerException if {@code description} or any specified extension are {@code null}
 	 * @throws IllegalArgumentException if not at least one extension has been specified
 	 */
@@ -132,9 +134,9 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	 * Specifies a new test strategy to determine whether a file shall be accepted by this filter or not.
 	 * 
 	 * @param testStrategy the test strategy to be used from now on
-	 * @throws if {@code null} is provided as the new test strategy
+	 * @throws NullPointerException if {@code null} is provided as the new test strategy
 	 */
-	public void setTestStrategy(TestStrategy testStrategy) {
+	public void setTestStrategy(TestStrategy testStrategy) throws NullPointerException {
 		if (testStrategy == null) {
 			throw new NullPointerException("The test strategy must not be null.");
 		}
@@ -146,7 +148,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 	
 	/**
 	 * Determines whether this filter accepts files where {@link IOException}s were thrown while they were tested
-	 * with {@link #acceptContent(BufferedInputStream)}. 
+	 * with {@link #acceptContent(File)}. 
 	 * 
 	 * @return {@code true} if such files shall be accepted or {@code false} otherwise
 	 */
@@ -157,7 +159,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 
 	/**
 	 * Specifies whether this filter accepts files where {@link IOException}s were thrown while they were tested
-	 * with {@link #acceptContent(BufferedInputStream)}. 
+	 * with {@link #acceptContent(File)}. 
 	 * 
 	 * @param acceptFilesWithExceptions Specify {@code true} here, if such files shall be accepted or {@code false} otherwise
 	 */

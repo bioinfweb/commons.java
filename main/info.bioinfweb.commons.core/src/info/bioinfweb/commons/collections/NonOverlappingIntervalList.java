@@ -67,10 +67,10 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
 	/**
 	 * Adds all or a part of the intervals contained in another list to this list. 
 	 * 
-	 * @param other - the other list instance
-	 * @param firstIndex - the first position from where to start the import (must be {@code >= 0})
-	 * @param lastIndex - the index after the last position to be imported (must be > {@code firstIndex}).
-	 * @param moveToFront - Specify {@code true} here, if you want to move the imported intervals to the
+	 * @param other the other list instance
+	 * @param firstIndex the first position from where to start the import (must be {@code >= 0})
+	 * @param lastIndex the index after the last position to be imported (must be &gt; {@code firstIndex}).
+	 * @param moveToFront Specify {@code true} here, if you want to move the imported intervals to the
 	 *        front of the target list. (An interval starting at {@code firstIndex} would than start at 0
 	 *        in the target list.)
 	 */
@@ -111,7 +111,10 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   
   
   /**
-   * Returns {@code true} if the specified position is marked by this list.
+   * Checks whether the specified position is marked by this list.
+   * 
+   * @param pos the position to be checked
+   * @return {@code true} if the specified position is marked by this list, {@code false} otherwise.
    */
 	public boolean contains(int pos) {
   	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(pos, pos));
@@ -120,7 +123,11 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   
   
   /**
-   * Returns {@code true} if all positions in the specified interval are marked by this list.
+   * Checks whether all positions in the specified interval are marked by this list.
+   * 
+   * @param firstPos the first position of the interval to be checked
+   * @param lastPos the last position of the interval to be checked (inclusive)
+   * @return {@code true} if all specified positions are marked by this list, {@code false} otherwise.
    */
   public boolean containsAll(int firstPos, int lastPos) {
   	SimpleSequenceInterval interval = floor(new SimpleSequenceInterval(firstPos, lastPos));  // Only a single element can contain the whole interval.

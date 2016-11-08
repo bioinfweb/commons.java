@@ -71,8 +71,9 @@ public class FormatVersion implements Comparable<FormatVersion>, Cloneable {
 	
 	/**
 	 * Returns whether this version is newer than the specified argument.
-	 * @param other - the version to be compared with this one
-	 * @return
+	 * 
+	 * @param other the version to be compared with this one
+	 * @return {@code true} if this version is newer than the specified argument or {@code false} otherwise
 	 */
 	public boolean geraterThan(FormatVersion other) {
 		return getMajor() > other.getMajor() || ((getMajor() == other.getMajor()) && (getMinor() > other.getMinor())); 
@@ -120,7 +121,7 @@ public class FormatVersion implements Comparable<FormatVersion>, Cloneable {
 	 * Returns {@code true} if the passed object is an instance of this class and major and minor version equal
 	 * to the values of this instance.
 	 * 
-	 * @param other - the version to be compared to this one
+	 * @param obj the version to be compared to this one
 	 * @return {@code true} of the versions are equal, {@code false} otherwise 
 	 */
 	@Override

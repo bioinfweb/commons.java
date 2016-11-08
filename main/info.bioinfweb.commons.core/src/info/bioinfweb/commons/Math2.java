@@ -89,7 +89,7 @@ public class Math2 {
   /**
    * Returns the whether the given string can be parsed to a {@code double} or a {@code float}.
    * 
-   * @param value - the string to be parsed
+   * @param value the string to be parsed
    * @return {@code true} if the given string could be parsed, {@code false} otherwise.
    */
   public static boolean isDecimal(String value) {
@@ -109,7 +109,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the minimal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -136,7 +136,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the minimal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -163,7 +163,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the minimal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -190,7 +190,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the minimal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -217,7 +217,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the maximal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -244,7 +244,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the maximal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -271,7 +271,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the maximal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -298,7 +298,7 @@ public class Math2 {
    * <p>
    * It is possible to pass only one value which is directly returned in that case.
    * 
-   * @param values - a list of values
+   * @param values a list of values
    * @return the maximal value that was passed
    * 
    * @throws IllegalArgumentException if an empty array is specified
@@ -324,9 +324,9 @@ public class Math2 {
    * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetween(byte value, byte min, byte max) {
@@ -338,9 +338,9 @@ public class Math2 {
    * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetween(int value, int min, int max) {
@@ -352,9 +352,9 @@ public class Math2 {
    * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetween(long value, long min, long max) {
@@ -366,9 +366,9 @@ public class Math2 {
    * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetween(float value, float min, float max) {
@@ -380,9 +380,9 @@ public class Math2 {
    * Checks if the specified value is greater or equal to the specified minimum and
    * lower or equal to the specified maximum.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetween(double value, double min, double max) {
@@ -395,9 +395,9 @@ public class Math2 {
    * lower than the specified maximum. If value is equal to {@code min} or {@code max}
    * this method will return false.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetweenNE(byte value, byte min, byte max) {
@@ -410,9 +410,9 @@ public class Math2 {
    * lower than the specified maximum. If value is equal to {@code min} or {@code max}
    * this method will return false.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetweenNE(int value, int min, int max) {
@@ -425,9 +425,9 @@ public class Math2 {
    * lower than the specified maximum. If value is equal to {@code min} or {@code max}
    * this method will return false.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetweenNE(long value, long min, long max) {
@@ -440,9 +440,9 @@ public class Math2 {
    * lower than the specified maximum. If value is equal to {@code min} or {@code max}
    * this method will return false.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetweenNE(float value, float min, float max) {
@@ -455,9 +455,9 @@ public class Math2 {
    * lower than the specified maximum. If value is equal to {@code min} or {@code max}
    * this method will return false.
    * 
-   * @param value - the value to be tested
-   * @param min - the minimum value
-   * @param max - the maximum value
+   * @param value the value to be tested
+   * @param min the minimum value
+   * @param max the maximum value
    * @return {@code true} if {@code value} if between {@code min} and {@code max}, {@code false} otherwise
    */
   public static boolean isBetweenNE(double value, double min, double max) {
@@ -470,9 +470,9 @@ public class Math2 {
    * is lower than {@code min}, {@code min} is returned, if it is greater than {@code max}, {@code max}
    * is returned.
    * 
-   * @param value - the value to be moved into the specified interval
-   * @param min - the lower border of the interval
-   * @param max - the upper border of the interval
+   * @param value the value to be moved into the specified interval
+   * @param min the lower border of the interval
+   * @param max the upper border of the interval
    * @return a value equal to {@code Math.min(max, Math.max(min, value))}
    */
   public static byte moveBetween(byte value, byte min, byte max) {
@@ -485,9 +485,9 @@ public class Math2 {
    * is lower than {@code min}, {@code min} is returned, if it is greater than {@code max}, {@code max}
    * is returned.
    * 
-   * @param value - the value to be moved into the specified interval
-   * @param min - the lower border of the interval
-   * @param max - the upper border of the interval
+   * @param value the value to be moved into the specified interval
+   * @param min the lower border of the interval
+   * @param max the upper border of the interval
    * @return a value equal to {@code Math.min(max, Math.max(min, value))}
    */
   public static int moveBetween(int value, int min, int max) {
@@ -500,9 +500,9 @@ public class Math2 {
    * is lower than {@code min}, {@code min} is returned, if it is greater than {@code max}, {@code max}
    * is returned.
    * 
-   * @param value - the value to be moved into the specified interval
-   * @param min - the lower border of the interval
-   * @param max - the upper border of the interval
+   * @param value the value to be moved into the specified interval
+   * @param min the lower border of the interval
+   * @param max the upper border of the interval
    * @return a value equal to {@code Math.min(max, Math.max(min, value))}
    */
   public static long moveBetween(long value, long min, long max) {
@@ -515,9 +515,9 @@ public class Math2 {
    * is lower than {@code min}, {@code min} is returned, if it is greater than {@code max}, {@code max}
    * is returned.
    * 
-   * @param value - the value to be moved into the specified interval
-   * @param min - the lower border of the interval
-   * @param max - the upper border of the interval
+   * @param value the value to be moved into the specified interval
+   * @param min the lower border of the interval
+   * @param max the upper border of the interval
    * @return a value equal to {@code Math.min(max, Math.max(min, value))}
    */
   public static float moveBetween(float value, float min, float max) {
@@ -530,9 +530,9 @@ public class Math2 {
    * is lower than {@code min}, {@code min} is returned, if it is greater than {@code max}, {@code max}
    * is returned.
    * 
-   * @param value - the value to be moved into the specified interval
-   * @param min - the lower border of the interval
-   * @param max - the upper border of the interval
+   * @param value the value to be moved into the specified interval
+   * @param min the lower border of the interval
+   * @param max the upper border of the interval
    * @return a value equal to {@code Math.min(max, Math.max(min, value))}
    */
   public static double moveBetween(double value, double min, double max) {
@@ -547,10 +547,10 @@ public class Math2 {
    * {@code min1} must be lower or equal than {@code max1} and {@code min2} must be lower or equal to {@code max2}.
    * This method does not check whether this conditions are fulfilled.
    * 
-   * @param min1 - the lower border of the first interval
-   * @param max1 - the upper border of the first interval
-   * @param min2 - the lower border of the second interval
-   * @param max2 - the upper border of the second interval
+   * @param min1 the lower border of the first interval
+   * @param max1 the upper border of the first interval
+   * @param min2 the lower border of the second interval
+   * @param max2 the upper border of the second interval
    * @return {@code true} if the two intervals overlap, {@code false} otherwise
    */
   public static boolean overlaps(byte min1, byte max1, byte min2, byte max2) {
@@ -565,10 +565,10 @@ public class Math2 {
    * {@code min1} must be lower or equal than {@code max1} and {@code min2} must be lower or equal to {@code max2}.
    * This method does not check whether this conditions are fulfilled.
    * 
-   * @param min1 - the lower border of the first interval
-   * @param max1 - the upper border of the first interval
-   * @param min2 - the lower border of the second interval
-   * @param max2 - the upper border of the second interval
+   * @param min1 the lower border of the first interval
+   * @param max1 the upper border of the first interval
+   * @param min2 the lower border of the second interval
+   * @param max2 the upper border of the second interval
    * @return {@code true} if the two intervals overlap, {@code false} otherwise
    */
   public static boolean overlaps(int min1, int max1, int min2, int max2) {
@@ -583,10 +583,10 @@ public class Math2 {
    * {@code min1} must be lower or equal than {@code max1} and {@code min2} must be lower or equal to {@code max2}.
    * This method does not check whether this conditions are fulfilled.
    * 
-   * @param min1 - the lower border of the first interval
-   * @param max1 - the upper border of the first interval
-   * @param min2 - the lower border of the second interval
-   * @param max2 - the upper border of the second interval
+   * @param min1 the lower border of the first interval
+   * @param max1 the upper border of the first interval
+   * @param min2 the lower border of the second interval
+   * @param max2 the upper border of the second interval
    * @return {@code true} if the two intervals overlap, {@code false} otherwise
    */
   public static boolean overlaps(long min1, long max1, long min2, long max2) {
@@ -601,10 +601,10 @@ public class Math2 {
    * {@code min1} must be lower or equal than {@code max1} and {@code min2} must be lower or equal to {@code max2}.
    * This method does not check whether this conditions are fulfilled.
    * 
-   * @param min1 - the lower border of the first interval
-   * @param max1 - the upper border of the first interval
-   * @param min2 - the lower border of the second interval
-   * @param max2 - the upper border of the second interval
+   * @param min1 the lower border of the first interval
+   * @param max1 the upper border of the first interval
+   * @param min2 the lower border of the second interval
+   * @param max2 the upper border of the second interval
    * @return {@code true} if the two intervals overlap, {@code false} otherwise
    */
   public static boolean overlaps(float min1, float max1, float min2, float max2) {
@@ -619,10 +619,10 @@ public class Math2 {
    * {@code min1} must be lower or equal than {@code max1} and {@code min2} must be lower or equal to {@code max2}.
    * This method does not check whether this conditions are fulfilled.
    * 
-   * @param min1 - the lower border of the first interval
-   * @param max1 - the upper border of the first interval
-   * @param min2 - the lower border of the second interval
-   * @param max2 - the upper border of the second interval
+   * @param min1 the lower border of the first interval
+   * @param max1 the upper border of the first interval
+   * @param min2 the lower border of the second interval
+   * @param max2 the upper border of the second interval
    * @return {@code true} if the two intervals overlap, {@code false} otherwise
    */
   public static boolean overlaps(double min1, double max1, double min2, double max2) {
@@ -663,8 +663,8 @@ public class Math2 {
   /**
    * Checks if one rectangle is completely contained inside the other.
    * 
-   * @param containedRect - the rectangle that shall be tested to be contained in {@code containingRect}
-   * @param containingRect - the rectangle that shall be tested to contain {@code containedRect}
+   * @param containedRect the rectangle that shall be tested to be contained in {@code containingRect}
+   * @param containingRect the rectangle that shall be tested to contain {@code containedRect}
    * @return {@code true} if the one rectangle is contained in the other, {@code false} otherwise
    */
   public static boolean containsRect(Rectangle containedRect, Rectangle containingRect) {
@@ -678,8 +678,8 @@ public class Math2 {
   /**
    * Returns the next integer value that is greater or equal to the specified value.
    * 
-   * @param value - the floating point value to be converted
-   * @return the next {@code long} >= {@code value}
+   * @param value the floating point value to be converted
+   * @return the next {@code long} &gt;= {@code value}
    */
   public static long roundUp(double value) {
   	long result = (long)value;
@@ -693,8 +693,8 @@ public class Math2 {
   /**
    * Returns the next integer value that is greater or equal to the specified value.
    * 
-   * @param value - the floating point value to be converted
-   * @return the next {@code int} >= {@code value}
+   * @param value the floating point value to be converted
+   * @return the next {@code int} &gt;= {@code value}
    */
   public static int roundUp(float value) {
   	int result = (int)value;
@@ -735,8 +735,8 @@ public class Math2 {
    *   <li><code>roundSignificantDigit(0.03462, -3)</code> would return <i>0.035</i></li>
    * </ul>
    * 
-   * @param value - the value to be rounded
-   * @param digit - the decimal power to be rounded to
+   * @param value the value to be rounded
+   * @param digit the decimal power to be rounded to
    * @return the rounded value
    */
   public static double roundSignificantDigit(double value, int digit) {
@@ -747,17 +747,17 @@ public class Math2 {
   
   
   /**
-   * Rounds a float value at the given significant digit.<br />
-   * <br />
-   * <b>Examples:</b><br />
+   * Rounds a float value at the given significant digit.
+   * <p>
+   * <b>Examples:</b>
    * <ul>
    *   <li><code>roundSignificantDigit(12.4, 0)</code> would return <i>12</i></li>
    *   <li><code>roundSignificantDigit(12.4, 1)</code> would return <i>10</i></li>
    *   <li><code>roundSignificantDigit(0.03462, -3)</code> would return <i>0.035</i></li>
    * </ul>
    * 
-   * @param value - the value to be rounded
-   * @param digit - the decimal power to be rounded to
+   * @param value the value to be rounded
+   * @param digit the decimal power to be rounded to
    * @return the rounded value
    */
   public static float roundSignificantDigit(float value, int digit) {
@@ -768,9 +768,9 @@ public class Math2 {
   
   
   /**
-   * Rounds a double value at the given first significant digit.<br />
-   * <br />
-   * <b>Examples:</b><br />
+   * Rounds a double value at the given first significant digit.
+   * <p>
+   * <b>Examples:</b>
    * <ul>
    *   <li><code>roundSignificantDigit(79.0)</code> would return <i>80.0</i></li>
    *   <li><code>roundSignificantDigit(12.0)</code> would return <i>10.0</i></li>
@@ -779,8 +779,7 @@ public class Math2 {
    * Calling this method is equivalent to 
    * <code>roundSignificantDigit(value, (int)Math.floor(Math.log10(value)))</code>.
    * 
-   * @param value - the value to be rounded
-   * @param digit - the decimal power to be rounded to
+   * @param value the value to be rounded
    * @return the rounded value
    */
   public static double roundFirstSignificantDigit(double value) {
@@ -789,9 +788,9 @@ public class Math2 {
   
   
   /**
-   * Rounds a float value at the given first significant digit.<br />
-   * <br />
-   * <b>Examples:</b><br />
+   * Rounds a float value at the given first significant digit.
+   * <p>
+   * <b>Examples:</b>
    * <ul>
    *   <li><code>roundSignificantDigit(79.0)</code> would return <i>80.0</i></li>
    *   <li><code>roundSignificantDigit(12.0)</code> would return <i>10.0</i></li>
@@ -800,8 +799,7 @@ public class Math2 {
    * Calling this method is equivalent to 
    * <code>roundSignificantDigit(value, (int)Math.floor(Math.log10(value)))</code>.
    * 
-   * @param value - the value to be rounded
-   * @param digit - the decimal power to be rounded to
+   * @param value the value to be rounded
    * @return the rounded value
    */
   public static float roundFirstSignificantDigit(float value) {
@@ -825,9 +823,9 @@ public class Math2 {
    * string must not contain thousand separators. (Distinguishing between "1,236" as 1236 in English and 
    * "1,236" as 1.236 in German is not possible.)
    * 
-   * @param string - the string to parse
+   * @param string the string to parse
    * @return the parsed double value
-   * @throws NumberFormatException - if the specified string does not represent a valid decimal value 
+   * @throws NumberFormatException if the specified string does not represent a valid decimal value 
    */
   public static double parseDouble(String string) {
   	return Double.parseDouble(string.replace(',', '.'));
@@ -864,8 +862,8 @@ public class Math2 {
   /**
    * Returns the sum of all integers from 1 to the specified value.
    *  
-   * @param n - the value to sum up to (must be greater or equal to zero)
-   * @throws ArithmeticException - if {@code n} is smaller than zero
+   * @param n the value to sum up to (must be greater or equal to zero)
+   * @throws ArithmeticException if {@code n} is smaller than zero
    */
   public static int sum1ToN(int n) {
   	if (n < 0) {

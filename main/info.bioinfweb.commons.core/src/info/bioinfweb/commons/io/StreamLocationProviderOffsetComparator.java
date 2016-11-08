@@ -28,8 +28,8 @@ import java.util.Comparator;
  * {@link StreamLocationProvider#getCharacterOffset()} as the only comparison criterion.
  * <p>
  * Note that the line and column number properties are not taken into account. As a consequence
- * this comparator is not necessarily consistent with the {@link StreamLocationProvider#equals(Object)}
- * methods of the implementations. (If this comparator returns 0 for two objects, these objects are not
+ * this comparator is not necessarily consistent with the {@code equals(Object)} methods of the implementations of 
+ * {@link StreamLocationProvider}. (If this comparator returns 0 for two objects, these objects are not
  * necessarily equal, they only have the same character offset.) Therefore this comparator should
  * not be used together with sorted sets or sorted maps, as described in the documentation of {@link Comparator}.
  * 

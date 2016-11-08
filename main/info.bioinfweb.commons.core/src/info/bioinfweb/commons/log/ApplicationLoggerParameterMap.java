@@ -32,7 +32,6 @@ public class ApplicationLoggerParameterMap extends ParameterMap {
 	 * Returns a stored {@link ApplicationLogger} object or a new instance of {@link VoidApplicationLogger} 
 	 * if no appropriate object is stored.
 	 * 
-	 * @param key - the key under which the result is stored
 	 * @return an appropriate object or a new instance of {@link VoidApplicationLogger}
 	 */
 	public ApplicationLogger getApplicationLogger() {

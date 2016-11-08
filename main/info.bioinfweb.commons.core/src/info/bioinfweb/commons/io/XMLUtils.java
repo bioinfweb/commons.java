@@ -58,7 +58,7 @@ public class XMLUtils {
   /**
    * Reads all events from the reader until one more end element than start elements is found.
    * 
-   * @param reader
+   * @param reader the reader to read the events from
    * @return <code>true</code> if anything else than ignorable whitespace is found before the next end element
    * @throws XMLStreamException
    */
@@ -158,9 +158,9 @@ public class XMLUtils {
 	/**
 	 * Reads the characters from the next event of the stream. If the next event in the stream is not a
 	 * character event an empty string ("") is returned.
-	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @param reader the stream to read the next element from
+	 * @return the read characters
+	 * @throws XMLStreamException if fired by {@code reader}
 	 */
 	public static String readCharactersAsString(XMLEventReader reader) throws XMLStreamException {
 		StringBuffer result = new StringBuffer();
@@ -173,9 +173,9 @@ public class XMLUtils {
 	
 	/**
 	 * Reads the characters from the next event of the stream a parses them as a {@code boolean} value.
-	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @param reader the stream to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if fired by {@code reader}
 	 */
 	public static boolean readCharactersAsBoolean(XMLEventReader reader) throws XMLStreamException {
 		return Boolean.parseBoolean(readCharactersAsString(reader));
@@ -184,9 +184,10 @@ public class XMLUtils {
 	
 	/**
 	 * Reads the characters from the next event of the stream a parses them as an {@code int} value.
-	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @param reader the stream to read the next element from
+	 * @return the parsed value
+	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws NumberFormatException if no {@code int} can be parsed from the current characters
 	 */
 	public static int readCharactersAsInt(XMLEventReader reader) throws XMLStreamException {
 		return Integer.parseInt(readCharactersAsString(reader));
@@ -195,9 +196,10 @@ public class XMLUtils {
 	
 	/**
 	 * Reads the characters from the next event of the stream a parses them as an {@code long} value.
-	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @param reader the stream to read the next element from
+	 * @return the parsed value
+	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws NumberFormatException if no {@code long} can be parsed from the current characters
 	 */
 	public static long readCharactersAsLong(XMLEventReader reader) throws XMLStreamException {
 		return Long.parseLong(readCharactersAsString(reader));
@@ -206,9 +208,10 @@ public class XMLUtils {
 	
 	/**
 	 * Reads the characters from the next event of the stream a parses them as a {@code float} value.
-	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @param reader the stream to read the next element from
+	 * @return the parsed value
+	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws NumberFormatException if no {@code float} can be parsed from the current characters
 	 */
 	public static float readCharactersAsFloat(XMLEventReader reader) throws XMLStreamException {
 		return Float.parseFloat(readCharactersAsString(reader));
@@ -218,8 +221,9 @@ public class XMLUtils {
 	/**
 	 * Reads the characters from the next event of the stream a parses them as a {@code double} value.
 	 * @param reader - the stream to read the next element from
-	 * @return
-	 * @throws XMLStreamException
+	 * @return the parsed value
+	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws NumberFormatException if no {@code double} can be parsed from the current characters
 	 */
 	public static double readCharactersAsDouble(XMLEventReader reader) throws XMLStreamException {
 		return Double.parseDouble(readCharactersAsString(reader));
@@ -263,9 +267,9 @@ public class XMLUtils {
 	 * Adds the <code>xmlns</code> attribute to the start element which was last written to the specified 
 	 * writer.
 	 * 
-	 * @param writer - the writer which generates the XML output
-	 * @param namespaceURI - the URI of the namespace (e.g. <i>http://www.w3.org/1999/xhtml</a>)
-	 * @throws XMLStreamException
+	 * @param writer the writer which generates the XML output
+	 * @param namespaceURI the URI of the namespace (e.g. <i>http://www.w3.org/1999/xhtml</i>)
+	 * @throws XMLStreamException if fired by {@code writer}
 	 */
 	public static void writeNamespaceAttr(XMLStreamWriter writer, 
 			String namespaceURI) throws XMLStreamException {
@@ -278,11 +282,11 @@ public class XMLUtils {
 	 * Adds the attributes <code>xmlns</code> <code>xmlns:xsi</code> and <code>xsi:schemaLocation</code> 
 	 * and the according values to the start element which was last written to the specified writer.
 	 * 
-	 * @param writer - the writer which generates the XML output
-	 * @param namespaceURI - the URI of the namespace (e.g. <i>http://www.w3.org/1999/xhtml</a>)
-	 * @param xsdURI - the URI which specifies the XML schema (xsd) which defines the XML code under the
+	 * @param writer the writer which generates the XML output
+	 * @param namespaceURI the URI of the namespace (e.g. <i>http://www.w3.org/1999/xhtml</i>)
+	 * @param xsdURI the URI which specifies the XML schema (xsd) which defines the XML code under the
 	 *        last start element
-	 * @throws XMLStreamException
+	 * @throws XMLStreamException if fired by {@code writer}
 	 */
 	public static void writeNamespaceXSDAttr(XMLStreamWriter writer, 
 			String namespaceURI, String xsdURI) throws XMLStreamException {

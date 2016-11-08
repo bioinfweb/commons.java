@@ -41,9 +41,9 @@ public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param index - the index the first affected element has in the list
-	 * @param affectedElements - a list of elements that have been inserted
+	 * @param source the list instance that has been modified
+	 * @param index the index the first affected element has in the list
+	 * @param addedElements a list of elements that have been inserted
 	 */
 	public ListAddEvent(List<E> source, int index, Collection<? extends E> addedElements) {
 		super(source, ListChangeType.INSERTION, index, addedElements);
@@ -53,8 +53,9 @@ public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
 	/**
 	 * Creates a new event object. Use this constructor if only one element is affected.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param affectedElements - a list of elements that have been inserted
+	 * @param source the list instance that has been modified
+	 * @param index the index the first affected element has in the list
+	 * @param affectedElement a list of elements that have been inserted
 	 */
 	public ListAddEvent(List<E> source, int index, E affectedElement) {
 		super(source, ListChangeType.INSERTION, index, affectedElement);

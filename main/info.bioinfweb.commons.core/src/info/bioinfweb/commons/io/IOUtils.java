@@ -62,21 +62,38 @@ public class IOUtils {
 	
 	
 	/**
-	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
-	 * @param in - the stream to read from
-	 * @param out - the stream to write to
-	 * @throws IOException
+	 * Copies data from an {@link InputStream} to an {@link OutputStream}.
+	 * 
+	 * @param in the stream to read from
+	 * @param out the stream to write to
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copy(InputStream in, OutputStream out) throws IOException {
 		copy(in, out, null);
 	}
 	
 	
+	/**
+	 * Copies data from an {@link InputStream} to an {@link OutputStream}.
+	 * 
+	 * @param in the stream to read from
+	 * @param out the stream to write to
+	 * @param close defines whether the streams shall be closed after the input stream ended
+	 * @throws IOException if an I/O error occurs
+	 */
 	public static void copy(InputStream in, OutputStream out, boolean close) throws IOException {
 		copy(in, out, close, null);
 	}
 	
 	
+	/**
+	 * Copies data from an {@link InputStream} to an {@link OutputStream}.
+	 * 
+	 * @param in the stream to read from
+	 * @param out the stream to write to
+	 * @param progressListener the progress listener which is informed about the ongoing progress
+	 * @throws IOException if an I/O error occurs
+	 */
 	public static void copy(InputStream in, OutputStream out, IOProgressListener progressListener) 
       throws IOException {
 		
@@ -85,13 +102,13 @@ public class IOUtils {
 	
 
 	/**
-	 * Copies data from an <code>InputStream</code> to a <code>OutputStream</code>.
+	 * Copies data from an {@link InputStream} to an {@link OutputStream}.
 	 * 
-	 * @param in - the stream to read from
-	 * @param out - the stream to write to
-	 * @param close - defines whether the streams shall be closed after the input stream ended.
-	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @param in the stream to read from
+	 * @param out the stream to write to
+	 * @param close defines whether the streams shall be closed after the input stream ended.
+	 * @param progressListener the progress listener which is informed about the ongoing progress
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copy(InputStream in, OutputStream out, boolean close, IOProgressListener progressListener) 
 	    throws IOException {
@@ -136,7 +153,7 @@ public class IOUtils {
 	 * @param src - the source file
 	 * @param dest - the destination file
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copy(File src, File dest, IOProgressListener progressListener) 
 	    throws IOException {
@@ -151,7 +168,7 @@ public class IOUtils {
 	 * 
 	 * @param src - the source file
 	 * @param dest - the destination file
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copy(File src, File dest) 
 	    throws IOException {
@@ -165,7 +182,7 @@ public class IOUtils {
 	 * 
 	 * @param path - the path to the resource
 	 * @param out - the stream to write to
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copyFromResource(String path, OutputStream out) throws IOException {
 		copyFromResource(path, out, null);
@@ -178,7 +195,7 @@ public class IOUtils {
 	 * @param path - the path to the resource
 	 * @param out - the stream to write to
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void copyFromResource(String path, OutputStream out, IOProgressListener progressListener) 
 	    throws IOException {
@@ -194,7 +211,7 @@ public class IOUtils {
 	 * @param path - the path of the file to extract inside the archive
 	 * @param out - the output stream to write the contents of the file to
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractFile(ZipFile file, String path, OutputStream out, 
 			IOProgressListener progressListener) throws IOException {
@@ -209,7 +226,7 @@ public class IOUtils {
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param out - the output stream to write the contents of the file to
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractFile(ZipFile file, String path, OutputStream out) throws IOException {
 		extractFile(file, path, out, null);
@@ -223,7 +240,7 @@ public class IOUtils {
 	 * @param path - the path of the file to extract inside the archive
 	 * @param dest - the destination file
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractFile(ZipFile file, String path, File dest, 
 			IOProgressListener progressListener) throws IOException {
@@ -239,7 +256,7 @@ public class IOUtils {
 	 * @param file - the source archive file
 	 * @param path - the path of the file to extract inside the archive
 	 * @param dest - the destination file
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractFile(ZipFile file, String path, File dest) throws IOException {
 		copy(file.getInputStream(file.getEntry(path)), new FileOutputStream(dest), null);
@@ -255,7 +272,7 @@ public class IOUtils {
 	 * @param destPath - the path of the destination directory where the extracted files should be 
 	 *        stored
 	 * @param progressListener - the progress listener which is informed about the ongoing progress
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractDir(ZipFile file, String sourcePath, String destPath, 
 			IOProgressListener progressListener) throws IOException {
@@ -290,7 +307,7 @@ public class IOUtils {
 	 *        a "/")
 	 * @param destPath - the path of the destination directory where the extracted files should be 
 	 *        stored
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static void extractDir(ZipFile file, String sourcePath, String destPath) 
 	    throws IOException {

@@ -27,7 +27,7 @@ import java.util.ListIterator;
  * Classes that decorate (wrap) a {@link ListIterator} can be inherited from this class.
  * <p>
  * In addition to the delegation of all methods to the underlying iterator this class provides the empty methods 
- * {@link #afterAdd(int, Object)}, {@link #afterReplace(int, Object, Object)} and {@link #afterRemove(Object)} 
+ * {@link #afterAdd(int, Object)}, {@link #afterReplace(int, Object, Object)} and {@link #afterRemove(int, Object)} 
  * that can be overwritten by inherited classes to react to modifications of the associated list made by this iterator. 
  * They are called from the according methods that make such modifications. 
  * 

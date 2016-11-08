@@ -59,8 +59,9 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	/**
 	 * Creates a new event object. Use this constructor if only one element is affected.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param affectedElements - a list of elements that have been removed
+	 * @param source the list instance that has been modified
+	 * @param index the index the first affected element has in the list
+	 * @param affectedElement a list of elements that have been removed
 	 */
 	public ListRemoveEvent(List<L> source, int index, E affectedElement) {
 		super(source, ListChangeType.DELETION, index);

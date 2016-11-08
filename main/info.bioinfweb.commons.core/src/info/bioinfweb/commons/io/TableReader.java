@@ -50,7 +50,7 @@ public class TableReader {
 	 * @param stream - the stream to read the text data from
 	 * @param separator - the column separator
 	 * @return String[colCount][rowCount]
-	 * @throws IOException
+	 * @throws IOException if an I/O error occurs
 	 */
 	public static String[][] readTable(InputStream stream, char separator) throws IOException {
 		String[] lines = TextReader.readText(stream).split("\r\n|\n|\r");  // Currently unnecessary because TextReader converts all types of line breaks to '\n'

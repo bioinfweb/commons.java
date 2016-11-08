@@ -45,9 +45,10 @@ public class ListMultipleChangesEvent<E> extends ListChangeEvent<E> {
 	/**
 	 * Creates a new event object.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param type - the type of modification that happened
-	 * @param affectedElements - a list of elements that have been affected (e.g. inserted or removed)
+	 * @param source the list instance that has been modified
+	 * @param type the type of modification that happened
+	 * @param index the index the first affected element has in the list
+	 * @param affectedElements a list of elements that have been affected (e.g. inserted or removed)
 	 */
 	public ListMultipleChangesEvent(List<E> source, ListChangeType type, int index, Collection<? extends E> affectedElements) {
 		super(source, type, index);
@@ -61,9 +62,10 @@ public class ListMultipleChangesEvent<E> extends ListChangeEvent<E> {
 	/**
 	 * Creates a new event object. Use this constructor if only one element is affected.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param type - the type of modification that happened
-	 * @param affectedElements - a list of elements that have been affected (e.g. inserted, removed)
+	 * @param source the list instance that has been modified
+	 * @param type the type of modification that happened
+	 * @param index the index the first affected element has in the list
+	 * @param affectedElement a list of elements that have been affected (e.g. inserted, removed)
 	 */
 	public ListMultipleChangesEvent(List<E> source, ListChangeType type, int index, E affectedElement) {
 		super(source, type, index);
