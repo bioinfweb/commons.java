@@ -195,6 +195,9 @@ main/info.bioinfweb.commons.servlet/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/lib/servlet.jar -text
+main/info.bioinfweb.commons.servlet/src/GPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/LGPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/src/NOTICE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/GetPostServlet.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/Model2Servlet.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/ServletUtils.java -text svneol=unset#text/plain
