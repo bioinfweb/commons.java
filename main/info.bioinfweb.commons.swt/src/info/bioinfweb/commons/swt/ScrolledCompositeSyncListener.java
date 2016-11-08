@@ -75,7 +75,7 @@ public class ScrolledCompositeSyncListener {
 	/**
 	 * Creates a new instance of this class which uses a deep copy of {@code scrolledComposites}. That means future changes
 	 * to {@code scrolledComposites} will not be reflected by this instance. If you need this functionality use
-	 * {@link #newLinkedInstance(Collection, boolean)} instead.
+	 * {@link #newLinkedInstance(Iterable, boolean)} instead.
 	 * <p>
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
@@ -92,7 +92,7 @@ public class ScrolledCompositeSyncListener {
 	/**
 	 * Creates a new instance of this class which uses a deep copy of {@code scrolledComposites}. That means future changes
 	 * to {@code scrolledComposites} will not be reflected by this instance. If you need this functionality use
-	 * {@link #newLinkedInstance(Collection, boolean)} instead.
+	 * {@link #newLinkedInstance(Iterable, boolean)} instead.
 	 * <p>
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
