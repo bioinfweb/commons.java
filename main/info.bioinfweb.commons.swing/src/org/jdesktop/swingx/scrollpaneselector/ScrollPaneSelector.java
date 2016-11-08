@@ -51,6 +51,7 @@ import javax.swing.event.MouseInputListener;
  * <p>
  * Once the selector is installed on a given JScrollPane instance, a little button appears as soon as at least
  * one of its scroll bars is made visible.
+ * 
  * @author weebib
  */
 public class ScrollPaneSelector extends JComponent {
