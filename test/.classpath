@@ -11,7 +11,6 @@
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.swing/bin"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.swt/bin"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.testing/bin"/>
-	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/guava-13.0.1.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.experimental/lib/biojava3-alignment-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.experimental/lib/biojava3-core-3.1.0.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.experimental/lib/core-1.9.2.jar"/>
@@ -22,5 +21,6 @@
 	<classpathentry kind="lib" path="lib/junit-4.9b1.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/commons-lang3-3.5.jar"/>
+	<classpathentry kind="lib" path="/info.bioinfweb.commons.core/lib/guava-20.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
