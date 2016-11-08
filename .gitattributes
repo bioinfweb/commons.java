@@ -125,6 +125,9 @@ main/info.bioinfweb.commons.experimental/lib/biojava3-alignment-3.1.0.jar -text
 main/info.bioinfweb.commons.experimental/lib/biojava3-core-3.1.0.jar -text
 main/info.bioinfweb.commons.experimental/lib/core-1.9.2.jar -text
 main/info.bioinfweb.commons.experimental/lib/phylo-1.8.jar -text
+main/info.bioinfweb.commons.experimental/src/GPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.experimental/src/LGPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.experimental/src/NOTICE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/info/bioinfweb/commons/HTMLTruncater.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/info/bioinfweb/commons/bio/AmbiguityBaseScore.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/info/bioinfweb/commons/bio/ConsensusSequenceCreator.java -text svneol=unset#text/plain
