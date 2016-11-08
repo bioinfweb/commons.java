@@ -2,6 +2,7 @@
 main/info.bioinfweb.commons.applet/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.applet/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/src/info/bioinfweb/commons/applet/DoubleBufferedApplet.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.bio/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.bio/.project -text svneol=unset#text/plain
