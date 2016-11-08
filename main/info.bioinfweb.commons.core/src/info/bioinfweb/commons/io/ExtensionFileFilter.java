@@ -1,6 +1,6 @@
 /*
  * bioinfweb.commons.java - Shared components of bioinfweb projects made available in a Java library
- * Copyright (C) 2008 - 2016  Ben Stöver
+ * Copyright (C) 2008-2011, 2013-2016  Ben Stöver, Sarah Wiechers
  * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
@@ -24,9 +24,7 @@ import info.bioinfweb.commons.SystemUtils;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
