@@ -21,4 +21,3 @@ are based on the source code of the Apache Lucene project
 developed by the Apache Software Foundation (http://www.apache.org/)
 distributed under the terms of the Apache License Version 2.0.
 (See APACHE-LICENSE.txt)
-
