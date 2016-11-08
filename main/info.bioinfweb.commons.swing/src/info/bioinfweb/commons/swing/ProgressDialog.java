@@ -95,7 +95,7 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 	 * Creates a new instance of this class with the default cancel button and an updatable progress text which uses
 	 * {@link #DEFAULT_PROGRESS_FORMAT} to display the progrss value.
 	 * 
-	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param owner the {@link Window} from which the dialog is displayed or null if this dialog has no owner
 	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
 	 */
 	public ProgressDialog(Window owner, String title) {
@@ -106,7 +106,7 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 	/**
 	 * Creates a new instance of this class with the default cancel button and an updatable progress text.
 	 * 
-	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param owner the {@link Window} from which the dialog is displayed or null if this dialog has no owner
 	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
 	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
 	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
@@ -119,7 +119,7 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 	/**
 	 * Creates a new instance of this class with the default cancel button.
 	 * 
-	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param owner the {@link Window} from which the dialog is displayed or null if this dialog has no owner
 	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
 	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
 	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
@@ -134,7 +134,7 @@ public class ProgressDialog extends JDialog implements ProgressMonitor {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param the {@link Window} from which the dialog is displayed or null if this dialog has no owner
+	 * @param owner the {@link Window} from which the dialog is displayed or null if this dialog has no owner
 	 * @param title the {@link String} to display in the dialog's title bar or null if the dialog has no title
 	 * @param progressFormat the decimal format to be used to display the progress value (If {@code null} is specified here,
 	 *        {@link #DEFAULT_PROGRESS_FORMAT} will be used.)
