@@ -65,12 +65,12 @@ public class SQLXMLReader implements SQLXMLConstants {
 	/**
 	 * Reads information information about a database connection from a XML-document. The namespace is not checked.
 	 * <pre>
-	 * <Host>host</Host>
-	 * <Name>name</Name> 
-	 * <User>user</User>
-	 * <Password>password</Password>
-	 * <Driver>com.mysql.jdbc.Driver</Driver>
-	 * <TablePrefix>tablePrefix</TablePrefix>
+	 * &lt;Host&gt;host&lt;/Host&gt;
+	 * &lt;Name&gt;name&lt;/Name&gt; 
+	 * &lt;User&gt;user&lt;/User&gt;
+	 * &lt;Password&gt;password&lt;/Password&gt;
+	 * &lt;Driver&gt;com.mysql.jdbc.Driver&lt;/Driver&gt;
+	 * &lt;TablePrefix&gt;tablePrefix&lt;/TablePrefix&gt;
 	 * </pre>
 	 * @param reader
 	 * @param properties
