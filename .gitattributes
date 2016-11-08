@@ -45,7 +45,6 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/Collecti
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/ListChangeType.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/ListDecorator.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/ListIteratorDecorator.java -text svneol=unset#text/plain
-main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/MultiTreeMap.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NonOverlappingIntervalList.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NonStoringCollection.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/NumberedStringsIterator.java -text svneol=unset#text/plain
