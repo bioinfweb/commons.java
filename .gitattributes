@@ -188,6 +188,7 @@ main/info.bioinfweb.commons.experimental/src/info/bioinfweb/commons/tokenizer/St
 main/info.bioinfweb.commons.servlet/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.servlet/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/lib/servlet.jar -text
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/GetPostServlet.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.servlet/src/info/bioinfweb/commons/servlet/Model2Servlet.java -text svneol=unset#text/plain
