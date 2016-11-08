@@ -116,6 +116,7 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/text/UniqueNameMapPa
 main/info.bioinfweb.commons.experimental/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+main/info.bioinfweb.commons.experimental/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/lib/biojava3-alignment-3.1.0.jar -text
 main/info.bioinfweb.commons.experimental/lib/biojava3-core-3.1.0.jar -text
 main/info.bioinfweb.commons.experimental/lib/core-1.9.2.jar -text
