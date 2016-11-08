@@ -21,6 +21,7 @@ main/info.bioinfweb.commons.core/lib/commons-lang3-3.1.jar -text
 main/info.bioinfweb.commons.core/lib/guava-13.0.1.jar -text
 main/info.bioinfweb.commons.core/src/APACHE-LICENSE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/GPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/LGPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/NOTICE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/CommandLineReader.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/IntegerIDManager.java -text svneol=unset#text/plain
