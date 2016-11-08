@@ -1,7 +1,7 @@
 /*
- * LibrAlign - A GUI library for displaying and editing multiple sequence alignments and attached data
- * Copyright (C) 2014-2015  Ben Stöver
- * <http://bioinfweb.info/LibrAlign>
+ * bioinfweb.commons.java - Shared components of bioinfweb projects made available in a Java library
+ * Copyright (C) 2008-2011, 2013-2016  Ben Stöver, Sarah Wiechers
+ * <http://commons.bioinfweb.info/Java>
  * 
  * This file is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
