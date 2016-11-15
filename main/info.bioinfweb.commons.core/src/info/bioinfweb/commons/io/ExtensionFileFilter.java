@@ -35,7 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * A file filter that both inherits from the Swing class {@link javax.swing.filechooser.FileFilter} and implements
- * both the Java IO interfaces {@link FileFilter} and {@link FilenameFilter}. It implements functionality similar 
+ * both the Java I/O interfaces {@link FileFilter} and {@link FilenameFilter}. It implements functionality similar 
  * to that of {@link FileNameExtensionFilter} but offers more features and allows extending this class, which is 
  * prohibited by {@link FileNameExtensionFilter}.
  * 
@@ -47,6 +47,9 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 	
 	/** The character separating an extension from the file name. */
 	public static final char EXTENSION_SEPARATOR = '.';
+	
+	/** The character separating an list of paths, e.g. {@code *.txt;*.*}. */
+	public static final char PATH_LIST_SEPARATOR = '.';
 	
 	
 	private String description;
@@ -100,27 +103,37 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 	}
 	
 	
+	/**
+	 * Returns all extensions stored in this filter as a single string.
+	 * <p>
+	 * <b>Example:</b> If the extensions {@code jpeg}, {@code jpg} and {@code jpe} would be have been passed to the constructor
+	 * of this class, the return value would be "{@code *.jpeg;*.jpg;*.jpe}". 
+	 * 
+	 * @return a string concatenating all extensions of this filter
+	 */
+	public String getExtensionsAsString() {
+		StringBuilder result = new StringBuilder();
+		Iterator<String> iterator = extensionsList.iterator();
+		while (iterator.hasNext()) {
+			result.append('*');
+			result.append(EXTENSION_SEPARATOR);
+			result.append(iterator.next());
+			if (iterator.hasNext()) {
+				result.append(PATH_LIST_SEPARATOR);
+				result.append(' ');
+			}
+		}
+		return result.toString();
+	}
+	
+	
 	private String processDescription(String description, boolean addExtensionListToDescription) {
 		if (description == null) {
 			throw new NullPointerException("The description must not be null.");
 		}
 		else {
 			if (addExtensionListToDescription) {
-				StringBuilder result = new StringBuilder();
-				result.append(description);
-				result.append(" (");
-				Iterator<String> iterator = extensionsList.iterator();
-				while (iterator.hasNext()) {
-					result.append('*');
-					result.append(EXTENSION_SEPARATOR);
-					result.append(iterator.next());
-					if (iterator.hasNext()) {
-						result.append(';');
-						result.append(' ');
-					}
-				}
-				result.append(')');
-				return result.toString();
+				return description + " (" + getExtensionsAsString() + ")";
 			}
 			else {
 				return description;
