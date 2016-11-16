@@ -158,7 +158,7 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 		}
 		else {
 			for (String extension : extensionsList) {
-				if (f.getName().endsWith(extension)) {
+				if (f.getName().endsWith(EXTENSION_SEPARATOR + extension)) {
 					return true;
 				}
 			}
