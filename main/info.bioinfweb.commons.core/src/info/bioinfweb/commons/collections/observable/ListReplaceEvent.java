@@ -26,7 +26,7 @@ import java.util.List;
 
 
 /**
- * Event that indicates that one or more new elements will be or have been added to an implementation of {@link List}.
+ * Event that indicates that one or more new elements will be or have been add to an implementation of {@link List}.
  * 
  * @author Ben St&ouml;ver
  * @since 1.1.0

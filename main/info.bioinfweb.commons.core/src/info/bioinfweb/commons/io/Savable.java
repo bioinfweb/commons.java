@@ -27,8 +27,10 @@ import java.io.*;
 
 
 public interface Savable extends ChangeMonitorable {
-	/**The file extension which should be added to file name chosen in the save as dialog,
+	/**
+	 * The file extension which should be add to file name chosen in the save as dialog,
 	 * if not one of the allowed ones is already present.
+	 * 
 	 * @return the file extension starting with a "."
 	 */
 	public String getDefaultExtension();

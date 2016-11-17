@@ -237,7 +237,7 @@ public class ParameterMap extends TreeMap<String, Object> {
 	 * Returns the application logger registered for the specified key.
 	 * <p>
 	 * If no objects with this key is contained in the map, an new instance of {@link VoidApplicationLogger}
-	 * is created, added to the map and returned. 
+	 * is created, add to the map and returned. 
 	 * 
 	 * @param key the key indent
 	 * @return the application logger stored (from now on) for the specified key

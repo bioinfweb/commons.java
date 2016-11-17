@@ -79,7 +79,7 @@ public class ListMultipleChangesEvent<E> extends ListChangeEvent<E> {
 
 	/**
 	 * Returns a collection of all elements that will be or have been affected by the list modification (e.g.
-	 * all elements that have been added).
+	 * all elements that have been add).
 	 * 
 	 * @return a collection of the affected list elements
 	 */

@@ -34,14 +34,14 @@ import java.util.List;
  */
 public interface ListChangeListener<E> extends EventListener {
 	/**
-	 * Called before one or more elements are added to monitored list.
+	 * Called before one or more elements are add to monitored list.
 	 * 
 	 * @param event - the event object containing further information on the modification
 	 */
 	public void beforeElementsAdded(ListAddEvent<E> event);
 	
 	/**
-	 * Called after one or more elements have been added to monitored list.
+	 * Called after one or more elements have been add to monitored list.
 	 * 
 	 * @param event - the event object containing further information on the modification
 	 */

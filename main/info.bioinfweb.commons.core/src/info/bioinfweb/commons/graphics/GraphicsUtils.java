@@ -88,8 +88,8 @@ public class GraphicsUtils {
 	 * <p>
 	 * Channel values will never become higher than 255 or lower than 0.  
 	 * 
-	 * @param color - the color to changed
-	 * @param addend - the value to be added to all color channels
+	 * @param color the color to changed
+	 * @param addend the value to be add to all color channels
 	 * @return the changed color
 	 */
 	public static Color addToColorChannels(Color color, int addend) {

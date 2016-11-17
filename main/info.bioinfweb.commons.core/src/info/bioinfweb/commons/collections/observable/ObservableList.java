@@ -53,7 +53,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 	/**
 	 * Adds a change listener to track changes of the underlying list.
 	 * 
-	 * @param listener - the listener to added
+	 * @param listener - the listener to add
 	 */
 	public void addListChangeListener(ListChangeListener<E> listener) {
 		changeListeners.add(listener);
@@ -72,8 +72,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 	
 	
 	@Override
-	protected void beforeAdd(int index, Collection<? extends E> addedElements) {
-		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
+	protected void beforeAdd(int index, Collection<? extends E> addElements) {
+		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.beforeElementsAdded(event);
 		}
@@ -81,8 +81,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 
 	@Override
-	protected void afterAdd(int index, Collection<? extends E> addedElements) {
-		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
+	protected void afterAdd(int index, Collection<? extends E> addElements) {
+		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.afterElementsAdded(event);
 		}

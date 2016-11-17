@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 
 /**
- * Instances of this class do not store objects added to them. This can be useful if objects are added to a collection 
+ * Instances of this class do not store objects add to them. This can be useful if objects are add to a collection 
  * in a standardized way but in some cases are not intended to be used later. To avoid using memory this non-storing 
  * collection can be used. 
  * 

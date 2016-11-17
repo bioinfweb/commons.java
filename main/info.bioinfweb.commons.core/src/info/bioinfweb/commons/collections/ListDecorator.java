@@ -72,13 +72,13 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * happens. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications of the list.
 	 * <p>
-	 * If more than one element will be added in one operation (e.g. {@link #addAll(Collection)} this method
+	 * If more than one element will be add in one operation (e.g. {@link #addAll(Collection)} this method
 	 * is only called once before the first elements is inserted.
 	 * 
 	 * @param index - the index where the first new element will be inserted
-	 * @param addedElements - the elements that shall be added (Always contains at least one element.) 
+	 * @param addElements - the elements that shall be add (Always contains at least one element.) 
 	 */
-	protected void beforeAdd(int index, Collection<? extends E> addedElements) {}
+	protected void beforeAdd(int index, Collection<? extends E> addElements) {}
 	
 	
 	private void beforeAdd(int index, E element) {
@@ -91,16 +91,16 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * methods called on the results of {@link #subList(int, int) or iterators}. This default implementation 
 	 * is empty and can be overwritten by inherited classes which want to track modifications of the list.
 	 * <p>
-	 * If more than one element is added in one operation (e.g. {@link #addAll(Collection)} this method
+	 * If more than one element is add in one operation (e.g. {@link #addAll(Collection)} this method
 	 * is only called once when all elements have been inserted.
 	 * <p>
 	 * Note that this method is not called if an add operation is not successful. In such a case only
 	 * {@link #beforeAdd(int, Collection)} is called.
 	 * 
 	 * @param index - the index where the first new element has been inserted
-	 * @param addedElements - the elements that have been added (Always contains at least one element.) 
+	 * @param addElements - the elements that have been add (Always contains at least one element.) 
 	 */
-	protected void afterAdd(int index, Collection<? extends E> addedElements) {}
+	protected void afterAdd(int index, Collection<? extends E> addElements) {}
 	
 	
 	private void afterAdd(int index, E element) {
@@ -452,13 +452,13 @@ public abstract class ListDecorator<E> implements List<E> {
 		final ListDecorator<E> thisList = this;
 		return new ListDecorator<E>(getUnderlyingList().subList(fromIndex, toIndex)) {
 					@Override
-					protected void beforeAdd(int index, Collection<? extends E> addedElements) {
-						thisList.beforeAdd(index + fromIndex, addedElements);
+					protected void beforeAdd(int index, Collection<? extends E> addElements) {
+						thisList.beforeAdd(index + fromIndex, addElements);
 					}
 		
 					@Override
-					protected void afterAdd(int index, Collection<? extends E> addedElements) {
-						thisList.afterAdd(fromIndex + index, addedElements);
+					protected void afterAdd(int index, Collection<? extends E> addElements) {
+						thisList.afterAdd(fromIndex + index, addElements);
 					}
 		
 					@Override

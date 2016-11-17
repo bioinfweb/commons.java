@@ -34,16 +34,16 @@ import java.util.Map;
  * instances.
  * <p>
  * The compression method of this class works best of the list contains a limited set of different objects
- * multiple times. If different equal object instances are added to this list only the object that was added 
+ * multiple times. If different equal object instances are add to this list only the object that was add 
  * first will be returned for all positions occupied by an equal object (which should not be a problem with
  * equal objects.)
  * <p>
  * Due to the compression method the maximum number of expected different objects has to be specified when
- * creating instances of this class. Each a new type of object is added to the list an specific integer value
+ * creating instances of this class. Each a new type of object is add to the list an specific integer value
  * will be assigned to it. Note that such values will always remain associated with this object even if
- * all objects of this kind (objects that are equal to each other) are removed from the list. So each object
- * that differs from all previously added objects that is added will contribute to the number of supported
- * different objects that can be stored, no matter if any of these objects is removed again later on. 
+ * all objects of this kind (objects that are equal to each other) are removed from the list. So each additional
+ * object that differs from all previously added objects will contribute to the number of supported different 
+ * objects that can be stored, no matter if any of these objects is removed again later on. 
  * 
  * @author Ben St&ouml;ver
  *
@@ -84,7 +84,7 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 			else {
 				throw new IndexOutOfBoundsException("There are already " + objectList.size() + 
 						" different object types registered in this list which is the maximum number of different objects this " +
-						"list can manage. The specified object is not equal to any of these objects and therefore cannot be added.");
+						"list can manage. The specified object is not equal to any of these objects and therefore cannot be add.");
 			}
 		}
 		return result;
@@ -157,6 +157,6 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	 *         could have.)
 	 */
 	public int getMaxObjectTypeCount() {
-		return (int)(packedList.getMaxValue() + 1);  // One must be added before the conversion to avoid possible overflow. 
+		return (int)(packedList.getMaxValue() + 1);  // One must be add before the conversion to avoid possible overflow. 
 	}
 }

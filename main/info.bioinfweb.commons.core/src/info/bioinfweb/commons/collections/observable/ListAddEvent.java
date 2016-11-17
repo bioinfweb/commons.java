@@ -27,7 +27,7 @@ import java.util.List;
 
 
 /**
- * Event that indicates that one or more new elements have been added to an implementation of {@link List}.
+ * Event that indicates that one or more new elements have been add to an implementation of {@link List}.
  * 
  * @author Ben St&ouml;ver
  * @since 1.1.0
@@ -43,10 +43,10 @@ public class ListAddEvent<E> extends ListMultipleChangesEvent<E> {
 	 * 
 	 * @param source the list instance that has been modified
 	 * @param index the index the first affected element has in the list
-	 * @param addedElements a list of elements that have been inserted
+	 * @param addElements a list of elements that have been inserted
 	 */
-	public ListAddEvent(List<E> source, int index, Collection<? extends E> addedElements) {
-		super(source, ListChangeType.INSERTION, index, addedElements);
+	public ListAddEvent(List<E> source, int index, Collection<? extends E> addElements) {
+		super(source, ListChangeType.INSERTION, index, addElements);
 	}
 
 

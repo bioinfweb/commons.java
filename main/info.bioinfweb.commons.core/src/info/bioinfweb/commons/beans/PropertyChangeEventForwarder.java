@@ -52,7 +52,7 @@ public class PropertyChangeEventForwarder implements PropertyChangeListener {
 	 * that collection is modified in another thread while {@link #propertyChange(PropertyChangeEvent)} is 
 	 * executed, even if the collection is thread save.)
 	 * 
-	 * @param prefix the prefix to be added in front of the property name (Maybe {@code null} or {@code ""}.)
+	 * @param prefix the prefix to be add in front of the property name (Maybe {@code null} or {@code ""}.)
 	 * @param targets the collection of property change listeners to delegate the events to
 	 * @throws NullPointerException if {@code targets} is {@code null}
 	 */
@@ -76,8 +76,8 @@ public class PropertyChangeEventForwarder implements PropertyChangeListener {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param prefix the prefix to be added in front of the property name (Maybe {@code null} or {@code ""}.)
-	 * @param target a single property change listener to forward events to (More may be added later.)
+	 * @param prefix the prefix to be add in front of the property name (Maybe {@code null} or {@code ""}.)
+	 * @param target a single property change listener to forward events to (More may be add later.)
 	 */
 	public PropertyChangeEventForwarder(String prefix, PropertyChangeListener target) {
 		this(prefix, new ArrayList<PropertyChangeListener>(1));
