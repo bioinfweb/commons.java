@@ -120,10 +120,10 @@ main/info.bioinfweb.commons.experimental/.classpath -text svneol=unset#text/plai
 main/info.bioinfweb.commons.experimental/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
-main/info.bioinfweb.commons.experimental/lib/biojava3-alignment-3.1.0.jar -text
-main/info.bioinfweb.commons.experimental/lib/biojava3-core-3.1.0.jar -text
-main/info.bioinfweb.commons.experimental/lib/core-1.9.2.jar -text
-main/info.bioinfweb.commons.experimental/lib/phylo-1.8.jar -text
+main/info.bioinfweb.commons.experimental/include/lib/biojava3-alignment-3.1.0.jar -text
+main/info.bioinfweb.commons.experimental/include/lib/biojava3-core-3.1.0.jar -text
+main/info.bioinfweb.commons.experimental/include/lib/core-1.9.2.jar -text
+main/info.bioinfweb.commons.experimental/include/lib/phylo-1.8.jar -text
 main/info.bioinfweb.commons.experimental/src/GPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/LGPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/NOTICE.txt -text svneol=unset#text/plain
