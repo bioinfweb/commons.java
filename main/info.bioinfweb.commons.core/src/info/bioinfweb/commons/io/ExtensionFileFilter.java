@@ -104,7 +104,8 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 	 * Returns all extensions stored in this filter as a single string.
 	 * <p>
 	 * <b>Example:</b> If the extensions {@code jpeg}, {@code jpg} and {@code jpe} would be have been passed to the constructor
-	 * of this class, the return value would be "{@code *.jpeg;*.jpg;*.jpe}". 
+	 * of this class, the return value would be "{@code *.jpeg;*.jpg;*.jpe}" (The path separator used, would depending on the 
+	 * operating system). 
 	 * 
 	 * @return a string concatenating all extensions of this filter
 	 */
