@@ -48,9 +48,6 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 	/** The character separating an extension from the file name. */
 	public static final char EXTENSION_SEPARATOR = '.';
 	
-	/** The character separating an list of paths, e.g. {@code *.txt;*.*}. */
-	public static final char PATH_LIST_SEPARATOR = '.';
-	
 	
 	private String description;
 	private List<String> extensionsList;
@@ -119,7 +116,7 @@ public class ExtensionFileFilter extends javax.swing.filechooser.FileFilter impl
 			result.append(EXTENSION_SEPARATOR);
 			result.append(iterator.next());
 			if (iterator.hasNext()) {
-				result.append(PATH_LIST_SEPARATOR);
+				result.append(File.pathSeparatorChar);
 				result.append(' ');
 			}
 		}
