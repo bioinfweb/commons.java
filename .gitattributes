@@ -270,7 +270,7 @@ main/info.bioinfweb.commons.testing/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
-main/info.bioinfweb.commons.testing/lib/junit-4.9b1.jar -text
+main/info.bioinfweb.commons.testing/include/lib/junit-4.9b1.jar -text
 main/info.bioinfweb.commons.testing/src/GPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/src/LGPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.testing/src/NOTICE.txt -text svneol=unset#text/plain
