@@ -33,6 +33,7 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.StartElement;
@@ -56,10 +57,10 @@ public class XMLUtils {
 	
 	
   /**
-   * Reads all events from the reader until one more end element than start elements is found.
+   * Reads all events from the {@link XMLEventReader} until one more end element than start elements is found.
    * 
    * @param reader the reader to read the events from
-   * @return <code>true</code> if anything else than ignorable whitespace is found before the next end element
+   * @return {@code true} if anything else than ignorable whitespace is found before the next end element
    * @throws XMLStreamException
    */
   public static boolean reachElementEnd(XMLEventReader reader) throws XMLStreamException {
@@ -82,6 +83,34 @@ public class XMLUtils {
 	    event = reader.nextEvent();
 		}
 		return result;
+  }
+  
+  
+  /**
+   * Reads all events from the {@link XMLStreamReader} until one more end element than start elements is found.
+   * 
+   * @param reader the reader to read the events from
+   * @return {@code true} if anything else than ignorable whitespace is found before the next end element
+   * @throws XMLStreamException
+   */
+  public static boolean reachElementEnd(XMLStreamReader reader) throws XMLStreamException {
+  	boolean result = false;
+		while (reader.next() != XMLStreamConstants.END_ELEMENT) {
+			
+			if ((reader.getEventType() != XMLStreamConstants.SPACE) && 
+					(reader.getEventType() != XMLStreamConstants.CHARACTERS)) {
+				
+				result = true;
+			}
+			else if (reader.getEventType() == XMLStreamConstants.CHARACTERS) {
+				result = result || !reader.getText().trim().equals("");
+			}
+			
+		  if (reader.getEventType() == XMLStreamConstants.START_ELEMENT) {
+	 	    reachElementEnd(reader);
+		  }
+		}
+  	return result;
   }
   
   
@@ -156,11 +185,15 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream. If the next event in the stream is not a
-	 * character event an empty string ("") is returned.
-	 * @param reader the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLEventReader}. If the next event is not a character event an empty 
+	 * string ("") is returned.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the read characters
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 */
 	public static String readCharactersAsString(XMLEventReader reader) throws XMLStreamException {
 		StringBuffer result = new StringBuffer();
@@ -172,10 +205,35 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a {@code boolean} value.
-	 * @param reader the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLStreamReader}. If the next event is not a character event an empty 
+	 * string ("") is returned.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read characters
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 */
+	public static String readCharactersAsString(XMLStreamReader reader) throws XMLStreamException {
+		StringBuffer result = new StringBuffer();
+		while (reader.getEventType() == XMLStreamConstants.CHARACTERS) {
+			result.append(reader.getText());
+			reader.next();
+		}
+		return result.toString();
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the {@link XMLEventReader} a parses them as a {@code boolean} value.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the read value
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 */
 	public static boolean readCharactersAsBoolean(XMLEventReader reader) throws XMLStreamException {
 		return Boolean.parseBoolean(readCharactersAsString(reader));
@@ -183,10 +241,29 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as an {@code int} value.
-	 * @param reader the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLStreamReader} a parses them as a {@code boolean} value.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 */
+	public static boolean readCharactersAsBoolean(XMLStreamReader reader) throws XMLStreamException {
+		return Boolean.parseBoolean(readCharactersAsString(reader));
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the {@link XMLEventReader} a parses them as an {@code int} value.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the parsed value
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 * @throws NumberFormatException if no {@code int} can be parsed from the current characters
 	 */
 	public static int readCharactersAsInt(XMLEventReader reader) throws XMLStreamException {
@@ -195,10 +272,30 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as an {@code long} value.
-	 * @param reader the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLStreamReader} a parses them as a {@code int} value.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 * @throws NumberFormatException if no {@code int} can be parsed from the current characters
+	 */
+	public static int readCharactersAsInt(XMLStreamReader reader) throws XMLStreamException {
+		return Integer.parseInt(readCharactersAsString(reader));
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the {@link XMLEventReader} a parses them as an {@code long} value.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the parsed value
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 * @throws NumberFormatException if no {@code long} can be parsed from the current characters
 	 */
 	public static long readCharactersAsLong(XMLEventReader reader) throws XMLStreamException {
@@ -207,10 +304,30 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a {@code float} value.
-	 * @param reader the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLStreamReader} a parses them as a {@code long} value.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 * @throws NumberFormatException if no {@code long} can be parsed from the current characters
+	 */
+	public static long readCharactersAsLong(XMLStreamReader reader) throws XMLStreamException {
+		return Long.parseLong(readCharactersAsString(reader));
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the {@link XMLEventReader} a parses them as a {@code float} value.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the parsed value
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 * @throws NumberFormatException if no {@code float} can be parsed from the current characters
 	 */
 	public static float readCharactersAsFloat(XMLEventReader reader) throws XMLStreamException {
@@ -219,10 +336,30 @@ public class XMLUtils {
 	
 	
 	/**
-	 * Reads the characters from the next event of the stream a parses them as a {@code double} value.
-	 * @param reader - the stream to read the next element from
+	 * Reads the characters from the next event of the {@link XMLStreamReader} a parses them as a {@code float} value.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 * @throws NumberFormatException if no {@code float} can be parsed from the current characters
+	 */
+	public static float readCharactersAsFloat(XMLStreamReader reader) throws XMLStreamException {
+		return Float.parseFloat(readCharactersAsString(reader));
+	}
+	
+	
+	/**
+	 * Reads the characters from the next event of the {@link XMLEventReader} a parses them as a {@code double} value.
+	 * <p>
+	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
+	 * iterator's position before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
 	 * @return the parsed value
-	 * @throws XMLStreamException if fired by {@code reader}
+	 * @throws XMLStreamException if thrown by {@code reader}
 	 * @throws NumberFormatException if no {@code double} can be parsed from the current characters
 	 */
 	public static double readCharactersAsDouble(XMLEventReader reader) throws XMLStreamException {
@@ -231,8 +368,25 @@ public class XMLUtils {
 	
 	
 	/**
+	 * Reads the characters from the next event of the {@link XMLStreamReader} a parses them as a {@code double} value.
+	 * <p>
+	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
+	 * before calling this method.
+	 * 
+	 * @param reader the reader to read the next element from
+	 * @return the read value
+	 * @throws XMLStreamException if thrown by {@code reader}
+	 * @throws NumberFormatException if no {@code double} can be parsed from the current characters
+	 */
+	public static double readCharactersAsDouble(XMLStreamReader reader) throws XMLStreamException {
+		return Double.parseDouble(readCharactersAsString(reader));
+	}
+	
+	
+	/**
 	 * Returns the root element of the XML file that can be read from the specified stream and closes it.
-	 * @param stream - the stream to read from (closed after the execution of this method)
+	 * 
+	 * @param stream the stream to read from (closed after the execution of this method)
 	 * @return the root element of the XML data
 	 * @throws IOException if the stream cannot be closed
 	 * @throws XMLStreamException if the XML format is invalid
