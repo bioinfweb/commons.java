@@ -184,9 +184,14 @@ public class XMLUtils {
 	}
 	
 	
+	public static boolean isCharacterType(int type) {
+		return (type == XMLStreamConstants.CHARACTERS) || (type == XMLStreamConstants.CDATA) || (type == XMLStreamConstants.SPACE); 
+	}
+	
+	
 	/**
 	 * Reads the characters from the next event of the {@link XMLEventReader}. If the next event is not a character event an empty 
-	 * string ("") is returned.
+	 * string ("") is returned. All encountered comment events will be skipped.
 	 * <p>
 	 * After calling this method the next element returned by {@code reader} will be the first non-character event after the 
 	 * iterator's position before calling this method.
@@ -197,8 +202,13 @@ public class XMLUtils {
 	 */
 	public static String readCharactersAsString(XMLEventReader reader) throws XMLStreamException {
 		StringBuffer result = new StringBuffer();
-		while (reader.peek().getEventType() == XMLStreamConstants.CHARACTERS) {
-			result.append(reader.nextEvent().asCharacters().getData());
+		int type = reader.peek().getEventType();
+		while (isCharacterType(type) || (type == XMLStreamConstants.COMMENT)) {
+			XMLEvent event = reader.nextEvent();
+			if (isCharacterType(event.getEventType())) {
+				result.append(event.asCharacters().getData());  //TODO Should SPACE be ignored?
+			}
+			type = reader.peek().getEventType();
 		}
 		return result.toString();
 	}
@@ -206,7 +216,7 @@ public class XMLUtils {
 	
 	/**
 	 * Reads the characters from the next event of the {@link XMLStreamReader}. If the next event is not a character event an empty 
-	 * string ("") is returned.
+	 * string ("") is returned. All encountered comment events will be skipped.
 	 * <p>
 	 * After calling this method {@code reader} will be positioned at the first non-character event after the cursor's position 
 	 * before calling this method.
@@ -217,8 +227,10 @@ public class XMLUtils {
 	 */
 	public static String readCharactersAsString(XMLStreamReader reader) throws XMLStreamException {
 		StringBuffer result = new StringBuffer();
-		while (reader.getEventType() == XMLStreamConstants.CHARACTERS) {
-			result.append(reader.getText());
+		while (isCharacterType(reader.getEventType()) || (reader.getEventType() == XMLStreamConstants.COMMENT)) {
+			if (isCharacterType(reader.getEventType())) {
+				result.append(reader.getText());  //TODO Should SPACE be ignored?
+			}
 			reader.next();
 		}
 		return result.toString();
