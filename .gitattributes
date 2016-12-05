@@ -26,6 +26,7 @@ main/info.bioinfweb.commons.core/include/NOTICE.txt -text svneol=unset#text/plai
 main/info.bioinfweb.commons.core/include/lib/commons-collections4-4.1.jar -text
 main/info.bioinfweb.commons.core/include/lib/commons-lang3-3.5.jar -text
 main/info.bioinfweb.commons.core/include/lib/guava-20.0.jar -text
+main/info.bioinfweb.commons.core/pom.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/APACHE-LICENSE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/GPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/LGPL.txt -text svneol=unset#text/plain
