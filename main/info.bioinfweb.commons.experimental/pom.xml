@@ -81,7 +81,6 @@
 			<version>[1.9.0,2.0)</version>
 		</dependency>
 	
-	
 		<!-- http://bioinfweb.info/MavenRepository/info/bioinfweb/commons/java/bioinfweb-commons-core/ -->
 		<dependency>
 			<groupId>info.bioinfweb.commons.java</groupId>
