@@ -130,6 +130,7 @@ main/info.bioinfweb.commons.experimental/include/lib/biojava3-alignment-3.1.0.ja
 main/info.bioinfweb.commons.experimental/include/lib/biojava3-core-3.1.0.jar -text
 main/info.bioinfweb.commons.experimental/include/lib/core-1.9.2.jar -text
 main/info.bioinfweb.commons.experimental/include/lib/phylo-1.8.jar -text
+main/info.bioinfweb.commons.experimental/pom.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/GPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/LGPL.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.experimental/src/NOTICE.txt -text svneol=unset#text/plain

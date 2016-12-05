@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.bioinfweb.commons.java</groupId>
+	<artifactId>bioinfweb-commons-bio</artifactId>
+	<version>2.0.0</version>
+	<packaging>jar</packaging>
+	<name>bioinfweb.commons.java.experimental</name>
+	<description>The experimental module of shared components of bioinfweb projects made available in a Java library. Classes within this module are not meant for public use and may undergo changes that break dependent code any time.</description>
+	<url>http://commons.bioinfweb.info/Java/</url>
+	<licenses>
+		<license>
+			<name>GNU Lesser General Public License, Version 3</name>
+			<url>http://commons.bioinfweb.info/Java/License/LGPL</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Ben Stöver</name>
+			<email>stoever@bioinfweb.info</email>
+			<organization>bioinfweb.info</organization>
+			<organizationUrl>http://bioinfweb.info/</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</connection>
+		<developerConnection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</developerConnection>
+		<url>http://bioinfweb.info/Code/sventon/repos/Commons.Java/list/trunk/</url>
+	</scm>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.biojava/biojava3-core -->
+		<dependency>
+			<groupId>org.biojava</groupId>
+			<artifactId>biojava3-core</artifactId>
+			<version>[3.0,)</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.biojava/biojava3-core -->
+		<dependency>
+			<groupId>org.biojava</groupId>
+			<artifactId>biojava3-alignment</artifactId><!-- Does not seem to be available anymore. Version 4 should be used in the future. -->
+			<version>[3.0,)</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.biojava/core -->
+		<dependency>
+			<groupId>org.biojava</groupId>
+			<artifactId>core</artifactId>
+			<version>[1.9.0,2.0)</version>
+		</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/org.biojava/core -->
+		<dependency>
+			<groupId>org.biojava</groupId>
+			<artifactId>phylo</artifactId>
+			<version>[1.9.0,2.0)</version>
+		</dependency>
+	
+	
+		<!-- http://bioinfweb.info/MavenRepository/info/bioinfweb/commons/java/bioinfweb-commons-core/ -->
+		<dependency>
+			<groupId>info.bioinfweb.commons.java</groupId>
+			<artifactId>bioinfweb-commons-core</artifactId>
+			<version>[2.0.0,3.0.0)</version>
+		</dependency>
+		
+		<!-- http://bioinfweb.info/MavenRepository/info/bioinfweb/commons/java/bioinfweb-commons-core/ -->
+		<dependency>
+			<groupId>info.bioinfweb.commons.java</groupId>
+			<artifactId>bioinfweb-commons-servlet</artifactId>
+			<version>[1.0.0,3.0.0)</version>
+		</dependency>
+	</dependencies>
+</project>
