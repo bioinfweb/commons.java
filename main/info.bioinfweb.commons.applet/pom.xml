@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+		
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>info.bioinfweb.commons.java</groupId>
+	<artifactId>bioinfweb-commons-applet</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+	<name>bioinfweb.commons.java.applet</name>
+	<description>The applet module of shared components of bioinfweb projects made available in a Java library.</description>
+	<url>http://commons.bioinfweb.info/Java/</url>
+	<licenses>
+		<license>
+			<name>GNU General Public License, Version 3</name>
+			<url>http://commons.bioinfweb.info/Java/License</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Ben Stöver</name>
+			<email>stoever@bioinfweb.info</email>
+			<organization>bioinfweb.info</organization>
+			<organizationUrl>http://bioinfweb.info/</organizationUrl>
+		</developer>
+	</developers>
+	<scm>
+		<connection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</connection>
+		<developerConnection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</developerConnection>
+		<url>http://bioinfweb.info/Code/sventon/repos/Commons.Java/list/trunk/</url>
+	</scm>
+</project>
