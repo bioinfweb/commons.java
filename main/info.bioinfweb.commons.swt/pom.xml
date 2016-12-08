@@ -5,7 +5,7 @@
 		
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.bioinfweb.commons.java</groupId>
-	<artifactId>bioinfweb-commons-swt</artifactId>
+	<artifactId>bioinfweb-commons-java-swt</artifactId>
 	<version>2.0.0</version>
 	<packaging>jar</packaging>
 	<name>bioinfweb.commons.java.swt</name>
