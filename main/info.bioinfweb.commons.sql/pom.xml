@@ -5,7 +5,7 @@
 		
   <modelVersion>4.0.0</modelVersion>
   <groupId>info.bioinfweb.commons.java</groupId>
-  <artifactId>bioinfweb-commons-sql</artifactId>
+  <artifactId>bioinfweb-commons-java-sql</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
   <name>bioinfweb.commons.java.sql</name>
