@@ -1,0 +1,27 @@
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.core/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.applet/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.bio/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.testing/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.servlet/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.sql/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.swing/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.swt/include">
+	<include name="**/*" />
+</fileset>
+<fileset dir="${sourceDataFolder}/${projectFolderPrefix}.experimental/include">
+	<include name="**/*" />
+</fileset>

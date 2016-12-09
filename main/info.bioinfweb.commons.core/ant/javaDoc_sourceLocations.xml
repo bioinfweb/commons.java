@@ -1,0 +1,7 @@
+      <sourceLocation packagePrefix="info.bioinfweb.commons.applet" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.applet/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.testing" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.testing/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.servlet" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.servlet/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.sql" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.sql/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.swing" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.swing/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.swt" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.swt/" />
+      <sourceLocation packagePrefix="info.bioinfweb.commons.bio" urlPrefix="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.bio/" />

@@ -1,0 +1,9 @@
+<include name="${projectFolderPrefix}.core/**/*.*" />
+<include name="${projectFolderPrefix}.applet/**/*.*" />
+<include name="${projectFolderPrefix}.bio/**/*.*" />
+<include name="${projectFolderPrefix}.testing/**/*.*" />
+<include name="${projectFolderPrefix}.servlet/**/*.*" />
+<include name="${projectFolderPrefix}.sql/**/*.*" />
+<include name="${projectFolderPrefix}.swing/**/*.*" />
+<include name="${projectFolderPrefix}.swt/**/*.*" />
+<include name="${projectFolderPrefix}.experimental/**/*.*" />

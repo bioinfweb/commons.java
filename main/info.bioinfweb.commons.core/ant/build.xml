@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE project [
+<!ENTITY libraryReleaseTargets SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/shared/ant/Library_Release_Targets.xml">
+<!ENTITY additionalClasspathEntries SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/additional_classpath_entries.xml">
+<!ENTITY javadocLinks SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/javaDoc_links.xml">
+<!ENTITY binaries SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/binaries.xml">
+<!ENTITY sourcefiles SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/sourcefiles.xml">
+<!ENTITY libraryJars SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/library_jars.xml">
+<!ENTITY javadocSourceLocations SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/javaDoc_sourceLocations.xml">
+<!ENTITY dbPassword SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/commons.java/secure/dbPassword.xml">
+]>
+<!-- The value of 'projectLabel' may not contain the following characters: '%', '_', '[', ']' -->
+<project default="bioinfweb.commons.java">
+	<property name="projectLabel" value="bioinfweb.commons.java" />
+	<property name="simpleProjectLabel" value="bioinfweb-commons" />
+	<property name="projectFolderPrefix" value="info.bioinfweb.commons" />
+	<property name="projectFolder" value="/srv/commons.bioinfweb/data/ReleaseManager/commons.java" />
+	<property name="sharedFolder" value="/srv/commons.bioinfweb/data/ReleaseManager/shared" />
+	<property name="tempFolder" value="${projectFolder}/temp" />
+	<property name="sourceDataFolder" value="${tempFolder}/checkout" />
+	<property name="webspaceRootFolder" value="/srv/commons.bioinfweb/content/Java" />
+	<property name="webspaceJavaDocFolder" value="${webspaceRootFolder}/PROTECTED/tree/Documentation/API" />
+	<property name="webspaceDownloadFolder" value="${webspaceRootFolder}/Download" />	
+	<property name="svnRepositoryPath" value="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main" />
+	<property name="defaultJavaDocSourceLocation" value="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.core" />
+	<property name="styleName" value="commons.java" />
+	<property name="dbName" value="biw_Commons_Java" />
+	<property name="dbUser" value="biw_rm_Commons_J" />
+	&dbPassword;
+	<property name="softwareID" value="16" />
+	<property name="containedItems" value="1 2 4 5 6 7 8 9 10 11" />
+	<property name="javadocSourcePath" value="${sourceDataFolder}/${projectFolderPrefix}.core/src;${sourceDataFolder}/${projectFolderPrefix}.applet/src;${sourceDataFolder}/${projectFolderPrefix}.bio/src;${sourceDataFolder}/${projectFolderPrefix}.testing/src;${sourceDataFolder}/${projectFolderPrefix}.servlet/src;${sourceDataFolder}/${projectFolderPrefix}.sql/src;${sourceDataFolder}/${projectFolderPrefix}.swing/src;${sourceDataFolder}/${projectFolderPrefix}.swt/src;" />
+	<property name="defaultNewsTextEn" value="A new version of our Java library [i]bioinfweb.commons[/i] has been [LINK http://commons.bioinfweb.info/Java/Download released]. It consists of  different modules to be used in bioinformatics or in a general purpose that are made available under [LINK http://commons.bioinfweb.info/Java/License/LGPL GNU LGPL 3]." />
+	<property name="defaultNewsTextDe" value="Eine neue Version unserer Java Bibliothek [i]bioinfweb.commons[/i] wurde [LINK http://commons.bioinfweb.info/Java/Download veröffentlicht]. Sie besteht aus Modulen mit vielfältigen Anwendungsbereichen die unter [LINK http://commons.bioinfweb.info/Java/License/LGPL GNU LGPL 3] öffentlich zur Verfügung gestellt werden." />
+	<property name="defaultImageURL" value="http://commons.bioinfweb.info/Java/Logo.png" />
+	<property name="defaultImageLinkURL" value="http://commons.bioinfweb.info/Java/" />
+	
+	&libraryReleaseTargets;
+</project>
