@@ -28,6 +28,6 @@
 	<scm>
 		<connection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</connection>
 		<developerConnection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</developerConnection>
-		<url>http://bioinfweb.info/Code/sventon/repos/Commons.Java/list/trunk/</url>
+		<url>http://bioinfweb.info/Code/sventon/repos/commons.java/list/trunk/</url>
 	</scm>
 </project>
