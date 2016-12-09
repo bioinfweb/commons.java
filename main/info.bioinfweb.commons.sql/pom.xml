@@ -28,14 +28,14 @@
   <scm>
     <connection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</connection>
     <developerConnection>scm:svn:https://secure.bioinfweb.info/Code/svn/commons.java/trunk</developerConnection>
-    <url>http://bioinfweb.info/Code/sventon/repos/Commons.Java/list/trunk/</url>
+    <url>http://bioinfweb.info/Code/sventon/repos/commons.java/list/trunk/</url>
   </scm>
 
   <dependencies>
 	<!-- http://bioinfweb.info/MavenRepository/info/bioinfweb/commons/java/bioinfweb-commons-core/ -->
 	<dependency>
 		<groupId>info.bioinfweb.commons.java</groupId>
-		<artifactId>bioinfweb-commons-core</artifactId>
+		<artifactId>bioinfweb-commons-java-core</artifactId>
 		<version>[1.0.0,)</version>
 	</dependency>
   </dependencies>
