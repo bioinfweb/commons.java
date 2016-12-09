@@ -12,7 +12,7 @@
 <!-- The value of 'projectLabel' may not contain the following characters: '%', '_', '[', ']' -->
 <project default="bioinfweb.commons.java">
 	<property name="projectLabel" value="bioinfweb.commons.java" />
-	<property name="simpleProjectLabel" value="bioinfweb-commons" />
+	<property name="simpleProjectLabel" value="bioinfweb-commons-java" />
 	<property name="projectFolderPrefix" value="info.bioinfweb.commons" />
 	<property name="projectFolder" value="/srv/commons.bioinfweb/data/ReleaseManager/commons.java" />
 	<property name="sharedFolder" value="/srv/commons.bioinfweb/data/ReleaseManager/shared" />
