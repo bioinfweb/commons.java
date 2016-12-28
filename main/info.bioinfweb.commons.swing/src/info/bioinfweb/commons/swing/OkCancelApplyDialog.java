@@ -20,13 +20,17 @@ package info.bioinfweb.commons.swing;
 
 
 import javax.swing.JPanel;
+
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Window;
+
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.KeyStroke;
+
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -154,6 +158,7 @@ public abstract class OkCancelApplyDialog extends JDialog {
 			buttonsPanel.add(getCancelButton(), null);
 			buttonsPanel.add(getApplyButton(), null);
 			addMoreButtons(buttonsPanel);
+			buttonsPanel.setMaximumSize(new Dimension(buttonsPanel.getMaximumSize().width, buttonsPanel.getMinimumSize().height));  // Otherwise this component would be enlarged if the dialog height is increased.
 		}
 		return buttonsPanel;
 	}
