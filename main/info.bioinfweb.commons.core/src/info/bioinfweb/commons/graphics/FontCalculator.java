@@ -27,11 +27,19 @@ import java.awt.image.BufferedImage;
 
 
 public class FontCalculator {
+	private static final int TEST_FONT_HEIGHT = 128;
+	
 	private static FontCalculator firstInstance = null;
-	private final FontRenderContext frc = ((Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY).getGraphics()).getFontRenderContext(); 
+	
+	private final FontRenderContext frc; 
   
 	
-	private FontCalculator() {}
+	private FontCalculator() {
+		super();
+		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY).getGraphics();
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		frc = g.getFontRenderContext();
+	}
 	
 	
 	public static FontCalculator getInstance() {
@@ -83,8 +91,8 @@ public class FontCalculator {
 	
 	public float getWidthToHeigth(String fontName, int fontStyle, String text, float height) {
 		if (text.length() > 0) {
-			TextLayout tl = new TextLayout(text, new Font(fontName, fontStyle, 12), frc);
-			return ((float)tl.getBounds().getWidth()) * (height / (tl.getDescent() + tl.getAscent()));
+			TextLayout tl = new TextLayout(text, new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
+			return ((float)tl.getBounds().getWidth()) * (height / (tl.getDescent() + tl.getAscent()));  //TODO Does leading need to be added here (and at the other locations)?
 		}
 		else {
 			return 0f;
@@ -93,13 +101,13 @@ public class FontCalculator {
 	
 	
 	public float getDescentToHeight(String fontName, int fontStyle, float height) {
-		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, 12), frc);
+		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
 		return height * (tl.getDescent() / (tl.getDescent() + tl.getAscent()));
 	}
 	
 	
 	public float getAscentToHeight(String fontName, int fontStyle, float height) {
-		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, 12), frc);
+		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
 		return height * (tl.getAscent() / (tl.getDescent() + tl.getAscent()));
 	}
 	
