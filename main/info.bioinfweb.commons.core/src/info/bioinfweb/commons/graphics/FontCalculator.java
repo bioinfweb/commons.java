@@ -34,10 +34,12 @@ public class FontCalculator {
 	private final FontRenderContext frc; 
   
 	
-	private FontCalculator() {
+	public FontCalculator() {
 		super();
-		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_BINARY).getGraphics();
+		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR).getGraphics();
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+  	g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+  	g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
 		frc = g.getFontRenderContext();
 	}
 	
