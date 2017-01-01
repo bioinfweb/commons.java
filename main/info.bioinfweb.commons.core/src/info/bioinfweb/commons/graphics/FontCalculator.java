@@ -27,20 +27,20 @@ import java.awt.image.BufferedImage;
 
 
 public class FontCalculator {
-	private static final int TEST_FONT_HEIGHT = 128;
+	private static final int TEST_FONT_HEIGHT = 512;
 	
 	private static FontCalculator firstInstance = null;
 	
-	private final FontRenderContext frc; 
+	private final FontRenderContext frc = new FontRenderContext(null, true, true); 
   
 	
-	public FontCalculator() {
+	private FontCalculator() {
 		super();
-		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR).getGraphics();
-		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-  	g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-  	g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-		frc = g.getFontRenderContext();
+//		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR).getGraphics();
+//		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//  	g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+//  	g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
+//		frc = g.getFontRenderContext();
 	}
 	
 	
@@ -63,14 +63,15 @@ public class FontCalculator {
 	
 	
 	public float getHeight(Font font) {
-		TextLayout tl = new TextLayout("Ög", font, frc);
-		return tl.getDescent() + tl.getAscent();
+		return (float)font.getStringBounds("Ög", frc).getHeight();
+		//return tl.getDescent() + tl.getAscent();
 	}
 	
 	
 	public float getWidth(Font font, String text) {
 		if (text.length() > 0) {
-			return (float)new TextLayout(text, font, frc).getBounds().getWidth();
+			return (float)font.getStringBounds(text, frc).getWidth();
+			//return (float)new TextLayout(text, font, frc).getBounds().getWidth();
 		}
 		else {
 			return 0f;
@@ -86,15 +87,20 @@ public class FontCalculator {
 	 * @return the aspect ratio of the specified text using the specified font
 	 */
 	public float getAspectRatio(Font font, String text) {
-		TextLayout tl = new TextLayout(text, font, frc);
-		return ((float)tl.getBounds().getWidth()) / (tl.getDescent() + tl.getAscent());
+		Rectangle2D r = font.getStringBounds(text, frc);
+		return (float)(r.getWidth() / r.getHeight());
+//		TextLayout tl = new TextLayout(text, font, frc);
+//		return ((float)tl.getBounds().getWidth()) / (tl.getDescent() + tl.getAscent());
 	}
 	
 	
 	public float getWidthToHeigth(String fontName, int fontStyle, String text, float height) {
 		if (text.length() > 0) {
-			TextLayout tl = new TextLayout(text, new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
-			return ((float)tl.getBounds().getWidth()) * (height / (tl.getDescent() + tl.getAscent()));  //TODO Does leading need to be added here (and at the other locations)?
+			Rectangle2D r = new Font(fontName, fontStyle, TEST_FONT_HEIGHT).getStringBounds(text, frc);
+			return (float)(r.getWidth() * (height / r.getHeight()));
+			
+//			TextLayout tl = new TextLayout(text, new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
+//			return ((float)tl.getBounds().getWidth()) * (height / (tl.getDescent() + tl.getAscent()));  //TODO Does leading need to be added here (and at the other locations)?
 		}
 		else {
 			return 0f;
