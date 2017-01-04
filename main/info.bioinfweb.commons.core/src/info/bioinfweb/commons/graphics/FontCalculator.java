@@ -19,10 +19,13 @@
 package info.bioinfweb.commons.graphics;
 
 
-import java.awt.*;
-import java.awt.font.*;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
 import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
 
 
 
@@ -31,16 +34,12 @@ public class FontCalculator {
 	
 	private static FontCalculator firstInstance = null;
 	
-	private final FontRenderContext frc = new FontRenderContext(null, true, true); 
+	private final FontRenderContext frc = new FontRenderContext(null, true, true);
+	private final Map<String, Float> sizeHeightRatioMap = new HashMap<String, Float>();
   
 	
 	private FontCalculator() {
 		super();
-//		Graphics2D g = (Graphics2D)new BufferedImage(1, 1, BufferedImage.TYPE_4BYTE_ABGR).getGraphics();
-//		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-//  	g.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-//  	g.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON);
-//		frc = g.getFontRenderContext();
 	}
 	
 	
@@ -49,6 +48,38 @@ public class FontCalculator {
 			firstInstance = new FontCalculator();
 		}
 		return firstInstance;
+	}
+	
+	
+	private String getMapKey(String fontName, int style) {
+		return fontName + "\t\t\t" + style;
+	}
+	
+	
+	public float getHeightSizeRatio(String fontName, int style) {
+		String key = getMapKey(fontName, style);
+		Float result = sizeHeightRatioMap.get(key);
+		if (result == null) {
+			Font font = new Font(fontName, style, TEST_FONT_HEIGHT);
+			result = (float)(font.getStringBounds("Ög", frc).getHeight() / font.getSize2D());
+			sizeHeightRatioMap.put(key, result);
+		}
+		return result;
+	}
+	
+	
+	public float getTextHeightByFontSize(float fontSize, String fontName, int style) {
+		return getHeightSizeRatio(fontName, style) * fontSize;
+	}
+	
+	
+	public float getTextHeightByFontSize(Font font) {
+		return getTextHeightByFontSize(font.getSize2D(), font.getFontName(), font.getStyle());
+	}
+	
+	
+	public float getFontSizeByTextHeight(float textHeight, String fontName, int style) {
+		return textHeight / getHeightSizeRatio(fontName, style);
 	}
 	
 	
@@ -62,16 +93,18 @@ public class FontCalculator {
 	}
 	
 	
+	/**
+	 * @deprecated As of release 2.2.0, replaced by {@link #getTextHeightByFontSize(Font)}.
+	 */
+	@Deprecated
 	public float getHeight(Font font) {
 		return (float)font.getStringBounds("Ög", frc).getHeight();
-		//return tl.getDescent() + tl.getAscent();
 	}
 	
 	
 	public float getWidth(Font font, String text) {
 		if (text.length() > 0) {
 			return (float)font.getStringBounds(text, frc).getWidth();
-			//return (float)new TextLayout(text, font, frc).getBounds().getWidth();
 		}
 		else {
 			return 0f;
@@ -80,27 +113,34 @@ public class FontCalculator {
 	
 	
 	/**
-	 * Returns the width of the given text divided by the height.
-	 * <p>
-	 * The value is identical with {@code getWidth() / getHeight()} but is calculated more efficiently.
+	 * Returns the width of the given text divided by the height. (Note that the text height and not the font size is used.)
 	 * 
 	 * @return the aspect ratio of the specified text using the specified font
 	 */
 	public float getAspectRatio(Font font, String text) {
 		Rectangle2D r = font.getStringBounds(text, frc);
 		return (float)(r.getWidth() / r.getHeight());
-//		TextLayout tl = new TextLayout(text, font, frc);
-//		return ((float)tl.getBounds().getWidth()) / (tl.getDescent() + tl.getAscent());
 	}
 	
 	
+	/**
+	 * @deprecated As of release 2.2.0, replaced by {@link #getTextWidthToTextHeigth(String, int, String, float)}.
+	 */
+	@Deprecated
 	public float getWidthToHeigth(String fontName, int fontStyle, String text, float height) {
+		return getTextWidthToTextHeigth(fontName, fontStyle, text, height);
+	}
+	
+	
+	public float getTextWidthToTextHeigth(String fontName, int fontStyle, String text, float height) {
+		return getTextWidthToFontSize(fontName, fontStyle, text, getFontSizeByTextHeight(height, fontName, fontStyle));
+	}
+	
+	
+	public float getTextWidthToFontSize(String fontName, int fontStyle, String text, float size) {
 		if (text.length() > 0) {
-			Rectangle2D r = new Font(fontName, fontStyle, TEST_FONT_HEIGHT).getStringBounds(text, frc);
-			return (float)(r.getWidth() * (height / r.getHeight()));
-			
-//			TextLayout tl = new TextLayout(text, new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
-//			return ((float)tl.getBounds().getWidth()) * (height / (tl.getDescent() + tl.getAscent()));  //TODO Does leading need to be added here (and at the other locations)?
+			Font font = new Font(fontName, fontStyle, TEST_FONT_HEIGHT);
+			return (float)(font.getStringBounds(text, frc).getWidth() * (size / font.getSize2D()));
 		}
 		else {
 			return 0f;
@@ -108,13 +148,13 @@ public class FontCalculator {
 	}
 	
 	
-	public float getDescentToHeight(String fontName, int fontStyle, float height) {
+	public float getDescentToHeight(String fontName, int fontStyle, float height) {  //TODO Replace method by versions that distinguish between font size and text height. 
 		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
 		return height * (tl.getDescent() / (tl.getDescent() + tl.getAscent()));
 	}
 	
 	
-	public float getAscentToHeight(String fontName, int fontStyle, float height) {
+	public float getAscentToHeight(String fontName, int fontStyle, float height) {  //TODO Replace method by versions that distinguish between font size and text height.
 		TextLayout tl = new TextLayout("Ög", new Font(fontName, fontStyle, TEST_FONT_HEIGHT), frc);
 		return height * (tl.getAscent() / (tl.getDescent() + tl.getAscent()));
 	}
