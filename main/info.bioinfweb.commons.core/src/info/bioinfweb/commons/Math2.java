@@ -81,11 +81,39 @@ public class Math2 {
   }
 	
 	
+	/**
+	 * Checks if the specified value is the string representation of a mathematical integer.
+	 * 
+	 * @param value the string to be tested
+	 * @return {@code true} if {@code value} is the string representation of an integer or {@code false} otherwise
+	 */
 	public static boolean isInt(String value) {
   	return INT_PATTERN.matcher(value).matches();
   }
 
   
+	/**
+	 * Checks if the specified value is a mathematical integer.
+	 * 
+	 * @param value the value to be tested
+	 * @return {@code true} if {@code value} is an integer or {@code false} otherwise
+	 */
+	public static boolean isInt(double value) {
+		return (value == Math.rint(value)) && !Double.isInfinite(value);	
+	}
+	
+	
+	/**
+	 * Checks if the specified value is a mathematical integer.
+	 * 
+	 * @param value the value to be tested
+	 * @return {@code true} if {@code value} is an integer or {@code false} otherwise
+	 */
+	public static boolean isInt(float value) {
+		return (value == (float)Math.rint(value)) && !Float.isInfinite(value);	
+	}
+	
+	
   /**
    * Returns the whether the given string can be parsed to a {@code double} or a {@code float}.
    * 
