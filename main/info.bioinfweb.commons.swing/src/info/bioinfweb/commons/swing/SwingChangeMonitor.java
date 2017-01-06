@@ -34,26 +34,31 @@ import info.bioinfweb.commons.changemonitor.ChangeMonitor;
 public class SwingChangeMonitor extends ChangeMonitor 
     implements ChangeListener, DocumentListener, ItemListener {
 	
+	@Override
 	public void stateChanged(ChangeEvent e) {
 		registerChange();
 	}
 
 	
+	@Override
 	public void changedUpdate(DocumentEvent e) {
 		registerChange();
 	}
 
 	
+	@Override
 	public void insertUpdate(DocumentEvent e) {
 		registerChange();
 	}
 
 	
+	@Override
 	public void removeUpdate(DocumentEvent e) {
 		registerChange();
 	}
 
 
+	@Override
 	public void itemStateChanged(ItemEvent e) {
 		registerChange();
 	}
