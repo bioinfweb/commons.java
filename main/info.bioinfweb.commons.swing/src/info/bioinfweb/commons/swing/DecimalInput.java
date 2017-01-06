@@ -95,7 +95,7 @@ public class DecimalInput {
 			panel.add(getSlider(), gbc);
 		}
 		
-		setValue(1);  // Es muss ein von Null verschiedener Wert gesetzt werden um ein sionnvolles Maximum zu berechnen
+		setValue(1);  // Es muss ein von Null verschiedener Wert gesetzt werden um ein sinnvolles Maximum zu berechnen.
 		setValue(0);
 		
 		getTextField().getDocument().addDocumentListener(changeMonitor);
