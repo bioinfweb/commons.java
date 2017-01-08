@@ -5,6 +5,9 @@ main/info.bioinfweb.commons.applet/.settings/org.eclipse.jdt.core.prefs -text sv
 main/info.bioinfweb.commons.applet/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/pom.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/src/info/bioinfweb/commons/applet/DoubleBufferedApplet.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.applet/src/info/bioinfweb/commons/applet/GPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.applet/src/info/bioinfweb/commons/applet/LGPL.txt -text svneol=unset#text/plain
+main/info.bioinfweb.commons.applet/src/info/bioinfweb/commons/applet/NOTICE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.bio/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.bio/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.bio/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
