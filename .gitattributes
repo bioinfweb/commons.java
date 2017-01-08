@@ -304,6 +304,7 @@ main/info.bioinfweb.commons.testing/src/info/bioinfweb/commons/testing/XMLAssert
 test/.classpath -text svneol=unset#text/plain
 test/.project -text svneol=unset#text/plain
 test/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
+test/.settings/org.eclipse.jdt.ui.prefs -text svneol=unset#text/plain
 test/data/alignmentIO/invalid.fasta -text
 test/data/alignmentIO/valid.fasta -text
 test/data/io/tableReader/TableLinux_noTerminalBreak.txt -text svneol=unset#text/plain
