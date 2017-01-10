@@ -2,5 +2,5 @@
   <include name="**/lib/*.jar" />
 </fileset>
 <fileset dir="${tempFolder}">
-  <include name="${projectFolderPrefix}.core.jar" />
+  <include name="${simpleProjectLabel}.core.jar" />
 </fileset>
