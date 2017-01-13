@@ -89,6 +89,6 @@ public class PhylipWriter<S extends Sequence<C>, C extends Compound> extends Abs
     	String name = iterator.next();
     	writer.println(getNameMap().addName(name) + " " + alignment.getSequence(name).getSequenceAsString());
     }
-    writer.flush();		
+    writer.flush();
 	}
 }
