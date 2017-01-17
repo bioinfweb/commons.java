@@ -22,7 +22,6 @@
 	<property name="webspaceJavaDocFolder" value="${webspaceRootFolder}/PROTECTED/tree/Documentation/API" />
 	<property name="webspaceDownloadFolder" value="${webspaceRootFolder}/Download" />	
 	<property name="svnRepositoryPath" value="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main" />
-	<property name="defaultJavaDocSourceLocation" value="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main/info.bioinfweb.commons.core" />
 	<property name="styleName" value="commons.java" />
 	<property name="dbName" value="biw_Commons_Java" />
 	<property name="dbUser" value="biw_rm_Commons_J" />
