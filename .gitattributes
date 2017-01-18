@@ -30,6 +30,7 @@ main/info.bioinfweb.commons.core/ant/build.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/ant/javaDoc_links.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/ant/javaDoc_sourceLocations.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/ant/library_jars.xml -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/ant/rename_binaries.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/ant/sourcefiles.xml -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/include/APACHE-LICENSE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/include/GPL.txt -text svneol=unset#text/plain
