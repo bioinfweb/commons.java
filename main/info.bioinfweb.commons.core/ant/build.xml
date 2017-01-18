@@ -28,6 +28,8 @@
 	&dbPassword;
 	<property name="softwareID" value="16" />
 	<property name="containedItems" value="1 2 4 5 6 7 8 9 10 11" />
+	<property name="singleModuleDownloadTypes" value="1,6" />
+	<property name="completeDownloadTypes" value="4,5" /> 
 	<property name="defaultNewsTextEn" value="A new version of our Java library [i]bioinfweb.commons[/i] has been [LINK http://commons.bioinfweb.info/Java/Download released]. It consists of  different modules to be used in bioinformatics or in a general purpose that are made available under [LINK http://commons.bioinfweb.info/Java/License/LGPL GNU LGPL 3]." />
 	<property name="defaultNewsTextDe" value="Eine neue Version unserer Java Bibliothek [i]bioinfweb.commons[/i] wurde [LINK http://commons.bioinfweb.info/Java/Download veröffentlicht]. Sie besteht aus Modulen mit vielfältigen Anwendungsbereichen die unter [LINK http://commons.bioinfweb.info/Java/License/LGPL GNU LGPL 3] öffentlich zur Verfügung gestellt werden." />
 	<property name="defaultImageURL" value="http://commons.bioinfweb.info/Java/Logo.png" />
