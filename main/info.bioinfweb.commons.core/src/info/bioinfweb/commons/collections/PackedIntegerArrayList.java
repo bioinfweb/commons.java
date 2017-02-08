@@ -91,9 +91,10 @@ public class PackedIntegerArrayList {
   /**
    * Creates a new instance of this class.
    * 
-   * @param bitsPerValue - the number of bit each value will consume in memory
-   * @param minValue - the minimum value to be stored in the list
-   * @param initialCapacity - the number of values the underlying array can take up initially
+   * @param bitsPerValue the number of bit each value will consume in memory
+   * @param minValue the minimum value to be stored in the list
+   * @param initialCapacity the number of values the underlying array can take up initially
+   * @see #calculateBitsPerValue(int)
    */
   public PackedIntegerArrayList(int bitsPerValue, long minValue, long initialCapacity) {
     this.size = 0;
@@ -168,7 +169,7 @@ public class PackedIntegerArrayList {
 	 * Calculates the number of {@code long} array elements necessary to store the specified
 	 * number of elements.
 	 * 
-	 * @param capacity - the number of list elements to be stored
+	 * @param capacity the number of list elements to be stored
 	 * @return the needed array size
 	 */
 	protected int calculateArrayLength(long capacity) {
@@ -191,7 +192,7 @@ public class PackedIntegerArrayList {
    * current one (or larger if the requested capacity requires it) is created and the current 
    * contents are copied there.
    * 
-   * @param newCapacity - the number of elements that need to be stored in the array
+   * @param newCapacity the number of elements that need to be stored in the array
    */
   public void ensureCapacity(long newCapacity) {
   	int newArrayLength = calculateArrayLength(newCapacity);
@@ -207,8 +208,8 @@ public class PackedIntegerArrayList {
 	 * the specified position are moved accordingly. The new elements are not initialized. The underlying
 	 * array is resized if necessary.
 	 * 
-	 * @param index - the index of the first element to be inserted
-	 * @param length - the number of elements to be inserted
+	 * @param index the index of the first element to be inserted
+	 * @param length the number of elements to be inserted
 	 */
 	protected void insertRange(long index, long length) {
 		if (length > 0) {
@@ -249,8 +250,8 @@ public class PackedIntegerArrayList {
 	 * Removes the specified elements from this list. All elements to the right of the removed sequence
 	 * are copied to the left accordingly.
 	 * 
-	 * @param index - the index of the first element to be removed
-	 * @param length - the number of elements to be removed
+	 * @param index the index of the first element to be removed
+	 * @param length the number of elements to be removed
 	 * @throws IllegalArgumentException if the specified range is outside the current size of the list
 	 */
 	protected void removeRange(long index, long length) {
@@ -322,8 +323,8 @@ public class PackedIntegerArrayList {
 	/**
 	 * Adds the specified element to this list and moves other elements to the right if necessary.
 	 * 
-	 * @param index - the index where the new element shall be inserted
-	 * @param value - the value to be inserted
+	 * @param index the index where the new element shall be inserted
+	 * @param value the value to be inserted
 	 * 
 	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater than the current size of 
 	 *         the list
@@ -341,7 +342,7 @@ public class PackedIntegerArrayList {
 	/**
 	 * Adds the specified element to the end of this list.
 	 * 
-	 * @param value - the value to be appended
+	 * @param value the value to be appended
 	 * @throws IllegalArgumentException if {@code value} does not fit into the range specified by the constructor
 	 *         parameters {@code bitsPerValue} and {@code minValue}
 	 */
@@ -356,7 +357,7 @@ public class PackedIntegerArrayList {
 	/**
 	 * Returns the element stored at the specified index.
 	 * 
-	 * @param index - the index of the element to be read
+	 * @param index the index of the element to be read
 	 * @return the integer value stored at this position
 	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
 	 *         of the list
@@ -384,7 +385,7 @@ public class PackedIntegerArrayList {
 	/**
 	 * Removes the element at the specified position from this list.
 	 * 
-	 * @param index - the index of the element to be removed
+	 * @param index the index of the element to be removed
 	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
 	 *         of the list
 	 */
@@ -396,8 +397,8 @@ public class PackedIntegerArrayList {
 	/**
 	 * Replaces the value at the specified position with the new value.
 	 * 
-	 * @param index - the index of the value to be replaced
-	 * @param value - the new value for the specified position
+	 * @param index the index of the value to be replaced
+	 * @param value the new value for the specified position
 	 * @throws IndexOutOfBoundsException if {@code index} is lower than 0 or greater or equal to the current size 
 	 *         of the list
 	 * @throws IllegalArgumentException if {@code value} does not fit into the range specified by the constructor
