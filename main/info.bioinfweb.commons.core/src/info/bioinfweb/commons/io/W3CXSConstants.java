@@ -36,6 +36,8 @@ public interface W3CXSConstants {
 	public static final QName DATA_TYPE_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "string");
 	public static final QName DATA_TYPE_NORMALIZED_STRING = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "normalizedString");
 	public static final QName DATA_TYPE_TOKEN = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "token");
+	public static final QName DATA_TYPE_NAME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "Name");
+	public static final QName DATA_TYPE_NC_NAME = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "NCName");
 
 	public static final QName DATA_TYPE_INTEGER = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "integer");
 	public static final QName DATA_TYPE_INT = new QName(XMLConstants.W3C_XML_SCHEMA_NS_URI, "int");
