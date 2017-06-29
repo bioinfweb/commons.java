@@ -19,6 +19,13 @@
 package info.bioinfweb.commons.swt;
 
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Frame;
+import java.awt.Panel;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -43,5 +50,24 @@ public class SWTUtils {
 	    child = child.getParent();
 		}
 		return (child == parent); 
-  }	
+  }
+  
+  
+  /**
+   * Creates a new {@link Composite} with an embedded <i>AWT</i> or <i>Swing</i> component.
+   * <p>
+   * This method makes use of {@link SWT_AWT#new_Frame(Composite)} internally.
+   * 
+   * @param awtComponent the <i>AWT</i> or <i>Swing</i> component to be embedded
+   * @param parentComposite the parent <i>SWT</i> composite
+   * @return the new <i>SWT</i> composite containing the embedded component
+   */
+  public static Composite embedAWTComponent(Component awtComponent, Composite parentComposite) {
+		Composite result = new Composite(parentComposite, SWT.EMBEDDED);  // Create a child composite to make sure the EMBEDDED flag is set, which is necessary to nest AWT components.
+		Frame frame = SWT_AWT.new_Frame(result);
+		Panel panel = new Panel(new BorderLayout());  // Parent heavyweight panel is necessary since Java 1.5 to be able to focus and receive mouse events in nested Swing components.
+		frame.add(panel);
+		panel.add(awtComponent, BorderLayout.CENTER);
+		return result;
+  }
 }
