@@ -22,6 +22,9 @@ package info.bioinfweb.commons.swing;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 
 
 public class SwingUtils {
@@ -35,5 +38,22 @@ public class SwingUtils {
 	    child = child.getParent();
 		}
 		return (child == parent); 
-  }	
+  }
+  
+  
+	/**
+	 * Sets the native look and feel of the current operating system by invoking 
+	 * {@code UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())}.
+	 * <p>
+	 * Possible exceptions are ignored.
+	 */
+	public static void setNativeLF() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} 
+		catch (ClassNotFoundException e) {} 
+		catch (InstantiationException e) {}
+		catch (IllegalAccessException e) {}
+		catch (UnsupportedLookAndFeelException e) {}
+	}
 }
