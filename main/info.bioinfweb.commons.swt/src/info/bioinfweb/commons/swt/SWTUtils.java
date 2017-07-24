@@ -63,6 +63,7 @@ public class SWTUtils {
    * @return the new <i>SWT</i> composite containing the embedded component
    */
   public static Composite embedAWTComponent(Component awtComponent, Composite parentComposite) {
+  	//TODO Does any care need to be taken here to run certain methods within the Swing or SWT thread?
 		Composite result = new Composite(parentComposite, SWT.EMBEDDED);  // Create a child composite to make sure the EMBEDDED flag is set, which is necessary to nest AWT components.
 		Frame frame = SWT_AWT.new_Frame(result);
 		Panel panel = new Panel(new BorderLayout());  // Parent heavyweight panel is necessary since Java 1.5 to be able to focus and receive mouse events in nested Swing components.
