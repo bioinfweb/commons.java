@@ -72,9 +72,9 @@ public class SQLUtils {
 	 * If {@code null} is read from the database the returned set will also be {@code null}.
 	 * If an empty string (representation of an empty {@code SET}) is read an empty set will be returned.
 	 * 
-	 * @param rs - the result set to read the data from
-	 * @param columnLabel - the label of the column containing the {@code SET} value
-	 * @param enumClass - the {@code enum} class that represents the SQL {@code SET} in Java
+	 * @param rs the result set to read the data from
+	 * @param columnLabel the label of the column containing the {@code SET} value
+	 * @param enumClass the {@code enum} class that represents the SQL {@code SET} in Java
 	 * @return an {@code enum} set corresponding the value in the database
 	 * @throws SQLException
 	 */
@@ -94,8 +94,8 @@ public class SQLUtils {
 	 * If {@code null} is specified as {@code value} the returned set will also be {@code null}.
 	 * If an empty string is specified as {@code value} an empty set will be returned.
 	 * 
-	 * @param value - the string representation of the SQL {@code SET} value
-	 * @param enumClass - the {@code enum} class that represents the SQL {@code SET} in Java
+	 * @param value the string representation of the SQL {@code SET} value
+	 * @param enumClass the {@code enum} class that represents the SQL {@code SET} in Java
 	 * @return an {@code enum} set corresponding the value in the database
 	 */
 	public static <E extends Enum<E>> EnumSet<E> readEnumSet(String value, Class<E> enumClass) {
