@@ -1,4 +1,4 @@
-# *bioinfweb.commons.java*
+# bioinfweb.commons.java
 
 *bioinfweb.commons.java* is a open source *Java* library consisting of different modules for e.g. general purposes, *Swing*, *SWT*, bioinformatics, *Servlets* or *SQL*. The classes and interfaces have been developed for different *bioinfweb* software projects and are provided here to be of possible use also for other developers.
 
