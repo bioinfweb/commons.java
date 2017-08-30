@@ -1,4 +1,6 @@
 * text=auto !eol
+/LICENSE.md -text
+/README.md -text
 main/info.bioinfweb.commons.applet/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.applet/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain
