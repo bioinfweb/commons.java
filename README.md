@@ -16,7 +16,9 @@ This *GitHub* repository in a synchronized mirror of the [master repository at b
 
 ## License
 
-The latest versions of *bioinfweb.commons.java* are distrubuted under [GNU General Lesser Public License Version 3](http://commons.bioinfweb.info/Java/License/LGPL).
+The latest versions of *bioinfweb.commons.java* are distrubuted under [GNU General Lesser Public License Version 3](http://commons.bioinfweb.info/Java/License/LGPL). See [NOTICE.txt](https://github.com/bioinfweb/commons.java/blob/master/main/info.bioinfweb.commons.core/src/NOTICE.txt) fur further details.
+
+This product includes dependencies developed by the [Apache Software Foundation](http://www.apache.org/) distributed under the terms of the [Apache License Version 2.0](https://github.com/bioinfweb/commons.java/blob/master/main/info.bioinfweb.commons.core/src/APACHE-LICENSE.txt).
 
 ## Binary releases
 
