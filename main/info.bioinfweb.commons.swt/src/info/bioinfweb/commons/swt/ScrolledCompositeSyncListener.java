@@ -80,8 +80,8 @@ public class ScrolledCompositeSyncListener {
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
 	 * 
-	 * @param scrolledComposites - the scroll components to be synchronized
-	 * @param horizontal - Specify {@code true} here of you want to synchronize horizontal scrolling or {@code false}
+	 * @param scrolledComposites the scroll components to be synchronized
+	 * @param horizontal Specify {@code true} here of you want to synchronize horizontal scrolling or {@code false}
 	 *        for vertical scrolling.
 	 */
 	public ScrolledCompositeSyncListener(Collection<ScrolledComposite> scrolledComposites, boolean horizontal) {
@@ -97,8 +97,8 @@ public class ScrolledCompositeSyncListener {
 	 * Note that all {@link ScrolledComposite}s need to have a scroll bar in the according direction. Otherwise
 	 * a {@link NullPointerException} will occur.
 	 * 
-	 * @param scrolledComposites - the scroll components to be synchronized
-	 * @param horizontal - Specify {@code true} here of you want to synchronize horizontal scrolling or {@code false}
+	 * @param scrolledComposites the scroll components to be synchronized
+	 * @param horizontal Specify {@code true} here of you want to synchronize horizontal scrolling or {@code false}
 	 *        for vertical scrolling.
 	 */
 	public ScrolledCompositeSyncListener(ScrolledComposite[] scrolledComposites, boolean horizontal) {
