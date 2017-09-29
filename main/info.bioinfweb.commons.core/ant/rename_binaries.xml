@@ -1,9 +1,0 @@
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.core.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-core-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.applet.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-applet-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.bio.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-bio-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.testing.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-testing-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.swing.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-swing-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.swt.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-swt-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.servlet.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-servlet-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.sql.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-sql-${majorNo}.${minorNo}.${revisionNo}.jar"/>
-<move file="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}.experimental.jar" tofile="${tempFolder}/downloads/complete/bin/${simpleProjectLabel}-experimental-${majorNo}.${minorNo}.${revisionNo}.jar"/>

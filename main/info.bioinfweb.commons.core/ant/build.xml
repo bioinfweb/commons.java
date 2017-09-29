@@ -3,8 +3,6 @@
 <!ENTITY libraryReleaseTargets SYSTEM "/srv/commons.bioinfweb/data/ReleaseManager/shared/ant/Library_Release_Targets.xml">
 <!ENTITY additionalClasspathEntries SYSTEM "additional_classpath_entries.xml">
 <!ENTITY javadocLinks SYSTEM "javaDoc_links.xml">
-<!ENTITY binaries SYSTEM "binaries.xml">
-<!ENTITY renameBinaries SYSTEM "rename_binaries.xml">
 <!ENTITY sourcefiles SYSTEM "sourcefiles.xml">
 <!ENTITY libraryJars SYSTEM "library_jars.xml">
 <!ENTITY javadocSourceLocations SYSTEM "javaDoc_sourceLocations.xml">
@@ -23,12 +21,14 @@
 	<property name="webspaceJavaDocFolder" value="${webspaceRootFolder}/PROTECTED/tree/Documentation/API" />
 	<property name="webspaceDownloadFolder" value="${webspaceRootFolder}/Download" />	
 	<property name="svnRepositoryPath" value="https://secure.bioinfweb.info/Code/svn/commons.java/trunk/main" />
+	<property name="javaVersion" value="1.7" /> 
 	<property name="styleName" value="commons.java" />
 	<property name="dbName" value="biw_Commons_Java" />
 	<property name="dbUser" value="biw_rm_Commons_J" />
 	&dbPassword;
 	<property name="softwareID" value="16" />
 	<property name="containedItems" value="1 2 4 5 6 7 8 9 10 11" />
+	<property name="containedModuleItems" value="1 2 4 5 6 7 8 10 11" />
 	<property name="singleModuleDownloadTypes" value="1,6" />
 	<property name="completeDownloadTypes" value="4,5" /> 
 	<property name="defaultNewsTextEn" value="A new version of our Java library [i]bioinfweb.commons[/i] has been [LINK http://commons.bioinfweb.info/Java/Download released]. It consists of  different modules to be used in bioinformatics or in a general purpose that are made available under [LINK http://commons.bioinfweb.info/Java/License/LGPL GNU LGPL 3]." />
