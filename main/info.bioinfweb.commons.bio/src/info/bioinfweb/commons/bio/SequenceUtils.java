@@ -175,8 +175,7 @@ public class SequenceUtils {
 	 * of uracil). (Anyway, if {@code 'U'} is specified for {@code nucleotide} the returned array will contain 
 	 * {@code 'U'} as the only element and not {@code 'T'}). 
 	 * <p>
-	 * If the specified character is not an ambiguity code character, an array containing 
-	 * this character (in upper case) as the only element is returned.  
+	 * If the specified character is not an ambiguity code character, an empty array is returned.  
 	 * 
 	 * @param nucleotide the character that may be an ambiguity code
 	 * @return an array of the nucleotides as upper case letters
@@ -185,7 +184,7 @@ public class SequenceUtils {
 		nucleotide = Character.toUpperCase(nucleotide);
 		NucleotideInfo result = nucleotideInfoMap.get(nucleotide);
 		if (result == null) {  // e.g. for '-'
-			return new char[]{nucleotide};
+			return new char[0];  //TODO Was returning the character itself needed at any place?  //TODO Is this an API change? => The changes e.g. in oneLetterAminoAcidConstituents() are. => Major version number increase.
 		}
 		else {
 			return Arrays.copyOf(result.constituents, result.constituents.length);  // Copy array to avoid modifications of the arrays in nucleotideInfoMap by external code.
@@ -325,7 +324,7 @@ public class SequenceUtils {
 	 * specified ambiguity code.
 	 * 
 	 * @param code the ambiguity one or three letter ambiguity code to be converted 
-	 * @return an array with the one letter representations of the according amino acids or {@code null}
+	 * @return an array with the one letter representations of the respective amino acids or an empty array
 	 *         if {@code code} was not a valid ambiguity code
 	 */
 	public static char[] oneLetterAminoAcidConstituents(String code) {
@@ -334,7 +333,7 @@ public class SequenceUtils {
 			return Arrays.copyOf(info.constituents, info.constituents.length);
 		}
 		else {
-			return null;
+			return new char[0];
 		}
 	}
 	
@@ -344,13 +343,13 @@ public class SequenceUtils {
 	 * specified ambiguity code.
 	 * 
 	 * @param code the ambiguity one or three letter ambiguity code to be converted 
-	 * @return an array with the three letter representations of the according amino acids or {@code null}
+	 * @return an array with the three letter representations of the according amino acids or an empty array
 	 *         if {@code code} was not a valid ambiguity code
 	 */
 	public static String[] threeLetterAminoAcidConstituents(String code) {
 		char[] oneLetterConstituents = oneLetterAminoAcidConstituents(code);
 		if (oneLetterConstituents == null) {
-			return null;
+			return new String[0];
 		}
 		else {
 			String[] result = new String[oneLetterConstituents.length];
