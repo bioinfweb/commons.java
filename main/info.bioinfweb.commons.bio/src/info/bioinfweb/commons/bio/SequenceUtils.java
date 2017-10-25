@@ -768,6 +768,9 @@ public class SequenceUtils {
   	double sum = 0.0;
   	for (int i = 0; i < alignmentColumn.length; i++) {
   		char[] constituents = nucleotideConstituents(alignmentColumn[i]);
+  		if (constituents.length == 0) {
+  			constituents = new char[]{alignmentColumn[i]};
+  		}
   		double addend = 1.0 / (double)constituents.length;
   		for (int j = 0; j < constituents.length; j++) {
   			if (isNonAmbiguityNucleotide(constituents[j])) {
@@ -818,6 +821,14 @@ public class SequenceUtils {
   	double sum = 0.0;
   	for (int i = 0; i < alignmentColumn.length; i++) {
   		char[] constituents = oneLetterAminoAcidConstituents(alignmentColumn[i]);
+  		if (constituents.length == 0) {
+  			if (alignmentColumn[i].length() == 1) {
+  				constituents = new char[]{alignmentColumn[i].charAt(0)};
+  			}
+  			else {
+  				constituents = new char[]{oneLetterAminoAcidByThreeLetter(alignmentColumn[i])};
+  			}
+  		}
   		if ((constituents != null) && (constituents.length <= 2)) {  // Also ignore X because it counts equally for all amino acids anyway and its not clear if post-translational amino acids are included in the alphabet.
 	  		double addend = 1.0 / (double)constituents.length;
 	  		for (int j = 0; j < constituents.length; j++) {
