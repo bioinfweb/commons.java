@@ -80,11 +80,11 @@ public class SequenceUtils {
 	
 	private static Map<Character, NucleotideInfo> createNucleotideInfoMap() {
 		Map<Character, NucleotideInfo> result = new TreeMap<Character, NucleotideInfo>();
-		result.put('A', new NucleotideInfo('T', new char[]{'A'}));
-		result.put('T', new NucleotideInfo('A', new char[]{'T'}));
-		result.put('U', new NucleotideInfo('A', new char[]{'U'}));
-		result.put('C', new NucleotideInfo('G', new char[]{'C'}));
-		result.put('G', new NucleotideInfo('C', new char[]{'G'}));
+		result.put('A', new NucleotideInfo('T', new char[0]));
+		result.put('T', new NucleotideInfo('A', new char[0]));
+		result.put('U', new NucleotideInfo('A', new char[0]));
+		result.put('C', new NucleotideInfo('G', new char[0]));
+		result.put('G', new NucleotideInfo('C', new char[0]));
 		result.put('Y', new NucleotideInfo('R', new char[]{'C', 'T'}));  // Y = C v T (Pyrimidin)
 		result.put('R', new NucleotideInfo('Y', new char[]{'A', 'G'}));  // R = A v G (Purin)
 		result.put('K', new NucleotideInfo('M', new char[]{'G', 'T'}));  // K = G v T (Ketogruppe)
@@ -97,6 +97,7 @@ public class SequenceUtils {
 		result.put('H', new NucleotideInfo('D', new char[]{'A', 'C', 'T'}));  // H = A v C v T
 		result.put('N', new NucleotideInfo('N', new char[]{'A', 'T', 'C', 'G'}));
 		result.put('X', new NucleotideInfo('X', new char[]{'A', 'T', 'C', 'G'}));
+		result.put('?', new NucleotideInfo('?', new char[]{'A', 'T', 'C', 'G', GAP_CHAR}));
 		return result;
 	}
 	
@@ -104,9 +105,6 @@ public class SequenceUtils {
 	private static void putAminoAcidInfo(Map<String, AminoAcidInfo> map, char oneLetterCode, String threeLetterCode, 
 			char... constituents) {
 		
-		if (constituents.length == 0) {
-			constituents = new char[]{oneLetterCode};
-		}
 		AminoAcidInfo info = new AminoAcidInfo(oneLetterCode, threeLetterCode, constituents);
 		map.put(Character.toString(oneLetterCode), info);
 		map.put(threeLetterCode.toUpperCase(), info);
@@ -149,6 +147,8 @@ public class SequenceUtils {
 		result.put("X", info);
 		result.put("XAA", info);
 		result.put("UNK", info);
+		putAminoAcidInfo(result, '?', "?", 'A', 'C', 'D', 'E', 'F','G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 
+				'W', 'Y', 'O', 'U', GAP_CHAR, STOP_CODON_CHAR);
 		
 		return result;
 	}
@@ -163,6 +163,7 @@ public class SequenceUtils {
 	public static Set<Character> getNucleotideCharacters() {
 		Set<Character> result = new TreeSet<Character>();
 		result.addAll(nucleotideInfoMap.keySet());
+		result.remove(MISSING_DATA_CHAR);  // This character is in the key set but should not be returned here. 
 		return result;
 	}
 	
@@ -244,6 +245,7 @@ public class SequenceUtils {
 			result.remove('J');
 			result.remove('X');
 		}
+		result.remove(MISSING_DATA_CHAR);
 		return result;
 	}
 	
@@ -259,7 +261,7 @@ public class SequenceUtils {
 	public static Set<String> getAminoAcidThreeLetterCodes(boolean includeAmbiguity) {
 		Set<String> result = new TreeSet<String>();
 		for (String key : aminoAcidInfoMap.keySet()) {
-			if (key.length() == 3) {
+			if (key.length() == 3) {  // Missing data will also be filtered out here, since it does not have a three letter code.
 				result.add(key);
 			}
 		}
@@ -363,7 +365,7 @@ public class SequenceUtils {
 	
 	public static boolean isNonAmbiguityAminoAcid(String code) {
 		AminoAcidInfo info = aminoAcidInfoMap.get(code.toUpperCase());
-		return (info != null) && (info.constituents.length == 1);
+		return (info != null) && (info.constituents.length == 0);
 	}
 	
 	
