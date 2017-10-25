@@ -39,12 +39,13 @@ import org.junit.Test;
 public class SequenceUtilsTest {
 	@Test
 	public void test_nucleotideConstituents() {
-		assertArrayEquals(new char[]{'A'}, SequenceUtils.nucleotideConstituents('A'));
-		assertArrayEquals(new char[]{'T'}, SequenceUtils.nucleotideConstituents('t'));
-		assertArrayEquals(new char[]{'-'}, SequenceUtils.nucleotideConstituents('-'));
-		assertArrayEquals(new char[]{'U'}, SequenceUtils.nucleotideConstituents('U'));
+		assertArrayEquals(new char[0], SequenceUtils.nucleotideConstituents('A'));
+		assertArrayEquals(new char[0], SequenceUtils.nucleotideConstituents('t'));
+		assertArrayEquals(new char[0], SequenceUtils.nucleotideConstituents('-'));
+		assertArrayEquals(new char[0], SequenceUtils.nucleotideConstituents('U'));
 		assertArrayEquals(new char[]{'A', 'T', 'C', 'G'}, SequenceUtils.nucleotideConstituents('N'));
 		assertArrayEquals(new char[]{'A', 'T', 'C', 'G'}, SequenceUtils.nucleotideConstituents('x'));
+		assertArrayEquals(new char[]{'A', 'T', 'C', 'G', '-'}, SequenceUtils.nucleotideConstituents('?'));
 	}
 	
 	
@@ -68,6 +69,7 @@ public class SequenceUtilsTest {
 		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('B'));
 		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('H'));
 		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('D'));
+		assertTrue(SequenceUtils.isNucleotideAmbuguityCode('?'));
 	}
 	
 	
@@ -120,7 +122,7 @@ public class SequenceUtilsTest {
 	
 	@Test
 	public void test_oneLetterAminoAcidConstituents() {
-		assertArrayEquals(new char[]{'P'}, SequenceUtils.oneLetterAminoAcidConstituents("Pro"));
+		assertArrayEquals(new char[0], SequenceUtils.oneLetterAminoAcidConstituents("Pro"));
 		assertArrayEquals(new char[]{'N', 'D'}, SequenceUtils.oneLetterAminoAcidConstituents("B"));
 		assertArrayEquals(new char[]{'N', 'D'}, SequenceUtils.oneLetterAminoAcidConstituents("Asx"));
 		assertArrayEquals(new char[]{'Q', 'E'}, SequenceUtils.oneLetterAminoAcidConstituents("Z"));
@@ -132,7 +134,7 @@ public class SequenceUtilsTest {
 	
 	@Test
 	public void test_threeLetterAminoAcidConstituents() {
-		assertArrayEquals(new String[]{"Pro"}, SequenceUtils.threeLetterAminoAcidConstituents("Pro"));
+		assertArrayEquals(new String[0], SequenceUtils.threeLetterAminoAcidConstituents("Pro"));
 		assertArrayEquals(new String[]{"Asn", "Asp"}, SequenceUtils.threeLetterAminoAcidConstituents("B"));
 		assertArrayEquals(new String[]{"Asn", "Asp"}, SequenceUtils.threeLetterAminoAcidConstituents("Asx"));
 		assertArrayEquals(new String[]{"Gln", "Glu"}, SequenceUtils.threeLetterAminoAcidConstituents("Z"));
