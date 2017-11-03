@@ -27,6 +27,7 @@ import javax.swing.JTextArea;
  * This implementation of {@link ApplicationLogger} appends all messages to a {@link JTextArea}.
  * 
  * @author Ben St&ouml;ver
+ * @bioinfweb.module info.bioinfweb.commons.swing
  */
 public class JTextAreaApplicationLogger extends AbstractApplicationLogger {
   private JTextArea textArea = null;

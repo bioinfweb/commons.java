@@ -44,6 +44,7 @@ import java.awt.Insets;
  * 
  * @since 3.0.0
  * @author Ben St&ouml;ver
+ * @bioinfweb.module info.bioinfweb.commons.swing
  */
 public class ApplicationLoggerDialog extends JDialog implements ApplicationLogger {
 	private static final long serialVersionUID = 1L;

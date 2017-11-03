@@ -27,9 +27,10 @@ import javax.swing.text.Document;
 
 /**
  * This implementation of {@link ApplicationLogger} appends all messages to a {@link Document}. It 
- * can be used to print log messages to swing text components (e.g. {@link JEditorPane}).
+ * can be used to print log messages to <i>Swing</i> text components (e.g. {@link JEditorPane}).
  * 
  * @author Ben St&ouml;ver
+ * @bioinfweb.module info.bioinfweb.commons.swing
  */
 public class SwingDocumentApplicationLogger extends AbstractApplicationLogger {
   private Document document = null;
