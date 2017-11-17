@@ -64,6 +64,21 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   }
 	
 	
+	public void remove(int firstPos, int lastPos) {
+		SortedSet<SimpleSequenceInterval> overlap = getOverlappingElements(firstPos -1, lastPos +1);
+		if (!overlap.isEmpty()) {
+			removeAll(overlap);
+			if (overlap.first().getFirstPos() < firstPos) {
+				super.add(new SimpleSequenceInterval(overlap.first().getFirstPos(), firstPos));
+			}
+			if (lastPos < overlap.last().getLastPos()) {
+				super.add(new SimpleSequenceInterval(lastPos, overlap.last().getLastPos()));
+			}
+		}
+	}
+	
+	
+	
 	/**
 	 * Adds all or a part of the intervals contained in another list to this list. 
 	 * 
