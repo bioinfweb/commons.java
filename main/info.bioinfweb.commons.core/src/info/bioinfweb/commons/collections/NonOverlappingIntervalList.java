@@ -64,7 +64,34 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
   }
 	
 	
-	public void remove(int firstPos, int lastPos) {
+	/**
+	 * Removes the specified object from this interval list. If {@code o} in an instance of 
+	 * {@link SimpleSequenceInterval} but this exact interval is not contained in this list,
+	 * this method will delegate to {@link #remove(int, int)}, which may then modify 
+	 * overlapping interval entries.
+	 * 
+	 * @return {@code true} if an object was removed or intervals have been modified.
+	 * @see java.util.TreeSet#remove(java.lang.Object)
+	 */
+	@Override
+	public boolean remove(Object o) {
+		boolean result = super.remove(o);  // This must be tried first to avoid recursions via the call of removeAll() in remove(int, int).
+		if ((!result) && (o instanceof SimpleSequenceInterval)) {
+			SimpleSequenceInterval interval = (SimpleSequenceInterval)o;
+			result = remove(interval.getFirstPos(), interval.getLastPos());
+		}
+		return result;
+	}
+
+
+	/**
+	 * Removes the specified interval from this list. (Overlapping interval objects will be modified.) 
+	 * 
+	 * @param firstPos the first index of the interval to be removed (must be {@code >= 0}) 
+	 * @param lastPos the index after the last position to be removed (must be &gt; {@code firstIndex}).
+	 * @return {@code true} if any changes were made to the list 
+	 */
+	public boolean remove(int firstPos, int lastPos) {
 		SortedSet<SimpleSequenceInterval> overlap = getOverlappingElements(firstPos -1, lastPos +1);
 		if (!overlap.isEmpty()) {
 			removeAll(overlap);
@@ -74,9 +101,12 @@ public class NonOverlappingIntervalList extends TreeSet<SimpleSequenceInterval> 
 			if (lastPos < overlap.last().getLastPos()) {
 				super.add(new SimpleSequenceInterval(lastPos, overlap.last().getLastPos()));
 			}
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
-	
 	
 	
 	/**
