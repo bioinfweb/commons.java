@@ -43,7 +43,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param underlyingList - the list to be observed
+	 * @param underlyingList the list to be observed
 	 */
 	public ObservableList(List<E> underlyingList) {
 		super(underlyingList);
@@ -53,7 +53,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 	/**
 	 * Adds a change listener to track changes of the underlying list.
 	 * 
-	 * @param listener - the listener to add
+	 * @param listener the listener to add
 	 */
 	public void addListChangeListener(ListChangeListener<E> listener) {
 		changeListeners.add(listener);
@@ -63,7 +63,7 @@ public class ObservableList<E> extends ListDecorator<E> {
 	/**
 	 * Removes a listener from this list.
 	 * 
-	 * @param listener - the listener to be removed
+	 * @param listener the listener to be removed
 	 * @return {@code true} if this list contained the specified element 
 	 */
 	public boolean removeListChangeListener(ListChangeListener<E> listener) {
