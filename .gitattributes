@@ -87,6 +87,9 @@ main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/observab
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/observable/ObservableList.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/observable/package-info.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/collections/package-info.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/events/GenericChangeEvent.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/events/GenericEventObject.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/events/package-info.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/graphics/AlphaImageAssembler.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/graphics/DoubleDimension.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.core/src/info/bioinfweb/commons/graphics/FontCalculator.java -text svneol=unset#text/plain
