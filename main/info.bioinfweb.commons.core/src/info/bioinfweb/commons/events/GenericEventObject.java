@@ -23,6 +23,15 @@ import java.util.EventObject;
 
 
 
+/**
+ * An event state object that returns its source as a generic type. Can be used as an alternative superclass to
+ * {@link EventObject} if a certain return type for {@link #getSource()} is needed.
+ * 
+ * @author Ben St&ouml;ver
+ * @since 3.0.0
+ *
+ * @param <S> the type of source
+ */
 public class GenericEventObject<S> extends EventObject {
 	public GenericEventObject(S source) {
 		super(source);
