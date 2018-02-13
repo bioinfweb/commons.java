@@ -268,7 +268,6 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/JDropDownSpin
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
-main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OpenWebsiteAction.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ProgressDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/RelativeRangeModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingChangeMonitor.java -text svneol=unset#text/plain
@@ -278,11 +277,20 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaverMes
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingUtils.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/TableColumnModelAdapter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/WrapLayout.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/actions/BioinfwebMainPageAction.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/actions/OpenWebsiteAction.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/actions/TwitterAction.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpaneselector/ExtendedScrollPaneSelector.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/scrollpaneselector/ScrollPaneSelectable.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneBidule.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/ScrollPaneSelector.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/org/jdesktop/swingx/scrollpaneselector/TweakedScrollPaneLayout.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/resources/symbols/ResearchGate16.png -text
+main/info.bioinfweb.commons.swing/src/resources/symbols/ResearchGate22.png -text
+main/info.bioinfweb.commons.swing/src/resources/symbols/Twitter16.png -text
+main/info.bioinfweb.commons.swing/src/resources/symbols/Twitter22.png -text
+main/info.bioinfweb.commons.swing/src/resources/symbols/bioinfweb16.png -text
+main/info.bioinfweb.commons.swing/src/resources/symbols/bioinfweb22.png -text
 main/info.bioinfweb.commons.swt/.classpath -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/.project -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swt/.settings/org.eclipse.jdt.core.prefs -text svneol=unset#text/plain

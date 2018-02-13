@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package info.bioinfweb.commons.swing;
+package info.bioinfweb.commons.swing.actions;
 
 
 import java.awt.Desktop;
@@ -26,6 +26,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.swing.JOptionPane;
+
+import info.bioinfweb.commons.swing.ExtendedAbstractAction;
 
 
 
@@ -49,17 +51,50 @@ public class OpenWebsiteAction extends ExtendedAbstractAction {
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param url the URL to be opened
+	 * @param pathPrefix the prefix of the resource path to load icons from
+	 */
+	public OpenWebsiteAction(String url, String pathPrefix) {
+		this(createURI(url), pathPrefix);
+	}
+	
+	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param url the URL to be opened
+	 */
 	public OpenWebsiteAction(String url) {
 		this(createURI(url));
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param url the URL to be opened
+	 * @param pathPrefix the prefix of the resource path to load icons from
+	 */
+	public OpenWebsiteAction(URI url, String pathPrefix) {
+		super(pathPrefix);
+		this.url = url;
+	}
+
+	
+	/**
+	 * Creates a new instance of this class.
+	 * 
+	 * @param url the URL to be opened
+	 */
 	public OpenWebsiteAction(URI url) {
 		super();
 		this.url = url;
 	}
 
-
+	
 	public URI getURL() {
 		return url;
 	}
