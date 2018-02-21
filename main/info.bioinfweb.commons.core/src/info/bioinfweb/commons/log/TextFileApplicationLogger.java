@@ -40,6 +40,12 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 	private PrintWriter writer;
 	
 	
+	public TextFileApplicationLogger(PrintWriter writer) {
+		super();
+		this.writer = writer;
+	}
+
+
 	/**
 	 * Creates a new instance of this class and writes all messaged to the specified file.
 	 * 
@@ -64,6 +70,16 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 		this(file, true);
 	}
 
+	
+	public static TextFileApplicationLogger newStandardOutInstance() {
+		return new TextFileApplicationLogger(new PrintWriter(System.out, true));
+	}
+	
+	
+	public static TextFileApplicationLogger newStandardErrorInstance() {
+		return new TextFileApplicationLogger(new PrintWriter(System.err, true));
+	}
+	
 	
 	@Override
 	public synchronized void addMessage(ApplicationLoggerMessage message) {
