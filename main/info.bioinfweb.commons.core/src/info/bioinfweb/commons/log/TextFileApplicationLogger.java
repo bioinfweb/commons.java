@@ -31,8 +31,13 @@ import java.io.PrintWriter;
 
 /**
  * This implementation of {@link ApplicationLogger} appends all log messages to a text file, where every
- * message is written to one line. Note that the {@link #close()} method of this logger has to be called 
- * after the end of the logging process.
+ * message is written to one line. Additional constructors also allow to write messages into any 
+ * {@link PrintWriter} instead, so this class can also be used to send log messages to standard out or
+ * standard error. 
+ * <p>
+ * Note that the {@link #close()} method of this logger has to be called after the end of the logging 
+ * process if messages are written to a file. Otherwise the file will not be terminated and information
+ * may be lost.
  *  
  * @author Ben St&ouml;ver
  */
@@ -40,6 +45,12 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 	private PrintWriter writer;
 	
 	
+	/**
+	 * Creates a new instance of this class that writes into the specified writer instead of a file.
+	 * 
+	 * @param writer the writer to write the messages into
+	 * @since 3.2.0
+	 */
 	public TextFileApplicationLogger(PrintWriter writer) {
 		super();
 		this.writer = writer;
@@ -71,11 +82,21 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 	}
 
 	
+	/**
+	 * Creates a new instance of this class that writes to the standard out.
+	 * 
+	 * @since 3.2.0
+	 */
 	public static TextFileApplicationLogger newStandardOutInstance() {
 		return new TextFileApplicationLogger(new PrintWriter(System.out, true));
 	}
 	
 	
+	/**
+	 * Creates a new instance of this class that writes to the standard error.
+	 * 
+	 * @since 3.2.0
+	 */
 	public static TextFileApplicationLogger newStandardErrorInstance() {
 		return new TextFileApplicationLogger(new PrintWriter(System.err, true));
 	}
@@ -87,6 +108,11 @@ public class TextFileApplicationLogger extends AbstractApplicationLogger impleme
 	}
 
 
+	/**
+	 * Closes the underlying writer or the target file.
+	 * 
+	 * @see java.io.Closeable#close()
+	 */
 	@Override
 	public void close() {
 		writer.close();
