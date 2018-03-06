@@ -63,7 +63,7 @@ public abstract class ContentExtensionFileFilter extends ExtensionFileFilter {
 		 * Files will first be selected by their extension and those will additionally be tested by their content.
 		 * <p>
 		 * This option is a compromise between the other two. It is faster than {@link #CONTENT} since only files with
-		 * an according extension need to be opened and still allows to determine between file types, that may share an 
+		 * a respective extension need to be opened and still allows to determine between file types, that may share an 
 		 * extension. It should always be preferred over {@link #CONTENT} if files can be expected to have one of the defined
 		 * extensions.
 		 */
