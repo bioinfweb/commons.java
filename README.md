@@ -23,3 +23,8 @@ This product includes dependencies developed by the [Apache Software Foundation]
 ## Binary releases
 
 Binary releases and *Maven* code can be found at http://commons.bioinfweb.info/Java/Download.
+
+## About *bioinfweb*
+
+* Legal notice: http://bioinfweb.info/About
+* Privacy policy: http://bioinfweb.info/Privacy
