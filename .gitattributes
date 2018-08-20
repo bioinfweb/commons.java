@@ -255,6 +255,7 @@ main/info.bioinfweb.commons.swing/src/NOTICE.txt -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/log/ApplicationLoggerDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/log/JTextAreaApplicationLogger.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/log/SwingDocumentApplicationLogger.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/AboutDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/AbstractDocumentEdit.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/AbstractUndoActionManagement.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/AccessibleUndoManager.java -text svneol=unset#text/plain
@@ -275,6 +276,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSavable.
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaver.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingSaverMessages.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SwingUtils.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/SystemBrowserHyperlinkListener.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/TableColumnModelAdapter.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/WrapLayout.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/actions/BioinfwebMainPageAction.java -text svneol=unset#text/plain
