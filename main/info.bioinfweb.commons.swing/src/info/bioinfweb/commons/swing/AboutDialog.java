@@ -237,4 +237,10 @@ public class AboutDialog extends JDialog {
 
 		addScrolledTab(title, icon, editorPane, tip);
 	}
+	
+	
+	public void show(int tabIndex) {
+		getTabbedPane().setSelectedIndex(tabIndex);
+		setVisible(true);
+	}
 }
