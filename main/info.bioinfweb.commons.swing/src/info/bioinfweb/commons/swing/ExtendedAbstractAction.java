@@ -61,7 +61,7 @@ public abstract class ExtendedAbstractAction extends AbstractAction {
    * @param name - the prefix of the file name of the image files
    */
   protected void loadSymbols(String name) {
-	  putValue(Action.SMALL_ICON, new ImageIcon(Object.class.getResource(getPathPrefix() + name + "16.png")));
-	  putValue(Action.LARGE_ICON_KEY, new ImageIcon(Object.class.getResource(getPathPrefix() + name + "22.png")));
+	  putValue(Action.SMALL_ICON, new ImageIcon(ExtendedAbstractAction.class.getResource(getPathPrefix() + name + "16.png")));
+	  putValue(Action.LARGE_ICON_KEY, new ImageIcon(ExtendedAbstractAction.class.getResource(getPathPrefix() + name + "22.png")));
   }
 }
