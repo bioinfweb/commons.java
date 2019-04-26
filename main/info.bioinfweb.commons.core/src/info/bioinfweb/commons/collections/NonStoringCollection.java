@@ -22,6 +22,7 @@ package info.bioinfweb.commons.collections;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.function.IntFunction;
 
 
 
@@ -54,7 +55,7 @@ public class NonStoringCollection<E> implements Collection<E> {
 	 * @return {@code false}
 	 */
 	@Override
-	public boolean addAll(Collection c) {
+	public boolean addAll(Collection<? extends E> c) {
 		return false;
 	}
 	
@@ -80,7 +81,7 @@ public class NonStoringCollection<E> implements Collection<E> {
 	 * @return always {@code false}
 	 */
 	@Override
-	public boolean containsAll(Collection c) {
+	public boolean containsAll(Collection<?> c) {
 		return false;
 	}
 	
@@ -102,8 +103,8 @@ public class NonStoringCollection<E> implements Collection<E> {
 	 * @return an empty iterator
 	 */
 	@Override
-	public Iterator iterator() {
-		return Collections.emptyIterator();
+	public Iterator<E> iterator() {
+		return Collections.<E>emptyIterator();
 	}
 	
 
@@ -126,7 +127,7 @@ public class NonStoringCollection<E> implements Collection<E> {
 	 * @return always {@code false}
 	 */
 	@Override
-	public boolean removeAll(Collection c) {
+	public boolean removeAll(Collection<?> c) {
 		return false;
 	}
 
@@ -138,7 +139,7 @@ public class NonStoringCollection<E> implements Collection<E> {
 	 * @return always {@code false}
 	 */
 	@Override
-	public boolean retainAll(Collection c) {
+	public boolean retainAll(Collection<?> c) {
 		return false;
 	}
 
