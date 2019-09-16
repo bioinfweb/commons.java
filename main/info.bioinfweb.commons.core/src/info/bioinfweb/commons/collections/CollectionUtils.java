@@ -20,6 +20,7 @@ package info.bioinfweb.commons.collections;
 
 
 import java.util.Iterator;
+import java.util.List;
 
 
 
@@ -41,5 +42,10 @@ public class CollectionUtils {
 				throw new UnsupportedOperationException();  // Manually implemented to keep Java 6 compatibility.
 			}
 		};
+	}
+	
+	
+	public static <E> E getLastElement(List<E> list) {
+		return list.get(list.size() - 1);
 	}
 }
