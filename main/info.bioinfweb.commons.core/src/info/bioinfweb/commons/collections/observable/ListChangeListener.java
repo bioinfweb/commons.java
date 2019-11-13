@@ -26,7 +26,7 @@ import java.util.List;
 
 /**
  * Classes that want to listen to modifications applied to an instance of {@link List} (e.g. {@link ObservableList}) 
- * should implement this interface.
+ * should implement this interface and register as a listener.
  * 
  * @author Ben St&ouml;ver
  *
@@ -34,44 +34,44 @@ import java.util.List;
  */
 public interface ListChangeListener<E> extends EventListener {
 	/**
-	 * Called before one or more elements are add to monitored list.
+	 * Called before one or more elements are added to monitored list.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void beforeElementsAdded(ListAddEvent<E> event);
 	
 	/**
-	 * Called after one or more elements have been add to monitored list.
+	 * Called after one or more elements have been added to monitored list.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void afterElementsAdded(ListAddEvent<E> event);
 	
 	/**
 	 * Called before an element in the monitored list will be replaced by another one.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void beforeElementReplaced(ListReplaceEvent<E> event);
 	
 	/**
 	 * Called after an element in the monitored list has been replaced by another one.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void afterElementReplaced(ListReplaceEvent<E> event);
 	
 	/**
 	 * Called before one or more elements will be removed from monitored list.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void beforeElementsRemoved(ListRemoveEvent<E, Object> event);
 	
 	/**
 	 * Called after one or more elements have been removed from monitored list.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	public void afterElementsRemoved(ListRemoveEvent<E, E> event);
 }
