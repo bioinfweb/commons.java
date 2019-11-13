@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @param <L> the type of elements in the list to be modified
  * @param <E> the type of elements will be or have been removed (Note that these types can only be different if
- *            this event is fired before the removal, because than elements which are not in the associated list
+ *            this event is fired before the removal, because then elements which are not in the associated list
  *            might anyway be requested to be removed.)
  */
 public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
