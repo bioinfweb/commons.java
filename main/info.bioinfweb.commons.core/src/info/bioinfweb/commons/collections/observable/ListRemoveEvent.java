@@ -37,8 +37,8 @@ import java.util.List;
  *
  * @param <L> the type of elements in the list to be modified
  * @param <E> the type of elements will be or have been removed (Note that these types can only be different if
- *            this event is fired before the removal, because then elements which are not in the associated list
- *            might anyway be requested to be removed.)
+ *            this event is fired before the removal, because elements which are not in the associated list might 
+ *            anyway be requested to be removed in that case.)
  */
 public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	private ListMultipleChangesEvent<E> decoratedEvent;
@@ -47,12 +47,12 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	/**
 	 * Creates a new event object.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param affectedElements - a list of elements that have been removed
+	 * @param source the list instance that has been modified
+	 * @param affectedElements a list of elements that have been removed
 	 */
 	public ListRemoveEvent(List<L> source, int index, Collection<? extends E> affectedElements) {
 		super(source, ListChangeType.DELETION, index);
-		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElements);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElements);  // null cannot be passed as the list, because EventObject would then throw an exception. //TODO Think about better solution.
 	}
 
 	
@@ -65,7 +65,7 @@ public class ListRemoveEvent<L, E> extends ListChangeEvent<L> {
 	 */
 	public ListRemoveEvent(List<L> source, int index, E affectedElement) {
 		super(source, ListChangeType.DELETION, index);
-		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElement);  // null cannot be passed as the list, because EventObject would than throw an exception. //TODO Think about better solution.
+		decoratedEvent = new ListMultipleChangesEvent<E>((List)source, ListChangeType.DELETION, index, affectedElement);  // null cannot be passed as the list, because EventObject would then throw an exception. //TODO Think about better solution.
 	}
 
 

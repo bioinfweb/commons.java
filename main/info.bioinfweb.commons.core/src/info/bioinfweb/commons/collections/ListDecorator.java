@@ -367,7 +367,6 @@ public abstract class ListDecorator<E> implements List<E> {
 
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean remove(Object o) {
 		int index = indexOf(o);
 		if (index != -1) {
@@ -380,6 +379,7 @@ public abstract class ListDecorator<E> implements List<E> {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean removeAll(Collection<?> c) {
 		boolean result = false;
