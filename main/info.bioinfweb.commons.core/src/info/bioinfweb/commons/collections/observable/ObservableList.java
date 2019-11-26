@@ -72,8 +72,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 	
 	
 	@Override
-	protected void beforeAdd(int index, Collection<? extends E> addElements) {
-		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addElements);
+	protected void beforeAdd(int index, Collection<? extends E> addedElements) {
+		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.beforeElementsAdded(event);
 		}
@@ -81,8 +81,8 @@ public class ObservableList<E> extends ListDecorator<E> {
 
 
 	@Override
-	protected void afterAdd(int index, Collection<? extends E> addElements) {
-		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addElements);
+	protected void afterAdd(int index, Collection<? extends E> addedElements) {
+		ListAddEvent<E> event = new ListAddEvent<E>(this, index, addedElements);
 		for (ListChangeListener<E> listener : changeListeners) {
 			listener.afterElementsAdded(event);
 		}
