@@ -72,11 +72,11 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * happens. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications of the list.
 	 * <p>
-	 * If more than one element will be add in one operation (e.g. {@link #addAll(Collection)} this method
+	 * If more than one element will be add in one operation (e.g. {@link #addAll(Collection)}) this method
 	 * is only called once before the first elements is inserted.
 	 * 
-	 * @param index - the index where the first new element will be inserted
-	 * @param addElements - the elements that shall be add (Always contains at least one element.) 
+	 * @param index the index where the first new element will be inserted
+	 * @param addElements the elements that shall be add (Always contains at least one element.) 
 	 */
 	protected void beforeAdd(int index, Collection<? extends E> addElements) {}
 	
@@ -91,14 +91,14 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * methods called on the results of {@link #subList(int, int) or iterators}. This default implementation 
 	 * is empty and can be overwritten by inherited classes which want to track modifications of the list.
 	 * <p>
-	 * If more than one element is add in one operation (e.g. {@link #addAll(Collection)} this method
+	 * If more than one element is add in one operation (e.g. {@link #addAll(Collection)}) this method
 	 * is only called once when all elements have been inserted.
 	 * <p>
 	 * Note that this method is not called if an add operation is not successful. In such a case only
 	 * {@link #beforeAdd(int, Collection)} is called.
 	 * 
-	 * @param index - the index where the first new element has been inserted
-	 * @param addElements - the elements that have been add (Always contains at least one element.) 
+	 * @param index the index where the first new element has been inserted
+	 * @param addElements the elements that have been add (Always contains at least one element.) 
 	 */
 	protected void afterAdd(int index, Collection<? extends E> addElements) {}
 	
@@ -113,9 +113,9 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications of the list.
 	 * 
-	 * @param index - the index where the element will be replaced
-	 * @param currentElement - the element that will be replaced
-	 * @param newElement - the new element that shall replace the current one
+	 * @param index the index where the element will be replaced
+	 * @param currentElement the element that will be replaced
+	 * @param newElement the new element that shall replace the current one
 	 */
 	protected void beforeReplace(int index, E currentElement, E newElement) {}
 
@@ -125,9 +125,9 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * replaced. This default implementation is empty and can be overwritten by inherited classes which want 
 	 * to track modifications of the list.
 	 * 
-	 * @param index - the index where the element has been replaced
-	 * @param previousElement - the element that was replaced
-	 * @param currentElement - the new element that is now contained in the list
+	 * @param index the index where the element has been replaced
+	 * @param previousElement the element that was replaced
+	 * @param currentElement the new element that is now contained in the list
 	 */
 	protected void afterReplace(int index, E previousElement, E currentElement) {}
 
@@ -138,10 +138,10 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * happens. This default implementation is empty and can be overwritten by inherited classes which want to 
 	 * track modifications of the list.
 	 * <p>
-	 * If more than one element will be removed in one operation (e.g. {@link #retainAll(Collection)} this method
+	 * If more than one element will be removed in one operation (e.g. {@link #retainAll(Collection)}) this method
 	 * is only called once before the first element is removed.
 	 * 
-	 * @param removedElements - the elements that have been removed.
+	 * @param removedElements the elements that have been removed.
 	 */
 	protected void beforeRemove(int index, Collection<Object> removedElements) {}
 	
@@ -156,13 +156,13 @@ public abstract class ListDecorator<E> implements List<E> {
 	 * methods called on the results of {@link #subList(int, int)} or iterators. This default implementation 
 	 * is empty and can be overwritten by inherited classes which want to track modifications of the list.
 	 * <p>
-	 * If more than one element is removed in one operation (e.g. {@link #retainAll(Collection)} this method
+	 * If more than one element is removed in one operation (e.g. {@link #retainAll(Collection)}) this method
 	 * is only called once when all elements have been removed.
 	 * <p>
 	 * Note that this method is not called if an add operation is not successful. In such a case only
 	 * {@link #beforeRemove(Collection)} is called.
 	 * 
-	 * @param removedElements - the elements that have been removed.
+	 * @param removedElements the elements that have been removed.
 	 */
 	protected void afterRemove(int index, Collection<? extends E> removedElements) {}
 	

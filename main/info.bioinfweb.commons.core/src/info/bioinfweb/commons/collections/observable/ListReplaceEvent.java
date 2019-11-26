@@ -44,9 +44,9 @@ public class ListReplaceEvent<E> extends ListChangeEvent<E> {
 	/**
 	 * Creates a new event object.
 	 * 
-	 * @param source - the list instance that has been modified
-	 * @param oldElement - the element that will be or has been replaced in the list
-	 * @param newElement - the element that is the replacement for the old element
+	 * @param source the list instance that has been modified
+	 * @param oldElement the element that will be or has been replaced in the list
+	 * @param newElement the element that is the replacement for the old element
 	 */
 	public ListReplaceEvent(List<E> source, int index, E oldElement, E newElement) {
 		super(source, ListChangeType.REPLACEMENT, index);
