@@ -35,7 +35,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void beforeElementsAdded(ListAddEvent<E> event) {}
@@ -44,7 +44,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void afterElementsAdded(ListAddEvent<E> event) {}
@@ -53,7 +53,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void beforeElementReplaced(ListReplaceEvent<E> event) {}
@@ -62,7 +62,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void afterElementReplaced(ListReplaceEvent<E> event) {}
@@ -71,7 +71,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void beforeElementsRemoved(ListRemoveEvent<E, Object> event) {}
@@ -80,7 +80,7 @@ public class ListChangeAdapter<E> implements ListChangeListener<E> {
 	/**
 	 * Empty implementation to be overwritten if necessary.
 	 * 
-	 * @param event - the event object containing further information on the modification
+	 * @param event the event object containing further information on the modification
 	 */
 	@Override
 	public void afterElementsRemoved(ListRemoveEvent<E, E> event) {}	
