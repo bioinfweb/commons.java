@@ -63,9 +63,7 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 	}
 
 	
-	public void die() {
-		// Grundimplementierung leer.
-	}
+	public void die() {}  // Basic implementation is empty.
 
 	
 	public String getRedoPresentationName() {
@@ -89,7 +87,7 @@ public abstract class AbstractDocumentEdit implements UndoableEdit {
 
 
 	/**
-	 * Inheriting classes should e.g. inform document listeners here.
+	 * Inheriting classes should, e.g., inform document listeners here.
 	 */
 	protected abstract void registerDocumentChange();
 	
