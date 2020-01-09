@@ -47,7 +47,7 @@ import java.util.Map;
  * 
  * @author Ben St&ouml;ver
  *
- * @param <E> - the type of element this list shall contain
+ * @param <E> the type of element this list shall contain
  */
 public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E> {
 	private PackedIntegerArrayList packedList;
@@ -58,9 +58,8 @@ public class PackedObjectArrayList<E> extends AbstractList<E> implements List<E>
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param objectTypeCount - the number of different objects that will at most be contained in the returned list
-	 * @param initialCapacity - the number of entries the list will be able to store before the underlying array
-	 *                          will be resized
+	 * @param objectTypeCount the number of different objects that will be contained in the returned list at most
+	 * @param initialCapacity the number of entries the list will be able to store before the underlying array will be resized
 	 */
 	public PackedObjectArrayList(int objectTypeCount, int initialCapacity) {
 		super();
