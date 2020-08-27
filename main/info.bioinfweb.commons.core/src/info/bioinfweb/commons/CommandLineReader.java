@@ -32,7 +32,7 @@ public class CommandLineReader {
 	/**
 	 * Creates a new instance of this class.
 	 * 
-	 * @param args - the passed command line arguments
+	 * @param args the passed command line arguments
 	 */
 	public CommandLineReader(String[] args) {
 		super();
@@ -43,9 +43,9 @@ public class CommandLineReader {
 	/**
 	 * Checks if the given value is contained in the arguments and returns the index.
 	 *  
-	 * @param value - the value to search for (exact match, case sensitive)
-	 * @param start - the start index
-	 * @param end - the end index (the last checked index is <code>end - 1</code>)
+	 * @param value the value to search for (exact match, case sensitive)
+	 * @param start the start index
+	 * @param end the end index (the last checked index is <code>end - 1</code>)
 	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value, int start, int end) {
@@ -62,8 +62,8 @@ public class CommandLineReader {
 	 * Checks if the given value is contained in the arguments and returns the index.
 	 * All elements from {@code start} on are searched. 
 	 * 
-	 * @param value - the value to search for (exact match, case sensitive)
-	 * @param start - the start index
+	 * @param value the value to search for (exact match, case sensitive)
+	 * @param start the start index
 	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value, int start) {
@@ -74,7 +74,8 @@ public class CommandLineReader {
 	/**
 	 * Checks if the given value is contained in the arguments and returns the index.
 	 * All elements are searched. 
-	 * @param value - the value to search for (exact match, case sensitive)
+	 * 
+	 * @param value the value to search for (exact match, case sensitive)
 	 * @return the index of the first occurrence of the value or -1 if it was not found
 	 */
 	public int contained(String value) {
