@@ -30,9 +30,6 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	private String text = "";
 	
 	
-	/* (non-Javadoc)
-	 * @see info.bioinfweb.commons.progress.ProgressMonitor#getProgressValue()
-	 */
 	@Override
 	public double getProgressValue() {
   	return progress;
@@ -70,6 +67,6 @@ public abstract class AbstractProgressMonitor implements ProgressMonitor {
 	
 	@Override
   public void addToProgressValue(double addend, String text) {
-	  addToProgressValue(addend, getProgressText());
+	  setProgressValue(getProgressValue() + addend, text);
   }
 }

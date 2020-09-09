@@ -27,7 +27,7 @@ package info.bioinfweb.commons.progress;
  */
 public class VoidProgressMonitor extends AbstractProgressMonitor implements ProgressMonitor {
 	/**
-	 * This method always returnes <code>false</code>.
+	 * This method always returns <code>false</code>.
 	 * 
 	 * @see info.bioinfweb.commons.progress.ProgressMonitor#isCanceled()
 	 */
