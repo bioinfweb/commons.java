@@ -42,7 +42,8 @@ public class IOUtils {
 	/**
 	 * Returns either the path to the class file of the specified class without the package path or 
 	 * the path top the archive file that contains it (e.g. JAR, ZIP, EXE).
-	 * @param c - the class that is contained in the returned JAR-file
+	 * 
+	 * @param c the class that is contained in the returned JAR-file
 	 * @return the path to the class folder or archive
 	 */
 	public static String getClassLocation(Class<?> c) {
@@ -57,6 +58,31 @@ public class IOUtils {
 		}
 		else {
 			return file.getParent();
+		}
+	}
+	
+	
+	/**
+	 * Returns an absolute version of {@code path}.
+	 * <p>
+	 * If {@code path} is already absolute it will be returned directly. Otherwise it will be considered as being relative to {@code baseDirectory}.
+	 * 
+	 * @param path the path to the file or directory to be referenced
+	 * @param baseDirectory the directory used to create a absolute path if {@code path} is a relative path.
+	 * @return the absolute path as a {@link String}
+	 * @throws IllegalArgumentException if {@code baseDirectory} is not absolute
+	 */
+	public static String absoluteFilePath(File path, File baseDirectory) {
+		if (baseDirectory.isAbsolute()) {
+			if (path.isAbsolute()) {
+				return path.getAbsolutePath();
+			}
+			else {
+				return baseDirectory.getAbsolutePath() + File.separator + path.getPath();
+			}
+		}
+		else {
+			throw new IllegalArgumentException("baseDirectory (" + baseDirectory.getPath() + ") must be an absolute path.");
 		}
 	}
 	
