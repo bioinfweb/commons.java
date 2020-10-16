@@ -266,6 +266,7 @@ main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedAbstr
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ExtendedDesktopPane.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/FileChooserDirModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/JDropDownSpinner.java -text svneol=unset#text/plain
+main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/ListBackedListModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/LocaleComboBoxModel.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyDialog.java -text svneol=unset#text/plain
 main/info.bioinfweb.commons.swing/src/info/bioinfweb/commons/swing/OkCancelApplyHelpDialog.java -text svneol=unset#text/plain
