@@ -22,9 +22,24 @@ package info.bioinfweb.commons.swing;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
+import javax.swing.JList;
+import javax.swing.ListModel;
 
 
 
+/**
+ * An implementation of {@link ListModel} that always reflects the contents of a {@link List}.
+ * <p>
+ * Note that this model does reflect changes in the underlying list that occur after the creation of this object but will not inform its 
+ * listeners on these. (The underlying list cannot be monitored.) The methods {@link #add(Object)}, {@link #add(int, Object)}, 
+ * {@link #set(int, Object)}, {@link #remove(int)} and {@link #clear()} allow to edit the underlying list and notify all listeners 
+ * registered to this model and the same time. It is recommended to use these methods instead of modifying the list directly if changes
+ * should be made to a list that is currently displayed in the GUI, e.g., in an instance of {@link JList}. 
+ * 
+ * @author Ben St&ouml;ver
+ *
+ * @param <E> the element type of the underlying list and this model
+ */
 public class ListBackedListModel<E> extends AbstractListModel<E>{
 	private List<E> list;
 	
@@ -87,13 +102,13 @@ public class ListBackedListModel<E> extends AbstractListModel<E>{
 	}
 
 
-	public void clear() {
-		int lastIndex = list.size() - 1;
-		list.clear();
-		fireIntervalRemoved(this, 0, lastIndex);
+	public E set(int index, E element) {
+		E result = list.set(index, element);
+		fireContentsChanged(this, index, index);
+		return result;
 	}
 
-
+	
 	public E remove(int index) {
 		E result = list.remove(index);
 		fireIntervalRemoved(this, index, index);
@@ -101,9 +116,9 @@ public class ListBackedListModel<E> extends AbstractListModel<E>{
 	}
 
 
-	public E set(int index, E element) {
-		E result = list.set(index, element);
-		fireContentsChanged(this, index, index);
-		return result;
+	public void clear() {
+		int lastIndex = list.size() - 1;
+		list.clear();
+		fireIntervalRemoved(this, 0, lastIndex);
 	}
 }
