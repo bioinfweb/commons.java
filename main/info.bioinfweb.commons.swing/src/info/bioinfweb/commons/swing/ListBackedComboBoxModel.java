@@ -64,7 +64,7 @@ public class ListBackedComboBoxModel<E> extends ListBackedListModel<E> implement
 	 * Selected items do not necessarily have to be part of the underlying list.
 	 * <p>
 	 * When this method is called a the event {@link ListDataListener#contentsChanged(javax.swing.event.ListDataEvent)} is fired with the 
-	 * start and end indices {@code -1}. (This behaviour is identical with {@link DefaultComboBoxModel}). 
+	 * start and end indices {@code -1}. (This behavior is identical with {@link DefaultComboBoxModel}). 
 	 * 
 	 * @param selectedItem the item to be selected from now on
 	 */
