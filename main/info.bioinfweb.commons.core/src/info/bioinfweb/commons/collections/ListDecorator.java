@@ -256,9 +256,11 @@ public abstract class ListDecorator<E> implements List<E> {
 		copy.addAll(this);
 		copy = Collections.unmodifiableCollection(copy);
 		
-		beforeRemove(0, copy);
-		getUnderlyingList().clear();
-		afterRemove(0, copy);
+		if (copy.isEmpty() == false) {
+			beforeRemove(0, copy);
+			getUnderlyingList().clear();
+			afterRemove(0, copy);
+		}
 	}
 
 
