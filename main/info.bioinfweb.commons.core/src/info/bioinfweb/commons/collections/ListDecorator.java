@@ -252,11 +252,11 @@ public abstract class ListDecorator<E> implements List<E> {
 
 	@Override
 	public void clear() {
-		Collection<E> copy = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
-		copy.addAll(this);
-		copy = Collections.unmodifiableCollection(copy);
+		if (!isEmpty())  {
+			Collection<E> copy = new ArrayList<E>(size());  // Clone cannot be used here, because changes there also affect the original list.
+			copy.addAll(this);
+			copy = Collections.unmodifiableCollection(copy);
 		
-		if (copy.isEmpty() == false) {
 			beforeRemove(0, copy);
 			getUnderlyingList().clear();
 			afterRemove(0, copy);
