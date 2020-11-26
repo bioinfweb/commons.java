@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>info.bioinfweb.commons.java</groupId>
 	<artifactId>bioinfweb-commons-java-core</artifactId>
-	<version>3.3.2</version>
+	<version>3.4.0</version>
 	<packaging>jar</packaging>
 	<name>bioinfweb.commons.java.core</name>
 	<description>The core module of shared components of bioinfweb projects made available in a Java library.</description>
